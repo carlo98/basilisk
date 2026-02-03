@@ -144,6 +144,8 @@ if <code class="docutils literal notranslate"><span class="pre">pyLimitedAPI</sp
 SWIG 4.4.0 introduces a new C-API codepath for Python 3.13 that expects newer
 definition macros which are not present when targeting older <code class="docutils literal notranslate"><span class="pre">abi3</span></code> compatibility. As such, when building
 Basilisk with Python 3.13 or above, we automatically default to using the newer cp313 ABI.</p></li>
+<li><p>The <a class="reference internal" href="../Documentation/simulation/communication/simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a> module raises a warning for each of the following messages not being connected: <code class="docutils literal notranslate"><span class="pre">sunInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">planetInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">sunEclipseInMsg</span></code>, even for ground based antennas.
+These messages are not relevant for ground based antennas and the warning should therefore not be risen for an antenna on ground.</p></li>
 </ul>
 </section>
 <section id="version-2-9-0">
