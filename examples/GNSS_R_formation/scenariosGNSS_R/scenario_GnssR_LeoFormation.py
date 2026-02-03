@@ -139,8 +139,10 @@ spacecraft is plotted per simulation.
 """
 
 import inspect, math, os, sys
+from tabnanny import verbose
 
 from Basilisk.simulation.albedo import BSK_ERROR
+from mypy.util import T
 import numpy as np
 from Basilisk.architecture import messaging
 # Import utilities
@@ -585,7 +587,6 @@ class scenario_StatKeepingAttPointGnssrFormaton(BSKSim, BSKScenario):
 
         return figureList
 
-
 def runScenario(scenario, formation):
     # Get the environment model
     EnvModel = scenario.get_EnvModel()
@@ -616,9 +617,10 @@ def runScenario(scenario, formation):
     # Phase 0: Configure initial FSW attitude mode
     # -> all satellites standby (Already set in FSW initialization)
     # =========================================
-    scenario.FSWModels[0].modeRequest = "standby"
-    scenario.FSWModels[1].modeRequest = "standby"
-    scenario.FSWModels[2].modeRequest = "standby"
+#    scenario.FSWModels[0].modeRequest = "standby"
+    scenario.FSWModels[0].setModeRequest("standby", verbose=True)
+    scenario.FSWModels[1].setModeRequest("standby", verbose=True)
+    scenario.FSWModels[2].setModeRequest("standby", verbose=True)
 
     simulationTime0 = macros.min2nano(5.) # 5 minutes
     scenario.ConfigureStopTime(simulationTime0)
@@ -628,15 +630,15 @@ def runScenario(scenario, formation):
     # Phase 1: Sun pointing (charging batteries)
     # -> all satellites point towards the sun
     # =========================================
-    scenario.FSWModels[0].modeRequest = "chargeBattery"
-    scenario.FSWModels[1].modeRequest = "chargeBattery"
-    scenario.FSWModels[2].modeRequest = "chargeBattery"
+    scenario.FSWModels[0].setModeRequest(modeRequest="autonomous", verbose=True)
+    scenario.FSWModels[1].setModeRequest(modeRequest="autonomous", verbose=True)
+    scenario.FSWModels[2].setModeRequest(modeRequest="autonomous", verbose=True)
 
     # =========================================
     # Phase 2: Reconfigure formation (station keeping -> ON)
     # Set up the cocentric formation desired orbital element differences
     # =========================================
-    if formation == 'COCENTRIC_FORMATION': # PCO
+    if formation == 'COCENTRIC_FORMATION': # CF
         a = scenario.oe[0].a
 
         rhos = [50.0, 100.0, 150.0]              # concentric radii [m]
@@ -680,47 +682,50 @@ def runScenario(scenario, formation):
 
             scenario.FSWModels[k].spacecraftReconfig.targetClassicOED = [
                 0.0,            # Δa/a  (critical)
-                delta_e,       # Δe
-                delta_i,       # Δi
+                delta_e,        # Δe
+                delta_i,        # Δi
                 0.0,            # ΔΩ
                 delta_omega,
                 delta_M
             ]
+    elif formation == 'CARTWHEEL': # CW
+        pass
     elif formation == 'LEAD_FOLLOWER': # LF
         delta_e = 1.5e-5  # Along-track separation [rad], ~50m
         scenario.FSWModels[0].spacecraftReconfig.targetClassicOED = [0.0,  delta_e, 0.0, 0.0, 0.0, 0.0] #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
         scenario.FSWModels[1].spacecraftReconfig.targetClassicOED = [0.0, -delta_e, 0.0, 0.0, 0.0, 0.0]  #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
         scenario.FSWModels[2].spacecraftReconfig.targetClassicOED = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
 
-    simulationTime2 = macros.hour2nano(24.0) # 24 minutes (24 hours 35 minutes)
+    simulationTime2 = macros.day2nano(2.0) # 2 days (48 hours)
     simulationTime1 = 0
     scenario.ConfigureStopTime(simulationTime0 + simulationTime1 + simulationTime2)
     scenario.ExecuteSimulation()
 
-    # =========================================
-    # Phase 2: Executed when battery > 80%
-    # =========================================
+#    # =========================================
+#    # Phase 2: Executed when battery > 80%
+#    # =========================================
+#
+#    # =========================================
+#    # Phase 3: Location pointing (EXPAND TO GNSS-R operations)
+#    # =========================================
+#    BSK_GnssrSatFsw.setModeRequest(scenario, 0, modeRequest="startGnssrSensing")
+#    BSK_GnssrSatFsw.setModeRequest(scenario, 1, modeRequest="startGnssrSensing")
+#    BSK_GnssrSatFsw.setModeRequest(scenario, 2, modeRequest="startGnssrSensing")
+#
+#    simulationTime3 = macros.hour2nano(2.0) # 2 hours
+#    scenario.ConfigureStopTime(simulationTime0 + simulationTime1 + simulationTime2 + simulationTime3)
+#    scenario.ExecuteSimulation()
+#
+#    # =========================================
+#    # Phase 4: Downlinking (nadirPoint pointing), station keeping OFF
+#    # =========================================
+#    BSK_GnssrSatFsw.setModeRequest(scenario, 0, modeRequest="dataTransfer")
+#    BSK_GnssrSatFsw.setModeRequest(scenario, 1, modeRequest="dataTransfer")
+#    BSK_GnssrSatFsw.setModeRequest(scenario, 2, modeRequest="dataTransfer")
+#    simulationTime4 = macros.hour2nano(5.0) # 5 hours
+#    scenario.ConfigureStopTime(simulationTime0 + simulationTime1 + simulationTime2 + simulationTime3 + simulationTime4)
+#    scenario.ExecuteSimulation()
 
-    # =========================================
-    # Phase 3: Location pointing (EXPAND TO GNSS-R operations)
-    # =========================================
-    scenario.FSWModels[0].modeRequest = "startGnssrSensing"
-    scenario.FSWModels[1].modeRequest = "startGnssrSensing"
-    scenario.FSWModels[2].modeRequest = "startGnssrSensing"
-
-    simulationTime3 = macros.hour2nano(2.0) # 2 hours
-    scenario.ConfigureStopTime(simulationTime0 + simulationTime1 + simulationTime2 + simulationTime3)
-    scenario.ExecuteSimulation()
-
-    # =========================================
-    # Phase 4: Downlinking (nadirPoint pointing), station keeping OFF
-    # =========================================
-    scenario.FSWModels[0].modeRequest = "dataTransfer"
-    scenario.FSWModels[1].modeRequest = "dataTransfer"
-    scenario.FSWModels[2].modeRequest = "dataTransfer"
-    simulationTime4 = macros.hour2nano(5.0) # 5 hours
-    scenario.ConfigureStopTime(simulationTime0 + simulationTime1 + simulationTime2 + simulationTime3 + simulationTime4)
-    scenario.ExecuteSimulation()
 def run(showPlots, numberSpacecraft, formation, txConstTleData):
     """
     The scenarios can be run with the followings setups parameters:
@@ -744,6 +749,6 @@ if __name__ == "__main__":
 
     run(showPlots=False,
         numberSpacecraft=3,
-        formation='CIRCULAR_PROJECTED_ORBITS', # can be any of ['COCENTRIC_FORMATION', 'CIRCULAR_PROJECTED_ORBITS', 'LEAD_FOLLOWER']
+        formation='COCENTRIC_FORMATION', # can be any of ['COCENTRIC_FORMATION', 'CIRCULAR_PROJECTED_ORBITS', 'LEAD_FOLLOWER', 'CARTWHEEL']
         txConstTleData=[gpsTleData] # can be any of ['GPS', 'Galileo', 'Beidou', 'Glonass']
         )

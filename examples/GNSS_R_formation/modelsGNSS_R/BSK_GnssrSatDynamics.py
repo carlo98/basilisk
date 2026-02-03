@@ -362,6 +362,7 @@ class BSKDynamicModels:
         self.simpleAntenna.sunInMsg.subscribeTo(SimBase.EnvModel.gravFactory.spiceObject.planetStateOutMsgs[SimBase.EnvModel.gravBodyList.index('sun')])
         self.simpleAntenna.addPlanetToModel(SimBase.EnvModel.gravFactory.spiceObject.planetStateOutMsgs[SimBase.EnvModel.gravBodyList.index('earth')])
         self.simpleAntenna.addPlanetToModel(SimBase.EnvModel.gravFactory.spiceObject.planetStateOutMsgs[SimBase.EnvModel.gravBodyList.index('moon')])
+        self.simpleAntenna.sunEclipseInMsg.subscribeTo(SimBase.EnvModel.eclipseObject.eclipseOutMsgs[0])  # choose the earth message
         # TODO once added protection for ground based antenna is added: -> Check if eclipse message subscription is needed
 
     def setSimpleAntennaPower(self):
