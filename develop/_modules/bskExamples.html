@@ -113,6 +113,7 @@
 
 <span class="c1"># define the print color codes</span>
 <span class="n">statusColor</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[92m&#39;</span>
+<span class="n">warningColor</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[93m&#39;</span>
 <span class="n">endColor</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[0m&#39;</span>
 
 <span class="c1"># this statement is needed to enable Windows to print ANSI codes in the Terminal</span>
@@ -167,13 +168,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Display the task message</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">statusColor</span><span class="si">}</span><span class="s2">Task: Downloading BSK examples folder</span><span class="si">{</span><span class="n">endColor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">statusColor</span><span class="si">}</span><span class="s2">Task:</span><span class="si">{</span><span class="n">endColor</span><span class="si">}</span><span class="s2"> Downloading BSK examples folder&quot;</span><span class="p">)</span>
 
     <span class="c1"># GitHub API URL for the target folder</span>
     <span class="n">github_api_url</span> <span class="o">=</span> <span class="s2">&quot;https://api.github.com/repos/AVSLab/basilisk/contents/examples&quot;</span>
     <span class="n">destination_folder</span> <span class="o">=</span> <span class="s2">&quot;./examples&quot;</span>
 
-    <span class="n">process_github_folder</span><span class="p">(</span><span class="n">github_api_url</span><span class="p">,</span> <span class="n">destination_folder</span><span class="p">)</span></div>
+    <span class="n">process_github_folder</span><span class="p">(</span><span class="n">github_api_url</span><span class="p">,</span> <span class="n">destination_folder</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">statusColor</span><span class="si">}</span><span class="s2">Status:</span><span class="si">{</span><span class="n">endColor</span><span class="si">}</span><span class="s2"> Download completed&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">warningColor</span><span class="si">}</span><span class="s2">Note:</span><span class="si">{</span><span class="n">endColor</span><span class="si">}</span><span class="s2"> Ensure you have the python package </span><span class="si">{</span><span class="n">warningColor</span><span class="si">}</span><span class="s2">pytest</span><span class="si">{</span><span class="n">endColor</span><span class="si">}</span><span class="s2"> installed to be able to run the example scripts.&quot;</span><span class="p">)</span></div>
 
 
 <span class="c1"># Main execution</span>

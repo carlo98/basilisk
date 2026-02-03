@@ -55,7 +55,16 @@
 <li class="toctree-l1"><a class="reference internal" href="Learn.html">Learning Basilisk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Support.html">Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Documentation/index.html">Documentation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Support Data Files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Support Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#albedodata">Albedodata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#atmospheredata">Atmospheredata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dentongeo">Dentongeo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ephemerisdata">Ephemerisdata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#localgravdata">Localgravdata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#magneticfield">Magneticfield</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#skybrightnessdata">Skybrightnessdata</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="ExternalSites.html">External Sites</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Vizard:</span></p>
@@ -93,87 +102,97 @@
            <div itemprop="articleBody">
              
   <section id="support-data-files">
-<h1>Support Data Files<a class="headerlink" href="#support-data-files" title="Link to this heading"></a></h1>
+<span id="supportdatalist"></span><h1>Support Data Files<a class="headerlink" href="#support-data-files" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This folder contains a listing of all the data files in the folder <code class="docutils literal notranslate"><span class="pre">basilisk/supportData</span></code> that are packaged into Basilisk.</p>
+<p>Below is a list of all the data files that are packaged into Basilisk.
+They are organized into a range of topical folders where the folder name is the data category.</p>
 </div>
-<hr class="docutils" />
-<p><strong>AlbedoData</strong></p>
+<section id="albedodata">
+<h2>Albedodata<a class="headerlink" href="#albedodata" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Earth_ALB_2018_CERES_All_10x10.csv</p></li>
-<li><p>Earth_ALB_2018_CERES_All_1x1.csv</p></li>
-<li><p>Earth_ALB_2018_CERES_All_5x5.csv</p></li>
-<li><p>Earth_ALB_2018_CERES_Clear_10x10.csv</p></li>
-<li><p>Earth_ALB_2018_CERES_Clear_1x1.csv</p></li>
-<li><p>Earth_ALB_2018_CERES_Clear_5x5.csv</p></li>
-<li><p>Mars_ALB_TES_10x10.csv</p></li>
-<li><p>Mars_ALB_TES_1x1.csv</p></li>
-<li><p>Mars_ALB_TES_5x5.csv</p></li>
-<li><p>earthReflectivityMean_10x10.dat</p></li>
-<li><p>earthReflectivityMean_1p25x1.dat</p></li>
-<li><p>earthReflectivityMean_5x5.dat</p></li>
-<li><p>earthReflectivityStd_10x10.dat</p></li>
-<li><p>earthReflectivityStd_1p25x1.dat</p></li>
-<li><p>earthReflectivityStd_5x5.dat</p></li>
-<li><p>marsReflectivityMean_10x10.dat</p></li>
-<li><p>marsReflectivityMean_1p25x1.dat</p></li>
-<li><p>marsReflectivityMean_5x5.dat</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Earth_ALB_2018_CERES_All_10x10.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Earth_ALB_2018_CERES_All_1x1.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Earth_ALB_2018_CERES_All_5x5.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Earth_ALB_2018_CERES_Clear_10x10.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Earth_ALB_2018_CERES_Clear_1x1.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Earth_ALB_2018_CERES_Clear_5x5.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mars_ALB_TES_10x10.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mars_ALB_TES_1x1.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mars_ALB_TES_5x5.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earthReflectivityMean_10x10.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earthReflectivityMean_1p25x1.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earthReflectivityMean_5x5.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earthReflectivityStd_10x10.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earthReflectivityStd_1p25x1.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earthReflectivityStd_5x5.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marsReflectivityMean_10x10.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marsReflectivityMean_1p25x1.dat</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marsReflectivityMean_5x5.dat</span></code></p></li>
 </ul>
-<p><strong>AtmosphereData</strong></p>
+</section>
+<section id="atmospheredata">
+<h2>Atmospheredata<a class="headerlink" href="#atmospheredata" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>EarthGRAMNominal.txt</p></li>
-<li><p>JupiterGRAMNominal.csv</p></li>
-<li><p>MarsGRAMNominal.txt</p></li>
-<li><p>NRLMSISE00Nominal.txt</p></li>
-<li><p>NeptuneGRAMNominal.csv</p></li>
-<li><p>TitanGRAMNominal.csv</p></li>
-<li><p>USStandardAtmosphere1976.csv</p></li>
-<li><p>UranusGRAMNominal.csv</p></li>
-<li><p>VenusGRAMNominal.csv</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EarthGRAMNominal.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JupiterGRAMNominal.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MarsGRAMNominal.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NRLMSISE00Nominal.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NeptuneGRAMNominal.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TitanGRAMNominal.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USStandardAtmosphere1976.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UranusGRAMNominal.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VenusGRAMNominal.csv</span></code></p></li>
 </ul>
-<p><strong>AtmosphereData/support</strong></p>
+</section>
+<section id="dentongeo">
+<h2>Dentongeo<a class="headerlink" href="#dentongeo" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>EarthGRAM_bsk_namelist.txt</p></li>
-<li><p>JupiterGRAM_bsk_namelist.txt</p></li>
-<li><p>MarsGRAM_bsk_namelist.txt</p></li>
-<li><p>NeptuneGRAM_bsk_namelist.txt</p></li>
-<li><p>README.txt</p></li>
-<li><p>TitanGRAM_bsk_namelist.txt</p></li>
-<li><p>UranusGRAM_bsk_namelist.txt</p></li>
-<li><p>VenusGRAM_bsk_namelist.txt</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_e_array_all.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_e_array_high.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_e_array_low.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_e_array_mid.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_i_array_all.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_i_array_high.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_i_array_low.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_i_array_mid.txt</span></code></p></li>
 </ul>
-<p><strong>DentonGEO</strong></p>
+</section>
+<section id="ephemerisdata">
+<h2>Ephemerisdata<a class="headerlink" href="#ephemerisdata" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>model_e_array_all.txt</p></li>
-<li><p>model_e_array_high.txt</p></li>
-<li><p>model_e_array_low.txt</p></li>
-<li><p>model_e_array_mid.txt</p></li>
-<li><p>model_i_array_all.txt</p></li>
-<li><p>model_i_array_high.txt</p></li>
-<li><p>model_i_array_low.txt</p></li>
-<li><p>model_i_array_mid.txt</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MVN_SCLKSCET.00000.tsc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">de-403-masses.tpc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">de430.bsp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hst_edited.bsp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">naif0011.tls</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">naif0012.tls</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nh_pred_od077.bsp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pck00010.tpc</span></code></p></li>
 </ul>
-<p><strong>EphemerisData</strong></p>
+</section>
+<section id="localgravdata">
+<h2>Localgravdata<a class="headerlink" href="#localgravdata" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>MVN_SCLKSCET.00000.tsc</p></li>
-<li><p>de430.bsp</p></li>
-<li><p>hst_edited.bsp</p></li>
-<li><p>naif0011.tls</p></li>
-<li><p>nh_pred_od077.bsp</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GGM03S-J2-only.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GGM03S.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GGM2BData.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VESTA20H.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eros007790.tab</span></code></p></li>
 </ul>
-<p><strong>LocalGravData</strong></p>
+</section>
+<section id="magneticfield">
+<h2>Magneticfield<a class="headerlink" href="#magneticfield" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>GGM03S-J2-only.txt</p></li>
-<li><p>GGM03S.txt</p></li>
-<li><p>GGM2BData.txt</p></li>
-<li><p>VESTA20H.txt</p></li>
-<li><p>eros007790.tab</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WMM.COF</span></code></p></li>
 </ul>
-<p><strong>MagneticField</strong></p>
+</section>
+<section id="skybrightnessdata">
+<h2>Skybrightnessdata<a class="headerlink" href="#skybrightnessdata" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>WMM.COF</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">haslam408_dsds_Remazeilles2014.fits</span></code></p></li>
 </ul>
+</section>
 </section>
 
 

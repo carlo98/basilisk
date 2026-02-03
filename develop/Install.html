@@ -50,7 +50,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Basilisk:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Install</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basilisk-support-data">Basilisk Support Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basilisk-examples">Basilisk Examples</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Build.html">Building from Source</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Learn.html">Learning Basilisk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Support.html">Support</a></li>
@@ -137,6 +141,8 @@ download the source archive (<code class="docutils literal notranslate"><span cl
 This requires a C++ compiler toolchain and standard build tools
 to be installed on your system.</p>
 </div>
+<section id="basilisk-support-data">
+<h2>Basilisk Support Data<a class="headerlink" href="#basilisk-support-data" title="Link to this heading"></a></h2>
 <p>To keep the wheel size smaller, the large BSK data files are not installed by
 default.  If the user wants to use a script that that needs BSK data it will
 be downloaded automatically using <code class="docutils literal notranslate"><span class="pre">pooch</span></code>.  If you want to force all data to
@@ -151,6 +157,15 @@ The <code class="docutils literal notranslate"><span class="pre">pip</span> <spa
 creates this console command in the current python environment to call this
 python file.  The file directly downloads the missing large BSK data files and put
 them into the local Basilisk python package installation.</p>
+</section>
+<section id="basilisk-examples">
+<h2>Basilisk Examples<a class="headerlink" href="#basilisk-examples" title="Link to this heading"></a></h2>
+<p>If you want to run the example files provided by the Basilisk repository can be downloaded to the local
+directory using the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bskExamples</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
