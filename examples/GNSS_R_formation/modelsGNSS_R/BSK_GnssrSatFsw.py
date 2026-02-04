@@ -17,12 +17,14 @@
 #
 
 import itertools
+from math import e
 
 from Basilisk.simulation.albedo import BSK_ERROR
 from bokeh.util import terminal
+from jinja2.utils import F
 from mypy.dmypy.client import ActionFunction
 import numpy as np
-from Basilisk.architecture import messaging, sysModel
+from Basilisk.architecture import astroConstants, messaging, sysModel
 from Basilisk.fswAlgorithms import (
     attTrackingError,
     inertial3D,
@@ -33,7 +35,8 @@ from Basilisk.fswAlgorithms import (
     spacecraftReconfig,
     tamComm,
     mtbMomentumManagement,
-    scanningInstrumentController
+    spacecraftPointing,
+    meanOEFeedback
 #    gnssrSensing # TODO add (cpp code) in src/fswAlgorithms/....
 )
 from Basilisk.simulation import simpleAntenna
@@ -55,7 +58,8 @@ class StateMachineModule(sysModel.SysModel):
 
     def UpdateState(self, currentSimNanos):
         # Run the state machine every timestep
-        self.fswModel.setModeRequest()
+        if self.fswModel.stateMachine:
+            self.fswModel.setModeRequest()
 
 ########################################################
 #####             Flight Software                  #####
@@ -85,7 +89,7 @@ class BSKFswModels:
         self.reconfFormation = True
         self.timeInMode = 0
         self.flightTime = 0
-#        self.modeHistory = []
+        self.stateMachine = False
         self.verboseMode = False
 
         # Define process name and default time-step for all FSW tasks defined later on
@@ -127,14 +131,15 @@ class BSKFswModels:
         self.simBase.fswProc[spacecraftIndex].addTask(self.simBase.CreateNewTask("dataTransferTask" + str(spacecraftIndex),
                                                                        self.processTasksTimeStep), 20)
 
-        #--- Create STATE MACHINE ---#
-        # Create state machine module and add to FSW task
-        self.stateMachineModule = StateMachineModule(self)
-        self.simBase.AddModelToTask(
-            f"trackingErrorTask{spacecraftIndex}",  # Or any task that's always running
-            self.stateMachineModule,
-            1  # Low priority - runs after other modules
-        )
+        self.simBase.fswProc[spacecraftIndex].addTask(self.simBase.CreateNewTask("spacecraftPointingTask" + str(spacecraftIndex),
+                                                                       self.processTasksTimeStep), 20)
+
+        self.simBase.fswProc[spacecraftIndex].addTask(self.simBase.CreateNewTask("meanOEFeedbackTask" + str(spacecraftIndex),
+                                                                       self.processTasksTimeStep), 15)
+
+        # State Machine Task
+        self.simBase.fswProc[spacecraftIndex].addTask(self.simBase.CreateNewTask("stateMachineTask" + str(spacecraftIndex),
+                                                                          self.processTasksTimeStep), 25)
 
         #--- Create module data and module wraps ---#
         # FSW "state related" modules
@@ -161,6 +166,9 @@ class BSKFswModels:
         self.trackingError = attTrackingError.attTrackingError()
         self.trackingError.ModelTag = "trackingError"
 
+        self.trackingError2 = attTrackingError.attTrackingError()
+        self.trackingError2.ModelTag = "trackingError2"
+
         self.mrpFeedbackRWs = mrpFeedback.mrpFeedback()
         self.mrpFeedbackRWs.ModelTag = "mrpFeedbackRWs"
 
@@ -176,6 +184,15 @@ class BSKFswModels:
 
         self.scanningInstrumentController = scanningInstrumentController.scanningInstrumentController() #TODO what is: scanningInstrumentController.scanningInstrumentControllerConfig()
         self.scanningInstrumentController.ModelTag = "scanningInstrumentController"
+
+        self.spacecraftPointing = spacecraftPointing.spacecraftPointing()
+        self.spacecraftPointing.ModelTag = "spacecraftPointing"
+
+        self.meanOEFeedback = meanOEFeedback.meanOEFeedback()
+        self.meanOEFeedback.ModelTag = "meanOEFeedback"
+
+        # State machine module
+        self.stateMachineModule = StateMachineModule(self)
 
 #        self.gnssrSensing = gnssrSensing.GnssrSensing()
 #        self.gnssrSensing.ModelTag = "gnssrSensing"
@@ -210,13 +227,22 @@ class BSKFswModels:
 
         self.simBase.AddModelToTask("dataTransferTask" + str(spacecraftIndex), self.svalbardStationPoint, 9)
 
+        self.simBase.AddModelToTask("spacecraftPointingTask" + str(spacecraftIndex), self.spacecraftPointing, 10)
+        self.simBase.AddModelToTask("spacecraftPointingTask" + str(spacecraftIndex), self.trackingError, 7)
+
+        self.simBase.AddModelToTask("meanOEFeedbackTask" + str(spacecraftIndex), self.meanOEFeedback, 10)
+
         self.simBase.AddModelToTask("scanningInstrumentControllerTask" + str(spacecraftIndex), self.scanningInstrumentController, 8)
+
+        # Create state machine module
+        # State-Machine created as task because they (tasks) are always runing -> Low priority - runs after other modules
+        self.simBase.AddModelToTask(f"stateMachineTask" + str(spacecraftIndex), self.stateMachineModule, 1)
 
 #        self.simBase.AddModelToTask("gnssrTask" + str(spacecraftIndex), self.gnssrSensing, 9)
 
-
         # Create events to be called for triggering GN&C maneuvers
         self.simBase.fswProc[spacecraftIndex].disableAllTasks()
+        self.simBase.enableTask("stateMachineTask" + str(spacecraftIndex)) # Re-enable state-machine task
 
         # ------------------------------------------------------------------------------------------- #
         #-- Event Definitions --# -> This are the initialization events for each type of FSW mode
@@ -232,6 +258,7 @@ class BSKFswModels:
             ),
             actionFunction=lambda self: (
                 self.fswProc[spacecraftIndex].disableAllTasks(),
+                self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.FSWModels[spacecraftIndex].zeroGateWayMsgs(),
                 self.setAllButCurrentEventActivity(
                     f"initiateStandby_{spacecraftIndex}", True, useIndex=True
@@ -250,9 +277,10 @@ class BSKFswModels:
             actionFunction=lambda self: (
                 self.fswProc[spacecraftIndex].disableAllTasks(),
                 self.FSWModels[spacecraftIndex].zeroGateWayMsgs(),
-                self.enableTask(f"inertialPointTask{spacecraftIndex}"),
-                self.enableTask(f"trackingErrorTask{spacecraftIndex}"),
-                self.enableTask(f"mrpFeedbackRWsTask{spacecraftIndex}"),
+                self.enableTask("inertialPointTask" + str(spacecraftIndex)),
+                self.enableTask("trackingErrorTask" + str(spacecraftIndex)),
+                self.enableTask("mrpFeedbackRWsTask" + str(spacecraftIndex)),
+                self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.setAllButCurrentEventActivity(
                     f"initiateInertialPointing_{spacecraftIndex}", True, useIndex=True
                 ),
@@ -269,9 +297,10 @@ class BSKFswModels:
             actionFunction=lambda self: (
                 self.fswProc[spacecraftIndex].disableAllTasks(),
                 self.FSWModels[spacecraftIndex].zeroGateWayMsgs(),
-                self.enableTask(f"chargeBatteryTask{spacecraftIndex}"),
-                self.enableTask(f"trackingErrorTask{spacecraftIndex}"),
-                self.enableTask(f"mrpFeedbackRWsTask{spacecraftIndex}"),
+                self.enableTask("chargeBatteryTask" + str(spacecraftIndex)),
+                self.enableTask("trackingErrorTask" + str(spacecraftIndex)),
+                self.enableTask("mrpFeedbackRWsTask" + str(spacecraftIndex)),
+                self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.setAllButCurrentEventActivity(
                     f"initiateSolCharging_{spacecraftIndex}", True, useIndex=True
                 ),
@@ -286,7 +315,7 @@ class BSKFswModels:
                 self.FSWModels[spacecraftIndex].modeRequest == "initiateStationKeeping"
             ),
             actionFunction=lambda self: (
-                self.enableTask(f"spacecraftReconfigTask{spacecraftIndex}"),
+                self.enableTask("spacecraftReconfigTask" + str(spacecraftIndex)),
                 self.setEventActivity(f"stopStationKeeping_{spacecraftIndex}", True),
                 setattr(self.FSWModels[spacecraftIndex], 'stationKeeping', 'ON'),
             ),
@@ -315,9 +344,10 @@ class BSKFswModels:
             actionFunction=lambda self: (
                 self.fswProc[spacecraftIndex].disableAllTasks(),
                 self.FSWModels[spacecraftIndex].zeroGateWayMsgs(),
-                self.enableTask(f"nadirPointTask{spacecraftIndex}"),
-                self.enableTask(f"trackingErrorTask{spacecraftIndex}"),
-                self.enableTask(f"mrpFeedbackRWsTask{spacecraftIndex}"),
+                self.enableTask("nadirPointTask" + str(spacecraftIndex)),
+                self.enableTask("trackingErrorTask" + str(spacecraftIndex)),
+                self.enableTask("mrpFeedbackRWsTask" + str(spacecraftIndex)),
+                self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.setAllButCurrentEventActivity(
                     f"initiateNadirPointing_{spacecraftIndex}", True, useIndex=True
                 ),
@@ -335,8 +365,9 @@ class BSKFswModels:
                 self.fswProc[spacecraftIndex].disableAllTasks(),
                 self.FSWModels[spacecraftIndex].zeroGateWayMsgs(),
                 self.enableTask(f"locPointTask{spacecraftIndex}"),
-                self.enableTask(f"trackingErrorTask{spacecraftIndex}"),
-                self.enableTask(f"mrpFeedbackRWsTask{spacecraftIndex}"),
+                self.enableTask("trackingErrorTask" + str(spacecraftIndex)),
+                self.enableTask("mrpFeedbackRWsTask" + str(spacecraftIndex)),
+                self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.setAllButCurrentEventActivity(
                     f"initiateLocationPointing_{spacecraftIndex}", True, useIndex=True
                 ),
@@ -353,9 +384,10 @@ class BSKFswModels:
             actionFunction=lambda self: (
                 self.fswProc[spacecraftIndex].disableAllTasks(),
                 self.FSWModels[spacecraftIndex].zeroGateWayMsgs(),
-                self.enableTask(f"dataTransferTask{spacecraftIndex}"),
-                self.enableTask(f"trackingErrorTask{spacecraftIndex}"),
-                self.enableTask(f"mrpFeedbackRWsTask{spacecraftIndex}"),
+                self.enableTask("dataTransferTask" + str(spacecraftIndex)),
+                self.enableTask("trackingErrorTask" + str(spacecraftIndex)),
+                self.enableTask("mrpFeedbackRWsTask" + str(spacecraftIndex)),
+                self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.FSWModels[spacecraftIndex].antennaStateMsg.write(
                     messaging.AntennaStateMsgPayload(antennaState=simpleAntenna.ANTENNA_TX)
                 ),
@@ -365,7 +397,51 @@ class BSKFswModels:
             ),
         )
 
-# TODO add PID-formation control event here
+        self.simBase.createNewEvent(
+            "initiateSpacecraftPointing_" + str(spacecraftIndex),
+            self.processTasksTimeStep,
+            True,
+            conditionFunction=lambda self: (
+                self.FSWModels[spacecraftIndex].modeRequest == "spacecraftPointing"
+            ),
+            actionFunction=lambda self: (
+                self.FSWModels[spacecraftIndex].disableAllFswTasks(),
+                self.FSWModels[spacecraftIndex].zeroGateWayMsgs(),
+                self.enableTask("spacecraftPointingTask" + str(spacecraftIndex)),
+                self.enableTask("trackingErrorTask" + str(spacecraftIndex)),
+                self.enableTask("mrpFeedbackRWsTask" + str(spacecraftIndex)),
+                self.setAllButCurrentEventActivity(
+                    f"initiateSpacecraftPointing_{spacecraftIndex}", True, useIndex=True
+                ),
+            ),
+        )
+
+        self.simBase.createNewEvent(
+            "meanOEFeedback_" + str(spacecraftIndex),
+            self.processTasksTimeStep,
+            True,
+            conditionFunction=lambda self: (
+                self.FSWModels[spacecraftIndex].modeRequest == "startMeanOEFeedback"
+            ),
+            actionFunction=lambda self: (
+                self.enableTask("spacecraftReconfigTask" + str(spacecraftIndex)),
+                self.setEventActivity(f"stopStationKeeping_{spacecraftIndex}", True),
+                setattr(self.FSWModels[spacecraftIndex], 'stationKeeping', 'ON'),
+            ),
+        )
+        self.simBase.createNewEvent(
+            "stopStationKeeping_" + str(spacecraftIndex),
+            self.processTasksTimeStep,
+            True,
+            conditionFunction=lambda self: (
+                self.FSWModels[spacecraftIndex].modeRequest == "stopStationKeeping"
+            ),
+            actionFunction=lambda self: (
+                self.disableTask(f"spacecraftReconfigTask{spacecraftIndex}"),
+                self.setEventActivity(f"initiateStationKeeping_{spacecraftIndex}", True),
+                setattr(self.FSWModels[spacecraftIndex], 'stationKeeping', 'OFF'),
+            ),
+        )
 
         self.simBase.createNewEvent(
             "initiateGnssRMode_" + str(spacecraftIndex),
@@ -380,8 +456,9 @@ class BSKFswModels:
                 self.enableTask(f"nadirPointTask{spacecraftIndex}"),
                 self.enableTask(f"trackingErrorTask{spacecraftIndex}"),
                 self.enableTask(f"mrpFeedbackRWsTask{spacecraftIndex}"),
-                self.enableTask(f"scanningInstrumentControllerTask{spacecraftIndex}"),  # Enable instrument task
-                self.setEventActivity(f"stopStationKeeping_{spacecraftIndex}", True),   # Stop station keeping
+                self.enableTask("scanningInstrumentControllerTask" + str(spacecraftIndex)),  # Enable instrument task
+                self.setEventActivity("stopStationKeeping_" + str(spacecraftIndex), True),   # Stop station keeping
+                self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.setAllButCurrentEventActivity(
                     f"initiateGnssRMode_{spacecraftIndex}", True, useIndex=True
                 ),
@@ -564,6 +641,24 @@ class BSKFswModels:
             self.simBase.EnvModel.groundStationSval.currentGroundStateOutMsg)
         messaging.AttRefMsg_C_addAuthor(self.svalbardStationPoint.attRefOutMsg, self.attRefMsg)
 
+    def setSpacecraftPointing(self, chiefIndex=None, useBarycenter=False):
+        self.spacecraftPointing.deputyPositionInMsg.subscribeTo(self.simBase.DynModels[self.spacecraftIndex].simpleNavObject.transOutMsg)
+
+        # Chief depends on formation type
+        if useBarycenter:
+            # Point at barycenter
+            self.spacecraftPointing.chiefPositionInMsg.subscribeTo(
+                self.simBase.relativeNavigationModule.transOutMsg
+            )
+        elif chiefIndex is not None:
+            # Point at another spacecraft
+            self.spacecraftPointing.chiefPositionInMsg.subscribeTo(
+                self.simBase.DynModels[chiefIndex].simpleNavObject.transOutMsg
+            )
+        # Define body axis pointing at the 'chief'
+        self.spacecraftPointing.alignmentVector_B = [1.0, 2.0, 3.0]
+        messaging.AttRefMsg_C_addAuthor(self.spacecraftPointing.attReferenceOutMsg, self.attRefMsg)
+
     def setupScanningInstrumentControler(self):
         """
         Defines the simple instrument controller module.
@@ -573,7 +668,31 @@ class BSKFswModels:
         self.scanningInstrumentController.attErrTolerance = 0.1
         self.scanningInstrumentController.attGuidInMsg.subscribeTo(self.nadirPoint.attGuidOutMsg)
         self.scanningInstrumentController.accessInMsg.subscribeTo(
-        self.simBase.EnvModel.groundStationBar.accessOutMsgs[self.spacecraftIndex])
+            self.simBase.EnvModel.groundStationBar.accessOutMsgs[self.spacecraftIndex])
+
+    def setmeanOEFeedback(self):
+        """
+        Defines the mean orbital elements feedback module.
+        """
+        # Set gains
+        self.meanOEFeedback.K = [1e-6, 0, 0, 0, 0, 0,
+                                 0, 1e-4, 0, 0, 0, 0,
+                                 0, 0, 1e-4, 0, 0, 0,
+                                 0, 0, 0, 1e-4, 0, 0,
+                                 0, 0, 0, 0, 1e-4, 0,
+                                 0, 0, 0, 0, 0, 1e-4]
+        self.meanOEFeedback.targetDiffOeMean = [0, 0, 0, 0, 0, 0] # TODO ???
+        self.meanOEFeedback.oeType = 1 # 0 for classic elements, 1 for equinoctial elements TODO understand this
+        self.meanOEFeedback.mu = astroConstants.MU_EARTH
+        self.meanOEFeedback.req = astroConstants.REQ_EARTH * 1e3
+        self.meanOEFeedback.J2 = astroConstants.J2_EARTH
+
+        self.meanOEFeedback.deputyTransInMsg.subscribeTo(
+            self.simBase.DynModels[self.spacecraftIndex].simpleNavObject.transOutMsg)
+        # connect a blank chief message
+        chiefData = messaging.NavTransMsgPayload()                   #TODO Why is this needed?
+        chiefMsg = messaging.NavTransMsg().write(chiefData)          #TODO what is written to this message (blank) and is this correct?
+        self.meanOEFeedback.chiefTransInMsg.subscribeTo(chiefMsg)
 
     # Global call to initialize every module
     def InitAllFSWObjects(self):
@@ -597,6 +716,8 @@ class BSKFswModels:
         self.setupMtbMomentumManagement()
         self.setupScanningInstrumentControler()
         self.setupDataTransferSvalbard()
+        self.setSpacecraftPointing()
+        self.setmeanOEFeedback()
 
     def setModeRequest(self, modeRequest=None, verbose=None):
         """State machine to set the modeRequest variable based on time and conditions"""
