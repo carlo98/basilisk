@@ -439,7 +439,10 @@ def setup_link_budget_sim(ant1_payload, ant2_payload, enable_atm=False):
 
     # Enable atmospheric attenuation if requested
     if enable_atm:
-        linkBudgetModule.atmosAtt = True
+        if hasattr(linkBudgetModule, "atmosAtt"):
+            linkBudgetModule.atmosAtt = True
+        elif hasattr(linkBudgetModule, "setAtmosAtt"):
+            linkBudgetModule.setAtmosAtt(True)
 
     unitTestSim.AddModelToTask(unitTaskName, linkBudgetModule)
 
