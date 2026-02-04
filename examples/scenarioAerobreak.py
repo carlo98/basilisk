@@ -54,7 +54,7 @@ def sph2rv(xxsph):
     return rvec_N, uvec_N
 
 
-def run(show_plots, planetCase):
+def run(show_plots, planetCase, deorbitAlt=90):
     """
     The scenarios can be run with the followings setups parameters:
 
@@ -102,11 +102,7 @@ def run(show_plots, planetCase):
     tabAtmo.rhoList = tabularAtmosphere.DoubleVector(rhoList)
     tabAtmo.tempList = tabularAtmosphere.DoubleVector(tempList)
 
-    # createNewEvent to stop scenario when it gets too close to planet 
-
-
     # Drag Effector for sc1 
-
     drag1 = facetDragDynamicEffector.FacetDragDynamicEffector()
     drag1.ModelTag = "FacetDrag"
     dragEffectorTaskName1 = "drag" #should there be one task name per drag1 and drag 2?
@@ -287,7 +283,7 @@ def run(show_plots, planetCase):
     
     # Attach drag to hub and panel (new/more accurate model)
     scObject2.addDynamicEffector(drag2)
-    scSim.panel2.addDynamicEffector(drag3) 
+    # scSim.panel2.addDynamicEffector(drag3) 
     # scSim.panel4.addDynamicEffector(drag4) # REMEMBER TO ADD A 4th drag for the second panel 
 
     # Add spacecraft object to the simulation process
@@ -363,6 +359,21 @@ def run(show_plots, planetCase):
 
     scObject2.hub.r_CN_NInit = rN  # m - r_CN_N
     scObject2.hub.v_CN_NInit = vN  # m - v_CN_N
+
+    # Event to terminate the simulation
+    scSim.createNewEvent(
+        "Deorbited",
+        simulationTimeStep,
+        True,
+        conditionFunction=lambda self: (
+            np.linalg.norm(scObject1.scStateOutMsg.read().r_BN_N)
+            < planet.radEquator + 1000 * deorbitAlt
+        or 
+            np.linalg.norm(scObject2.scStateOutMsg.read().r_BN_N)
+            < planet.radEquator + 1000 * deorbitAlt
+        ),
+        terminal=True,
+    )
 
     # if this scenario is to interface with the BSK Viz, uncomment the following line
     vizSupport.enableUnityVisualization(scSim, simTaskName, [
@@ -448,5 +459,5 @@ def run(show_plots, planetCase):
 
     # close the plots being saved off to avoid over-writing old and new figures
 if __name__ == '__main__':
-    run(True, 'Earth')      # planet arrival case, can be Earth or Mars
+    run(True, 'Earth', deorbitAlt=90)      # planet arrival case, can be Earth or Mars
     
