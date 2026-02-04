@@ -120,6 +120,10 @@ public:
      */
     double getCNR2() const {return this->CNR2;}
 
+    bool atmosAtt = false;     //!< Enable/disable atmospheric attenuation (only used for space-ground)
+    bool pointingLoss = true;  //!< Enable/disable pointing loss
+    bool freqLoss = true;      //!< Enable/disable frequency offset loss
+
 private:
     LinkBudgetTypes::AntennaPlacement antennaPlacement;  //!< [-]   Antenna placement type
     AntennaTypes::EnvironmentType     env1;              //!< [-]   Antenna environment of antenna 1: space, 2: ground
@@ -140,9 +144,6 @@ private:
     const double          h_Toa      = 100.0e3;          //!< [m]   Height of top of atmosphere for attenuation integration(TOA = 100 km "Karman line") (above spherical earth surface)
     AntennaLogMsgPayload  *gndAntPnt = nullptr;          //!< [-]   Pointer to the ground antenna msg payload
     AntennaLogMsgPayload  *scAntPnt  = nullptr;          //!< [-]   Pointer to the spacecraft antenna msg payload
-    bool                   atmosAtt;                     //!< [-]   Enable/disable atmospheric attenuation
-    bool                   pointingLoss;                 //!< [-]   Enable pointing loss by default
-    bool                   freqLoss;                     //!< [-]   Enable frequency offset loss by default
     LookupTable            oxygenLookup;                 //!< [-]   Oxygen absorption coefficients       # TODO this should be a lookup table with frq a1 a2 a3 a4 a5 a6
     LookupTable            waterVaporLookup;             //!< [-]   Water vapor absorption coefficients  # TODO this should be a lookup table with frq b1 b2 b3 b4 b5 b6
     AttenuationLookupTable attenuationLookup;            //!< [-]   Atmospheric attenuation lookup table
