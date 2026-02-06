@@ -33,6 +33,9 @@ Version |release|
   compute the drag acting on such body.
 - Added :ref:`cannonballDrag`, a model intended to be used with MuJoCo dynamics to model
   cannonball aerodynamic drag forces and torques acting on bodies.
+- Fixed range of grammatical typos in the Basilisk documentation
+- Ensure the HTML documentation figures from the example scenario look more consistent
+- Avoid a memory leak when saving off figures in the CI Unit tests to build the online documentation
 
 
 Version 2.9.0 (Jan. 28 2026)
