@@ -367,28 +367,78 @@ class scenario_StatKeepingAttPointGnssrFormaton(BSKSim, BSKScenario):
         self.FSWModels[2].setSpacecraftPointing(chiefIndex=1)  # SC2 points at SC1
 
         # Configure station keeping formation control
-        if self.formation == 'COCENTRIC_FORMATION': # CF
-            a = self.oe[0].a
+        if self.formation == 'COCENTRIC_FORMATION': # CF (chief -> SC0)
+            # =====================================================
+            # HydroSwarm Fig. 3-5
+            # Collinear Circular Projected Orbit
+            # Chief + 2 deputies stacked radially
+            # =====================================================
 
-            rhos = [50.0, 100.0, 150.0]              # concentric radii [m]
-            phis = [0.0, 2*np.pi/3, 4*np.pi/3]       # 120 deg spacing
+            a = self.oe[0].a          # chief semi-major axis
+            rho = 75.0               # meters
 
-            for k in range(3):
-                rho = rhos[k]
-                phi = phis[k]
-                delta_e = rho / a
-                delta_i = np.sqrt(3) * delta_e
+            # Convert separation into relative eccentricity
+            delta_e1 = rho / a
+            delta_e2 = 2.0 * rho / a
 
-                delta_omega = delta_e * np.cos(phi)
-                delta_M     = -delta_omega
-                self.FSWModels[k].spacecraftReconfig.targetClassicOED = [
-                    0.0,                          # Δa/a
-                    delta_e,                      # Δe
-                    delta_i,                      # Δi
-                    0.0,                          # ΔΩ
-                    delta_omega,                  # Δω
-                    delta_M                       # ΔM
-                ]
+            # Circular projected condition (Schaub Eq. 14.155)
+            delta_i1 = np.sqrt(3.0) * delta_e1
+            delta_i2 = np.sqrt(3.0) * delta_e2
+
+            # IMPORTANT:
+            # All deputies MUST share the SAME phase
+            phi = 0.0
+
+            # =====================================================
+            # CHIEF (SC0)
+            # =====================================================
+
+            self.FSWModels[0].spacecraftReconfig.targetClassicOED = [
+                0.0,   # Δa/a
+                0.0,   # Δe
+                0.0,   # Δi
+                0.0,   # ΔΩ
+                0.0,   # Δω
+                0.0    # ΔM
+            ]
+
+            # =====================================================
+            # DEPUTY 1 (SC1)  ---- radius rho
+            # =====================================================
+
+            delta_ex1 = delta_e1 * np.cos(phi)
+            delta_ey1 = delta_e1 * np.sin(phi)
+
+            delta_ix1 = delta_i1 * np.cos(phi + np.pi/2)
+            delta_iy1 = delta_i1 * np.sin(phi + np.pi/2)
+
+            self.FSWModels[1].spacecraftReconfig.targetClassicOED = [
+                0.0,            # Δa  (CRITICAL -> prevents drift)
+                delta_e1,       # keep this! Basilisk needs it
+                delta_iy1,      # Δi
+                delta_ix1,      # ΔΩ
+                delta_ey1,      # Δω
+                -delta_ex1      # ΔM  (MOST IMPORTANT LINE)
+            ]
+
+            # =====================================================
+            # DEPUTY 2 (SC2) ---- radius 2*rho
+            # =====================================================
+
+            delta_ex2 = delta_e2 * np.cos(phi)
+            delta_ey2 = delta_e2 * np.sin(phi)
+
+            delta_ix2 = delta_i2 * np.cos(phi + np.pi/2)
+            delta_iy2 = delta_i2 * np.sin(phi + np.pi/2)
+
+            self.FSWModels[2].spacecraftReconfig.targetClassicOED = [
+                0.0,
+                delta_e2,
+                delta_iy2,
+                delta_ix2,
+                delta_ey2,
+                -delta_ex2
+            ]
         elif self.formation == 'CIRCULAR_PROJECTED_ORBITS': # CPO J2 invariant
             a = self.oe[0].a
             rho = 75.0                  # [m]
@@ -437,10 +487,11 @@ class scenario_StatKeepingAttPointGnssrFormaton(BSKSim, BSKScenario):
                     -phi          # ΔM
                 ]
         elif self.formation == 'LEAD_FOLLOWER': # LF TODO This might be wrong
-            delta_e = 1.5e-5  # Along-track separation [rad], ~50m
-            self.FSWModels[0].spacecraftReconfig.targetClassicOED = [0.0,  delta_e, 0.0, 0.0, 0.0, 0.0]  #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
-            self.FSWModels[1].spacecraftReconfig.targetClassicOED = [0.0, 0.0,      0.0, 0.0, 0.0, 0.0]  #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
-            self.FSWModels[2].spacecraftReconfig.targetClassicOED = [0.0, -delta_e, 0.0, 0.0, 0.0, 0.0]  #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
+            separation = 50.0  # [m] along-track separation
+            delta_M = separation / self.oe[0].a  # [rad]
+            self.FSWModels[0].spacecraftReconfig.targetClassicOED = [0.0,  0.0, 0.0, 0.0, 0.0, delta_M]   #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
+            self.FSWModels[1].spacecraftReconfig.targetClassicOED = [0.0, 0.0,  0.0, 0.0, 0.0, 0.0]       #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
+            self.FSWModels[2].spacecraftReconfig.targetClassicOED = [0.0, 0.0,  0.0, 0.0, 0.0, -delta_M]  #| Δa/a, Δe, Δi, ΔΩ, Δω, ΔM
 
     def configure_initial_conditions(self):
         EnvModel = self.get_EnvModel()
@@ -614,7 +665,15 @@ class scenario_StatKeepingAttPointGnssrFormaton(BSKSim, BSKScenario):
 
         # Save data system information
         dataStorageLevel = self.dataStorageLog[spacecraftIndex].storageLevel
-        dataStoredData = self.dataStorageLog[spacecraftIndex].storedData  # Per-partition data
+
+        # Single partition data - parse manually to avoid numpy inhomogeneous array error
+        storedDataRaw = self.dataStorageLog[spacecraftIndex]._storedData_list()
+        numTimesteps = len(storedDataRaw)
+        dataStoredData = np.zeros((numTimesteps, 1))
+        for i in range(numTimesteps):
+            partitionData = list(storedDataRaw[i])
+            if len(partitionData) > 0:
+                dataStoredData[i, 0] = partitionData[0]
         dataNetBaud = self.dataStorageLog[spacecraftIndex].currentNetBaud
         dataGsAccess = self.gsAccessLog[spacecraftIndex].hasAccess
         dataSlantRange = self.gsAccessLog[spacecraftIndex].slantRange
@@ -705,7 +764,7 @@ class scenario_StatKeepingAttPointGnssrFormaton(BSKSim, BSKScenario):
         plt.plot_thrust_percentage(timeLineSetMin, dataThrustPercentage, DynModels[spacecraftIndex].numThr, 14)
 
        # Data system plots
-        partitionNames = ["GPS-R L1", "GPS-R L5", "Galileo E1", "Galileo E5a"]
+        partitionNames = ["GNSS_R"]
         plt.plot_data_storage(timeLineSetMin, dataStorageLevel, dataStoredData, partitionNames, 15)
         plt.plot_data_rates(timeLineSetMin, dataNetBaud, 16)
         plt.plot_ground_access(timeLineSetMin, dataGsAccess, dataSlantRange, dataElevation, 17)
@@ -753,7 +812,7 @@ def runScenario(scenario):
 #    scenario.FSWModels[1].setModeRequest(modeRequest="autonomous", verbose=True)
 #    scenario.FSWModels[2].setModeRequest(modeRequest="autonomous", verbose=True)
     for i in range(scenario.numberSpacecraft):
-        scenario.FSWModels[i].setModeRequest(modeRequest="autonomous", verbose=True)
+        scenario.FSWModels[i].setModeRequest(modeRequest="chargeBattery", verbose=True)
     simulationTime1 = macros.hour2nano(2.0) # 2 hours
     scenario.ConfigureStopTime(simulationTime0 + simulationTime1)
     scenario.ExecuteSimulation()
@@ -778,8 +837,8 @@ def runScenario(scenario):
     # Phase 3: Location pointing (EXPAND TO GNSS-R operations)
     # =========================================
     for i in range(scenario.numberSpacecraft):
-        scenario.FSWModels[i].setModeRequest(modeRequest="startGnssSensing", verbose=True)
-    simulationTime3 = macros.hour2nano(2.0) # 2 hours
+        scenario.FSWModels[i].setModeRequest(modeRequest="startGnssrSensing", verbose=True)
+    simulationTime3 = macros.hour2nano(10.0) # 2 hours
     scenario.ConfigureStopTime(simulationTime0 + simulationTime1 + simulationTime2 + simulationTime3)
     scenario.ExecuteSimulation()
 
@@ -813,7 +872,7 @@ if __name__ == "__main__":
     # show current path
     gpsTleData = tleHandling.satTle2elem(os.path.join(path, "TLE", "GPS_operational.tle"))# Options are "Galileo.tle", "GLONAS_operational.tle", "GPS_operational.tle", "BeiDou.tle", "oneWeb.tle"
 
-    run(showPlots=False,
+    run(showPlots=True,
         numberSpacecraft=3,
         formation='COCENTRIC_FORMATION', # can be any of ['COCENTRIC_FORMATION', 'CIRCULAR_PROJECTED_ORBITS', 'LEAD_FOLLOWER', 'CARTWHEEL']
         txConstTleData=[gpsTleData] # can be any of ['GPS', 'Galileo', 'Beidou', 'Glonass']

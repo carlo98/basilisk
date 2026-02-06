@@ -43,6 +43,17 @@ from Basilisk.simulation import simpleAntenna
 from Basilisk.utilities import fswSetupThrusters
 from Basilisk.utilities import macros as mc
 
+#############################################################
+###############        HELPER FUNCTIONS       ###############
+#############################################################
+def format_sim_time(nanos):
+    """Convert nanoseconds to D:HH:MM:SS format."""
+    total_seconds = int(nanos * mc.NANO2SEC)
+    days, remainder = divmod(total_seconds, 86400)
+    hours, remainder = divmod(remainder, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{days}:{hours:02d}:{minutes:02d}:{seconds:02d}"
+
 class StateMachineModule(sysModel.SysModel):
     """
     State machine module run as a Basilisk task.
@@ -456,7 +467,7 @@ class BSKFswModels:
                 self.enableTask(f"nadirPointTask{spacecraftIndex}"),
                 self.enableTask(f"trackingErrorTask{spacecraftIndex}"),
                 self.enableTask(f"mrpFeedbackRWsTask{spacecraftIndex}"),
-                self.enableTask("scanningInstrumentControllerTask" + str(spacecraftIndex)),  # Enable instrument task
+                self.enableTask(f"scanningInstrumentControllerTask{spacecraftIndex}"),  # Enable instrument task
                 self.setEventActivity("stopStationKeeping_" + str(spacecraftIndex), True),   # Stop station keeping
                 self.enableTask("stateMachineTask" + str(spacecraftIndex)), # Re-enable state-machine task
                 self.setAllButCurrentEventActivity(
@@ -491,7 +502,7 @@ class BSKFswModels:
         """
         Defines the Earth location pointing guidance module (Pointing to NADIR).
         """
-        self.nadirPoint.pHat_B = [0, 0, -1] #TODO check if this is correct # Pointing "bottom" of the spacecraft to the location (GNSS-R sensors are on the 'flat underside' of the satellite)
+        self.nadirPoint.pHat_B = [0, 0, 1] # GNSS-R sensors are on the 'flat underside' of the satellite
         self.nadirPoint.scAttInMsg.subscribeTo(
             self.simBase.DynModels[self.spacecraftIndex].simpleNavObject.attOutMsg)
         self.nadirPoint.scTransInMsg.subscribeTo(
@@ -666,9 +677,14 @@ class BSKFswModels:
         self.scanningInstrumentController.useRateTolerance = 1
         self.scanningInstrumentController.rateErrTolerance = 0.01
         self.scanningInstrumentController.attErrTolerance = 0.1
-        self.scanningInstrumentController.attGuidInMsg.subscribeTo(self.nadirPoint.attGuidOutMsg)
+        self.scanningInstrumentController.controllerStatus = 1        # Enable the controller (default is 0 = disabled)
+        self.scanningInstrumentController.attGuidInMsg.subscribeTo(self.attGuidMsg)
         self.scanningInstrumentController.accessInMsg.subscribeTo(
-            self.simBase.EnvModel.groundStationBar.accessOutMsgs[self.spacecraftIndex])
+            self.simBase.EnvModel.groundEarthCenter.accessOutMsgs[self.spacecraftIndex])
+
+        # Connect controller output to simpleInstrument
+        self.simBase.DynModels[self.spacecraftIndex].instrument.nodeStatusInMsg.subscribeTo(
+            self.scanningInstrumentController.deviceCmdOutMsg)
 
     def setmeanOEFeedback(self):
         """
@@ -732,9 +748,8 @@ class BSKFswModels:
         if modeRequest is not None and modeRequest != 'autonomous':
             self.modeRequest = modeRequest
             self.timeInMode = 0
-#            print(f'DEBUG changed mode from {previousMode} to {self.modeRequest} at time {mc.NANO2MIN * (self.flightTime)} min [FORCED]')
             if self.verboseMode and previousMode != self.modeRequest:
-                print(f"Forced mode change from {previousMode} to {self.modeRequest} at time {mc.NANO2MIN * (self.flightTime)} min")
+                print(f"SC{self.spacecraftIndex}: {previousMode} → {self.modeRequest} at {format_sim_time(self.flightTime)}")
             return
 
         # ===== AUTOMATIC MODE CHANGE =====
@@ -782,9 +797,8 @@ class BSKFswModels:
 
         if self.modeRequest != previousMode:
             self.timeInMode = 0
-#            print(f'DEBUG changed mode from {previousMode} to {self.modeRequest} at time {mc.NANO2MIN * (self.flightTime)} min [AUTO]')
             if self.verboseMode:
-                print(f"Mode change from {previousMode} to {self.modeRequest} at time {mc.NANO2MIN * (self.flightTime)} min [AUTO]")
+                print(f"SC{self.spacecraftIndex}: {previousMode} → {self.modeRequest} at {format_sim_time(self.flightTime)} [AUTO]")
         # Update time in current mode
         elif self.modeRequest == previousMode:
             self.timeInMode += self.processTasksTimeStep

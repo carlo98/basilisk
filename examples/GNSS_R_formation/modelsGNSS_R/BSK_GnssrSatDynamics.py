@@ -138,6 +138,7 @@ class BSKDynamicModels:
         """
         SimBase.EnvModel.groundStationBar.addSpacecraftToModel(self.scObject.scStateOutMsg)
         SimBase.EnvModel.groundStationSval.addSpacecraftToModel(self.scObject.scStateOutMsg)
+        SimBase.EnvModel.groundEarthCenter.addSpacecraftToModel(self.scObject.scStateOutMsg)
 
     def SetEclipseObject(self, SimBase):
         """
@@ -321,7 +322,7 @@ class BSKDynamicModels:
         """Sets up the simple instrument"""
         self.instrument.ModelTag = "SimpleInstrument" + str(self.spacecraftIndex)
         self.instrument.nodeBaudRate = 1e6  # 1 Mbps | TODO update according to GNSS-R instrument specs
-        self.instrument.nodeDataName = "GNSS-R_Data" + str(self.spacecraftIndex)
+        self.instrument.nodeDataName = "GNSS_R"
 
     def SetTransmitter(self, SimBase):
         """Sets up the transmitter (simple antenna + link budget)"""
@@ -339,10 +340,7 @@ class BSKDynamicModels:
         self.dataMonitor.storageCapacity = 32e9  # 32 GB | Nano Avionics M12P max data storage capacity is 32 GB NAND
         self.dataMonitor.addDataNodeToModel(self.instrument.nodeDataOutMsg)
         self.dataMonitor.addDataNodeToModel(self.transmitter.nodeDataOutMsg) # TODO add transmitter when available (remove comment)
-        self.dataMonitor.addPartition("GPS-R L1")
-        self.dataMonitor.addPartition("GPS-R L5")
-        self.dataMonitor.addPartition(("Galileo E1"))
-        self.dataMonitor.addPartition(("Galileo E5a"))
+        self.dataMonitor.addPartition("GNSS_R") # There is only one partition for the data simpleScanning instrument
 
     def SetSimpleAntenna(self, SimBase):
         """Sets up the simple antenna"""
