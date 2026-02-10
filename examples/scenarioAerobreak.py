@@ -146,6 +146,10 @@ def run(show_plots, planetCase, deorbitAlt=90):
     drag3 = facetDragDynamicEffector.FacetDragDynamicEffector()
     drag3.ModelTag = "FacetDrag3"
     dragEffectorTaskName3 = "panelDrag3"
+
+    drag4 = facetDragDynamicEffector.FacetDragDynamicEffector()
+    drag4.ModelTag = "FacetDrag4"
+    dragEffectorTaskName4 = "panelDrag4"
     
     panelArea = 25    # m^2 ???
     panelOffset = 0.3  # Distance from hub COM
@@ -153,7 +157,7 @@ def run(show_plots, planetCase, deorbitAlt=90):
 
     panel_normals = [
         np.array([0, 0,  1]), 
-        np.array([0, 0, -1])
+        np.array([0, 0, -1]) # may need to add other panel to this
     ]
 
     panel_locations = [
@@ -164,23 +168,20 @@ def run(show_plots, planetCase, deorbitAlt=90):
     for i in range(2):
         drag3.addFacet(panelArea, panelCd, panel_normals[i], panel_locations[i])
 
+    for i in range(2):
+        drag4.addFacet(panelArea, panelCd, panel_normals[i], panel_locations[i])
     
     for i in range(2):
         drag1.addFacet(panelArea, panelCd, panel_normals[i], panel_locations[i])
-
-    # Add another drag and panel facets for sc2 later there:
-
 
     dynProcess.addTask(scSim.CreateNewTask(atmoTaskName, simulationTimeStep))
     
     dynProcess.addTask(scSim.CreateNewTask(dragEffectorTaskName1, simulationTimeStep))
     dynProcess.addTask(scSim.CreateNewTask(dragEffectorTaskName2, simulationTimeStep))
     dynProcess.addTask(scSim.CreateNewTask(dragEffectorTaskName3, simulationTimeStep))
+    dynProcess.addTask(scSim.CreateNewTask(dragEffectorTaskName4, simulationTimeStep))
     
     scSim.AddModelToTask(atmoTaskName, tabAtmo)
-
-    # Add test module to runtime call list
-    scSim.AddModelToTask(simTaskName, tabAtmo)
 
     #
     #   setup the simulation tasks/objects
@@ -217,47 +218,47 @@ def run(show_plots, planetCase, deorbitAlt=90):
     panel1.d = 1.5
     panel1.k = 200
     panel1.c = 20  # c is the rotational damping coefficient for the hinge, which is modeled as a spring.
-    panel1.r_HB_B = [[-0.5], [0.0], [-1.0]] # maybe make it 1 
+    panel1.r_HB_B = [[0.5], [0.0], [-1.0]] # maybe make it 1 
     panel1.dcm_HB = [[-1, 0, 0.0], [0.0, -1, 0.0], [0.0, 0.0, 1]]
     panel1.thetaInit = 0.0
     panel1.thetaDotInit = 0.0
 
-    panel2.mass = 200
+    panel2.mass = 100
     panel2.IPntS_S = [[100.0, 0.0, 0.0], [0.0, 50.0, 0.0], [0.0, 0.0, 50.0]]
     panel2.d = 1.5
     panel2.k = 200
     panel2.c = 20  # c is the rotational damping coefficient for the hinge, which is modeled as a spring.
-    panel2.r_HB_B = [[-0.5], [0.0], [1.0]] 
+    panel2.r_HB_B = [[0.5], [0.0], [-1.0]] 
     panel2.dcm_HB = [[-1, 0, 0.0], [0.0, -1, 0.0], [0.0, 0.0, 1]]
     panel2.thetaInit = 0.0
     panel2.thetaDotInit = 0.0
 
     # # Symmetrically opposite panels for each spacecraft
-    # scSim.panel3 = hingedRigidBodyStateEffector.HingedRigidBodyStateEffector() 
-    # scSim.panel3.ModelTag = "panel3"
+    panel3 = hingedRigidBodyStateEffector.HingedRigidBodyStateEffector() 
+    panel3.ModelTag = "panel3"
 
-    # scSim.panel4 = hingedRigidBodyStateEffector.HingedRigidBodyStateEffector() 
-    # scSim.panel4.ModelTag = "panel4"
+    panel4 = hingedRigidBodyStateEffector.HingedRigidBodyStateEffector() 
+    panel4.ModelTag = "panel4"
 
-    # scSim.panel3.mass = 200
-    # scSim.panel3.IPntS_S = [[100.0, 0.0, 0.0], [0.0, 50.0, 0.0], [0.0, 0.0, 50.0]]
-    # scSim.panel3.d = -16
-    # scSim.panel3.k = 20
-    # scSim.panel3.c = 0.0  # c is the rotational damping coefficient for the hinge, which is modeled as a spring.
-    # scSim.panel3.r_HB_B = [[0.5], [0.0], [1.0]]
-    # scSim.panel3.dcm_HB = [[1, 0, 0.0], [0.0, 1, 0.0], [0.0, 0.0, 1]]
-    # scSim.panel3.thetaInit = 0.0
-    # scSim.panel3.thetaDotInit = 0.0
+    panel3.mass = 100
+    panel3.IPntS_S = [[100.0, 0.0, 0.0], [0.0, 50.0, 0.0], [0.0, 0.0, 50.0]]
+    panel3.d = -1.5
+    panel3.k = 200
+    panel3.c = 20  # c is the rotational damping coefficient for the hinge, which is modeled as a spring.
+    panel3.r_HB_B = [[-0.5], [0.0], [-1.0]]
+    panel3.dcm_HB = [[-1, 0, 0.0], [0.0, -1, 0.0], [0.0, 0.0, 1]]
+    panel3.thetaInit = 0.0
+    panel3.thetaDotInit = 0.0
 
-    # scSim.panel4.mass = 200
-    # scSim.panel4.IPntS_S = [[100.0, 0.0, 0.0], [0.0, 50.0, 0.0], [0.0, 0.0, 50.0]]
-    # scSim.panel4.d = -16
-    # scSim.panel4.k = 20
-    # scSim.panel4.c = 0.0  # c is the rotational damping coefficient for the hinge, which is modeled as a spring.
-    # scSim.panel4.r_HB_B = [[0.5], [0.0], [1.0]] 
-    # scSim.panel4.dcm_HB = [[1, 0, 0.0], [0.0, 1, 0.0], [0.0, 0.0, 1]]
-    # scSim.panel4.thetaInit = 0.0
-    # scSim.panel4.thetaDotInit = 0.0
+    panel4.mass = 100
+    panel4.IPntS_S = [[100.0, 0.0, 0.0], [0.0, 50.0, 0.0], [0.0, 0.0, 50.0]]
+    panel4.d = -1.5
+    panel4.k = 200
+    panel4.c = 20  # c is the rotational damping coefficient for the hinge, which is modeled as a spring.
+    panel4.r_HB_B = [[-0.5], [0.0], [-1.0]] 
+    panel4.dcm_HB = [[-1, 0, 0.0], [0.0, -1, 0.0], [0.0, 0.0, 1]]
+    panel4.thetaInit = 0.0
+    panel4.thetaDotInit = 0.0
 
     #########
     # Add panels to spaceCraft
@@ -266,8 +267,8 @@ def run(show_plots, planetCase, deorbitAlt=90):
     # in order to affect dynamics
     scObject1.addStateEffector(panel1)
     scObject2.addStateEffector(panel2)
-    # scObject1.addStateEffector(panel3)
-    # scObject2.addStateEffector(panel4)
+    scObject1.addStateEffector(panel3)
+    scObject2.addStateEffector(panel4)
 
     scSim.AddModelToTask(simTaskName, scObject1)
     scSim.AddModelToTask(simTaskName, scObject2)
@@ -275,8 +276,8 @@ def run(show_plots, planetCase, deorbitAlt=90):
     # in order to track messages
     scSim.AddModelToTask(simTaskName, panel1) 
     scSim.AddModelToTask(simTaskName, panel2)
-    # scSim.AddModelToTask(simTaskName, panel3)
-    # scSim.AddModelToTask(simTaskName, panel4)
+    scSim.AddModelToTask(simTaskName, panel3)
+    scSim.AddModelToTask(simTaskName, panel4)
     
     print("in python attaching to hub 1!!!!")
     # Attach drag to hub only (previous method)
@@ -292,12 +293,12 @@ def run(show_plots, planetCase, deorbitAlt=90):
 
     print("in python attaching to panel!!!!!!")
     panel2.addDynamicEffector(drag3)  
-    scSim.AddModelToTask(dragEffectorTaskName2, drag3)
+    scSim.AddModelToTask(dragEffectorTaskName3, drag3)
     drag3.atmoDensInMsg.subscribeTo(tabAtmo.envOutMsgs[0])    
 
-    # panel4.addDynamicEffector(drag4) # REMEMBER TO ADD A 4th drag for the second panel 
-    # scSim.AddModelToTask(dragEffectorTaskName2, drag4)
-    # drag4.atmoDensInMsg.subscribeTo(tabAtmo.envOutMsgs[0])
+    panel4.addDynamicEffector(drag4)  
+    scSim.AddModelToTask(dragEffectorTaskName4, drag4)
+    drag4.atmoDensInMsg.subscribeTo(tabAtmo.envOutMsgs[0])    
 
     # set the simulation time
     if planetCase == 'Earth':
@@ -346,12 +347,16 @@ def run(show_plots, planetCase, deorbitAlt=90):
     dataLog2 = scObject2.scStateOutMsg.recorder()
     p1Log = panel1.hingedRigidBodyOutMsg.recorder()
     p2Log = panel2.hingedRigidBodyOutMsg.recorder()
+    p3Log = panel3.hingedRigidBodyOutMsg.recorder()
+    p4Log = panel4.hingedRigidBodyOutMsg.recorder()
 
 
     scSim.AddModelToTask(simTaskName, dataLog1)
     scSim.AddModelToTask(simTaskName, dataLog2)
     scSim.AddModelToTask(simTaskName, p1Log)
     scSim.AddModelToTask(simTaskName, p2Log)
+    scSim.AddModelToTask(simTaskName, p3Log)
+    scSim.AddModelToTask(simTaskName, p4Log)
 
     dataNewAtmoLog = tabAtmo.envOutMsgs[0].recorder()
     scSim.AddModelToTask(simTaskName, dataNewAtmoLog)
@@ -376,6 +381,8 @@ def run(show_plots, planetCase, deorbitAlt=90):
         scObject2,
         ["panel1", panel1.hingedRigidBodyConfigLogOutMsg],
         ["panel2", panel2.hingedRigidBodyConfigLogOutMsg],
+        ["panel3", panel3.hingedRigidBodyConfigLogOutMsg],
+        ["panel4", panel4.hingedRigidBodyConfigLogOutMsg],
     ]
 
     # if this scenario is to interface with the BSK Viz, uncomment the following line
@@ -400,12 +407,26 @@ def run(show_plots, planetCase, deorbitAlt=90):
                                  simBodiesToModify=["panel1"],
                                  modelPath="CUBE",
                                  scale=[3, 1, 0.1]) # [width, length, height] in meters
-    # Panel 2
+    
+    # Panel 3 on spacecraft 1
+    vizSupport.createCustomModel(viz,
+                                 simBodiesToModify=["panel3"],
+                                 modelPath="CUBE",
+                                 scale=[3, 1, 0.1]) # [width, length, height] in meters
+    
+    # Panel 2 on spacecraft 2
     vizSupport.createCustomModel(viz,
                                  simBodiesToModify=["panel2"],
                                  modelPath="CUBE",
                                  color=vizSupport.toRGBA255("gold"),
                                  scale=[3, 1, 0.1])  # [width, length, height] in meters
+    
+    # Panel 4 on spacecraft 2
+    vizSupport.createCustomModel(viz,
+                                 simBodiesToModify=["panel4"],
+                                 modelPath="CUBE",
+                                 color=vizSupport.toRGBA255("gold"),
+                                 scale=[3, 1, 0.1]) # [width, length, height] in meters
     
     #
     #   initialize Simulation
