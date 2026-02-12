@@ -1,6 +1,28 @@
+#
+#  ISC License
+#
+#  Copyright (c) 2026, Norwegian University of Science and Technology (NTNU)
+#
+#  Permission to use, copy, modify, and/or distribute this software for any
+#  purpose with or without fee is hereby granted, provided that the above
+#  copyright notice and this permission notice appear in all copies.
+#
+#  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+#  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+#  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+#  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+#  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+#  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#
+
 import numpy as np
 import datetime as dt
 import re
+from sgp4.api import Satrec, jday
+from astropy.coordinates import TEME, GCRS, CartesianRepresentation, CartesianDifferential
+from astropy import units as u
+from astropy.time import Time
 from dataclasses import dataclass, field
 from matplotlib.dates import SEC_PER_DAY
 from Basilisk.utilities import orbitalMotion as om
@@ -34,6 +56,29 @@ class TleData:
         if name not in self.__dataclass_fields__:
             raise AttributeError(f"Cannot set attribute '{name}' on TleData instance")
         object.__setattr__(self, name, value)
+
+
+# Helper functions: Coordinate conversion; TEME -> J2000/ICRS
+def _teme2j2000(r_m, v_m, epoch: dt.datetime):
+    t = Time(epoch)
+    r_teme = CartesianRepresentation(r_m * u.m)
+    v_teme = CartesianDifferential(v_m * u.m / u.s)
+    teme = TEME(r_teme.with_differentials(v_teme), obstime=t)
+    gcrs = teme.transform_to(GCRS(obstime=t))
+    return gcrs.cartesian.xyz.to(u.m).value, gcrs.cartesian.differentials['s'].d_xyz.to(u.m / u.s).value
+
+# Helper functions: Coordinate conversion; J2000/ICRS -> TEME
+def _j20002teme(r_m, v_m, epoch: dt.datetime):
+    t = Time(epoch)
+    r_gcrs = CartesianRepresentation(r_m * u.m)
+    v_gcrs = CartesianDifferential(v_m * u.m / u.s)
+    gcrs = GCRS(r_gcrs.with_differentials(v_gcrs), obstime=t)
+    teme = gcrs.transform_to(TEME(obstime=t))
+    return teme.cartesian.xyz.to(u.m).value, teme.cartesian.differentials['s'].d_xyz.to(u.m / u.s).value
+
+# Helper function to wrap angles to [0, 360) degrees
+def _wrap_deg(angle_rad: float) -> float:
+    return np.rad2deg(angle_rad) % 360.0
 
 def _calcTleChecksum(stringArray: str) -> int:
     """
@@ -191,6 +236,133 @@ def _parseTle(tle: str) -> TleData:
 
     return tleData
 
+def _convertMean2osculating(line1: str, line2: str, tleData: TleData) -> om.ClassicElements:
+    """
+    Convert the TLE mean orbital elements (NORAD/SGP4) to osculating orbital elements used by basilisk.
+
+    spg4MeanOE -> SPG4 -> state vector -> osculating OE
+
+    :param tleDataList: list of TleData objects containing the mean orbital elements from the TLE
+    :return: tleDataList with updated osculating orbital elements used by basilisk
+    """
+    # Get initial state vector from SGP4 mean orbital elements
+    satellite = Satrec.twoline2rv(line1, line2)
+
+    # Convert epoch to Julian date
+    epoch = tleData.tleEpoch
+    jd, fr = jday(epoch.year, epoch.month, epoch.day,
+                  epoch.hour, epoch.minute,
+                  epoch.second + epoch.microsecond / 1e6)
+
+    # Propagate to epoch to get True Equator, Mean Equinox (TEME) state vector
+    e, r, v = satellite.sgp4(jd, fr)
+
+    if e != 0:
+        raise ValueError(f"SPG4 propagation failed for satellite {tleData.satName} with NORAD ID {tleData.noradID} at epoch {tleData.tleEpoch}. Error code: {e}")
+
+    # Convert km -> m for Basilisk
+    r_teme_m = np.array(r) * 1e3
+    v_teme_m = np.array(v) * 1e3
+
+    # Convert TEME -> J2000/ICRF (Basilisk inertial frame)
+    r_m, v_m = _teme2j2000(r_teme_m, v_teme_m, tleData.tleEpoch)
+
+    # Convert state vector to osculating orbital elements
+    osculatingOE = om.rv2elem(om.MU_EARTH*1e9, r_m, v_m)
+
+    return osculatingOE
+
+def _osculating2mean_j2(oe_osc: om.ClassicElements) -> om.ClassicElements:
+    """
+    Convert osculating to mean elements using first-order J2 mapping.
+
+    :param oe_osc: osculating classical orbital elements
+    :return: mean classical orbital elements
+    """
+    oe_mean = om.ClassicElements()
+    om.clMeanOscMap(om.REQ_EARTH*1e3, om.J2_EARTH, oe_osc, oe_mean, sign=-1)
+    return oe_mean
+
+def _osculating2mean_sgp4(tleData: TleData, tol: float = 0.1, max_iter: int = 10) -> om.ClassicElements:
+    """
+    Convert osculating elements to SGP4-compatible mean elements via iteration.
+    """
+    oe_osc = tleData.oe
+    epoch = tleData.tleEpoch
+
+    # Start with J2 approximation as initial guess
+    oe_mean = _osculating2mean_j2(oe_osc)
+
+    jd, fr = jday(epoch.year, epoch.month, epoch.day,
+                  epoch.hour, epoch.minute,
+                  epoch.second + epoch.microsecond / 1e6)
+
+    # Target state
+    r_target, v_target = om.elem2rv(om.MU_EARTH * 1e9, oe_osc)
+    r_target = np.array(r_target)
+
+    for _ in range(max_iter):
+        # Generate TLE from current guess and propagate
+        tle_str = _generateTleFromMean(oe_mean, tleData)
+        lines = tle_str.split('\n')
+        sat = Satrec.twoline2rv(lines[1], lines[2])
+        e, r_sgp4, v_sgp4 = sat.sgp4(jd, fr)
+
+        if e != 0:
+            break
+
+        r_sgp4_m = np.array(r_sgp4) * 1e3
+        v_sgp4_m = np.array(v_sgp4) * 1e3
+        r_sgp4_j2000, v_sgp4_j2000 = _teme2j2000(r_sgp4_m, v_sgp4_m, epoch)
+
+        # Check convergence
+        pos_error = np.linalg.norm(np.array(r_target) - r_sgp4_j2000)
+        if pos_error < tol:
+            break
+
+        # Compute correction
+        oe_sgp4 = om.rv2elem(om.MU_EARTH * 1e9, r_sgp4_j2000, v_sgp4_j2000)
+
+        # Update mean elements
+        oe_mean.a += (oe_osc.a - oe_sgp4.a)
+        oe_mean.e += (oe_osc.e - oe_sgp4.e)
+        oe_mean.i += (oe_osc.i - oe_sgp4.i)
+        oe_mean.Omega += (oe_osc.Omega - oe_sgp4.Omega)
+        oe_mean.omega += (oe_osc.omega - oe_sgp4.omega)
+        oe_mean.f += (oe_osc.f - oe_sgp4.f)
+
+    return oe_mean
+
+def _generateTleFromMean(oe_mean: om.ClassicElements, tleData: TleData) -> str:
+    """
+    Generate TLE string directly from mean elements (no conversion).
+    """
+    Norad_str = f"{tleData.noradID:05d}"
+    epoch_str = f"{tleData.tleEpoch:%y%j}" + f"{(tleData.tleEpoch.hour * 3600 + tleData.tleEpoch.minute * 60 + tleData.tleEpoch.second + tleData.tleEpoch.microsecond / 1e6) / SEC_PER_DAY:.8f}"[1:]
+    classification = tleData.classification[0].upper() if tleData.classification[0].upper() in ['U', 'C', 'S'] else 'U'
+
+    # Format these separately to avoid slicing issues
+    IntD_LYear = f"{tleData.launchDate.year % 100:02d}"
+    IntD_LNo = f"{tleData.launchNo:03d}"
+    pol_str = f"{tleData.pol:<3}"[:3]
+    b_star_str = _str2tleFormat(tleData.bStar)
+
+    # Line 1 - properly formatted
+    line1_content = f"1 {Norad_str}{classification} {IntD_LYear}{IntD_LNo}{pol_str} {epoch_str}  .00000000  00000-0 {b_star_str} 0  {tleData.elemSetNo:03d}"
+    checksum1 = _calcTleChecksum([line1_content])
+    line1 = f"{line1_content}{checksum1}"
+
+    # Line 2
+    a_km = oe_mean.a / 1000.0
+    n_revday = np.sqrt(om.MU_EARTH / a_km ** 3) * SEC_PER_DAY / (2.0 * np.pi)
+    M = om.E2M(om.f2E(oe_mean.f, oe_mean.e), oe_mean.e)
+
+    line2_content = f"2 {Norad_str} {np.rad2deg(oe_mean.i):8.4f} {_wrap_deg(oe_mean.Omega):8.4f} {int(oe_mean.e * 1e7):07d} {_wrap_deg(oe_mean.omega):8.4f} {np.rad2deg(M) % 360.0:8.4f} {n_revday:11.8f}{int(tleData.revAtEpoch):05d}"
+    checksum2 = _calcTleChecksum([line2_content])
+    line2 = f"{line2_content}{checksum2}"
+
+    return f"{tleData.satName}\n{line1}\n{line2}"
+
 def satTle2elem(tle_path: str):
     """
     Convert the TLEs of a constellation to classical orbital elements for each satellite.
@@ -267,6 +439,7 @@ def satTle2elem(tle_path: str):
             satTLE[type-2] = line
             satTleReady[type-2] = True
             readingOrderIndex += 1
+            line1 = line
         elif line.startswith('2') and expected == 'line2':
             if satTleReady[type-1]:
                 print(f"WARNING: constTLE2Elem() found a new TLE line2 before completing the previous TLE (line number {lineNo}). The previous TLE will be discarded.")
@@ -275,6 +448,7 @@ def satTle2elem(tle_path: str):
             # Second TLE-line
             satTLE[type-1] = line
             satTleReady[type-1] = True
+            line2 = line
         elif expected == 'title' and type == 3:
             if satTleReady[0]:
                 print(f"WARNING: constTLE2Elem() found a new TLE title line before completing the previous TLE (line number {lineNo}). The previous TLE will be discarded.")
@@ -291,6 +465,8 @@ def satTle2elem(tle_path: str):
 
         if all(satTleReady):
             tleDataClass = _parseTle(satTLE)
+            oscOE = _convertMean2osculating(line1, line2, tleDataClass)
+            tleDataClass.oe = oscOE
             tleDataList.append(tleDataClass)
             # Reset for next TLE
             resetTleStr()
@@ -346,6 +522,9 @@ def generateTle(tleData: TleData) -> str:
     :param BStar: B* drag term (optional, default: 0.0)                                  [float, 1/Earth radii]
     :return: TLE string                                                                  [str, 3 lines]
     """
+
+    meanOrbElem = _osculating2mean_sgp4(tleData)
+
     # Make sure NORAD_ID is an integer and no longer than 5 characters (truncate)
     Norad_str = f"{tleData.noradID:05d}"
     if len(str(tleData.noradID)) > 5:
@@ -411,15 +590,15 @@ def generateTle(tleData: TleData) -> str:
     # Line 2
     line_no_2_str = "2"  # Line number "2"
     satcat_str = satIDStr  # Satellite Catalog Number (5 digits) [same as satID]
-    i_str = f"{np.rad2deg(tleData.oe.i):8.4f}"  # Inclination in degrees
-    raan_str = f"{np.rad2deg(tleData.oe.Omega):8.4f}"  # Right Ascension of Ascending Node in degrees
-    eccen_str = f"{int(tleData.oe.e * 1e7):07d}"  # Eccentricity  * 10^7 as decimal value / decimal point assumed
-    per_str = f"{np.rad2deg(tleData.oe.omega):8.4f}"  # Argument of perigee in degrees
+    i_str = f"{np.rad2deg(meanOrbElem.i):8.4f}"  # Inclination in degrees
+    raan_str = f"{_wrap_deg(meanOrbElem.Omega):8.4f}"  # Right Ascension of Ascending Node in degrees
+    eccen_str = f"{int(meanOrbElem.e * 1e7):07d}"  # Eccentricity  * 10^7 as decimal value / decimal point assumed
+    per_str = f"{_wrap_deg(meanOrbElem.omega):8.4f}"  # Argument of perigee in degrees
     # Calculate M from orbital elements
-    M = om.E2M(om.f2E(tleData.oe.f, tleData.oe.e), tleData.oe.e)
-    mean_anom_str = f"{np.rad2deg(M):8.4f}"  # Mean anomaly
+    M = om.E2M(om.f2E(meanOrbElem.f, meanOrbElem.e), meanOrbElem.e)
+    mean_anom_str = f"{np.rad2deg(M) % 360.0:8.4f}"  # Mean anomaly
     # Calculate mean motion in [rev/day^2]
-    n = np.sqrt(om.MU_EARTH / (tleData.oe.a / 1000.0) ** 3) * SEC_PER_DAY / (2.0 * np.pi)
+    n = np.sqrt(om.MU_EARTH / (meanOrbElem.a / 1000.0) ** 3) * SEC_PER_DAY / (2.0 * np.pi)
     mean_Mot_str = f"{n:11.8f}"  # Revolutions per day
     rev_str = f"{0:05d}"  # Revolution number at epoch [hardcoded to '00000']
     checksum2 = _calcTleChecksum(

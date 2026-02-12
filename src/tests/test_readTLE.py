@@ -7,82 +7,85 @@ import Basilisk.utilities.orbitalMotion as om
 from datetime import datetime, timedelta, timezone
 
 A_TOL = 1e-14 #[-]
+A_TOL_ROUNDTRIP = 1e-4 #[-] Tolerance for eccentricity (roundtrip error)
+A_TOL_DEG_ROUNDTRIP = 1.5  # [deg] Tolerance for angles in degrees (roundtrip error)
+
 DATA_DIR = pathlib.Path(__file__).parent / 'data'
 
 ###################################################################
 # Expected orbital elements for oneWeb (if testing multiple satellites)
 EXPECTED_OE_ONE_WEB = {
     'a': [
-        7575817.78380046,  # 0
-        7575897.531671279, # 1
-        7575896.775957426, # 2
-        7579911.683283668, # 3
-        7579911.241546285, # 4
-        7579912.336286875 # 5
+        7578544.779977489,  # 0
+        7581725.286624685,  # 1
+        7581725.0644000145, # 2
+        7585736.5116564045, # 3
+        7585735.969908914, # 4
+        7585737.122778924 # 5
     ],
     'e': [
-        0.000175,   0.0001764, 0.0002086, 0.0001581, 0.0001714,
-        0.0002029
+        0.0008817610616498866,   0.001210092720829519, 0.001258632637199018, 0.0011981315070938715, 0.0012069525700065013,
+        0.0012398288414982343
     ],
     'i': [
-        1.534083325979196,  1.5340868166376997, 1.534083325979196,
-        1.5341409218445117, 1.5341496484907717, 1.5341409218445117
+        1.5340969599567005,  1.5341079406333271, 1.534104451987643,
+        1.5341619924086083, 1.5341707140511949, 1.5341619924093775
     ],
     'f': [
-        2.2017240215026246, 4.489410705143804, 4.744271057621696,
-        4.549972500184758, 4.511343702990637, 4.567673118903615
+        2.1381902119590572, 5.002603384280056, 5.0290291055077345,
+        5.017007128018255, 5.007173564098952, 5.003260218813585
     ],
     'Omega': [
-        4.888890636980372, 4.888930779553168, 4.889318242647111,
-        5.4216838070781765, 5.420380046126938, 5.4207134040140685
+        4.888906786058248, 4.888930779554231, 4.889318242662984,
+        5.421683807074992, 5.420380046148317, 5.420713403989505
     ],
     'omega': [
-        1.372734617949328, 1.7957483234259417, 1.5408883647327218,
-        1.7351853983817387, 1.773814770716129, 1.717484269108012
+        1.4381317553505906, 1.2805819480498706, 1.2541565771775638,
+        1.2661781036367423, 1.2760122502736482, 1.2799245057654098
     ]
 }
 
 EXPECTED_OE_2LE = {
     'a': [
-        6796012.0083837,
-        6763487.620700561,
-        6796034.881033647
+        6802505.886893865,
+        6770009.68464781,
+        6802528.753304223
     ],
     'e': [
-        0.0001066,
-        0.0001842,
-        0.0001045
+        0.0011264777844962191,
+        0.0011530141980256035,
+        0.0011288394223626691
     ],
     'i': [
-        0.9011588713652241,
-        0.7236833210469288,
-        0.9011606166944762
+        0.9015068684734451,
+        0.724041375492735,
+        0.9015086111773605
     ],
     'f': [
-        3.019032029543272,
-        3.4280122815833245,
-        3.0304383654813503
+        5.428345740894182,
+        5.535544343398931,
+        5.428801220635774
     ],
     'Omega': [
-        2.3957855389445846,
-        1.6320242222841097,
-        2.4180821201388114
+        2.395785537940196,
+        1.632024223580092,
+        2.4180821212267007
     ],
     'omega': [
-        3.2658775496243098,
-        2.8566379826044352,
-        3.2544735682917785
+        0.8548384352861554,
+        0.747642161264503,
+        0.8543853115805702
     ]
 }
 
 # Values to generate TLE for HYPSO 1
 oeHypso1 = om.ClassicElements()
-oeHypso1.i = np.deg2rad(97.3197)
-oeHypso1.e = 0.0004257 # [-]
-oeHypso1.a = (om.RP_EARTH + 445.195971181338)*1e3 # [m]
-oeHypso1.Omega = np.deg2rad(349.0390) # [rad]
-oeHypso1.omega = np.deg2rad(136.0807) # [rad]
-oeHypso1.f = np.deg2rad(224.04427854247686) # [rad]
+oeHypso1.i = np.deg2rad(97.31452620946388)
+oeHypso1.e = 0.001399608536242 # [-]
+oeHypso1.a = (om.RP_EARTH + 451.68298285628407)*1e3 # [m]
+oeHypso1.Omega = np.deg2rad(349.0390000036714) # [rad]
+oeHypso1.omega = np.deg2rad(82.38650024248433) # [rad]
+oeHypso1.f = np.deg2rad(277.61347958955423) # [rad]
 hypso1noradId = 51053 # [-]
 hypso1launch = datetime(2022, 1, 13, 0, 0, 0) # [UTC]
 hypso1tleEpoch = datetime(2025, 1, 1, tzinfo=timezone.utc) + timedelta(days=279.47924866 - 1) # [UTC]
@@ -153,7 +156,15 @@ def test_write_tle(satName, orbitalElements, noradID, launchDate, launch_Noyear,
     # String compaire (line 1)
     eCountTle += int((generatedTle.splitlines()[1] != expectedTLE.splitlines()[1]))
     # String compaire (line 2)
-    eCountTle += int((generatedTle.splitlines()[2][0:63] != expectedTLE.splitlines()[2][0:63])) # Ignore revolutions count and checksum
+    for i, (field_expected, field_generated) in enumerate(zip(expectedTLE.splitlines()[2].split(), generatedTle.splitlines()[2].split())):
+        if i in [4]: # 4 = eccentricity (leading decimal point assumed), 5 = argument of perigee, 6 = mean anomaly
+            # Eccentricity -> leading decimal point assume -> max tolerance is A_TOL_ROUNDTRIP * 1e7 => 1e-4 physical eccentricity tolerance
+            eCountTle += abs(float(field_expected) - float(field_generated)) > A_TOL_ROUNDTRIP * 1e7
+        elif i in [5,6]: # 5 = argument of perigee, 6 = mean anomaly (degrees)
+            eCountTle += abs(float(field_expected) - float(field_generated)) > A_TOL_DEG_ROUNDTRIP
+        else:
+            eCountTle += abs(float(field_expected) - float(field_generated)) > A_TOL_ROUNDTRIP
+
     assert eCountTle < 1, f"{eCountTle} functions failed in tleHandling.py script, generateTleDataString() method"
 
 @pytest.mark.parametrize("tlePath", [
@@ -174,7 +185,15 @@ def test_read_write_tle(tlePath):
     # String compaire (line 1)
     eCountTle += int((generatedTle.splitlines()[1] != tleToBeTested.splitlines()[1]))
     # String compaire (line 2)
-    eCountTle += int((generatedTle.splitlines()[2][0:63] != tleToBeTested.splitlines()[2][0:63])) # Ignore revolutions count and checksum
+    for i, (field_expected, field_generated) in enumerate(zip(tleToBeTested.splitlines()[2].split(), generatedTle.splitlines()[2].split())):
+        if i in [4]: # 4 = eccentricity (leading decimal point assumed), 5 = argument of perigee, 6 = mean anomaly
+            # Eccentricity -> leading decimal point assume -> max tolerance is A_TOL_ROUNDTRIP * 1e7 => 1e-4 physical eccentricity tolerance
+            eCountTle += abs(float(field_expected) - float(field_generated)) > A_TOL_ROUNDTRIP * 1e7
+        elif i in [5,6]: # 5 = argument of perigee, 6 = mean anomaly (degrees)
+            eCountTle += abs(float(field_expected) - float(field_generated)) > A_TOL_DEG_ROUNDTRIP
+        else:
+            eCountTle += abs(float(field_expected) - float(field_generated)) > A_TOL_ROUNDTRIP
+
     assert eCountTle < 1, f"{eCountTle} functions failed in tleHandling.py script, generateTleDataString() method"
 
 if __name__ == "__main__":
