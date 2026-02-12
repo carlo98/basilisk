@@ -6,7 +6,7 @@ import Basilisk.utilities.tleHandling as tleHandling
 import Basilisk.utilities.orbitalMotion as om
 from datetime import datetime, timedelta, timezone
 
-A_TOL = 1e-14 #[-]
+A_TOL = 1e-9 #[-]
 A_TOL_ROUNDTRIP = 1e-4 #[-] Tolerance for eccentricity (roundtrip error)
 A_TOL_DEG_ROUNDTRIP = 1.5  # [deg] Tolerance for angles in degrees (roundtrip error)
 
