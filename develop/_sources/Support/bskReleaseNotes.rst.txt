@@ -25,14 +25,48 @@ Basilisk Release Notes
 
 Version |release|
 -----------------
+.. include:: bskReleaseNotesSnippets/_compiled_latest.rst
+
+- Removed the default ``--clean`` flag from ``setup.py`` to allow for incremental pip wheel builds.
+- TLE parsing fixed to be robust to file ending issues between LF and CRLF.
+- Updated ``conanfile.py`` to pass ``compiler.cstd=gnu17`` during Conan build step to avoid ``cspice/0067``
+  build failures on newer GCC 15 based Linux toolchains.
+- Updated the World Magnetic Model (WMM) Coefficients file to the 2025 version.
+- Local data fetches fall back to using the pooch fetch if local files are not found.
+- No longer prefetch ephemeris data kernels on initial local builds. The data fetcher will handle it.
 - Warnings for not connected messages of types: ``sunInMsg``, ``planetInMsg``, ``sunEclipseInMsg`` in
   the :ref:`simpleAntenna` module for ground based antennas are not raised anymore.
 - Updated documentation on how to use ``bskExamples`` to download a copy of the tutorial examples
+- Added :ref:`thrJointCompensation`, a module to compute the motor torques required to
+  prevent joint acceleration during thruster firing for systems with attached thruster arms.
 - Added :ref:`bskPrinciples-6a` to explain how to import Basilisk provided data
+- Added :ref:`inertialCartFeedback` module to compute an inertial-frame relative motion feedback control force
 - Added :ref:`DragGeometryMsgPayload`, which contains geometry information of a body necessary to
   compute the drag acting on such body.
 - Added :ref:`cannonballDrag`, a model intended to be used with MuJoCo dynamics to model
   cannonball aerodynamic drag forces and torques acting on bodies.
+- Added :ref:`linearTimeInvariantSystem`. This module implements a linear time-invariant
+  system using state-space representation. It can be used to model linear systems in the dynamics task of
+  ``MJScene``. This model is abstract: subclasses must specify how the input vector is
+  read from input messages, and the output vector is written to output messages. Subclasses
+  can be implemented in Python.
+- Added :ref:`singleActuatorLTI`: a single-input single-output subclass of :ref:`linearTimeInvariantSystem`
+  whose input and output is a :ref:`SingleActuatorMsgPayload`.
+- Added :ref:`forceAtSiteLTI`: a subclass of :ref:`linearTimeInvariantSystem` whose input vector
+  is read from a :ref:`ForceAtSiteMsgPayload` and output vector is written to a :ref:`ForceAtSiteMsgPayload`.
+- Fixed range of grammatical typos in the Basilisk documentation
+- Ensure the HTML documentation figures from the example scenario look more consistent
+- Avoid a memory leak when saving off figures in the CI Unit tests to build the online documentation
+- Deprecated the ``pytest`` optional flag ``show_plots``.
+- Added :ref:`orbElemOffset`, a classical orbital element combiner that applies element offsets to a baseline orbit and
+  supports optional interpretation of the anomaly offset as a mean-anomaly increment.
+- Added :ref:`CmdForceInertialToForceAtSite<cmdForceInertialToForceAtSite>`, a module that rotates inertial-frame force
+  commands into a site-fixed :ref:`ForceAtSiteMsgPayload`.
+- Added :ref:`OrbitalElementControl<orbitalElementControl>`, a
+  :ref:`linearTimeInvariantSystem` subclass that computes orbital-element feedback and outputs inertial force commands
+  through :ref:`CmdForceInertialMsgPayload`.
+- Added :ref:`scenarioFormationFlyingWithDrag`, a MuJoCo example scenario for chief-deputy formation flying in LEO
+  with differential cannonball drag and orbital-element feedback control.
 
 
 Version 2.9.0 (Jan. 28 2026)

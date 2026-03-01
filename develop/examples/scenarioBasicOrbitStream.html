@@ -146,13 +146,14 @@ with <code class="docutils literal notranslate"><span class="pre">liveStream</sp
                                     <span class="p">,</span> <span class="n">broadcastStream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>When starting Basilisk simulation it prints now to the terminal that it is trying to connect to Vizard:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Waiting</span> <span class="k">for</span> <span class="n">Vizard</span> <span class="n">at</span> <span class="n">tcp</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5556</span>
+<p>When starting Basilisk simulation it prints now to the terminal that it is waiting for Vizard connections:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Waiting</span> <span class="k">for</span> <span class="n">Vizard</span> <span class="n">at</span> <span class="n">tcp</span><span class="p">:</span><span class="o">//</span><span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">5556</span>
 </pre></div>
 </div>
-<p>Copy <code class="docutils literal notranslate"><span class="pre">tcp://localhost:5556</span></code> and open the Vizard application.  Enter this address in the connection field and select
-“Direct Communication” mode as well as “Live Streaming”.  After this the Basilisk simulation resumes and
-will live stream the data to Vizard.</p>
+<p>Basilisk will bind to all network interfaces. Open the Vizard application and enter <code class="docutils literal notranslate"><span class="pre">tcp://localhost:5556</span></code>
+in the connection field (or the appropriate IP if connecting from a different machine/container).
+Select “Direct Communication” mode as well as “Live Streaming”.  After this the Basilisk simulation resumes
+and will live stream the data to Vizard.</p>
 <figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="../_images/vizard-ImgStream.jpg"><img alt="../_images/vizard-ImgStream.jpg" src="../_images/vizard-ImgStream.jpg" style="width: 500.0px; height: 385.5px;" />
 </a>

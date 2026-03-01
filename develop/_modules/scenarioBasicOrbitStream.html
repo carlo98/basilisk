@@ -128,13 +128,14 @@
 <span class="sd">                                        , liveStream=True</span>
 <span class="sd">                                        , broadcastStream=True)</span>
 
-<span class="sd">When starting Basilisk simulation it prints now to the terminal that it is trying to connect to Vizard::</span>
+<span class="sd">When starting Basilisk simulation it prints now to the terminal that it is waiting for Vizard connections::</span>
 
-<span class="sd">    Waiting for Vizard at tcp://localhost:5556</span>
+<span class="sd">    Waiting for Vizard at tcp://0.0.0.0:5556</span>
 
-<span class="sd">Copy ``tcp://localhost:5556`` and open the Vizard application.  Enter this address in the connection field and select</span>
-<span class="sd">&quot;Direct Communication&quot; mode as well as &quot;Live Streaming&quot;.  After this the Basilisk simulation resumes and</span>
-<span class="sd">will live stream the data to Vizard.</span>
+<span class="sd">Basilisk will bind to all network interfaces. Open the Vizard application and enter ``tcp://localhost:5556``</span>
+<span class="sd">in the connection field (or the appropriate IP if connecting from a different machine/container).</span>
+<span class="sd">Select &quot;Direct Communication&quot; mode as well as &quot;Live Streaming&quot;.  After this the Basilisk simulation resumes</span>
+<span class="sd">and will live stream the data to Vizard.</span>
 
 <span class="sd">.. figure:: /_images/static/vizard-ImgStream.jpg</span>
 <span class="sd">   :align: center</span>
@@ -384,12 +385,12 @@
 
         <span class="c1"># To set 2-way port:</span>
         <span class="n">viz</span><span class="o">.</span><span class="n">reqComProtocol</span> <span class="o">=</span> <span class="s2">&quot;tcp&quot;</span>
-        <span class="n">viz</span><span class="o">.</span><span class="n">reqComAddress</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">reqComAddress</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
         <span class="n">viz</span><span class="o">.</span><span class="n">reqPortNumber</span> <span class="o">=</span> <span class="s2">&quot;5556&quot;</span>
 
         <span class="c1"># To set broadcast port:</span>
         <span class="n">viz</span><span class="o">.</span><span class="n">pubComProtocol</span> <span class="o">=</span> <span class="s2">&quot;tcp&quot;</span>
-        <span class="n">viz</span><span class="o">.</span><span class="n">pubComAddress</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">pubComAddress</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
         <span class="n">viz</span><span class="o">.</span><span class="n">pubPortNumber</span> <span class="o">=</span> <span class="s2">&quot;5570&quot;</span>
 
         <span class="c1"># Pre-instantiate panels</span>

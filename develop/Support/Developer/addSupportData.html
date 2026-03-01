@@ -74,6 +74,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#step-2-ensure-makeregistry-py-will-include-the-file">Step 2 — Ensure makeRegistry.py will include the file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#step-3-regenerate-the-registrysnippet-py-file">Step 3 — Regenerate the registrySnippet.py file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#step-4-update-datafetcher-py-enums-and-base-paths">Step 4 — Update dataFetcher.py (Enums and Base Paths)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-the-cache-directory">Configuring the Cache Directory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#external-data-sources">External Data Sources</a></li>
 </ul>
 </li>
@@ -211,6 +212,27 @@ If you add a new sub-category, <strong>you must also add it to</strong>
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+<section id="configuring-the-cache-directory">
+<h2>Configuring the Cache Directory<a class="headerlink" href="#configuring-the-cache-directory" title="Link to this heading"></a></h2>
+<p>By default, Pooch stores downloaded files in the OS-specific user cache
+directory (e.g. <code class="docutils literal notranslate"><span class="pre">~/.cache/bsk_support_data</span></code> on Linux).  You can override
+this by setting the <code class="docutils literal notranslate"><span class="pre">BSK_SUPPORT_DATA_CACHE</span></code> environment variable to any
+writable path:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">BSK_SUPPORT_DATA_CACHE</span><span class="o">=</span>/path/to/my/cache
+</pre></div>
+</div>
+<p>This is useful for:</p>
+<ul class="simple">
+<li><p><strong>CI pipelines</strong> — point the cache at a workspace-relative directory that
+can be saved and restored between runs.</p></li>
+<li><p><strong>Shared installations</strong> — redirect all users on a system to a common
+pre-populated cache directory.</p></li>
+<li><p><strong>Testing</strong> — isolate the cache to a temporary directory.</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">BSK_SUPPORT_DATA_CACHE</span></code> is set, the <code class="docutils literal notranslate"><span class="pre">LOCAL_SUPPORT</span></code> shortcut
+(files already present in a cloned repo’s <code class="docutils literal notranslate"><span class="pre">supportData/</span></code> directory) still
+takes priority for any file that exists there.</p>
 </section>
 <section id="external-data-sources">
 <h2>External Data Sources<a class="headerlink" href="#external-data-sources" title="Link to this heading"></a></h2>

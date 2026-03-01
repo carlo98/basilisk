@@ -132,7 +132,7 @@ subject to changes in future releases.</p>
 </div>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>This document describes how the simpleAntenna module operates within the Basilisk astrodynamics simulation framework. The purpose of this module is to provide a simplified representation of an antenna for spacecraft-to-spacecraft and spacecraft-to-ground communication. The module abstracts away complex antenna parameters, such as detailed radiation patterns, and replaces them with general assumptions that enable simulation of typical satellite communication systems. The simplified antenna model is based on a 2D Gaussian beam pattern (see <a class="reference internal" href="#figure-1">Figure 1</a>), sidelobes are neglected (see also <a class="reference internal" href="#module-assumptions"><span class="std std-ref">Module Assumptions and Limitations</span></a>).</p>
+<p>This document describes how the simpleAntenna module operates within the Basilisk astrodynamics simulation framework. The purpose of this module is to provide a simplified representation of an antenna for spacecraft-to-spacecraft and spacecraft-to-ground communication. The module abstracts away complex antenna parameters, such as detailed radiation patterns, and replaces them with general assumptions that enable simulation of typical satellite communication systems. The simplified antenna model is based on a 2D Gaussian beam pattern (see <cite>Figure 2</cite>), sidelobes are neglected (see also <a class="reference internal" href="#module-assumptions"><span class="std std-ref">Module Assumptions and Limitations</span></a>).</p>
 <p>This module enables users to simulate an antenna mounted on a spacecraft or placed in a ground environment (Earth) by configuring a set of key parameters (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>). The module must be connected to either a spacecraft state message (for space-based antennas) or a ground state message (for ground-based antennas).</p>
 </section>
 <section id="message-connection-descriptions">
@@ -157,17 +157,17 @@ provides information on what this message is used for.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>scInStateMsg</p></td>
+<tr class="row-even"><td><p>scStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
 <td><p>spacecraft state</p></td>
-<td><p>Required for space based antennas</p></td>
+<td><p>Required for space-based antennas</p></td>
 </tr>
-<tr class="row-odd"><td><p>groundInStateMsg</p></td>
+<tr class="row-odd"><td><p>groundStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/GroundStateMsgPayload.html#groundstatemsgpayload"><span class="std std-ref">GroundStateMsgPayload</span></a></p></td>
 <td><p>ground state</p></td>
-<td><p>Required for ground based antennas</p></td>
+<td><p>Required for ground-based antennas</p></td>
 </tr>
-<tr class="row-even"><td><p>antennaInStateMsg</p></td>
+<tr class="row-even"><td><p>antennaSetStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AntennaStateMsgPayload.html#antennastatemsgpayload"><span class="std std-ref">AntennaStateMsgPayload</span></a></p></td>
 <td><p>setting antenna to [off / Rx / Tx / RxTx]</p></td>
 <td><p>optional, default is ‘Off’</p></td>
@@ -175,19 +175,19 @@ provides information on what this message is used for.</p>
 <tr class="row-odd"><td><p>sunInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
 <td><p>sun ephemeris data input message</p></td>
-<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground based antennas)</p></td>
+<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground-based antennas)</p></td>
 </tr>
 <tr class="row-even"><td><p>planetInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
 <td><p>vector of planet ephemeris data input messages</p></td>
-<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground based antennas)</p></td>
+<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground-based antennas)</p></td>
 </tr>
 <tr class="row-odd"><td><p>sunEclipseInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#eclipsemsgpayload"><span class="std std-ref">EclipseMsgPayload</span></a></p></td>
-<td><p>sun eclipse state input Message</p></td>
-<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground based antennas)</p></td>
+<td><p>sun eclipse state input message</p></td>
+<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground-based antennas)</p></td>
 </tr>
-<tr class="row-even"><td><p>antennaOutStateMsg</p></td>
+<tr class="row-even"><td><p>antennaOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AntennaLogMsgPayload.html#antennalogmsgpayload"><span class="std std-ref">AntennaLogMsgPayload</span></a></p></td>
 <td><p>output msg description</p></td>
 <td><p>Output message containing antenna state information</p></td>
@@ -197,7 +197,7 @@ provides information on what this message is used for.</p>
 </section>
 <section id="detailed-module-description">
 <span id="id1"></span><h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
-<p>The simpleAntenna module simulates a directional antenna for spacecraft communication systems. It provides a simplified representation of antenna behavior by abstracting away complex antenna properties, such as detailed radiation patterns and receiver noise modeling. Instead, the radiation pattern is approximated using a 2D Gaussian field response (see <a class="reference internal" href="#figure-1">Figure 1</a> and <a class="reference external" href="https://www.mathworks.com/help/phased/ref/phased.gaussianantennaelement-system-object.html">MATLAB Gaussian Antenna Element</a>).</p>
+<p>The simpleAntenna module simulates a directional antenna for spacecraft communication systems. It provides a simplified representation of antenna behavior by abstracting away complex antenna properties, such as detailed radiation patterns and receiver noise modeling. Instead, the radiation pattern is approximated using a 2D Gaussian field response (see <cite>Figure 2</cite> and <a class="reference external" href="https://www.mathworks.com/help/phased/ref/phased.gaussianantennaelement-system-object.html">MATLAB Gaussian Antenna Element</a>).</p>
 <p>The module computes key antenna performance metrics including the Equivalent Isotropically Radiated Power (EIRP), the Gain-To-Noise Temperature (G/T), and the Noise Power. These outputs can be used to evaluate link budgets for spacecraft communication systems.</p>
 <p>The following parameters must be configured by the user:</p>
 <table class="docutils align-default" id="id5">
@@ -245,7 +245,7 @@ provides information on what this message is used for.</p>
 <tr class="row-even"><td><p>Beam cross section shape</p></td>
 <td><p><span class="math notranslate nohighlight">\(k\)</span></p></td>
 <td><p>-</p></td>
-<td><p>Ratio between HPBW in azimuth <span class="math notranslate nohighlight">\(\phi\)</span> and elevation <span class="math notranslate nohighlight">\(\theta\)</span> direction (for a rotation symmetrical beam, <span class="math notranslate nohighlight">\(k=1\)</span>)</p></td>
+<td><p>Ratio between HPBW in azimuth <span class="math notranslate nohighlight">\(\phi\)</span> and elevation <span class="math notranslate nohighlight">\(\theta\)</span> direction (for a rotation symmetric beam, <span class="math notranslate nohighlight">\(k=1\)</span>)</p></td>
 <td><p><span class="math notranslate nohighlight">\(0.5 &lt; k &lt; 5\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Transmission power</p></td>
@@ -281,7 +281,7 @@ provides information on what this message is used for.</p>
 <tr class="row-even"><td><p>Use Haslam Map (optional)</p></td>
 <td><p><code class="code docutils literal notranslate"><span class="pre">useHaslamMap</span></code></p></td>
 <td><p>[bool]</p></td>
-<td><p>Enable/Disable the use of the Haslam 408 MHz all-sky survey map for sky noise temperature calculation. If false a omnidirectional galactic noise temperature is used. (default: <code class="code docutils literal notranslate"><span class="pre">False</span></code>)</p></td>
+<td><p>Enable/Disable the use of the Haslam 408 MHz all-sky survey map for sky noise temperature calculation. If false, an omnidirectional galactic noise temperature is used. (default: <code class="code docutils literal notranslate"><span class="pre">False</span></code>)</p></td>
 <td><p><code class="code docutils literal notranslate"><span class="pre">True</span></code> or <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>Antenna position vector in body frame (optional)</p></td>
@@ -299,7 +299,7 @@ provides information on what this message is used for.</p>
 </tbody>
 </table>
 <figure class="align-center" id="id6">
-<span id="figure-coord"></span><a class="reference internal image-reference" href="../../../../_images/CoordinateFrame.svg"><img alt="Shematic antenna coordinate frame :math:`\mathrm{A}` definition" src="../../../../_images/CoordinateFrame.svg" style="width: 25%;" />
+<span id="figure-coord"></span><a class="reference internal image-reference" href="../../../../_images/CoordinateFrame.svg"><img alt="Schematic antenna coordinate frame :math:`\mathrm{A}` definition" src="../../../../_images/CoordinateFrame.svg" style="width: 25%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Figure 1: Illustration of the antenna coordinate frame <span class="math notranslate nohighlight">\({A}\)</span></span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
@@ -321,14 +321,14 @@ provides information on what this message is used for.</p>
 </ul>
 </dd>
 </dl>
-<p>These states can either be set via the <code class="code docutils literal notranslate"><span class="pre">antennaInStateMsg</span></code> input message or by setting the state directly with the setter for this property.</p>
+<p>These states can either be set via the <code class="code docutils literal notranslate"><span class="pre">antennaSetStateInMsg</span></code> input message or by setting the state directly with the setter for this property.</p>
 <section id="radiation-pattern-model">
 <h3>Radiation Pattern Model<a class="headerlink" href="#radiation-pattern-model" title="Link to this heading"></a></h3>
 <figure class="align-center" id="id7">
-<span id="figure-1"></span><a class="reference internal image-reference" href="../../../../_images/DocumentationBSKsimpleAntenna.svg"><img alt="Shematic of SimpleAntenna beam pattern" src="../../../../_images/DocumentationBSKsimpleAntenna.svg" style="width: 60%;" />
+<span id="figure-2"></span><a class="reference internal image-reference" href="../../../../_images/DocumentationBSKsimpleAntenna.svg"><img alt="Schematic of SimpleAntenna beam pattern" src="../../../../_images/DocumentationBSKsimpleAntenna.svg" style="width: 60%;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Figure 1: Illustration of simpleAntenna 2D Gaussian beam pattern</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">Figure 2: Illustration of simpleAntenna 2D Gaussian beam pattern</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The antenna radiation pattern is modeled as a 2D Gaussian beam pattern (see also <a class="reference internal" href="#module-assumptions"><span class="std std-ref">Module Assumptions and Limitations</span></a>).</p>
@@ -350,13 +350,13 @@ provides information on what this message is used for.</p>
         \Big( \frac{\phi}{\phi_{\mathrm{HPBW}}} \Big)^2
     \Bigg)
 \Bigg]\]</div>
-<p>Where <span class="math notranslate nohighlight">\(G_{0}\)</span> is the boresight power gain (see <a class="reference internal" href="#figure-1"><span class="std std-ref">Figure 1: Illustration of simpleAntenna 2D Gaussian beam pattern</span></a>).</p>
+<p>Where <span class="math notranslate nohighlight">\(G_{0}\)</span> is the boresight power gain (see <a class="reference internal" href="#figure-2"><span class="std std-ref">Figure 2: Illustration of simpleAntenna 2D Gaussian beam pattern</span></a>).</p>
 <div class="math notranslate nohighlight">
 \[k\,\mathrm{[-]} = \frac{\phi_\mathrm{HPBW}}{\theta_\mathrm{HPBW}}\]</div>
 <section id="setting-of-the-radiation-pattern-parameters">
 <h4>Setting of the radiation pattern parameters<a class="headerlink" href="#setting-of-the-radiation-pattern-parameters" title="Link to this heading"></a></h4>
-<p>To set the radiation-pattern specific parameters, the user can set the directivity <span class="math notranslate nohighlight">\(D_\mathrm{dB}\)</span> and the beam cross-section shape <span class="math notranslate nohighlight">\(k\)</span>. From these two parameters, the Half-Power BeamWidths (HPBW) in elevation <span class="math notranslate nohighlight">\(\theta_\mathrm{HPBW}\)</span> and azimuth <span class="math notranslate nohighlight">\(\phi_\mathrm{HPBW}\)</span> are calculated:</p>
-<p>The unit less directivity <span class="math notranslate nohighlight">\(D\)</span> and the boresight power gain <span class="math notranslate nohighlight">\(G_{0}\)</span> are calculated from <span class="math notranslate nohighlight">\(D_\mathrm{dB}\)</span> as follows:</p>
+<p>To set the radiation-pattern specific parameters, the user can set the directivity <span class="math notranslate nohighlight">\(D_\mathrm{dB}\)</span> and the beam cross-section shape <span class="math notranslate nohighlight">\(k\)</span>. From these two parameters, the half-power beam widths (HPBW) in elevation <span class="math notranslate nohighlight">\(\theta_\mathrm{HPBW}\)</span> and azimuth <span class="math notranslate nohighlight">\(\phi_\mathrm{HPBW}\)</span> are calculated:</p>
+<p>The unitless directivity <span class="math notranslate nohighlight">\(D\)</span> and the boresight power gain <span class="math notranslate nohighlight">\(G_{0}\)</span> are calculated from <span class="math notranslate nohighlight">\(D_\mathrm{dB}\)</span> as follows:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}D\,\mathrm{[-]} = 10^{D_\mathrm{dB}/10}\\G_{0}\,\mathrm{[-]} = D \cdot \eta_\mathrm{r}\end{aligned}\end{align} \]</div>
 <p><span class="math notranslate nohighlight">\(\theta_\mathrm{HPBW}\)</span> and <span class="math notranslate nohighlight">\(\phi_\mathrm{HPBW}\)</span> are then calculated as follows:</p>
@@ -408,8 +408,8 @@ provides information on what this message is used for.</p>
 <p><span class="math notranslate nohighlight">\(T_\mathrm{Sky}\)</span> depends on the antenna pointing direction and is computed as a weighted sum of the Galactic Noise Temperature <span class="math notranslate nohighlight">\(T_\mathrm{Galaxy}\)</span> and the Noise Temperature of the celestial bodies within the antenna beam coverage, <span class="math notranslate nohighlight">\(T_\mathrm{Planet}\)</span>.
 The weights are given by the antenna beam coverage fractions <span class="math notranslate nohighlight">\(C_\mathrm{Galaxy}\)</span> and <span class="math notranslate nohighlight">\(C_\mathrm{Planet}\)</span> (see also <a class="reference internal" href="#module-overlap-area-computation"><span class="std std-ref">Overlap Area Computation</span></a>). The antenna gain <span class="math notranslate nohighlight">\(G(\theta, \phi)\)</span> is not considered at this stage (see also <a class="reference internal" href="#module-assumptions"><span class="std std-ref">Module Assumptions and Limitations</span></a>).</p>
 <ul class="simple">
-<li><p>For space-based antennas, <span class="math notranslate nohighlight">\(T_\mathrm{Ambient}\)</span> can be set by the user (optional) if it is not set, a default value of <span class="math notranslate nohighlight">\(T_\mathrm{Ambient} = 150.0K\)</span> is used.</p></li>
-<li><p>The caculation of <span class="math notranslate nohighlight">\(T_\mathrm{Sky}\)</span> is described in <a class="reference internal" href="#calculation-of-tsky"><span class="std std-ref">Calculation of T_sky</span></a>.</p></li>
+<li><p>For space-based antennas, <span class="math notranslate nohighlight">\(T_\mathrm{Ambient}\)</span> can be set by the user (optional) if it is not set, a default value of <span class="math notranslate nohighlight">\(T_\mathrm{Ambient} = 150.0 \mathrm{K}\)</span> is used.</p></li>
+<li><p>The calculation of <span class="math notranslate nohighlight">\(T_\mathrm{Sky}\)</span> is described in <a class="reference internal" href="#calculation-of-tsky"><span class="std std-ref">Calculation of T_sky</span></a>.</p></li>
 </ul>
 </section>
 <section id="for-ground-based-antennas">
@@ -429,7 +429,7 @@ The weights are given by the antenna beam coverage fractions <span class="math n
 <span id="calculation-of-tsky"></span><h3>Calculation of <span class="math notranslate nohighlight">\(T_\mathrm{sky}\)</span><a class="headerlink" href="#calculation-of-t-mathrm-sky" title="Link to this heading"></a></h3>
 <section id="id2">
 <h4>For space-based antennas<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
-<p>The sky noise temperature for a spacecraft-mounted antenna is calculated based on the antenna position and orientation with respect to the Earth, Sun and Moon (other celestial bodies are at the moment not incuded). If the setting <code class="code docutils literal notranslate"><span class="pre">useHaslamMap=True</span></code> is enabled, the galactic noise temperature is calculated using the Haslam 408 MHz all-sky survey map. if <code class="code docutils literal notranslate"><span class="pre">useHaslamMap=False</span></code>, a simple model with a frequency dependent, omnidirectional galactic noise temperature is used.</p>
+<p>The sky noise temperature for a spacecraft-mounted antenna is calculated based on the antenna position and orientation with respect to the Earth, Sun and Moon (other celestial bodies are at the moment not included). If the setting <code class="code docutils literal notranslate"><span class="pre">useHaslamMap=True</span></code> is enabled, the galactic noise temperature is calculated using the Haslam 408 MHz all-sky survey map. If <code class="code docutils literal notranslate"><span class="pre">useHaslamMap=False</span></code>, a simple model with a frequency-dependent, omnidirectional galactic noise temperature is used.</p>
 <div class="math notranslate nohighlight">
 \[T_\mathrm{Sky} = T_\mathrm{Sun} \cdot C_\mathrm{Sun} + T_\mathrm{Earth} \cdot C_\mathrm{Earth} + T_\mathrm{Moon} \cdot C_\mathrm{Moon} + T_\mathrm{Galaxy} \cdot C_\mathrm{Galaxy}\]</div>
 <p>where:</p>
@@ -462,7 +462,7 @@ The weights are given by the antenna beam coverage fractions <span class="math n
 <section id="id3">
 <h4>For ground-based antennas<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
 <ul class="simple">
-<li><p>For ground based antennas, <span class="math notranslate nohighlight">\(T_\mathrm{sky}\)</span> is always assumed to be <span class="math notranslate nohighlight">\(T_\mathrm{sky} = 200K\)</span>.</p></li>
+<li><p>For ground based antennas, <span class="math notranslate nohighlight">\(T_\mathrm{sky}\)</span> is always assumed to be <span class="math notranslate nohighlight">\(T_\mathrm{sky} = 200 \mathrm{K}\)</span>.</p></li>
 </ul>
 </section>
 </section>
@@ -536,12 +536,12 @@ the overlap area by the beam area,</p>
 <span id="module-assumptions"></span><h2>Module Assumptions and Limitations<a class="headerlink" href="#module-assumptions-and-limitations" title="Link to this heading"></a></h2>
 <p>The following assumptions and limitations apply to the simpleAntenna module:</p>
 <ul class="simple">
-<li><p>The antennas radiation pattern is modelled as a simple 2D Gaussian beam pattern. This has the following implications:
+<li><p>The antenna radiation pattern is modeled as a simple 2D Gaussian beam pattern. This has the following implications:
 - Sidelobes are neglected, and thus any noise, interference or signal received through sidelobes is not considered.
 - The main-lobe is approximated as a Gaussian function in both elevation and azimuth direction <span class="math notranslate nohighlight">\(\rightarrow\)</span> The antenna gain is computed as a function of the angle off boresight in both elevation and azimuth direction.</p></li>
 <li><p>For the calculation of <span class="math notranslate nohighlight">\(T_\mathrm{Sky}\)</span> the antenna gain is not used to weight the sky and planet noise temperatures, instead the beam coverage fractions are used (see also <a class="reference internal" href="#module-overlap-area-computation"><span class="std std-ref">Overlap Area Computation</span></a>). A uniform gain across the beam is assumed for this step.</p></li>
 <li><p>The antenna can be placed either on a spacecraft or on Earth (ground). It is not (yet) possible to place the antenna on other celestial bodies.</p></li>
-<li><p>For ground based antennas, the sky noise temperature is always assumed to be <span class="math notranslate nohighlight">\(T_\mathrm{Sky} = 200K\)</span>. This is because the ground antenna does not have a pointing direction. It is assumed that the ground based antenna is always precisely pointed at the spacecraft antenna.</p></li>
+<li><p>For ground-based antennas, the sky noise temperature is always assumed to be <span class="math notranslate nohighlight">\(T_\mathrm{Sky} = 200K\)</span>. This is because the ground antenna does not have a pointing direction. It is assumed that the ground-based antenna is always precisely pointed at the spacecraft antenna.</p></li>
 <li><p>Doppler shift between two antennas is not (yet) considered.</p></li>
 <li><p>Noise due to lightning and other static electrical discharges is neglected.</p></li>
 <li><p>Man-made radio noise is neglected.</p></li>
@@ -589,7 +589,7 @@ the overlap area by the beam area,</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Calling <code class="code docutils literal notranslate"><span class="pre">antenna.setUseHaslamMap(True)`</span></code> enables the use of the Haslam 408 MHz all-sky survey map for sky noise temperature calculation, and calles the function <code class="code docutils literal notranslate"><span class="pre">configureBrightnessFile(&lt;filepath&gt;)</span></code> internally.
+<p>Calling <code class="code docutils literal notranslate"><span class="pre">antenna.setUseHaslamMap(True)</span></code> enables the use of the Haslam 408 MHz all-sky survey map for sky noise temperature calculation, and calls the function <code class="code docutils literal notranslate"><span class="pre">configureBrightnessFile(&lt;filepath&gt;)</span></code> internally.
 If the user wants to use a custom brightness temperature map file, they must call <code class="code docutils literal notranslate"><span class="pre">antenna.configureBrightnessFile(&lt;custom</span> <span class="pre">filePath&gt;)</span></code> after calling <code class="code docutils literal notranslate"><span class="pre">antenna.setUseHaslamMap(True)</span></code>.</p>
 </div>
 </section>
@@ -653,7 +653,7 @@ If the user wants to use a custom brightness temperature map file, they must cal
 <span id="_CPPv313SimpleAntenna"></span><span id="_CPPv213SimpleAntenna"></span><span id="SimpleAntenna"></span><span class="target" id="class_simple_antenna"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimpleAntenna</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../../../architecture/_GeneralModuleFiles/sys_model.html#_CPPv48SysModel" title="SysModel"><span class="n"><span class="pre">SysModel</span></span></a><a class="headerlink" href="#_CPPv413SimpleAntenna" title="Link to this definition"></a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;simpleAntenna.h&gt;</em></div>
-<p>This module describes how the simple antenna model operates within the simulation environment.The purpose of this module is to provide a basic representation of antenna behavior for spacecraft communication systems.The antenna is based on a simple model (2D Gaussian beam pattern). The user is able to set directivity, HPBW (elevation and azimuth), power demand for Tx and Rx, radiation efficiency, bandwidth and system noise temperature. </p>
+<p>This module describes how the simple antenna model operates within the simulation environment. The purpose of this module is to provide a basic representation of antenna behavior for spacecraft communication systems. The antenna is based on a simple model (2D Gaussian beam pattern). The user is able to set directivity, HPBW (elevation and azimuth), power demand for Tx and Rx, radiation efficiency, bandwidth and system noise temperature. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -964,7 +964,7 @@ If the user wants to use a custom brightness temperature map file, they must cal
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13SimpleAntenna15sunEclipseInMsgE">
 <span id="_CPPv3N13SimpleAntenna15sunEclipseInMsgE"></span><span id="_CPPv2N13SimpleAntenna15sunEclipseInMsgE"></span><span id="SimpleAntenna::sunEclipseInMsg__ReadFunctor:EclipseMsgPayload:"></span><span class="target" id="class_simple_antenna_1a99dc449435032f5ef0eb951c69f705ce"></span><a class="reference internal" href="../../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#_CPPv417EclipseMsgPayload" title="EclipseMsgPayload"><span class="n"><span class="pre">EclipseMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sunEclipseInMsg</span></span></span><a class="headerlink" href="#_CPPv4N13SimpleAntenna15sunEclipseInMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>[-] Messun eclipse state input message </p>
+<dd><p>[-] sun eclipse state input message </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -1090,8 +1090,8 @@ If the user wants to use a custom brightness temperature map file, they must cal
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N13SimpleAntenna11minTresholdE">
-<span id="_CPPv3N13SimpleAntenna11minTresholdE"></span><span id="_CPPv2N13SimpleAntenna11minTresholdE"></span><span id="SimpleAntenna::minTreshold__double"></span><span class="target" id="class_simple_antenna_1a084aa4c8859d90a49305cfa62fd0851b"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minTreshold</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-6</span></span><a class="headerlink" href="#_CPPv4N13SimpleAntenna11minTresholdE" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N13SimpleAntenna12minThresholdE">
+<span id="_CPPv3N13SimpleAntenna12minThresholdE"></span><span id="_CPPv2N13SimpleAntenna12minThresholdE"></span><span id="SimpleAntenna::minThreshold__double"></span><span class="target" id="class_simple_antenna_1a6ca243cffa9ac24229ff2e2af0715a0d"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minThreshold</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-6</span></span><a class="headerlink" href="#_CPPv4N13SimpleAntenna12minThresholdE" title="Link to this definition"></a><br /></dt>
 <dd><p>[-] Minimum threshold for power and directivity values </p>
 </dd></dl>
 

@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Learning Basilisk" href="../Learn.html" />
+    <link rel="next" title="Containers" href="containers.html" />
     <link rel="prev" title="Advanced: Directly Building the Software Framework Using Conan" href="installBuildConan.html" /> 
 </head>
 
@@ -66,6 +66,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#for-maintainers-overview-of-implementation">For Maintainers: Overview of Implementation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="containers.html">Containers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Learn.html">Learning Basilisk</a></li>
@@ -156,7 +157,7 @@ installations (<code class="docutils literal notranslate"><span class="pre">pip<
 </div>
 <p>This allows the user to create a custom Basilisk wheel to distribute within their organization.</p>
 <p>To keep the wheel size smaller, the BSK data files are not installed by default.  If the user
-wants to use script that assumes they are included into the Basilisk python package, then go to the
+wants to use a script that assumes they are included into the Basilisk python package, then go to the
 command line, change the current directory to be inside the environment where Basilisk was <code class="docutils literal notranslate"><span class="pre">pip</span></code> installed,
 and run the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bskLargeData</span>
@@ -199,7 +200,7 @@ specified in <code class="docutils literal notranslate"><span class="pre">pyproj
 <code class="docutils literal notranslate"><span class="pre">--managePipEnvironment</span> <span class="pre">False</span></code> option so that Conan does not directly manipulate the user’s <code class="docutils literal notranslate"><span class="pre">pip</span></code>
 environment. The main reasons for this setting was to maintain the current default behaviour of
 <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>-based installation.</p>
-<p>Editable installations (i.e. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>) are are partially supported. Python code changes are reflected
+<p>Editable installations (i.e. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>) are partially supported. Python code changes are reflected
 automatically with this flag, but C++ components are not automatically rebuilt.</p>
 <p>This limitation exists because editable mode still routes through <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">conanfile.py</span></code>, but skips C++ rebuilds
 once the initial build exists. This avoids long native rebuilds and preserves the Conan/CMake configuration.
@@ -220,7 +221,7 @@ such as <a class="reference external" href="https://peps.python.org/pep-0517/">P
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installBuildConan.html" class="btn btn-neutral float-left" title="Advanced: Directly Building the Software Framework Using Conan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../Learn.html" class="btn btn-neutral float-right" title="Learning Basilisk" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="containers.html" class="btn btn-neutral float-right" title="Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

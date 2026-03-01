@@ -145,11 +145,11 @@
 Reading in the planet’s ephemeris state the position of <span class="math notranslate nohighlight">\(L\)</span> relative to the planet origin and
 the inertial frame are evaluated at output as a message.</p>
 <p>Further, one or more spacecraft states can be added to this module to compute the spacecraft position
-relative to the ground location <span class="math notranslate nohighlight">\(L\)</span>.  The associated output access output message contains the relative
-position vector in terms the spherical coordinates range, azimuth and elevation angle, as well as in terms of
+relative to the ground location <span class="math notranslate nohighlight">\(L\)</span>.  The associated output access message contains the relative
+position vector in terms of the spherical coordinates range, azimuth and elevation angle, as well as in terms of
 South-East-Zenith (SEZ) coordinates.  Finally, the velocity of the spacecraft as seen by the <span class="math notranslate nohighlight">\(L\)</span> location
 is provided in terms of range, azimuth, elevation, south east and zenith rates.  Finally, this access message
-has a integer variable indicating if the spacecraft is above a minimum elevation angle of the <span class="math notranslate nohighlight">\(L\)</span> SEC frame.</p>
+has an integer variable indicating if the spacecraft is above a minimum elevation angle of the <span class="math notranslate nohighlight">\(L\)</span> SEZ frame.</p>
 </section>
 <section id="module-assumptions-and-limitations">
 <h2>Module Assumptions and Limitations<a class="headerlink" href="#module-assumptions-and-limitations" title="Link to this heading"></a></h2>
@@ -160,7 +160,7 @@ a conical field of view around the normal vector from the body’s surface at th
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
+user from Python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
@@ -210,11 +210,11 @@ east and zenith coordinate rates</p></li>
 <section id="determining-states">
 <h3>Determining States<a class="headerlink" href="#determining-states" title="Link to this heading"></a></h3>
 <p>The position of the spacecraft in the SEZ frame, relative to the ground station, is parameterized
-by the cartesian coordinates:</p>
+by the Cartesian coordinates:</p>
 <div class="math notranslate nohighlight" id="equation-eq-sez-coords-1">
 <span class="eqno">(1)<a class="headerlink" href="#equation-eq-sez-coords-1" title="Link to this equation"></a></span>\[\mathbf{r}_{B/L} = x\hat{S} + y\hat{E} + z\hat{Z}\]</div>
-<p>The cartesian coordinates are converted to spherical coordinates, centered at the ground station position,
-which give the range (<span class="math notranslate nohighlight">\(\rho\)</span>), azimuth(<span class="math notranslate nohighlight">\(Az\)</span>), and elevation(<span class="math notranslate nohighlight">\(El\)</span>).</p>
+<p>The Cartesian coordinates are converted to spherical coordinates, centered at the ground station position,
+which give the range (<span class="math notranslate nohighlight">\(\rho\)</span>), azimuth (<span class="math notranslate nohighlight">\(Az\)</span>), and elevation (<span class="math notranslate nohighlight">\(El\)</span>).</p>
 <div class="math notranslate nohighlight" id="equation-eq-rho-2">
 <span class="eqno">(2)<a class="headerlink" href="#equation-eq-rho-2" title="Link to this equation"></a></span>\[\rho = \sqrt{x^2 + y^2 + z^2}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-az-3">
@@ -239,12 +239,12 @@ which give the range (<span class="math notranslate nohighlight">\(\rho\)</span>
 <section id="user-guide">
 <h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>
 <p>To use this module, instantiate the class and provide it with a body-fixed location (in either lat/long/altitude,
-via the specifyLocation method, or in
+via the <code class="docutils literal notranslate"><span class="pre">specifyLocation()</span></code> method, or in
 planet-centered planet-fixed coordinates directly via the <code class="docutils literal notranslate"><span class="pre">r_LP_P_Init</span></code> attribute) and a planet position/attitude
 message (i.e., an instance of <a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a>);
 to compute access, at least one <a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a> message must be added to the module using the <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code> method.
 The first spacecraft is 0, the second is 1, and so on.</p>
-<p>A new instance of groundLocation, alongside necessary user-supplied parameters, can be created by calling:</p>
+<p>A new instance of <code class="docutils literal notranslate"><span class="pre">groundLocation</span></code>, alongside necessary user-supplied parameters, can be created by calling:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">groundTarget</span> <span class="o">=</span> <span class="n">groundLocation</span><span class="o">.</span><span class="n">GroundLocation</span><span class="p">()</span>
 <span class="n">groundTarget</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;groundTarget&quot;</span>
 <span class="n">groundTarget</span><span class="o">.</span><span class="n">planetRadius</span> <span class="o">=</span> <span class="n">orbitalMotion</span><span class="o">.</span><span class="n">REQ_EARTH</span> <span class="o">*</span> <span class="mf">1000.</span>
@@ -257,7 +257,7 @@ The first spacecraft is 0, the second is 1, and so on.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">planetRadius</span></code> variable is optional and defaults to Earth’s radius.  Instead of specifying the ground location
 through the <code class="docutils literal notranslate"><span class="pre">specifyLocation()</span></code> method, you can also set the module variable <code class="docutils literal notranslate"><span class="pre">r_LP_P_Init</span></code> using the
 <code class="docutils literal notranslate"><span class="pre">specifyLocationPCPF()</span></code> method. Avoid setting the module variable <code class="docutils literal notranslate"><span class="pre">r_LP_P_Init</span></code> directly, as there are computations
-that occur within the <code class="docutils literal notranslate"><span class="pre">specifyLocation()</span></code> and <code class="docutils literal notranslate"><span class="pre">specifylocationPCPF()</span></code> methods that are important for access message
+that occur within the <code class="docutils literal notranslate"><span class="pre">specifyLocation()</span></code> and <code class="docutils literal notranslate"><span class="pre">specifyLocationPCPF()</span></code> methods that are important for access message
 states.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">maximumRange</span></code> variable is optional and defaults to -1.  This means by default no maximum range is considered.  Set it to a positive value to have <code class="docutils literal notranslate"><span class="pre">hasAccess</span></code> output message variable depend on range.</p>
 <p>A groundLocation can be affixed to a specific planet by setting its <code class="docutils literal notranslate"><span class="pre">planetInMsg</span></code> input message:</p>

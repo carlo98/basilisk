@@ -71,7 +71,7 @@
 <li class="toctree-l3"><a class="reference internal" href="addSupportData.html">Adding Support Data Files</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Release Guide</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#updating-the-version-number">Updating the Version Number</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#updating-the-changelog">Updating the Changelog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-the-release-notes">Updating the Release Notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#creating-a-release-branch">Creating a Release Branch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#creating-and-pushing-tags">Creating and Pushing Tags</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#creating-a-release-on-github">Creating a Release on GitHub</a></li>
@@ -159,12 +159,12 @@ bumps.</p>
 <p>Update this file to reflect the new version number following semantic versioning
 guidelines (e.g., MAJOR.MINOR.PATCH).</p>
 </section>
-<section id="updating-the-changelog">
-<h2>Updating the Changelog<a class="headerlink" href="#updating-the-changelog" title="Link to this heading"></a></h2>
-<p>The changelog is located in the <code class="docutils literal notranslate"><span class="pre">docs/source/Support/bskReleaseNotes.rst</span></code> file.
-Before releasing a new version, ensure that this file is updated to include
-all relevant changes, bug fixes, and new features that are part of the release.
-Add a release date after the version number.</p>
+<section id="updating-the-release-notes">
+<h2>Updating the Release Notes<a class="headerlink" href="#updating-the-release-notes" title="Link to this heading"></a></h2>
+<p>For normal PR development, release notes are contributed as snippet files in:
+<code class="docutils literal notranslate"><span class="pre">docs/source/Support/bskReleaseNotesSnippets</span></code>.
+These snippets are compiled and included automatically into the current
+<code class="docutils literal notranslate"><span class="pre">Version</span> <span class="pre">|release|</span></code> section in <code class="docutils literal notranslate"><span class="pre">docs/source/Support/bskReleaseNotes.rst</span></code> when documentation is built.</p>
 </section>
 <section id="creating-a-release-branch">
 <h2>Creating a Release Branch<a class="headerlink" href="#creating-a-release-branch" title="Link to this heading"></a></h2>

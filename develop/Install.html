@@ -126,10 +126,13 @@ To install a specific version, run:</p>
 </pre></div>
 </div>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> with the desired release number, e.g. <code class="docutils literal notranslate"><span class="pre">2.9.0</span></code>.</p>
+<p>Container images are also available for users who prefer Docker-based
+workflows. See <a class="reference internal" href="Build/containers.html#bskcontainers"><span class="std std-ref">Containers</span></a> for registry locations, tags, and
+architecture support.</p>
 <p><strong>Prebuilt wheel availability:</strong></p>
 <ul class="simple">
 <li><p><strong>Windows:</strong> Windows 10/11 (x86_64)</p></li>
-<li><p><strong>macOS:</strong> macOS 11+ (x86_64 and Apple Silicon arm64)</p></li>
+<li><p><strong>macOS:</strong> macOS 11+ (Apple Silicon arm64)</p></li>
 <li><p><strong>Linux:</strong> Manylinux 2.24+ (x86_64, aarch64)</p></li>
 </ul>
 <p>All wheels are built as <strong>ABI3</strong> packages for Basilisk supported Python
@@ -144,7 +147,7 @@ to be installed on your system.</p>
 <section id="basilisk-support-data">
 <h2>Basilisk Support Data<a class="headerlink" href="#basilisk-support-data" title="Link to this heading"></a></h2>
 <p>To keep the wheel size smaller, the large BSK data files are not installed by
-default.  If the user wants to use a script that that needs BSK data it will
+default.  If the user wants to use a script that needs BSK data it will
 be downloaded automatically using <code class="docutils literal notranslate"><span class="pre">pooch</span></code>.  If you want to force all data to
 be downloaded at once, then go to the command line, change the current
 directory to be inside the environment where Basilisk was <code class="docutils literal notranslate"><span class="pre">pip</span></code> installed,
@@ -160,7 +163,7 @@ them into the local Basilisk python package installation.</p>
 </section>
 <section id="basilisk-examples">
 <h2>Basilisk Examples<a class="headerlink" href="#basilisk-examples" title="Link to this heading"></a></h2>
-<p>If you want to run the example files provided by the Basilisk repository can be downloaded to the local
+<p>If you want to run the example files provided by the Basilisk repository, they can be downloaded to the local
 directory using the command line:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bskExamples</span>
 </pre></div>

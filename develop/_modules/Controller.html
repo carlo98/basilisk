@@ -154,6 +154,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">archiveDir</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">varCast</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">multiProcManager</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataWriter</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">simParams</span> <span class="o">=</span> <span class="n">SimulationParameters</span><span class="p">(</span>
             <span class="n">creationFunction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -166,6 +169,27 @@
             <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="n">icfilename</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
         <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_shutdown_data_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataWriter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataWriter</span><span class="p">,</span> <span class="s2">&quot;pid&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataWriter</span><span class="p">,</span> <span class="s2">&quot;pid&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dataWriter</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiProcManager</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">multiProcManager</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataWriter</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">multiProcManager</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Controller.setShowProgressBar">
 <a class="viewcode-back" href="../Documentation/utilities/MonteCarlo/Controller.html#Controller.Controller.setShowProgressBar">[docs]</a>
@@ -193,10 +217,10 @@
             <span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pickledData</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">simParams</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading montecarlo at&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">multiProcManager</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">dataOutQueue</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">multiProcManager</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">dataWriter</span> <span class="o">=</span> <span class="n">DataWriter</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="p">)</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">dataWriter</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># Defer multiprocessing resources until they are required.</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">multiProcManager</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">dataOutQueue</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">dataWriter</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">return</span> <span class="n">data</span></div>
 
 
@@ -625,8 +649,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">archiveDir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">archiveDir</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icDirectory</span><span class="p">:</span>
             <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_data_writer</span><span class="p">()</span>
 
         <span class="c1"># if there are failures</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">failed</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -790,65 +813,63 @@
         <span class="c1"># is a temporary fix to a memory leak which is assumed to be a result of the simGenerator not collecting</span>
         <span class="c1"># garbage properly. # TODO: Find a more permenant solution to the leak.</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># don&#39;t make child thread</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">simParams</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing sequentially...&quot;</span><span class="p">)</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numSims</span><span class="p">):</span>
-                <span class="n">simGenerator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateSims</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
-                <span class="k">for</span> <span class="n">sim</span> <span class="ow">in</span> <span class="n">simGenerator</span><span class="p">:</span>
-                    <span class="k">try</span><span class="p">:</span>
-                        <span class="n">run_ok</span> <span class="o">=</span> <span class="n">simulationExecutor</span><span class="p">([</span><span class="n">sim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="k">except</span><span class="p">:</span>
-                        <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="ow">not</span> <span class="n">run_ok</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># don&#39;t make child thread</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">simParams</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing sequentially...&quot;</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numSims</span><span class="p">):</span>
+                    <span class="n">simGenerator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateSims</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+                    <span class="k">for</span> <span class="n">sim</span> <span class="ow">in</span> <span class="n">simGenerator</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">run_ok</span> <span class="o">=</span> <span class="n">simulationExecutor</span><span class="p">([</span><span class="n">sim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">except</span><span class="p">:</span>
                             <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">progressBar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">&gt;</span> <span class="n">numSims</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fewer MCs spawned than processes assigned (</span><span class="si">%d</span><span class="s2"> &lt; </span><span class="si">%d</span><span class="s2">). Changing processes count to </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">numSims</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">,</span> <span class="n">numSims</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">=</span> <span class="n">numSims</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numSims</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">):</span>
-                <span class="c1"># If number of sims doesn&#39;t factor evenly into the number of processes:</span>
-                <span class="k">if</span> <span class="n">numSims</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">numSims</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">)))</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                    <span class="n">offset</span> <span class="o">=</span> <span class="n">numSims</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">simGenerator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateSims</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">offset</span><span class="p">)))</span>
-                <span class="n">pool</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="c1"># yields results *as* the workers finish jobs</span>
-                    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">simulationExecutor</span><span class="p">,</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">simGenerator</span><span class="p">]):</span>
-                        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>  <span class="c1"># workers return True on success</span>
-                            <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># add failed jobs to the list of failures</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Job&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;failed...&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="ow">not</span> <span class="n">run_ok</span><span class="p">:</span>
+                                <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">progressBar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">&gt;</span> <span class="n">numSims</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fewer MCs spawned than processes assigned (</span><span class="si">%d</span><span class="s2"> &lt; </span><span class="si">%d</span><span class="s2">). Changing processes count to </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">numSims</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">,</span> <span class="n">numSims</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">=</span> <span class="n">numSims</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numSims</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">):</span>
+                    <span class="c1"># If number of sims doesn&#39;t factor evenly into the number of processes:</span>
+                    <span class="k">if</span> <span class="n">numSims</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">numSims</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">)))</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="n">offset</span> <span class="o">=</span> <span class="n">numSims</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="n">simGenerator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateSims</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">offset</span><span class="p">)))</span>
+                    <span class="n">pool</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numProcess</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="c1"># yields results *as* the workers finish jobs</span>
+                        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">simulationExecutor</span><span class="p">,</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">simGenerator</span><span class="p">]):</span>
+                            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>  <span class="c1"># workers return True on success</span>
+                                <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># add failed jobs to the list of failures</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Job&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;failed...&quot;</span><span class="p">)</span>
 
-                        <span class="n">jobsFinished</span> <span class="o">+=</span> <span class="mi">1</span>
-                        <span class="n">progressBar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">jobsFinished</span><span class="p">)</span>
-                    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">KeyboardInterrupt</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ctrl-C was hit, closing pool&quot;</span><span class="p">)</span>
-                    <span class="n">failed</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">jobsFinished</span><span class="p">,</span> <span class="n">numSims</span><span class="p">)))</span>  <span class="c1"># fail all potentially running jobs...</span>
-                    <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
-                    <span class="k">raise</span> <span class="n">e</span>
-                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unknown exception while running simulations:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-                    <span class="n">failed</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">jobsFinished</span><span class="p">,</span> <span class="n">numSims</span><span class="p">)))</span>  <span class="c1"># fail all potentially running jobs...</span>
-                    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
-                    <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
-                <span class="k">finally</span><span class="p">:</span>
-                    <span class="c1"># Wait until all data is logged from the spawned runs before proceeding with the next set.</span>
-                    <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                            <span class="n">jobsFinished</span> <span class="o">+=</span> <span class="mi">1</span>
+                            <span class="n">progressBar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">jobsFinished</span><span class="p">)</span>
+                        <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ctrl-C was hit, closing pool&quot;</span><span class="p">)</span>
+                        <span class="n">failed</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">jobsFinished</span><span class="p">,</span> <span class="n">numSims</span><span class="p">)))</span>  <span class="c1"># fail all potentially running jobs...</span>
+                        <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+                        <span class="k">raise</span> <span class="n">e</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unknown exception while running simulations:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                        <span class="n">failed</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">jobsFinished</span><span class="p">,</span> <span class="n">numSims</span><span class="p">)))</span>  <span class="c1"># fail all potentially running jobs...</span>
+                        <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+                        <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+                    <span class="k">finally</span><span class="p">:</span>
+                        <span class="c1"># Wait until all data is logged from the spawned runs before proceeding with the next set.</span>
+                        <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 
-        <span class="n">progressBar</span><span class="o">.</span><span class="n">markComplete</span><span class="p">()</span>
-        <span class="n">progressBar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="c1"># Wait until all data logging is finished before concatenation dataframes and shutting down the pool</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
-           <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dataOutQueue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+            <span class="n">progressBar</span><span class="o">.</span><span class="n">markComplete</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">progressBar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_data_writer</span><span class="p">()</span>
 
         <span class="c1"># if there are failures</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">failed</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>

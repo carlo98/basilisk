@@ -113,6 +113,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">macros</span> <span class="k">as</span> <span class="n">mc</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">orbitalMotion</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">unitTestSupport</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">vizSupport</span>
 
 <span class="c1"># --------------------------------- COMPONENTS &amp; SUBPLOT HANDLING ----------------------------------------------- #</span>
 <span class="n">color_x</span> <span class="o">=</span> <span class="s1">&#39;dodgerblue&#39;</span>
@@ -511,6 +512,82 @@
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$</span><span class="si">{}</span><span class="s1">^Sv_</span><span class="si">{BS_1}</span><span class="s1">$ [m/s]&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$</span><span class="si">{}</span><span class="s1">^Sv_</span><span class="si">{BS_2}</span><span class="s1">$ [m/s]&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$</span><span class="si">{}</span><span class="s1">^Sv_</span><span class="si">{BS_3}</span><span class="s1">$ [m/s]&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="plot_magnetic_field">
+<a class="viewcode-back" href="../examples/BskSim/plotting/BSK_Plotting.html#BSK_Plotting.plot_magnetic_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_magnetic_field</span><span class="p">(</span><span class="n">timeData</span><span class="p">,</span> <span class="n">dataMagField</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the magnetic field.&quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">timeData</span><span class="p">,</span>
+            <span class="n">dataMagField</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">unitTestSupport</span><span class="o">.</span><span class="n">getLineColor</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$B\_N_{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}$&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time [min]&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Magnetic Field $B_N$ [nT]&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="plot_data_tam">
+<a class="viewcode-back" href="../examples/BskSim/plotting/BSK_Plotting.html#BSK_Plotting.plot_data_tam">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_data_tam</span><span class="p">(</span><span class="n">timeData</span><span class="p">,</span> <span class="n">dataTam</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the magnetic field.&quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">timeData</span><span class="p">,</span>
+            <span class="n">dataTam</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">unitTestSupport</span><span class="o">.</span><span class="n">getLineColor</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$TAM\_S_{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}$&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time [min]&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Magnetic Field $TAM_S$ [nT]&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_data_lat">
+<a class="viewcode-back" href="../examples/BskSim/plotting/BSK_Plotting.html#BSK_Plotting.plot_data_lat">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_data_lat</span><span class="p">(</span><span class="n">timeData</span><span class="p">,</span> <span class="n">dataLoc</span><span class="p">,</span> <span class="n">C_PN</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot geodetic latitude from time-series position and DCM data.</span>
+
+<span class="sd">    Assumes:</span>
+<span class="sd">    - ``timeData`` is length N</span>
+<span class="sd">    - ``dataLoc`` has shape (N, 3) and is expressed in frame N</span>
+<span class="sd">    - ``C_PN`` has shape (N, 3, 3), where each sample maps N -&gt; P</span>
+
+<span class="sd">    All three inputs must be aligned sample-by-sample in time.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+
+    <span class="n">timeData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">timeData</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">dataLoc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dataLoc</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">C_PN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">C_PN</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">timeData</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataLoc</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">timeData</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">C_PN</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;plot_data_lat requires equal lengths for timeData, dataLoc, and C_PN&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">numPts</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">timeData</span><span class="p">)</span>
+    <span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">numPts</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numPts</span><span class="p">):</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">C_PN</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="n">dataLoc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">lat_rad</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">fixedframe2lla</span><span class="p">(</span>
+            <span class="n">vec</span><span class="p">,</span>
+            <span class="n">orbitalMotion</span><span class="o">.</span><span class="n">REQ_EARTH</span> <span class="o">*</span> <span class="mf">1000.0</span><span class="p">,</span>
+            <span class="n">orbitalMotion</span><span class="o">.</span><span class="n">RP_EARTH</span> <span class="o">/</span> <span class="n">orbitalMotion</span><span class="o">.</span><span class="n">REQ_EARTH</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">lats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lat_rad</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timeData</span><span class="p">[:</span><span class="n">numPts</span><span class="p">],</span> <span class="n">lats</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time [min]&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude [deg]&quot;</span><span class="p">)</span></div>
+
 </pre></div>
 
            </div>

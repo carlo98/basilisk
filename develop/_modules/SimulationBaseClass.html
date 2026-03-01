@@ -644,7 +644,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            TaskName (str): Name of Task</span>
 <span class="sd">            TaskRate (int): Number of nanoseconds to elapse before update() is called</span>
-<span class="sd">            InputDelay (int): (depreciated, unimplemented) Number of nanoseconds simulating a lag of the particular task</span>
+<span class="sd">            InputDelay (int): (deprecated, unimplemented) Number of nanoseconds simulating a lag of the particular task</span>
 <span class="sd">            FirstStart (int): Number of nanoseconds to elapse before task is officially enabled</span>
 
 <span class="sd">        Returns:</span>
@@ -655,7 +655,7 @@
             <span class="n">deprecated</span><span class="o">.</span><span class="n">deprecationWarn</span><span class="p">(</span>
                 <span class="s2">&quot;InputDelay&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;2024/12/13&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;This input variable is non-functional and now depreciated.&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;This input variable is non-functional and now deprecated.&quot;</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="n">Task</span> <span class="o">=</span> <span class="n">simulationArchTypes</span><span class="o">.</span><span class="n">TaskBaseClass</span><span class="p">(</span><span class="n">TaskName</span><span class="p">,</span> <span class="n">TaskRate</span><span class="p">,</span> <span class="n">FirstStart</span><span class="p">)</span>

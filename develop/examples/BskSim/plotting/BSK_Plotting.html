@@ -131,9 +131,32 @@
 <div class="toctree-wrapper compound">
 </div>
 <dl class="py function" id="module-BSK_Plotting">
+<dt class="sig sig-object py" id="BSK_Plotting.plot_data_lat">
+<span class="sig-prename descclassname"><span class="pre">BSK_Plotting.</span></span><span class="sig-name descname"><span class="pre">plot_data_lat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataLoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_PN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/BSK_Plotting.html#plot_data_lat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#BSK_Plotting.plot_data_lat" title="Link to this definition"></a></dt>
+<dd><p>Plot geodetic latitude from time-series position and DCM data.</p>
+<p>Assumes:
+- <code class="docutils literal notranslate"><span class="pre">timeData</span></code> is length N
+- <code class="docutils literal notranslate"><span class="pre">dataLoc</span></code> has shape (N, 3) and is expressed in frame N
+- <code class="docutils literal notranslate"><span class="pre">C_PN</span></code> has shape (N, 3, 3), where each sample maps N -&gt; P</p>
+<p>All three inputs must be aligned sample-by-sample in time.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BSK_Plotting.plot_data_tam">
+<span class="sig-prename descclassname"><span class="pre">BSK_Plotting.</span></span><span class="sig-name descname"><span class="pre">plot_data_tam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataTam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/BSK_Plotting.html#plot_data_tam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#BSK_Plotting.plot_data_tam" title="Link to this definition"></a></dt>
+<dd><p>Plot the magnetic field.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="BSK_Plotting.plot_illumination_fraction">
 <span class="sig-prename descclassname"><span class="pre">BSK_Plotting.</span></span><span class="sig-name descname"><span class="pre">plot_illumination_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeAxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">illumination_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/BSK_Plotting.html#plot_illumination_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#BSK_Plotting.plot_illumination_fraction" title="Link to this definition"></a></dt>
 <dd><p>Preferred plot for eclipse illumination fraction.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BSK_Plotting.plot_magnetic_field">
+<span class="sig-prename descclassname"><span class="pre">BSK_Plotting.</span></span><span class="sig-name descname"><span class="pre">plot_magnetic_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataMagField</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/BSK_Plotting.html#plot_magnetic_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#BSK_Plotting.plot_magnetic_field" title="Link to this definition"></a></dt>
+<dd><p>Plot the magnetic field.</p>
 </dd></dl>
 
 <dl class="py function">

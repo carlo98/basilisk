@@ -192,8 +192,9 @@ into the “<em>Socket Address</em>” field. Make sure that the “<em>DirectCo
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reqComAddress</span></code></p></td>
 <td><p>string</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
-<td><p>Network address to use for the connection.  This can be either a host name or an IP address.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
+<td><p>Network address to bind to for the connection. Use <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code> to bind to all interfaces
+(recommended for containers), or a specific IP address or host name.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reqPortNumber</span></code></p></td>
 <td><p>string</p></td>
@@ -202,7 +203,8 @@ into the “<em>Socket Address</em>” field. Make sure that the “<em>DirectCo
 </tr>
 </tbody>
 </table>
-<p>The default 2-way address is therefore <code class="docutils literal notranslate"><span class="pre">tcp://localhost:5556</span></code>.</p>
+<p>The default 2-way address is therefore <code class="docutils literal notranslate"><span class="pre">tcp://0.0.0.0:5556</span></code>, which binds to all network
+interfaces allowing connections from localhost or remote machines/containers.</p>
 </section>
 <section id="creating-vizeventdialog-panels">
 <h2>Creating <code class="docutils literal notranslate"><span class="pre">VizEventDialog</span></code> Panels<a class="headerlink" href="#creating-vizeventdialog-panels" title="Link to this heading"></a></h2>
@@ -515,8 +517,9 @@ into the “<em>Socket Address</em>” box. Make sure that the “<em>Receive On
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pubComAddress</span></code></p></td>
 <td><p>string</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
-<td><p>Network address to use for the connection.  This can be either a host name or an IP address.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
+<td><p>Network address to bind to for broadcasting. Use <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code> to bind to all interfaces
+(recommended for containers), or a specific IP address or host name.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pubPortNumber</span></code></p></td>
 <td><p>string</p></td>
@@ -525,7 +528,8 @@ into the “<em>Socket Address</em>” box. Make sure that the “<em>Receive On
 </tr>
 </tbody>
 </table>
-<p>The default broadcast address is therefore <code class="docutils literal notranslate"><span class="pre">tcp://localhost:5570</span></code>.</p>
+<p>The default broadcast address is therefore <code class="docutils literal notranslate"><span class="pre">tcp://0.0.0.0:5570</span></code>, which binds to all network
+interfaces allowing connections from localhost or remote machines/containers.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Although the default TCP ports seemed to be available across our development machines, specific

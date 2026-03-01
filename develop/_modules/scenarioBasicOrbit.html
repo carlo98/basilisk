@@ -175,7 +175,9 @@
 <span class="sd">to be stored in a binary file inside the _VizFiles sub-folder with the scenario folder. This file can be read in by</span>
 <span class="sd">`Vizard &lt;vizard&gt;`_ and played back after running the BSK simulation. ::</span>
 
-<span class="sd">    vizSupport.enableUnityVisualization(scSim, simTaskName, simProcessName, gravBodies=gravFactory, saveFile=fileName)</span>
+<span class="sd">    vizSupport.enableUnityVisualization(scSim, simTaskName, simProcessName, gravBodies=gravFactory</span>
+<span class="sd">                                        # , saveFile=fileName</span>
+<span class="sd">                                        )</span>
 
 <span class="sd">The vizInterface module must be built into BSK. This is done if the correct `CMake options &lt;cmakeOptions&gt;`_</span>
 <span class="sd">are selected. The default</span>
@@ -394,7 +396,7 @@
         <span class="n">planet</span><span class="o">.</span><span class="n">isCentralBody</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># ensure this is the central gravitational body</span>
         <span class="k">if</span> <span class="n">useSphericalHarmonics</span><span class="p">:</span>
             <span class="c1"># the get_path() method returns the data path to supportData folder</span>
-            <span class="c1"># if the repository was closed, and to the pooch cached file if a</span>
+            <span class="c1"># if the repository was cloned, and to the pooch cached file if a</span>
             <span class="c1"># wheel install was performed.</span>
             <span class="n">ggm2b_path</span> <span class="o">=</span> <span class="n">get_path</span><span class="p">(</span><span class="n">DataFile</span><span class="o">.</span><span class="n">LocalGravData</span><span class="o">.</span><span class="n">GGM2BData</span><span class="p">)</span>
             <span class="n">planet</span><span class="o">.</span><span class="n">useSphericalHarmonicsGravityModel</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ggm2b_path</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>

@@ -200,7 +200,7 @@
 <span class="sd">In this case, we do not see a perfect conservation of Rotational</span>
 <span class="sd">Angular Momentum and Rotational Energy because</span>
 <span class="sd">of the **high** timeStep. We cannot use too high timeStep because</span>
-<span class="sd">we will lose the periodic behaviour of the fuel slosh;</span>
+<span class="sd">we will lose the periodic behavior of the fuel slosh;</span>
 <span class="sd">and the integration could diverge. On the other hand, small</span>
 <span class="sd">timeStep makes the simulation very long.</span>
 
@@ -415,7 +415,7 @@
     <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">dataLog</span><span class="p">)</span>
 
     <span class="n">scLog</span> <span class="o">=</span> <span class="n">scObject</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span>
-        <span class="p">[</span><span class="s2">&quot;totOrbEnergy&quot;</span><span class="p">,</span> <span class="s2">&quot;totOrbAngMomPntN_N&quot;</span><span class="p">,</span> <span class="s2">&quot;totRotAngMomPntC_N&quot;</span><span class="p">,</span> <span class="s2">&quot;totRotEnergy&quot;</span><span class="p">],</span> 
+        <span class="p">[</span><span class="s2">&quot;totOrbEnergy&quot;</span><span class="p">,</span> <span class="s2">&quot;totOrbAngMomPntN_N&quot;</span><span class="p">,</span> <span class="s2">&quot;totRotAngMomPntC_N&quot;</span><span class="p">,</span> <span class="s2">&quot;totRotEnergy&quot;</span><span class="p">],</span>
         <span class="n">simulationTimeStep</span><span class="p">)</span>
     <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">scLog</span><span class="p">)</span>
 
@@ -424,13 +424,13 @@
         <span class="k">def</span><span class="w"> </span><span class="nf">get_rho</span><span class="p">(</span><span class="n">CurrentSimNanos</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
             <span class="n">stateName</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;linearSpringMassDamperRho</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="k">return</span> <span class="n">scObject</span><span class="o">.</span><span class="n">dynManager</span><span class="o">.</span><span class="n">getStateObject</span><span class="p">(</span><span class="n">stateName</span><span class="p">)</span><span class="o">.</span><span class="n">getState</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-        
+
         <span class="n">damperRhoLog</span> <span class="o">=</span> <span class="n">pythonVariableLogger</span><span class="o">.</span><span class="n">PythonVariableLogger</span><span class="p">({</span>
                 <span class="s2">&quot;damperRho1&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">CurrentSimNanos</span><span class="p">:</span> <span class="n">get_rho</span><span class="p">(</span><span class="n">CurrentSimNanos</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
                 <span class="s2">&quot;damperRho2&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">CurrentSimNanos</span><span class="p">:</span> <span class="n">get_rho</span><span class="p">(</span><span class="n">CurrentSimNanos</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
                 <span class="s2">&quot;damperRho3&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">CurrentSimNanos</span><span class="p">:</span> <span class="n">get_rho</span><span class="p">(</span><span class="n">CurrentSimNanos</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
             <span class="p">},</span> <span class="n">simulationTimeStep</span><span class="p">)</span>
-        
+
         <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">damperRhoLog</span><span class="p">)</span>
 
     <span class="c1">#</span>
@@ -530,7 +530,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">rhojOut</span> <span class="ow">in</span> <span class="n">rhojOuts</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">rhojOut</span><span class="p">)</span>
-        
+
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Particle 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Particle 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Particle 3&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement (m)&#39;</span><span class="p">)</span>
