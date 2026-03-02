@@ -63,6 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../system_model/index.html">system_model</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="index.html">utilities</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="BSpline.html">BSpline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ItuRefAtmosphere.html">ItuRefAtmosphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="astroConstants.html">astroConstants</a></li>
 <li class="toctree-l4"><a class="reference internal" href="avsEigenMRP.html">avsEigenMRP</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">avsEigenSupport</a></li>
@@ -154,6 +155,9 @@
 <li><p><strong>outArray</strong> – The destination array (sized by the user!) we copy into </p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>void </p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -176,13 +180,16 @@
 <dt class="sig sig-object cpp" id="_CPPv420eigenVector3d2CArrayRN5Eigen8Vector3dEPd">
 <span id="_CPPv320eigenVector3d2CArrayRN5Eigen8Vector3dEPd"></span><span id="_CPPv220eigenVector3d2CArrayRN5Eigen8Vector3dEPd"></span><span id="eigenVector3d2CArray__Eigen::Vector3dR.doubleP"></span><span class="target" id="avs_eigen_support_8h_1a794c4abb778e3a203ca08dfb3f707050"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eigenVector3d2CArray</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../simulation/mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">inMat</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">outArray</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420eigenVector3d2CArrayRN5Eigen8Vector3dEPd" title="Link to this definition"></a><br /></dt>
 <dd><p>Rapid conversion between 3-vector and output array. </p>
-<p>This function provides a direct conversion between a 3-vector and an output C array. We are providing this function to save on the inline conversion and the transpose that would have been performed by the general case.</p>
+<p>This function provides a direct conversion between a 3-vector and an output C array. We are providing this function to save on the inline conversion and the transpose that would have been performed by the general case. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inMat</strong> – The source Eigen matrix that we are converting </p></li>
 <li><p><strong>outArray</strong> – The destination array we copy into </p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>void </p>
 </dd>
 </dl>
 </dd></dl>
@@ -191,13 +198,16 @@
 <dt class="sig sig-object cpp" id="_CPPv416eigenMRPd2CArrayRN5Eigen8Vector3dEPd">
 <span id="_CPPv316eigenMRPd2CArrayRN5Eigen8Vector3dEPd"></span><span id="_CPPv216eigenMRPd2CArrayRN5Eigen8Vector3dEPd"></span><span id="eigenMRPd2CArray__Eigen::Vector3dR.doubleP"></span><span class="target" id="avs_eigen_support_8h_1a1f1b705018c04b0a2e22d7b92453bff0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eigenMRPd2CArray</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../simulation/mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">inMat</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">outArray</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416eigenMRPd2CArrayRN5Eigen8Vector3dEPd" title="Link to this definition"></a><br /></dt>
 <dd><p>Rapid conversion between MRP and output array. </p>
-<p>This function provides a direct conversion between an MRP and an output C array. We are providing this function to save on the inline conversion and the transpose that would have been performed by the general case.</p>
+<p>This function provides a direct conversion between an MRP and an output C array. We are providing this function to save on the inline conversion and the transpose that would have been performed by the general case. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inMat</strong> – The source Eigen MRP that we are converting </p></li>
 <li><p><strong>outArray</strong> – The destination array we copy into </p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>void </p>
 </dd>
 </dl>
 </dd></dl>
@@ -206,13 +216,16 @@
 <dt class="sig sig-object cpp" id="_CPPv420eigenMatrix3d2CArrayRN5Eigen8Matrix3dEPd">
 <span id="_CPPv320eigenMatrix3d2CArrayRN5Eigen8Matrix3dEPd"></span><span id="_CPPv220eigenMatrix3d2CArrayRN5Eigen8Matrix3dEPd"></span><span id="eigenMatrix3d2CArray__Eigen::Matrix3dR.doubleP"></span><span class="target" id="avs_eigen_support_8h_1a1d53f0520c190b8992c5a6f51d70dc48"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eigenMatrix3d2CArray</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../simulation/mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Matrix3d</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">inMat</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">outArray</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420eigenMatrix3d2CArrayRN5Eigen8Matrix3dEPd" title="Link to this definition"></a><br /></dt>
 <dd><p>Rapid conversion between 3x3 matrix and output array. </p>
-<p>This function provides a direct conversion between a 3x3 matrix and an output C array. We are providing this function to save on the inline conversion that would have been performed by the general case.</p>
+<p>This function provides a direct conversion between a 3x3 matrix and an output C array. We are providing this function to save on the inline conversion that would have been performed by the general case. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inMat</strong> – The source Eigen matrix that we are converting </p></li>
 <li><p><strong>outArray</strong> – The destination array we copy into </p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>void </p>
 </dd>
 </dl>
 </dd></dl>
@@ -398,6 +411,25 @@
 <li><p><strong>accuracy</strong> – The desired upper bound for the error </p></li>
 <li><p><strong>f</strong> – Function to find the zero of </p></li>
 <li><p><strong>fPrime</strong> – First derivative of the function </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>double </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414bisectionSolvePddRNSt8functionIFddEEE">
+<span id="_CPPv314bisectionSolvePddRNSt8functionIFddEEE"></span><span id="_CPPv214bisectionSolvePddRNSt8functionIFddEEE"></span><span class="target" id="avs_eigen_support_8h_1a5f5b765574c95052ba744c339df4752b"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bisectionSolve</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">interval</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">accuracy</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414bisectionSolvePddRNSt8functionIFddEEE" title="Link to this definition"></a><br /></dt>
+<dd><p>solves for the zero of the provided function using Bisection </p>
+<p>This function solves for the zero of the passed function using the Bisection Method </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval</strong> – The interval to use for the bisection method. Note that the root of the function must be inside this interval </p></li>
+<li><p><strong>accuracy</strong> – The desired upper bound for the error </p></li>
+<li><p><strong>f</strong> – Function to find the zero of </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

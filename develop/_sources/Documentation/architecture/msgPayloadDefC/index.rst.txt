@@ -48,6 +48,7 @@ msgPayloadDefC
    DvBurnCmdMsgPayload
    DvExecutionDataMsgPayload
    EclipseMsgPayload
+   ElectronBeamMsgPayload
    EphemerisMsgPayload
    EpochMsgPayload
    ForceAtSiteMsgPayload
@@ -67,6 +68,7 @@ msgPayloadDefC
    LambertValidatorMsgPayload
    LandmarkMsgPayload
    LinearTranslationRigidBodyMsgPayload
+   LinkBudgetMsgPayload
    MTBArrayConfigMsgPayload
    MTBCmdMsgPayload
    MTBMsgPayload
@@ -104,6 +106,8 @@ msgPayloadDefC
    SCStatesMsgPayload
    STAttMsgPayload
    STSensorMsgPayload
+   ScChargingCurrentsMsgPayload
+   ScSunlitFacetAreaMsgPayload
    ScalarJointStateMsgPayload
    SingleActuatorMsgPayload
    SmallBodyNavMsgPayload

@@ -153,6 +153,7 @@
 <span class="n">LOCAL_GRAV_DATA_BASE_PATH</span> <span class="o">=</span> <span class="s2">&quot;LocalGravData/&quot;</span>
 <span class="n">MAGNETIC_FIELD_BASE_PATH</span> <span class="o">=</span> <span class="s2">&quot;MagneticField/&quot;</span>
 <span class="n">SKY_BRIGHTNESS_BASE_PATH</span> <span class="o">=</span> <span class="s2">&quot;SkyBrightnessData/&quot;</span>
+<span class="n">ITU_ATMOSPHERE_RADIOFREQ_DAMPENING_BASE_PATH</span> <span class="o">=</span> <span class="s2">&quot;AtmRadioFreqDampData/&quot;</span>
 
 
 <div class="viewcode-block" id="tag_exists">
@@ -316,6 +317,9 @@
     <span class="k">class</span><span class="w"> </span><span class="nc">SkyBrightnessData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
         <span class="n">skyTemperature408MHz</span> <span class="o">=</span> <span class="s2">&quot;haslam408_dsds_Remazeilles2014.fits&quot;</span>
 
+    <span class="k">class</span><span class="w"> </span><span class="nc">AtmRadioFreqDampData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="n">oxygen</span> <span class="o">=</span> <span class="s2">&quot;oxygen.json&quot;</span>
+        <span class="n">waterVapor</span> <span class="o">=</span> <span class="s2">&quot;waterVapour.json&quot;</span>
 
 <span class="n">CATEGORY_BASE_PATHS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;AlbedoData&quot;</span><span class="p">:</span> <span class="n">ALBEDO_DATA_BASE_PATH</span><span class="p">,</span>
@@ -325,6 +329,7 @@
     <span class="s2">&quot;LocalGravData&quot;</span><span class="p">:</span> <span class="n">LOCAL_GRAV_DATA_BASE_PATH</span><span class="p">,</span>
     <span class="s2">&quot;MagneticFieldData&quot;</span><span class="p">:</span> <span class="n">MAGNETIC_FIELD_BASE_PATH</span><span class="p">,</span>
     <span class="s2">&quot;SkyBrightnessData&quot;</span><span class="p">:</span> <span class="n">SKY_BRIGHTNESS_BASE_PATH</span><span class="p">,</span>
+    <span class="s2">&quot;AtmRadioFreqDampData&quot;</span><span class="p">:</span> <span class="n">ITU_ATMOSPHERE_RADIOFREQ_DAMPENING_BASE_PATH</span><span class="p">,</span>
 <span class="p">}</span>
 
 
