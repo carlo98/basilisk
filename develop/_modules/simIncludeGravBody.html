@@ -483,6 +483,21 @@
 <span class="sd">        It connects the gravBodyData objects to the spice planet state messages.  Thus,</span>
 <span class="sd">        it must be run after the gravBodyData objects are created.</span>
 
+<span class="sd">        .. note::</span>
+
+<span class="sd">           ``spicePlanetFrames`` specifies the output frames used to compute</span>
+<span class="sd">           ``J20002Pfix`` for each planet state output message. If this argument is not</span>
+<span class="sd">           set, the method uses the frames gathered when bodies were created (typically</span>
+<span class="sd">           ``IAU_*`` frame names).</span>
+
+<span class="sd">           Alternatives to ``IAU_*`` can be provided as long as SPICE can resolve the</span>
+<span class="sd">           frame IDs from loaded kernels. For example, ``&quot;ITRF93&quot;`` can be used for</span>
+<span class="sd">           Earth-fixed outputs when Earth high precision kernels are available, and</span>
+<span class="sd">           ``&quot;J2000&quot;`` can be used to request an inertial-aligned output frame.</span>
+
+<span class="sd">           Earth frame-association FK kernels (for example ``earth_assoc_itrf93.tf``)</span>
+<span class="sd">           do not override ``spicePlanetFrames``.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            path (str): The absolute path to the folder that contains the</span>
 <span class="sd">                kernels to be loaded.</span>
@@ -528,6 +543,21 @@
 <span class="sd">        `%BSK_PATH%/supportData/EphemerisData/`, where `%BSK_PATH%` is replaced by</span>
 <span class="sd">        the Basilisk directory.</span>
 
+<span class="sd">        .. note::</span>
+
+<span class="sd">           ``spicePlanetFrames`` specifies the output frames used to compute</span>
+<span class="sd">           ``J20002Pfix`` for each planet state output message. If this argument is not</span>
+<span class="sd">           set, the method uses the frames gathered when bodies were created (typically</span>
+<span class="sd">           ``IAU_*`` frame names).</span>
+
+<span class="sd">           Alternatives to ``IAU_*`` can be provided as long as SPICE can resolve the</span>
+<span class="sd">           frame IDs from loaded kernels. For example, ``&quot;ITRF93&quot;`` can be used for</span>
+<span class="sd">           Earth-fixed outputs when Earth high precision kernels are available, and</span>
+<span class="sd">           ``&quot;J2000&quot;`` can be used to request an inertial-aligned output frame.</span>
+
+<span class="sd">           Earth frame-association FK kernels (for example ``earth_assoc_itrf93.tf``)</span>
+<span class="sd">           do not override ``spicePlanetFrames``.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            path (str): The absolute path to the folder that contains the</span>
 <span class="sd">                kernels to be loaded.</span>
@@ -549,6 +579,8 @@
 <span class="sd">            same as the stored `self.spiceObject`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="gravBodyFactory.createSpiceInterface">
+<a class="viewcode-back" href="../Documentation/utilities/simIncludeGravBody.html#simIncludeGravBody.gravBodyFactory.createSpiceInterface">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">createSpiceInterface</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;%BSK_PATH%/supportData/EphemerisData/&quot;</span><span class="p">,</span>
@@ -564,6 +596,49 @@
         <span class="n">epochInMsg</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">spiceKernalFileNames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">spiceInterface</span><span class="o">.</span><span class="n">SpiceInterface</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A convenience function to configure a NAIF Spice module for the simulation.</span>
+<span class="sd">        It connect the gravBodyData objects to the spice planet state messages.  Thus,</span>
+<span class="sd">        it must be run after the gravBodyData objects are created.</span>
+
+<span class="sd">        Unless the &#39;path&#39; input is provided, the kernels are loaded from the folder:</span>
+<span class="sd">        `%BSK_PATH%/supportData/EphemerisData/`, where `%BSK_PATH%` is replaced by</span>
+<span class="sd">        the Basilisk directory.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">           ``spicePlanetFrames`` specifies the output frames used to compute</span>
+<span class="sd">           ``J20002Pfix`` for each planet state output message. If this argument is not</span>
+<span class="sd">           set, the method uses the frames gathered when bodies were created (typically</span>
+<span class="sd">           ``IAU_*`` frame names).</span>
+
+<span class="sd">           Alternatives to ``IAU_*`` can be provided as long as SPICE can resolve the</span>
+<span class="sd">           frame IDs from loaded kernels. For example, ``&quot;ITRF93&quot;`` can be used for</span>
+<span class="sd">           Earth-fixed outputs when Earth high precision kernels are available, and</span>
+<span class="sd">           ``&quot;J2000&quot;`` can be used to request an inertial-aligned output frame.</span>
+
+<span class="sd">           Earth frame-association FK kernels (for example ``earth_assoc_itrf93.tf``)</span>
+<span class="sd">           do not override ``spicePlanetFrames``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path (str): The absolute path to the folder that contains the</span>
+<span class="sd">                kernels to be loaded.</span>
+<span class="sd">            time (str): The time string in a format that SPICE recognizes.</span>
+<span class="sd">            spiceKernelFileNames (Iterable[str], optional): A list of spice kernel file</span>
+<span class="sd">                names including file extension. Defaults to</span>
+<span class="sd">                `[&#39;de430.bsp&#39;, &#39;naif0012.tls&#39;, &#39;de-403-masses.tpc&#39;, &#39;pck00010.tpc&#39;]`.</span>
+<span class="sd">            spicePlanetNames (Optional[Sequence[str]], optional): A list of planet names</span>
+<span class="sd">                whose Spice data is loaded. If this is not provided, Spice data is</span>
+<span class="sd">                loaded for the bodies created with this factory object. Defaults to None.</span>
+<span class="sd">            spicePlanetFrames (Optional[Sequence[str]], optional): A list of planet</span>
+<span class="sd">                frame names to load in Spice. If this is not provided, frames are loaded</span>
+<span class="sd">                for the bodies created with this factory function. Defaults to None.</span>
+<span class="sd">            epochInMsg (bool, optional): Flag to set an epoch input message for the</span>
+<span class="sd">                spice interface. Defaults to False.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            spiceInterface.SpiceInterface: The generated SpiceInterface, which is the</span>
+<span class="sd">            same as the stored `self.spiceObject`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">time</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;&#39;time&#39; argument must be provided and a valid SPICE time string&quot;</span>
@@ -631,7 +706,8 @@
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">spiceObject</span><span class="o">.</span><span class="n">epochInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epochMsg</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spiceObject</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spiceObject</span></div>
+
 
 <div class="viewcode-block" id="gravBodyFactory.unloadSpiceKernels">
 <a class="viewcode-back" href="../Documentation/utilities/simIncludeGravBody.html#simIncludeGravBody.gravBodyFactory.unloadSpiceKernels">[docs]</a>
