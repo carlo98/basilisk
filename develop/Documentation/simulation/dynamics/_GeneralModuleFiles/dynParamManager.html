@@ -21,6 +21,7 @@
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=3cd7d658"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -84,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../gravityEffector/index.html">gravityEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyMotor/index.html">hingedRigidBodyMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTranslationalBodies/index.html">linearTranslationalBodies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoiseStateEffector/index.html">meanRevertingNoiseStateEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../msmForceTorque/index.html">msmForceTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedMotion/index.html">prescribedMotion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reactionWheels/index.html">reactionWheels</a></li>
@@ -203,8 +205,8 @@ present in the model.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11StateVector15propagateStatesEd">
-<span id="_CPPv3N11StateVector15propagateStatesEd"></span><span id="_CPPv2N11StateVector15propagateStatesEd"></span><span id="StateVector::propagateStates__double"></span><span class="target" id="class_state_vector_1ad65909633e5f466f9cc89f9abd71f2c7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateStates</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11StateVector15propagateStatesEd" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N11StateVector15propagateStatesEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE">
+<span id="_CPPv3N11StateVector15propagateStatesEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE"></span><span id="_CPPv2N11StateVector15propagateStatesEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE"></span><span id="StateVector::propagateStates__double.std::unordered_map:ss.std::vector:double::CR"></span><span class="target" id="class_state_vector_1a74cbe2717f11851073f009d5523c2bea"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateStates</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dt</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pseudoTimeSteps</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11StateVector15propagateStatesEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE" title="Link to this definition"></a><br /></dt>
 <dd><p>Scales the states of this <a class="reference internal" href="#class_state_vector"><span class="std std-ref">StateVector</span></a> by the given delta time </p>
 </dd></dl>
 
@@ -273,9 +275,32 @@ present in the model.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15DynParamManager20propagateStateVectorEd">
-<span id="_CPPv3N15DynParamManager20propagateStateVectorEd"></span><span id="_CPPv2N15DynParamManager20propagateStateVectorEd"></span><span id="DynParamManager::propagateStateVector__double"></span><span class="target" id="class_dyn_param_manager_1a6c3eec68a79882d446a7764bc68268fc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateStateVector</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15DynParamManager20propagateStateVectorEd" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N15DynParamManager20propagateStateVectorEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE">
+<span id="_CPPv3N15DynParamManager20propagateStateVectorEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE"></span><span id="_CPPv2N15DynParamManager20propagateStateVectorEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE"></span><span id="DynParamManager::propagateStateVector__double.std::unordered_map:ss.std::vector:double::CR"></span><span class="target" id="class_dyn_param_manager_1a82cce43cfe8163f4201a0876167cb38b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateStateVector</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dt</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pseudoTimeSteps</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15DynParamManager20propagateStateVectorEdRKNSt13unordered_mapINSt6stringENSt6vectorIdEEEE" title="Link to this definition"></a><br /></dt>
 <dd><p>Propagates the states managed by this class a given delta time. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N15DynParamManager25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE">
+<span id="_CPPv3N15DynParamManager25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE"></span><span id="_CPPv2N15DynParamManager25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE"></span><span id="DynParamManager::registerSharedNoiseSource__std::vector:std::pair:StateDataCR.s::"></span><span class="target" id="class_dyn_param_manager_1ab100e073f2e8119c663c0e0ba987720f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">registerSharedNoiseSource</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="stateData.html#_CPPv49StateData" title="StateData"><span class="n"><span class="pre">StateData</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15DynParamManager25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Used when more than one state have dynamics perturbed by the same noise process.</p>
+<p>For example, consider the following SDE:</p>
+<p><div class="math notranslate nohighlight">
+\[  dx_0 = f_0(t,x)\,dt + g_{00}(t,x)\,dW_0 + g_{01}(t,x)\,dW_1
+\]</div>
+<div class="math notranslate nohighlight">
+\[  dx_1 = f_1(t,x)\,dt + g_{11}(t,x)\,dW_1
+\]</div>
+</p>
+<p>In this case, state ‘x_0’ is affected by 2 sources of noise and ‘x_1’ by 1 source of noise. However, the source ‘W_1’ is shared between ‘x_0’ and ‘x_1’.</p>
+<p>This function is called like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dynParamManager</span><span class="o">.</span><span class="n">registerSharedNoiseSource</span><span class="p">({</span>
+    <span class="p">{</span><span class="n">myStateX0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">myStateX1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>which means that the 2nd noise source of the <code class="docutils literal notranslate"><a class="reference internal" href="stateData.html#class_state_data"><span class="std std-ref"><span class="pre">StateData</span></span></a></code> ‘myStateX0’ and the first noise source of the <code class="docutils literal notranslate"><a class="reference internal" href="stateData.html#class_state_data"><span class="std std-ref"><span class="pre">StateData</span></span></a></code> ‘myStateX1’ actually correspond to the same noise process. </p>
 </dd></dl>
 
 </div>
@@ -298,6 +323,21 @@ present in the model.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N15DynParamManager9bskLoggerE">
 <span id="_CPPv3N15DynParamManager9bskLoggerE"></span><span id="_CPPv2N15DynParamManager9bskLoggerE"></span><span id="DynParamManager::bskLogger__BSKLogger"></span><span class="target" id="class_dyn_param_manager_1a02cd81261a8fc7488bf3b18064d4ae07"></span><span class="n"><span class="pre">BSKLogger</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bskLogger</span></span></span><a class="headerlink" href="#_CPPv4N15DynParamManager9bskLoggerE" title="Link to this definition"></a><br /></dt>
 <dd><p>Logger used by this class </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15DynParamManager14sharedNoiseMapE">
+<span id="_CPPv3N15DynParamManager14sharedNoiseMapE"></span><span id="_CPPv2N15DynParamManager14sharedNoiseMapE"></span><span id="DynParamManager::sharedNoiseMap__std::unordered_map:std::pair:ss.s:.s:"></span><span class="target" id="class_dyn_param_manager_1a97abb841d67a8d9891e66ff4aae966ad"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sharedNoiseMap</span></span></span><a class="headerlink" href="#_CPPv4N15DynParamManager14sharedNoiseMapE" title="Link to this definition"></a><br /></dt>
+<dd><p>When multiple states share a noise source, then this map maps their (name, noiseIndex) to the same number </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15DynParamManager23sharedNoiseMapIdCounterE">
+<span id="_CPPv3N15DynParamManager23sharedNoiseMapIdCounterE"></span><span id="_CPPv2N15DynParamManager23sharedNoiseMapIdCounterE"></span><span id="DynParamManager::sharedNoiseMapIdCounter__s"></span><span class="target" id="class_dyn_param_manager_1a712f4f750301f5ece76e9779c5007699"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sharedNoiseMapIdCounter</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N15DynParamManager23sharedNoiseMapIdCounterE" title="Link to this definition"></a><br /></dt>
+<dd><p>A counter used to ensure that the values in <code class="docutils literal notranslate"><a class="reference internal" href="#class_dyn_param_manager_1a97abb841d67a8d9891e66ff4aae966ad"><span class="std std-ref"><span class="pre">sharedNoiseMap</span></span></a></code> are unique. </p>
 </dd></dl>
 
 </div>

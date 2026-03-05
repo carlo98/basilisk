@@ -21,6 +21,7 @@
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=3cd7d658"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -84,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../gravityEffector/index.html">gravityEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyMotor/index.html">hingedRigidBodyMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTranslationalBodies/index.html">linearTranslationalBodies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoiseStateEffector/index.html">meanRevertingNoiseStateEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../msmForceTorque/index.html">msmForceTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedMotion/index.html">prescribedMotion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reactionWheels/index.html">reactionWheels</a></li>
@@ -155,6 +157,33 @@
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Drag dynamics class used to compute drag effects on spacecraft bodies. This class is used to implement drag dynamic effects on spacecraft using a variety of simple or complex models, which will include cannonball (attitude-independent) drag, single flat-plate drag, faceted drag models, and an interface to full-CAD GPU-accelerated drag models.</p>
+</section>
+<section id="density-correction-state">
+<h2>Density Correction State<a class="headerlink" href="#density-correction-state" title="Link to this heading"></a></h2>
+<p>The module supports an optional density correction state that scales the incoming atmospheric density.
+If <code class="docutils literal notranslate"><span class="pre">densityCorrectionStateName</span></code> is set, the drag model uses</p>
+<div class="math notranslate nohighlight">
+\[\rho = \rho_{\text{in}} \left(1 + \delta_\rho\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_{\text{in}}\)</span> is read from <code class="docutils literal notranslate"><span class="pre">atmoDensInMsg</span></code> and <span class="math notranslate nohighlight">\(\delta_\rho\)</span> is the scalar
+state referenced by <code class="docutils literal notranslate"><span class="pre">densityCorrectionStateName</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">densityCorrectionStateName</span></code> is left empty (default), no correction is applied and
+<code class="docutils literal notranslate"><span class="pre">atmoDensInMsg.neutralDensity</span></code> is used directly.</p>
+<p>Example setup:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drag model</span>
+<span class="n">drag</span> <span class="o">=</span> <span class="n">dragDynamicEffector</span><span class="o">.</span><span class="n">DragDynamicEffector</span><span class="p">()</span>
+<span class="n">drag</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">dragCoeff</span> <span class="o">=</span> <span class="mf">2.2</span>
+<span class="n">drag</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">projectedArea</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">drag</span><span class="o">.</span><span class="n">atmoDensInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">atmo</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Optional: apply multiplicative density correction from a scalar state</span>
+<span class="n">stochasticAtmo</span> <span class="o">=</span> <span class="n">meanRevertingNoiseStateEffector</span><span class="o">.</span><span class="n">MeanRevertingNoiseStateEffector</span><span class="p">()</span>
+<span class="c1"># ... Configure stochasticAtmo here</span>
+<span class="n">scObject</span><span class="o">.</span><span class="n">addStateEffector</span><span class="p">(</span><span class="n">stochasticAtmo</span><span class="p">)</span>
+<span class="n">drag</span><span class="o">.</span><span class="n">densityCorrectionStateName</span> <span class="o">=</span> <span class="n">stochasticAtmo</span><span class="o">.</span><span class="n">getStateName</span><span class="p">()</span>
+
+<span class="n">scObject</span><span class="o">.</span><span class="n">addDynamicEffector</span><span class="p">(</span><span class="n">drag</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
@@ -289,6 +318,12 @@ provides information on what this message is used for.</p>
 <dd><p>This method updates the internal drag direction based on the spacecraft velocity vector. </p>
 </dd></dl>
 
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N19DragDynamicEffector10getDensityEv">
+<span id="_CPPv3N19DragDynamicEffector10getDensityEv"></span><span id="_CPPv2N19DragDynamicEffector10getDensityEv"></span><span id="DragDynamicEffector::getDensity"></span><span class="target" id="class_drag_dynamic_effector_1a3328aa5b218675b954ac5745dba1e0ed"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDensity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19DragDynamicEffector10getDensityEv" title="Link to this definition"></a><br /></dt>
+<dd><p>This method obtains the density from the input data and applies a correction based on the density correction state (if it was configured) </p>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
@@ -320,6 +355,18 @@ provides information on what this message is used for.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N19DragDynamicEffector11hubVelocityE">
 <span id="_CPPv3N19DragDynamicEffector11hubVelocityE"></span><span id="_CPPv2N19DragDynamicEffector11hubVelocityE"></span><span id="DragDynamicEffector::hubVelocity__StateDataP"></span><span class="target" id="class_drag_dynamic_effector_1a903c1dc3ae03ea6bf030980f58e37ac6"></span><a class="reference internal" href="../_GeneralModuleFiles/stateData.html#_CPPv49StateData" title="StateData"><span class="n"><span class="pre">StateData</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">hubVelocity</span></span></span><a class="headerlink" href="#_CPPv4N19DragDynamicEffector11hubVelocityE" title="Link to this definition"></a><br /></dt>
 <dd><p>m/s Hub inertial velocity vector </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19DragDynamicEffector26densityCorrectionStateNameE">
+<span id="_CPPv3N19DragDynamicEffector26densityCorrectionStateNameE"></span><span id="_CPPv2N19DragDynamicEffector26densityCorrectionStateNameE"></span><span id="DragDynamicEffector::densityCorrectionStateName__ss"></span><span class="target" id="class_drag_dynamic_effector_1ac215bb3a69bfca96266bf8bb20b413b8"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">densityCorrectionStateName</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><a class="headerlink" href="#_CPPv4N19DragDynamicEffector26densityCorrectionStateNameE" title="Link to this definition"></a><br /></dt>
+<dd><p>&amp;#8212; If not ‘’, finds a state with this name to get <code class="docutils literal notranslate"><a class="reference internal" href="#class_drag_dynamic_effector_1a28826a28b45de10e31e5c96362863e0d"><span class="std std-ref"><span class="pre">densityCorrection</span></span></a></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19DragDynamicEffector17densityCorrectionE">
+<span id="_CPPv3N19DragDynamicEffector17densityCorrectionE"></span><span id="_CPPv2N19DragDynamicEffector17densityCorrectionE"></span><span id="DragDynamicEffector::densityCorrection__StateDataP"></span><span class="target" id="class_drag_dynamic_effector_1a28826a28b45de10e31e5c96362863e0d"></span><a class="reference internal" href="../_GeneralModuleFiles/stateData.html#_CPPv49StateData" title="StateData"><span class="n"><span class="pre">StateData</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">densityCorrection</span></span></span><a class="headerlink" href="#_CPPv4N19DragDynamicEffector17densityCorrectionE" title="Link to this definition"></a><br /></dt>
+<dd><p>&amp;#8212; Used density is <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">+</span> <a class="reference internal" href="#class_drag_dynamic_effector_1a28826a28b45de10e31e5c96362863e0d"><span class="std std-ref"><span class="pre">densityCorrection</span></span></a><span class="pre">)</span> <span class="pre">*</span> <span class="pre">atmoInData.neutralDensity</span></code></p>
 </dd></dl>
 
 <dl class="cpp var">

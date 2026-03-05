@@ -10,6 +10,7 @@ _UnitTest
    :caption: Files:
 
    test_Integrators
+   test_stochasticIntegrators
 .. toctree::
    :maxdepth: 1
    :caption: Directories:

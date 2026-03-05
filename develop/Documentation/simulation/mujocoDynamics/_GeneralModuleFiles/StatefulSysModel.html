@@ -21,6 +21,7 @@
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=3cd7d658"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -73,6 +74,7 @@
 <li class="toctree-l4 current"><a class="reference internal" href="index.html">_GeneralModuleFiles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cmdForceInertialToForceAtSite/index.html">cmdForceInertialToForceAtSite</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTimeInvariantSystem/index.html">linearTimeInvariantSystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoise/index.html">meanRevertingNoise</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrOnTimeToForce/index.html">thrOnTimeToForce</a></li>
 </ul>
 </li>
@@ -152,6 +154,30 @@
 <dd><p>Creates and returns a new state, which will be managed by the underlying <code class="docutils literal notranslate"><span class="pre">DynParamManager</span></code>.</p>
 <p>The state name should be unique: registering two states with the same name on this class will cause an error. Different <a class="reference internal" href="#class_stateful_sys_model"><span class="std std-ref">StatefulSysModel</span></a> are allowed to use the same state name, however.</p>
 <p>This method may optionally be templated to create StateData of subclasses of StateData. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N18DynParamRegisterer25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE">
+<span id="_CPPv3N18DynParamRegisterer25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE"></span><span id="_CPPv2N18DynParamRegisterer25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE"></span><span id="DynParamRegisterer::registerSharedNoiseSource__std::vector:std::pair:StateDataCR.s::"></span><span class="target" id="class_dyn_param_registerer_1ade780fbc87c4b1ae9b721684feb0584e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">registerSharedNoiseSource</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../../dynamics/_GeneralModuleFiles/stateData.html#_CPPv49StateData" title="StateData"><span class="n"><span class="pre">StateData</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">in</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N18DynParamRegisterer25registerSharedNoiseSourceENSt6vectorINSt4pairIRK9StateData6size_tEEEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Used when more than one state have dynamics perturbed by the same noise process.</p>
+<p>For example, consider the following SDE:</p>
+<p><div class="math notranslate nohighlight">
+\[  dx_0 = f_0(t,x)\,dt + g_{00}(t,x)\,dW_0 + g_{01}(t,x)\,dW_1
+\]</div>
+<div class="math notranslate nohighlight">
+\[  dx_1 = f_1(t,x)\,dt + g_{11}(t,x)\,dW_1
+\]</div>
+</p>
+<p>In this case, state ‘x_0’ is affected by 2 sources of noise and ‘x_1’ by 1 source of noise. However, the source ‘W_1’ is shared between ‘x_0’ and ‘x_1’.</p>
+<p>This function is called like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dynParamManager</span><span class="o">.</span><span class="n">registerSharedNoiseSource</span><span class="p">({</span>
+    <span class="p">{</span><span class="n">myStateX0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">myStateX1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>which means that the 2nd noise source of the <code class="docutils literal notranslate"><span class="pre">StateData</span></code> ‘myStateX0’ and the first noise source of the <code class="docutils literal notranslate"><span class="pre">StateData</span></code> ‘myStateX1’ actually correspond to the same noise process.</p>
+<p>NOTE: Some stochastic integrators do not support sharing noise sources. In this case, this method should raise <code class="docutils literal notranslate"><span class="pre">std::logic_error</span></code>. </p>
 </dd></dl>
 
 </div>

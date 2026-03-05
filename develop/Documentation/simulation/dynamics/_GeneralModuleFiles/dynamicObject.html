@@ -21,6 +21,7 @@
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=3cd7d658"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -84,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../gravityEffector/index.html">gravityEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyMotor/index.html">hingedRigidBodyMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTranslationalBodies/index.html">linearTranslationalBodies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoiseStateEffector/index.html">meanRevertingNoiseStateEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../msmForceTorque/index.html">msmForceTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedMotion/index.html">prescribedMotion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reactionWheels/index.html">reactionWheels</a></li>
@@ -202,7 +204,24 @@ momentum calculations. <a class="reference internal" href="#dynamicobject"><span
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N13DynamicObject17equationsOfMotionEdd">
 <span id="_CPPv3N13DynamicObject17equationsOfMotionEdd"></span><span id="_CPPv2N13DynamicObject17equationsOfMotionEdd"></span><span id="DynamicObject::equationsOfMotion__double.double"></span><span class="target" id="class_dynamic_object_1ac944c5aa18ddcbd5b074fb4868e966b8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equationsOfMotion</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeStep</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N13DynamicObject17equationsOfMotionEdd" title="Link to this definition"></a><br /></dt>
-<dd><p>Computes F = Xdot(X,t) </p>
+<dd><p>Computes the time derivative of the states:</p>
+<p><div class="math notranslate nohighlight">
+\[    dx = f(t,x)\,dt
+\]</div>
+</p>
+<p><code class="docutils literal notranslate"><a class="reference internal" href="#class_dynamic_object_1ac944c5aa18ddcbd5b074fb4868e966b8"><span class="std std-ref"><span class="pre">equationsOfMotion</span></span></a></code> computes <span class="math notranslate nohighlight">\(f(t,x)\)</span> in the equation above. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13DynamicObject26equationsOfMotionDiffusionEdd">
+<span id="_CPPv3N13DynamicObject26equationsOfMotionDiffusionEdd"></span><span id="_CPPv2N13DynamicObject26equationsOfMotionDiffusionEdd"></span><span id="DynamicObject::equationsOfMotionDiffusion__double.double"></span><span class="target" id="class_dynamic_object_1aee8a4e36622f214abeaf232fca176c3f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equationsOfMotionDiffusion</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeStep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13DynamicObject26equationsOfMotionDiffusionEdd" title="Link to this definition"></a><br /></dt>
+<dd><p>Computes the diffusion of the states:</p>
+<p><div class="math notranslate nohighlight">
+\[    dx = f(t,x)\,dt + g_0(t,x)\,dW_0 + g_1(t,x)\,dW_1 + \cdots + g_{n-1}(t,x)\,dW_{n-1}
+\]</div>
+</p>
+<p><code class="docutils literal notranslate"><a class="reference internal" href="#class_dynamic_object_1aee8a4e36622f214abeaf232fca176c3f"><span class="std std-ref"><span class="pre">equationsOfMotionDiffusion</span></span></a></code> is equivalent to evaluating <span class="math notranslate nohighlight">\(g_0(t,x), g_1(t,x), \ldots, g_{n-1}(t,x)\)</span> in the equation above.</p>
+<p>Note that not all <code class="docutils literal notranslate"><span class="pre">DynamicObjects</span></code> may support this functionality. </p>
 </dd></dl>
 
 <dl class="cpp function">

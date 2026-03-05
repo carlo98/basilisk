@@ -21,6 +21,7 @@
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=3cd7d658"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -73,6 +74,7 @@
 <li class="toctree-l4 current"><a class="reference internal" href="index.html">_GeneralModuleFiles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cmdForceInertialToForceAtSite/index.html">cmdForceInertialToForceAtSite</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTimeInvariantSystem/index.html">linearTimeInvariantSystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoise/index.html">meanRevertingNoise</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrOnTimeToForce/index.html">thrOnTimeToForce</a></li>
 </ul>
 </li>
@@ -491,6 +493,12 @@
 <span id="_CPPv3N7MJScene22AddModelToDynamicsTaskEP8SysModel7int32_t"></span><span id="_CPPv2N7MJScene22AddModelToDynamicsTaskEP8SysModel7int32_t"></span><span id="MJScene::AddModelToDynamicsTask__SysModelP.int32_t"></span><span class="target" id="class_m_j_scene_1a67659da6c3b41e343e420ca17e55ddf2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AddModelToDynamicsTask</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../../architecture/_GeneralModuleFiles/sys_model.html#_CPPv48SysModel" title="SysModel"><span class="n"><span class="pre">SysModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">priority</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">-</span></span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7MJScene22AddModelToDynamicsTaskEP8SysModel7int32_t" title="Link to this definition"></a><br /></dt>
 <dd><p>Adds a model to the dynamics task. </p>
 <p>The dynamics task of this dynamical object is called once per integrator sub-step (so, it will be called 4 times if using the RK4 integrator, for example). Models in the dynamics task typically compute and apply forces and torques on the system that depend on the simulation time or the state of the multi-body.</p>
+<p>Models in this task should contribute to computing <code class="docutils literal notranslate"><span class="pre">f</span></code> in:</p>
+<p><div class="math notranslate nohighlight">
+\[    dx = f(t,x)\,dt
+\]</div>
+</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">x</span></code> represents the state of this dynamic object.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><code class="docutils literal notranslate"><span class="pre">SysModel</span></code> added to the dynamics task should be memoryless. That is, any output message computed should depend strictly on input messages and the current time/states. It should save values internally with the expectation of using them in further calls to <code class="docutils literal notranslate"><a class="reference internal" href="#class_m_j_scene_1a1bc8e71ba20bcfe2104059611648edc0"><span class="std std-ref"><span class="pre">UpdateState</span></span></a></code>. The reason for this is that <code class="docutils literal notranslate"><a class="reference internal" href="#class_m_j_scene_1a1bc8e71ba20bcfe2104059611648edc0"><span class="std std-ref"><span class="pre">UpdateState</span></span></a></code> may be called at arbitrary simulation times, and not necessarily in order or with consistent time steps.</p>
@@ -506,6 +514,19 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7MJScene31AddModelToDiffusionDynamicsTaskEP8SysModel7int32_t">
+<span id="_CPPv3N7MJScene31AddModelToDiffusionDynamicsTaskEP8SysModel7int32_t"></span><span id="_CPPv2N7MJScene31AddModelToDiffusionDynamicsTaskEP8SysModel7int32_t"></span><span id="MJScene::AddModelToDiffusionDynamicsTask__SysModelP.int32_t"></span><span class="target" id="class_m_j_scene_1ae291b24a57c3c628aa61a0d75fbc23ca"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AddModelToDiffusionDynamicsTask</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../../architecture/_GeneralModuleFiles/sys_model.html#_CPPv48SysModel" title="SysModel"><span class="n"><span class="pre">SysModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">priority</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">-</span></span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7MJScene31AddModelToDiffusionDynamicsTaskEP8SysModel7int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Adds a model to the diffusion dynamics task. </p>
+<p>This task and function are only relevant when the dynamics of the system are stochastic.</p>
+<p>Similar to <code class="docutils literal notranslate"><a class="reference internal" href="#class_m_j_scene_1a67659da6c3b41e343e420ca17e55ddf2"><span class="std std-ref"><span class="pre">AddModelToDynamicsTask</span></span></a></code>, except that models in this task contribute to computing <code class="docutils literal notranslate"><span class="pre">g</span></code> in:</p>
+<p><div class="math notranslate nohighlight">
+\[    dx = f(t,x)\,dt + g(t,x)\,dW
+\]</div>
+</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the state of the system, <code class="docutils literal notranslate"><span class="pre">f</span></code> represents the drift term of the dynamics (classic time derivative), and <code class="docutils literal notranslate"><span class="pre">g</span></code> is the diffusion term of the dynamics (which evaluates the impact of the random ‘noise’ <code class="docutils literal notranslate"><span class="pre">W</span></code> on the dynamics). </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7MJScene30AddFwdKinematicsToDynamicsTaskE7int32_t">
 <span id="_CPPv3N7MJScene30AddFwdKinematicsToDynamicsTaskE7int32_t"></span><span id="_CPPv2N7MJScene30AddFwdKinematicsToDynamicsTaskE7int32_t"></span><span id="MJScene::AddFwdKinematicsToDynamicsTask__int32_t"></span><span class="target" id="class_m_j_scene_1add10130d931f8088bed6036c2f3d7ea8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AddFwdKinematicsToDynamicsTask</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">priority</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7MJScene30AddFwdKinematicsToDynamicsTaskE7int32_t" title="Link to this definition"></a><br /></dt>
 <dd><p>Adds forward kinematics to the dynamics task. </p>
@@ -518,6 +539,14 @@
 <dd class="field-odd"><p><strong>priority</strong> – The priority of the forward kinematics in the task list. </p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7MJScene39AddFwdKinematicsToDiffusionDynamicsTaskE7int32_t">
+<span id="_CPPv3N7MJScene39AddFwdKinematicsToDiffusionDynamicsTaskE7int32_t"></span><span id="_CPPv2N7MJScene39AddFwdKinematicsToDiffusionDynamicsTaskE7int32_t"></span><span id="MJScene::AddFwdKinematicsToDiffusionDynamicsTask__int32_t"></span><span class="target" id="class_m_j_scene_1af89fba5935120a5486ffc0bea19b34dd"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AddFwdKinematicsToDiffusionDynamicsTask</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">priority</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7MJScene39AddFwdKinematicsToDiffusionDynamicsTaskE7int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Adds forward kinematics to the diffusion dynamics task. </p>
+<p>See <code class="docutils literal notranslate"><a class="reference internal" href="#class_m_j_scene_1ae291b24a57c3c628aa61a0d75fbc23ca"><span class="std std-ref"><span class="pre">AddModelToDiffusionDynamicsTask</span></span></a></code> and <code class="docutils literal notranslate"><a class="reference internal" href="#class_m_j_scene_1add10130d931f8088bed6036c2f3d7ea8"><span class="std std-ref"><span class="pre">AddFwdKinematicsToDynamicsTask</span></span></a></code>.</p>
+<p>By default, the diffusion dynamics task has no forward kinematics model, so one must be added if the diffusion term depends on the forward kinematics of the multibody. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -559,6 +588,12 @@
 <span id="_CPPv3N7MJScene17equationsOfMotionEdd"></span><span id="_CPPv2N7MJScene17equationsOfMotionEdd"></span><span id="MJScene::equationsOfMotion__double.double"></span><span class="target" id="class_m_j_scene_1adb11f4bbc43ef81cb3f15f63a7be5a52"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equationsOfMotion</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeStep</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7MJScene17equationsOfMotionEdd" title="Link to this definition"></a><br /></dt>
 <dd><p>Computes the equations of motion for the system. </p>
 <p>This evaluates the dynamics task for the given time, which should update the control values of actuators, the positions of constrained joints… These information is translated, through MuJoCo, into first derivatives of the joint states and the mass of bodies.</p>
+<p>Computes <code class="docutils literal notranslate"><span class="pre">f</span></code> in:</p>
+<p><div class="math notranslate nohighlight">
+\[    dx = f(t,x)\,dt
+\]</div>
+</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">x</span></code> represents the current state of the dynamics.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -567,6 +602,19 @@
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7MJScene26equationsOfMotionDiffusionEdd">
+<span id="_CPPv3N7MJScene26equationsOfMotionDiffusionEdd"></span><span id="_CPPv2N7MJScene26equationsOfMotionDiffusionEdd"></span><span id="MJScene::equationsOfMotionDiffusion__double.double"></span><span class="target" id="class_m_j_scene_1a73ddb3d50dd5ab8a0fa1bed58631f75a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equationsOfMotionDiffusion</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeStep</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7MJScene26equationsOfMotionDiffusionEdd" title="Link to this definition"></a><br /></dt>
+<dd><p>Computes the diffusion of the dynamics of the system. </p>
+<p>Only relevant for systems with stochastic dynamics.</p>
+<p>Computes <code class="docutils literal notranslate"><span class="pre">g</span></code> in:</p>
+<p><div class="math notranslate nohighlight">
+\[    dx = f(t,x)\,dt + g(t,x)\,dW
+\]</div>
+</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">x</span></code> represents the current state of the dynamics. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -843,6 +891,12 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7MJScene12dynamicsTaskE">
 <span id="_CPPv3N7MJScene12dynamicsTaskE"></span><span id="_CPPv2N7MJScene12dynamicsTaskE"></span><span id="MJScene::dynamicsTask__SysModelTask"></span><span class="target" id="class_m_j_scene_1aeca977748cfa74540bb4e36cd95532c3"></span><a class="reference internal" href="../../../architecture/_GeneralModuleFiles/sys_model_task.html#_CPPv412SysModelTask" title="SysModelTask"><span class="n"><span class="pre">SysModelTask</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dynamicsTask</span></span></span><a class="headerlink" href="#_CPPv4N7MJScene12dynamicsTaskE" title="Link to this definition"></a><br /></dt>
 <dd><p>Task managing models involved in the dynamics of this scene. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7MJScene21dynamicsDiffusionTaskE">
+<span id="_CPPv3N7MJScene21dynamicsDiffusionTaskE"></span><span id="_CPPv2N7MJScene21dynamicsDiffusionTaskE"></span><span id="MJScene::dynamicsDiffusionTask__SysModelTask"></span><span class="target" id="class_m_j_scene_1a73102798005559542559ed3da01a62ef"></span><a class="reference internal" href="../../../architecture/_GeneralModuleFiles/sys_model_task.html#_CPPv412SysModelTask" title="SysModelTask"><span class="n"><span class="pre">SysModelTask</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dynamicsDiffusionTask</span></span></span><a class="headerlink" href="#_CPPv4N7MJScene21dynamicsDiffusionTaskE" title="Link to this definition"></a><br /></dt>
+<dd><p>Task managing models involved in the diffusion stochastic dynamics of this scene. </p>
 </dd></dl>
 
 <dl class="cpp var">

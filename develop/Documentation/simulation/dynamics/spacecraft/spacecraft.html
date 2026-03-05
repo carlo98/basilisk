@@ -85,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../gravityEffector/index.html">gravityEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyMotor/index.html">hingedRigidBodyMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTranslationalBodies/index.html">linearTranslationalBodies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoiseStateEffector/index.html">meanRevertingNoiseStateEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../msmForceTorque/index.html">msmForceTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedMotion/index.html">prescribedMotion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reactionWheels/index.html">reactionWheels</a></li>
@@ -385,6 +386,12 @@ input message of type <a class="reference internal" href="../../../architecture/
 <span id="_CPPv3N10Spacecraft17equationsOfMotionEdd"></span><span id="_CPPv2N10Spacecraft17equationsOfMotionEdd"></span><span id="Spacecraft::equationsOfMotion__double.double"></span><span class="target" id="class_spacecraft_1a92a08390765d30462807161656a9785b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equationsOfMotion</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">integTimeSeconds</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeStep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10Spacecraft17equationsOfMotionEdd" title="Link to this definition"></a><br /></dt>
 <dd><p>This method computes the equations of motion for the whole system. </p>
 <p>This method is solving Xdot = F(X,t) for the system. The hub needs to calculate its derivatives, along with all of the stateEffectors. The hub also has gravity and dynamicEffectors acting on it and these relationships are controlled in this method. At the end of this method all of the states will have their corresponding state derivatives set in the dynParam Manager thus solving for Xdot </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N10Spacecraft26equationsOfMotionDiffusionEdd">
+<span id="_CPPv3N10Spacecraft26equationsOfMotionDiffusionEdd"></span><span id="_CPPv2N10Spacecraft26equationsOfMotionDiffusionEdd"></span><span id="Spacecraft::equationsOfMotionDiffusion__double.double"></span><span class="target" id="class_spacecraft_1abefda13391309b9860e23503a28956c9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equationsOfMotionDiffusion</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">integTimeSeconds</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeStep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10Spacecraft26equationsOfMotionDiffusionEdd" title="Link to this definition"></a><br /></dt>
+<dd><p>This method computes the diffusion equations of motion for the whole system. </p>
 </dd></dl>
 
 <dl class="cpp function">

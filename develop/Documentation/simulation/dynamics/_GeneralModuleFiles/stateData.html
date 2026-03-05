@@ -85,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../gravityEffector/index.html">gravityEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyMotor/index.html">hingedRigidBodyMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTranslationalBodies/index.html">linearTranslationalBodies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoiseStateEffector/index.html">meanRevertingNoiseStateEffector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../msmForceTorque/index.html">msmForceTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedMotion/index.html">prescribedMotion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reactionWheels/index.html">reactionWheels</a></li>
@@ -183,6 +184,30 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9StateData18setNumNoiseSourcesE6size_t">
+<span id="_CPPv3N9StateData18setNumNoiseSourcesE6size_t"></span><span id="_CPPv2N9StateData18setNumNoiseSourcesE6size_t"></span><span id="StateData::setNumNoiseSources__s"></span><span class="target" id="class_state_data_1a12b6eec96a902878cd4f10270a42567e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setNumNoiseSources</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">numSources</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9StateData18setNumNoiseSourcesE6size_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Sets the number of noise sources for this state.</p>
+<p>This is used for stochastic dynamics, where the evolutions of the state are driven by a set of independent noise sources:</p>
+<p><div class="math notranslate nohighlight">
+\[ dx = f(t,x)\,dt + g_0(t,x)\,dW_0 + g_1(t,x)\,dW_1 + \cdots + g_{n-1}(t,x)\,dW_{n-1}
+\]</div>
+</p>
+<p>where <span class="math notranslate nohighlight">\(dW_i\)</span> are independent Wiener processes. The number of noise sources is equal to the number of diffusion matrices that are used to drive the stochastic dynamics (n above).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>numSources</strong> – The number of noise sources </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK9StateData18getNumNoiseSourcesEv">
+<span id="_CPPv3NK9StateData18getNumNoiseSourcesEv"></span><span id="_CPPv2NK9StateData18getNumNoiseSourcesEv"></span><span id="StateData::getNumNoiseSourcesC"></span><span class="target" id="class_state_data_1a09abcf526356ab6b35d3bf0dec8bb4f7"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNumNoiseSources</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK9StateData18getNumNoiseSourcesEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get how many independent sources of noise drive the dynamics of this state.</p>
+<p>Any number greater than zero indicates that this state is driven by a stochastic differential equation. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9StateData8setStateERKN5Eigen8MatrixXdE">
 <span id="_CPPv3N9StateData8setStateERKN5Eigen8MatrixXdE"></span><span id="_CPPv2N9StateData8setStateERKN5Eigen8MatrixXdE"></span><span id="StateData::setState__Eigen::MatrixXdCR"></span><span class="target" id="class_state_data_1ac15afb78420f106083b2f1bfe45db13e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setState</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../../mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MatrixXd</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">newState</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9StateData8setStateERKN5Eigen8MatrixXdE" title="Link to this definition"></a><br /></dt>
 <dd><p>Updates the value of the state </p>
@@ -195,6 +220,26 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9StateData12setDiffusionERKN5Eigen8MatrixXdE6size_t">
+<span id="_CPPv3N9StateData12setDiffusionERKN5Eigen8MatrixXdE6size_t"></span><span id="_CPPv2N9StateData12setDiffusionERKN5Eigen8MatrixXdE6size_t"></span><span id="StateData::setDiffusion__Eigen::MatrixXdCR.s"></span><span class="target" id="class_state_data_1a28bb0a634130d9e21ce9d525f7ba4976"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDiffusion</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../../mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MatrixXd</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">newDiffusion</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9StateData12setDiffusionERKN5Eigen8MatrixXdE6size_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Updates the diffusion of the value of the state.</p>
+<p>This is used for stochastic dynamics, where the evolutions of the state are driven by a set of independent noise sources:</p>
+<p><div class="math notranslate nohighlight">
+\[ dx = f(t,x)\,dt + g_0(t,x)\,dW_0 + g_1(t,x)\,dW_1 + \cdots + g_{n-1}(t,x)\,dW_{n-1}
+\]</div>
+</p>
+<p>where <span class="math notranslate nohighlight">\(dW_i\)</span> are independent Wiener processes. The diffusion matrices are used to drive the stochastic dynamics ( <span class="math notranslate nohighlight">\(g_i\)</span> above).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>newDiffusion</strong> – The new diffusion matrix </p></li>
+<li><p><strong>index</strong> – The index of the diffusion matrix to update. This must be less than the number of noise sources. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK9StateData8getStateEv">
 <span id="_CPPv3NK9StateData8getStateEv"></span><span id="_CPPv2NK9StateData8getStateEv"></span><span id="StateData::getStateC"></span><span class="target" id="class_state_data_1af81773dcf8371149e6ad3389f7a4e866"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="../../mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MatrixXd</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getState</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK9StateData8getStateEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Retrieves a copy of the current state </p>
@@ -204,6 +249,17 @@
 <dt class="sig sig-object cpp" id="_CPPv4NK9StateData13getStateDerivEv">
 <span id="_CPPv3NK9StateData13getStateDerivEv"></span><span id="_CPPv2NK9StateData13getStateDerivEv"></span><span id="StateData::getStateDerivC"></span><span class="target" id="class_state_data_1ad521b1dc16405e74d28a66f4916629c5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="../../mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MatrixXd</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getStateDeriv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK9StateData13getStateDerivEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Retrieves a copy of the current state derivative </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK9StateData17getStateDiffusionE6size_t">
+<span id="_CPPv3NK9StateData17getStateDiffusionE6size_t"></span><span id="_CPPv2NK9StateData17getStateDiffusionE6size_t"></span><span id="StateData::getStateDiffusion__sC"></span><span class="target" id="class_state_data_1a4b2cc37651c414c4e60bef6e5a77eca6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="../../mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MatrixXd</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getStateDiffusion</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK9StateData17getStateDiffusionE6size_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Retrieves a copy of the current state diffusion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The index of the diffusion matrix to retrieve. This must be less than the number of noise sources. </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
@@ -249,9 +305,22 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9StateData14propagateStateEd">
-<span id="_CPPv3N9StateData14propagateStateEd"></span><span id="_CPPv2N9StateData14propagateStateEd"></span><span id="StateData::propagateState__double"></span><span class="target" id="class_state_data_1ac01b120b7ce9747617351ecfcbbcd26f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateState</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9StateData14propagateStateEd" title="Link to this definition"></a><br /></dt>
-<dd><p>Propagates the state in time with the stored derivative </p>
+<dt class="sig sig-object cpp" id="_CPPv4N9StateData14propagateStateEdNSt6vectorIdEE">
+<span id="_CPPv3N9StateData14propagateStateEdNSt6vectorIdEE"></span><span id="_CPPv2N9StateData14propagateStateEdNSt6vectorIdEE"></span><span id="StateData::propagateState__double.std::vector:double:"></span><span class="target" id="class_state_data_1a74500e769ad53b0376650463ad8c22b1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateState</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pseudoStep</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9StateData14propagateStateEdNSt6vectorIdEE" title="Link to this definition"></a><br /></dt>
+<dd><p>Propagates the state over a time step. </p>
+<p>This method integrates the position state using the state derivative over the given time step::</p>
+<p><div class="math notranslate nohighlight">
+\[  x \mathrel{+}= f(t,x)\,h + g_0(t,x)\,\mathrm{pseudoStep}[0] + g_1(t,x)\,\mathrm{pseudoStep}[1] + \cdots
+\]</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h</strong> – The time step for propagation. </p></li>
+<li><p><strong>pseudoStep</strong> – For states driven by stochastic dynamics, this represents the random pseudotimestep. The length of this input must match the number of noise sources of this state (<code class="docutils literal notranslate"><a class="reference internal" href="#class_state_data_1a09abcf526356ab6b35d3bf0dec8bb4f7"><span class="std std-ref"><span class="pre">getNumNoiseSources()</span></span></a></code>) </p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -267,6 +336,12 @@
 <dt class="sig sig-object cpp" id="_CPPv4N9StateData10stateDerivE">
 <span id="_CPPv3N9StateData10stateDerivE"></span><span id="_CPPv2N9StateData10stateDerivE"></span><span id="StateData::stateDeriv__Eigen::MatrixXd"></span><span class="target" id="class_state_data_1a2761a7851f3709090d77481ab11562ce"></span><a class="reference internal" href="../../mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MatrixXd</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stateDeriv</span></span></span><a class="headerlink" href="#_CPPv4N9StateData10stateDerivE" title="Link to this definition"></a><br /></dt>
 <dd><p>[-] State derivative value storage </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9StateData14stateDiffusionE">
+<span id="_CPPv3N9StateData14stateDiffusionE"></span><span id="_CPPv2N9StateData14stateDiffusionE"></span><span id="StateData::stateDiffusion__std::vector:Eigen::MatrixXd:"></span><span class="target" id="class_state_data_1a334326733930b90af961379079b5c001"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../mujocoDynamics/_GeneralModuleFiles/MJSpec.html#_CPPv45Eigen" title="Eigen"><span class="n"><span class="pre">Eigen</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MatrixXd</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stateDiffusion</span></span></span><a class="headerlink" href="#_CPPv4N9StateData14stateDiffusionE" title="Link to this definition"></a><br /></dt>
+<dd><p>[-] State diffusion value storage </p>
 </dd></dl>
 
 <dl class="cpp var">

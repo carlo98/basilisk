@@ -27,9 +27,11 @@ _GeneralModuleFiles
    stateData
    stateEffector
    stateVecIntegrator
+   stateVecStochasticIntegrator
    svIntegratorAdaptiveRungeKutta
    svIntegratorRK4
    svIntegratorRungeKutta
+   svIntegratorWeakStochasticRungeKutta
 .. toctree::
    :maxdepth: 1
    :caption: Directories:

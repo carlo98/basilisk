@@ -21,6 +21,7 @@
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=3cd7d658"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -73,6 +74,7 @@
 <li class="toctree-l4 current"><a class="reference internal" href="index.html">_GeneralModuleFiles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cmdForceInertialToForceAtSite/index.html">cmdForceInertialToForceAtSite</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../linearTimeInvariantSystem/index.html">linearTimeInvariantSystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../meanRevertingNoise/index.html">meanRevertingNoise</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrOnTimeToForce/index.html">thrOnTimeToForce</a></li>
 </ul>
 </li>
@@ -178,13 +180,20 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N15MJQPosStateData14propagateStateEd">
-<span id="_CPPv3N15MJQPosStateData14propagateStateEd"></span><span id="_CPPv2N15MJQPosStateData14propagateStateEd"></span><span id="MJQPosStateData::propagateState__double"></span><span class="target" id="class_m_j_q_pos_state_data_1a2fb2e2f2ff967842824bd3c7de6c280d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateState</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dt</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N15MJQPosStateData14propagateStateEd" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N15MJQPosStateData14propagateStateEdNSt6vectorIdEE">
+<span id="_CPPv3N15MJQPosStateData14propagateStateEdNSt6vectorIdEE"></span><span id="_CPPv2N15MJQPosStateData14propagateStateEdNSt6vectorIdEE"></span><span id="MJQPosStateData::propagateState__double.std::vector:double:"></span><span class="target" id="class_m_j_q_pos_state_data_1af7adc9f21c1ef7a5ff7a4cc542f79e3f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">propagateState</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pseudoStep</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N15MJQPosStateData14propagateStateEdNSt6vectorIdEE" title="Link to this definition"></a><br /></dt>
 <dd><p>Propagates the state over a time step. </p>
-<p>This method integrates the position state using the state derivative over the given time step.</p>
+<p>This method integrates the position state using the state derivative over the given time step::</p>
+<p><div class="math notranslate nohighlight">
+\[  x \mathrel{+}= f(t,x)\,h + g_0(t,x)\,\mathrm{pseudoStep}[0] + g_1(t,x)\,\mathrm{pseudoStep}[1] + \cdots
+\]</div>
+</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dt</strong> – The time step for propagation. </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h</strong> – The time step for propagation. </p></li>
+<li><p><strong>pseudoStep</strong> – For states driven by stochastic dynamics, this represents the random pseudotimestep. The length of this input must match the number of noise sources of this state (<code class="docutils literal notranslate"><span class="pre">getNumNoiseSources()</span></code>) </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
