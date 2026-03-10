@@ -117,6 +117,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -186,6 +187,231 @@
 
     <span class="n">dragForce</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dragCoeff</span> <span class="o">*</span> <span class="n">dens</span> <span class="o">*</span> <span class="n">area</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">dragDir_B</span>
     <span class="k">return</span> <span class="n">dragForce</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cannonballDragCompRel</span><span class="p">(</span><span class="n">dragCoeff</span><span class="p">,</span> <span class="n">dens</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">att</span><span class="p">,</span> <span class="n">planetOmega</span><span class="p">):</span>
+    <span class="n">vAtmo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">planetOmega</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+    <span class="n">vRel</span> <span class="o">=</span> <span class="n">vel</span> <span class="o">-</span> <span class="n">vAtmo</span>
+    <span class="n">vMag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vRel</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">vMag</span> <span class="o">&lt;=</span> <span class="mf">1e-12</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">vRel</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">dragDir_N</span> <span class="o">=</span> <span class="o">-</span><span class="n">vRel</span> <span class="o">/</span> <span class="n">vMag</span>
+    <span class="n">dcm_BN</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">MRP2C</span><span class="p">(</span><span class="n">att</span><span class="p">)</span>
+    <span class="n">dragDir_B</span> <span class="o">=</span> <span class="n">dcm_BN</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dragDir_N</span><span class="p">)</span>
+    <span class="n">dragForce</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dragCoeff</span> <span class="o">*</span> <span class="n">dens</span> <span class="o">*</span> <span class="n">area</span> <span class="o">*</span> <span class="n">vMag</span><span class="o">**</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">dragDir_B</span>
+    <span class="k">return</span> <span class="n">dragForce</span><span class="p">,</span> <span class="n">vRel</span><span class="p">,</span> <span class="n">dragDir_B</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_basic_drag_sim</span><span class="p">(</span><span class="n">useAtmosphereRelativeVelocity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">planetOmega</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">rN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sigmaBN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">1.0e-12</span><span class="p">,</span>
+                         <span class="n">dragCoeff</span><span class="o">=</span><span class="mf">2.2</span><span class="p">,</span> <span class="n">projArea</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+    <span class="n">simTaskName</span> <span class="o">=</span> <span class="s2">&quot;simTask&quot;</span>
+    <span class="n">simProcessName</span> <span class="o">=</span> <span class="s2">&quot;simProcess&quot;</span>
+
+    <span class="n">scSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
+    <span class="n">dynProcess</span> <span class="o">=</span> <span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewProcess</span><span class="p">(</span><span class="n">simProcessName</span><span class="p">)</span>
+    <span class="n">simulationTimeStep</span> <span class="o">=</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">dynProcess</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">simulationTimeStep</span><span class="p">))</span>
+
+    <span class="n">scObject</span> <span class="o">=</span> <span class="n">spacecraft</span><span class="o">.</span><span class="n">Spacecraft</span><span class="p">()</span>
+    <span class="n">scObject</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;spacecraftBody&quot;</span>
+
+    <span class="n">dragEff</span> <span class="o">=</span> <span class="n">dragDynamicEffector</span><span class="o">.</span><span class="n">DragDynamicEffector</span><span class="p">()</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;DragEff&quot;</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">projectedArea</span> <span class="o">=</span> <span class="n">projArea</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">dragCoeff</span> <span class="o">=</span> <span class="n">dragCoeff</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">comOffset</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">setUseAtmosphereRelativeVelocity</span><span class="p">(</span><span class="n">useAtmosphereRelativeVelocity</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">planetOmega</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dragEff</span><span class="o">.</span><span class="n">setPlanetOmega_N</span><span class="p">(</span><span class="n">planetOmega</span><span class="p">)</span>
+
+    <span class="n">newAtmo</span> <span class="o">=</span> <span class="n">exponentialAtmosphere</span><span class="o">.</span><span class="n">ExponentialAtmosphere</span><span class="p">()</span>
+    <span class="n">newAtmo</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;ExpAtmo&quot;</span>
+    <span class="n">newAtmo</span><span class="o">.</span><span class="n">baseDensity</span> <span class="o">=</span> <span class="mf">1.217</span>
+    <span class="n">newAtmo</span><span class="o">.</span><span class="n">scaleHeight</span> <span class="o">=</span> <span class="mf">8500.0</span>
+    <span class="n">newAtmo</span><span class="o">.</span><span class="n">planetRadius</span> <span class="o">=</span> <span class="mf">6371.0</span> <span class="o">*</span> <span class="mf">1000.0</span>
+    <span class="n">newAtmo</span><span class="o">.</span><span class="n">addSpacecraftToModel</span><span class="p">(</span><span class="n">scObject</span><span class="o">.</span><span class="n">scStateOutMsg</span><span class="p">)</span>
+
+    <span class="n">scObject</span><span class="o">.</span><span class="n">addDynamicEffector</span><span class="p">(</span><span class="n">dragEff</span><span class="p">)</span>
+
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">scObject</span><span class="p">)</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">newAtmo</span><span class="p">)</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">dragEff</span><span class="p">)</span>
+
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">atmoDensInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">newAtmo</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">rN</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7000e3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">vN</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">vN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">7500.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">sigmaBN</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sigmaBN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+    <span class="n">scObject</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">r_CN_NInit</span> <span class="o">=</span> <span class="n">rN</span>
+    <span class="n">scObject</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">v_CN_NInit</span> <span class="o">=</span> <span class="n">vN</span>
+    <span class="n">scObject</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">sigma_BNInit</span> <span class="o">=</span> <span class="n">sigmaBN</span>
+
+    <span class="n">dataLog</span> <span class="o">=</span> <span class="n">scObject</span><span class="o">.</span><span class="n">scStateOutMsg</span><span class="o">.</span><span class="n">recorder</span><span class="p">()</span>
+    <span class="n">atmoLog</span> <span class="o">=</span> <span class="n">newAtmo</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">recorder</span><span class="p">()</span>
+    <span class="n">dragLog</span> <span class="o">=</span> <span class="n">dragEff</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="s2">&quot;forceExternal_B&quot;</span><span class="p">)</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">dataLog</span><span class="p">)</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">atmoLog</span><span class="p">)</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">dragLog</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">scSim</span><span class="p">,</span> <span class="n">scObject</span><span class="p">,</span> <span class="n">dragEff</span><span class="p">,</span> <span class="n">dataLog</span><span class="p">,</span> <span class="n">atmoLog</span><span class="p">,</span> <span class="n">dragLog</span>
+
+
+<div class="viewcode-block" id="test_dragAtmosphereRelativeVelocityDisabled">
+<a class="viewcode-back" href="../Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityDisabled">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dragAtmosphereRelativeVelocityDisabled</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify nominal drag behavior is unchanged when useAtmosphereRelativeVelocity is False.&quot;&quot;&quot;</span>
+    <span class="n">rN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7000e3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="n">vN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">7600.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="n">sigmaBN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+    <span class="n">scSim</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dragEff</span><span class="p">,</span> <span class="n">dataLog</span><span class="p">,</span> <span class="n">atmoLog</span><span class="p">,</span> <span class="n">dragLog</span> <span class="o">=</span> <span class="n">setup_basic_drag_sim</span><span class="p">(</span>
+        <span class="n">useAtmosphereRelativeVelocity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">planetOmega</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.2921159e-5</span><span class="p">]),</span>
+        <span class="n">rN</span><span class="o">=</span><span class="n">rN</span><span class="p">,</span>
+        <span class="n">vN</span><span class="o">=</span><span class="n">vN</span><span class="p">,</span>
+        <span class="n">sigmaBN</span><span class="o">=</span><span class="n">sigmaBN</span>
+    <span class="p">)</span>
+
+    <span class="n">scSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span>
+
+    <span class="n">posData</span> <span class="o">=</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">r_BN_N</span>
+    <span class="n">velData</span> <span class="o">=</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">v_BN_N</span>
+    <span class="n">attData</span> <span class="o">=</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">sigma_BN</span>
+    <span class="n">densData</span> <span class="o">=</span> <span class="n">atmoLog</span><span class="o">.</span><span class="n">neutralDensity</span>
+    <span class="n">dragForce</span> <span class="o">=</span> <span class="n">dragLog</span><span class="o">.</span><span class="n">forceExternal_B</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="mf">1e-13</span>
+    <span class="n">refForce</span> <span class="o">=</span> <span class="n">cannonballDragComp</span><span class="p">(</span>
+        <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">dragCoeff</span><span class="p">,</span>
+        <span class="n">densData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">projectedArea</span><span class="p">,</span>
+        <span class="n">velData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">attData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">unitTestSupport</span><span class="o">.</span><span class="n">isArrayEqual</span><span class="p">(</span><span class="n">dragForce</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">refForce</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="test_dragAtmosphereRelativeVelocityEnabled">
+<a class="viewcode-back" href="../Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityEnabled">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dragAtmosphereRelativeVelocityEnabled</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify drag uses v_rel = v_sc - omega x r when enabled.&quot;&quot;&quot;</span>
+    <span class="n">rN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7000e3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="n">vN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">7600.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="n">sigmaBN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="n">planetOmega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.2921159e-5</span><span class="p">])</span>
+
+    <span class="n">scSim</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dragEff</span><span class="p">,</span> <span class="n">dataLog</span><span class="p">,</span> <span class="n">atmoLog</span><span class="p">,</span> <span class="n">dragLog</span> <span class="o">=</span> <span class="n">setup_basic_drag_sim</span><span class="p">(</span>
+        <span class="n">useAtmosphereRelativeVelocity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">planetOmega</span><span class="o">=</span><span class="n">planetOmega</span><span class="p">,</span>
+        <span class="n">rN</span><span class="o">=</span><span class="n">rN</span><span class="p">,</span>
+        <span class="n">vN</span><span class="o">=</span><span class="n">vN</span><span class="p">,</span>
+        <span class="n">sigmaBN</span><span class="o">=</span><span class="n">sigmaBN</span>
+    <span class="p">)</span>
+
+    <span class="n">scSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span>
+
+    <span class="n">posData</span> <span class="o">=</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">r_BN_N</span>
+    <span class="n">velData</span> <span class="o">=</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">v_BN_N</span>
+    <span class="n">attData</span> <span class="o">=</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">sigma_BN</span>
+    <span class="n">densData</span> <span class="o">=</span> <span class="n">atmoLog</span><span class="o">.</span><span class="n">neutralDensity</span>
+    <span class="n">dragForce</span> <span class="o">=</span> <span class="n">dragLog</span><span class="o">.</span><span class="n">forceExternal_B</span>
+
+    <span class="n">refForce</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cannonballDragCompRel</span><span class="p">(</span>
+        <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">dragCoeff</span><span class="p">,</span>
+        <span class="n">densData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">projectedArea</span><span class="p">,</span>
+        <span class="n">velData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">posData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">attData</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">planetOmega</span>
+    <span class="p">)</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="mf">1e-13</span>
+    <span class="k">assert</span> <span class="n">unitTestSupport</span><span class="o">.</span><span class="n">isArrayEqual</span><span class="p">(</span><span class="n">dragForce</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">refForce</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="test_dragAtmosphereRelativeVelocityPositionStateOptional">
+<a class="viewcode-back" href="../Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityPositionStateOptional">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dragAtmosphereRelativeVelocityPositionStateOptional</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify position state is only required when atmosphere-relative velocity is enabled.&quot;&quot;&quot;</span>
+
+    <span class="n">scSim</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">setup_basic_drag_sim</span><span class="p">(</span>
+        <span class="n">useAtmosphereRelativeVelocity</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="test_dragAtmosphereRelativeVelocityNearZero">
+<a class="viewcode-back" href="../Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityNearZero">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dragAtmosphereRelativeVelocityNearZero</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify near-zero relative velocity does not produce invalid normalization behavior.&quot;&quot;&quot;</span>
+    <span class="n">rN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7000e3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="n">planetOmega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">7.2921159e-5</span><span class="p">])</span>
+    <span class="n">vAtmo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">planetOmega</span><span class="p">,</span> <span class="n">rN</span><span class="p">)</span>
+    <span class="n">vN</span> <span class="o">=</span> <span class="n">vAtmo</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-15</span><span class="p">,</span> <span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">])</span>
+    <span class="n">sigmaBN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+    <span class="n">scSim</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dragLog</span> <span class="o">=</span> <span class="n">setup_basic_drag_sim</span><span class="p">(</span>
+        <span class="n">useAtmosphereRelativeVelocity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">planetOmega</span><span class="o">=</span><span class="n">planetOmega</span><span class="p">,</span>
+        <span class="n">rN</span><span class="o">=</span><span class="n">rN</span><span class="p">,</span>
+        <span class="n">vN</span><span class="o">=</span><span class="n">vN</span><span class="p">,</span>
+        <span class="n">sigmaBN</span><span class="o">=</span><span class="n">sigmaBN</span>
+    <span class="p">)</span>
+
+    <span class="n">scSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span>
+
+    <span class="n">dragForce</span> <span class="o">=</span> <span class="n">dragLog</span><span class="o">.</span><span class="n">forceExternal_B</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">dragForce</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dragForce</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-20</span></div>
+
+
+
+<div class="viewcode-block" id="test_dragAtmosphereRelativeVelocityResetGuardPosition">
+<a class="viewcode-back" href="../Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityResetGuardPosition">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dragAtmosphereRelativeVelocityResetGuardPosition</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify Reset emits BSK_ERROR when relative velocity is enabled without a valid position state.&quot;&quot;&quot;</span>
+    <span class="n">simTaskName</span> <span class="o">=</span> <span class="s2">&quot;simTask&quot;</span>
+    <span class="n">simProcessName</span> <span class="o">=</span> <span class="s2">&quot;simProcess&quot;</span>
+
+    <span class="n">scSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
+    <span class="n">dynProcess</span> <span class="o">=</span> <span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewProcess</span><span class="p">(</span><span class="n">simProcessName</span><span class="p">)</span>
+    <span class="n">dynProcess</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)))</span>
+
+    <span class="n">dragEff</span> <span class="o">=</span> <span class="n">dragDynamicEffector</span><span class="o">.</span><span class="n">DragDynamicEffector</span><span class="p">()</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;DragEff&quot;</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">setUseAtmosphereRelativeVelocity</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">projectedArea</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="n">dragEff</span><span class="o">.</span><span class="n">coreParams</span><span class="o">.</span><span class="n">dragCoeff</span> <span class="o">=</span> <span class="mf">2.2</span>
+
+    <span class="c1"># no spacecraft attached here on purpose, so hub position is never linked</span>
+
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">dragEff</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+        <span class="n">scSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span></div>
+
 
 
 <div class="viewcode-block" id="run">

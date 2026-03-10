@@ -3223,17 +3223,23 @@
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector18computeForceTorqueEdd">DragDynamicEffector::computeForceTorque (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector10coreParamsE">DragDynamicEffector::coreParams (C++ member)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector17densityCorrectionE">DragDynamicEffector::densityCorrection (C++ member)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector26densityCorrectionStateNameE">DragDynamicEffector::densityCorrectionStateName (C++ member)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector19DragDynamicEffectorEv">DragDynamicEffector::DragDynamicEffector (C++ function)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector10getDensityEv">DragDynamicEffector::getDensity (C++ function)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4NK19DragDynamicEffector16getPlanetOmega_NEv">DragDynamicEffector::getPlanetOmega_N (C++ function)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4NK19DragDynamicEffector32getUseAtmosphereRelativeVelocityEv">DragDynamicEffector::getUseAtmosphereRelativeVelocity (C++ function)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector11hubPositionE">DragDynamicEffector::hubPosition (C++ member)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector8hubSigmaE">DragDynamicEffector::hubSigma (C++ member)</a>
 </li>
@@ -3243,13 +3249,21 @@
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector9modelTypeE">DragDynamicEffector::modelType (C++ member)</a>
 </li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector13planetOmega_NE">DragDynamicEffector::planetOmega_N (C++ member)</a>
+</li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector10ReadInputsEv">DragDynamicEffector::ReadInputs (C++ function)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector5ResetE8uint64_t">DragDynamicEffector::Reset (C++ function)</a>
 </li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector16setPlanetOmega_NERKN5Eigen8Vector3dE">DragDynamicEffector::setPlanetOmega_N (C++ function)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector32setUseAtmosphereRelativeVelocityEb">DragDynamicEffector::setUseAtmosphereRelativeVelocity (C++ function)</a>
+</li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector13updateDragDirEv">DragDynamicEffector::updateDragDir (C++ function)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector11UpdateStateE8uint64_t">DragDynamicEffector::UpdateState (C++ function)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector29useAtmosphereRelativeVelocityE">DragDynamicEffector::useAtmosphereRelativeVelocity (C++ member)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#_CPPv4N19DragDynamicEffector3v_BE">DragDynamicEffector::v_B (C++ member)</a>
 </li>
@@ -22391,6 +22405,16 @@
 </li>
       <li><a href="Documentation/simulation/onboardDataHandling/spaceToGroundTransmitter/_UnitTest/test_spaceToGroundTransmitter.html#test_spaceToGroundTransmitter.test_downlink_with_disrupted_connection">test_downlink_with_disrupted_connection() (in module test_spaceToGroundTransmitter)</a>
 </li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityDisabled">test_dragAtmosphereRelativeVelocityDisabled() (in module test_atmoDrag)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityEnabled">test_dragAtmosphereRelativeVelocityEnabled() (in module test_atmoDrag)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityNearZero">test_dragAtmosphereRelativeVelocityNearZero() (in module test_atmoDrag)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityPositionStateOptional">test_dragAtmosphereRelativeVelocityPositionStateOptional() (in module test_atmoDrag)</a>
+</li>
+      <li><a href="Documentation/simulation/dynamics/dragEffector/_UnitTest/test_atmoDrag.html#test_atmoDrag.test_dragAtmosphereRelativeVelocityResetGuardPosition">test_dragAtmosphereRelativeVelocityResetGuardPosition() (in module test_atmoDrag)</a>
+</li>
       <li><a href="Documentation/simulation/dynamics/dualHingedRigidBodies/_UnitTest/test_dualhingedRigidBodyStateEffector.html#test_dualhingedRigidBodyStateEffector.test_dualHingedRigidBody">test_dualHingedRigidBody() (in module test_dualhingedRigidBodyStateEffector)</a>
 </li>
       <li><a href="Documentation/simulation/dynamics/dualHingedRigidBodies/_UnitTest/test_dualhingedRigidBodyStateEffector.html#test_dualhingedRigidBodyStateEffector.test_dualHingedRigidBodyMotorTorque">test_dualHingedRigidBodyMotorTorque() (in module test_dualhingedRigidBodyStateEffector)</a>
@@ -23907,6 +23931,8 @@
         <li><a href="Documentation/simulation/environment/spacecraftChargingEquilibrium/_UnitTest/test_spacecraftChargingEquilibrium.html#module-test_spacecraftChargingEquilibrium">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Documentation/simulation/environment/spacecraftLocation/_UnitTest/test_unitSpacecraftLocation.html#test_unitSpacecraftLocation.test_spacecraftLocation">test_spacecraftLocation() (in module test_unitSpacecraftLocation)</a>
 </li>
       <li>
@@ -23916,8 +23942,6 @@
         <li><a href="Documentation/fswAlgorithms/formationFlying/spacecraftPointing/_UnitTest/test_spacecraftPointing.html#module-test_spacecraftPointing">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="Documentation/fswAlgorithms/formationFlying/spacecraftPointing/_UnitTest/test_spacecraftPointing.html#test_spacecraftPointing.test_spacecraftPointing">test_spacecraftPointing() (in module test_spacecraftPointing)</a>
 </li>
       <li>
