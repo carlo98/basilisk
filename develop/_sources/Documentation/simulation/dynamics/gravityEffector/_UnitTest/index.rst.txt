@@ -9,6 +9,7 @@ _UnitTest
    :maxdepth: 1
    :caption: Files:
 
+   test_gravCoeffOps
    test_gravityDynEffector
    test_gravitySpacecraft
 .. toctree::
