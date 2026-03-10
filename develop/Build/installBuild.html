@@ -59,6 +59,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Building the Software Framework</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#one-step-configuring-and-building-the-basilisk-framework">One-Step Configuring and Building the Basilisk Framework</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#doing-incremental-builds">Doing Incremental Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#speeding-up-builds-with-sccache">Speeding Up Builds with <code class="docutils literal notranslate"><span class="pre">sccache</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-project-tests">Running Project Tests</a></li>
 </ul>
 </li>
@@ -256,6 +257,33 @@ such as Xcode projeect file on macOS, MS Visual Studio project file on Windows, 
 open the project file in your IDE and compile Basilisk there.  The initial build is a clean build and will take a
 similar amount of time to compile the messaging related files.  However, after making changes to a particular module,
 only this Basilisk module will need to be compiled and the compile times are drastically reduced.</p>
+</section>
+<section id="speeding-up-builds-with-sccache">
+<h2>Speeding Up Builds with <code class="docutils literal notranslate"><span class="pre">sccache</span></code><a class="headerlink" href="#speeding-up-builds-with-sccache" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/mozilla/sccache">sccache</a> is a compiler cache that caches individual C++ object
+files by content hash.  When source files have not changed, sccache returns the cached object instead of
+invoking the compiler, which can dramatically reduce clean-build times.</p>
+<p>Install sccache with your system package manager, for example on macOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">sccache</span>
+</pre></div>
+</div>
+<p>Then set the following environment variables before building:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">CMAKE_C_COMPILER_LAUNCHER</span><span class="o">=</span><span class="n">sccache</span>
+<span class="n">export</span> <span class="n">CMAKE_CXX_COMPILER_LAUNCHER</span><span class="o">=</span><span class="n">sccache</span>
+</pre></div>
+</div>
+<p>With these set, any build invocation (<code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">conanfile.py</span></code>, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, etc.) will
+automatically use sccache.  A warm cache reduces a full rebuild to only the linking step plus any
+files that actually changed.</p>
+<p>To inspect cache statistics after a build:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sccache</span> <span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">stats</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>sccache is also enabled automatically in CI via <code class="docutils literal notranslate"><span class="pre">CMAKE_C/CXX_COMPILER_LAUNCHER</span></code> environment
+variables set by the GitHub Actions build workflow.</p>
+</div>
 </section>
 <section id="running-project-tests">
 <h2>Running Project Tests<a class="headerlink" href="#running-project-tests" title="Link to this heading"></a></h2>
