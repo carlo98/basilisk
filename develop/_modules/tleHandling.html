@@ -141,7 +141,7 @@
 
     <span class="c1"># Optional</span>
     <span class="n">satName</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;BSK-Sat-00&quot;</span><span class="p">)</span> <span class="c1"># Satellite name [str] (max 24 characters)</span>
-    <span class="n">noradID</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;00000&quot;</span><span class="p">)</span> <span class="c1"># Satellite catalog number / NORAD ID [str] (5 digits)</span>
+    <span class="n">noradID</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;00000&quot;</span><span class="p">)</span> <span class="c1"># Satellite catalog number / NORAD ID [str] (integer 0–99999; TLE format cannot represent catalog numbers ≥ 100000, which will be assigned from ~July 2026)</span>
     <span class="n">classification</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Unknown&quot;</span><span class="p">)</span> <span class="c1"># Satellite classification (&quot;Unclassified&quot;, &quot;Classified&quot;, &quot;Secret&quot; | default: &quot;Unknown&quot;)</span>
     <span class="n">revAtEpoch</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Revolution number at epoch [int] (indicates how many orbits the satellite has completed at epoch time (since launch), tops out at 99999)</span>
     <span class="n">propagator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span> <span class="c1"># Ephemeris type/propagator (0: &quot;Unknown&quot;, 1: &quot;SGP4&quot;, 2: &quot;SDP4&quot;, 3: &quot;SGP8&quot;, 4: &quot;SDP8&quot; | default: &quot;Unknown&quot;)</span>
@@ -434,6 +434,82 @@
 <span class="c1"># ---------------------------------------------------------------------------------------------------------- #</span>
 <span class="c1">#                                            TLE parsing functions                                           #</span>
 <span class="c1"># ---------------------------------------------------------------------------------------------------------- #</span>
+<span class="n">_TLE_MAX_NORAD_ID</span> <span class="o">=</span> <span class="mi">99999</span>  <span class="c1"># Maximum catalog number representable in the 5-character TLE field</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_tle_id_is_5_digit_numeric</span><span class="p">(</span><span class="n">id_field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ensure a TLE catalog field contains only numeric characters.</span>
+
+<span class="sd">    :param id_field: raw fixed-width catalog field from a TLE line</span>
+<span class="sd">    :param line_name: name of the TLE line for error messages</span>
+<span class="sd">    :raises ValueError: if the field is not numeric</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">id_clean</span> <span class="o">=</span> <span class="n">id_field</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">id_clean</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;_parseTle() received a non-numeric catalog field in </span><span class="si">{</span><span class="n">line_name</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">id_field</span><span class="si">}</span><span class="s2">&#39;). This parser only supports standard numeric TLE &quot;</span>
+            <span class="s2">&quot;catalog IDs in the 5-character field.&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_tle_id_is_not_alpha5_like</span><span class="p">(</span><span class="n">id_field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reject Alpha-5-style catalog IDs.</span>
+
+<span class="sd">    :param id_field: raw fixed-width catalog field from a TLE line</span>
+<span class="sd">    :param line_name: name of the TLE line for error messages</span>
+<span class="sd">    :raises ValueError: if the field appears Alpha-5 encoded</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">id_clean</span> <span class="o">=</span> <span class="n">id_field</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">id_clean</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">id_clean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="ow">and</span> <span class="n">id_clean</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;_parseTle() received an Alpha-5-like catalog field in </span><span class="si">{</span><span class="n">line_name</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">id_field</span><span class="si">}</span><span class="s2">&#39;). This parser only supports classic numeric TLE IDs &quot;</span>
+            <span class="s2">&quot;up to 99999. Use OMM (CSV/JSON/XML) for newer catalog schemes.&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_tle_id_no_overflow</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect likely 6-digit catalog number overflow in fixed-width TLE columns.</span>
+
+<span class="sd">    :param line: raw TLE line</span>
+<span class="sd">    :param line_name: name of the TLE line for error messages</span>
+<span class="sd">    :raises ValueError: if overflow is detected</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;_parseTle() detected a catalog-ID overflow in </span><span class="si">{</span><span class="n">line_name</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;This is likely a 6+ digit object ID forced into the 5-character &quot;</span>
+            <span class="s2">&quot;TLE field. Use OMM (CSV/JSON/XML) for these objects.&quot;</span>
+        <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_norad_id_to_tle_str</span><span class="p">(</span><span class="n">norad_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Format a NORAD catalog number for use in a TLE line.</span>
+
+<span class="sd">    The TLE format uses a fixed 5-character field for the catalog number, limiting</span>
+<span class="sd">    it to integers 0-99999. CelesTrak will not produce TLE data for objects with</span>
+<span class="sd">    catalog numbers &gt;= 100000 (expected from ~July 2026). Use OMM format</span>
+<span class="sd">    (CSV/JSON/XML) for those objects instead.</span>
+
+<span class="sd">    :param norad_id: catalog number as int or string</span>
+<span class="sd">    :return: zero-padded 5-character string</span>
+<span class="sd">    :raises ValueError: if catalog number &gt;= 100000</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">norad_id_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">norad_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">norad_id_int</span> <span class="o">&gt;</span> <span class="n">_TLE_MAX_NORAD_ID</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;TLE format cannot represent catalog number </span><span class="si">{</span><span class="n">norad_id_int</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;The TLE 5-character field supports integers 0–</span><span class="si">{</span><span class="n">_TLE_MAX_NORAD_ID</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;Objects with 6+ digit catalog numbers (assigned from ~July 2026) require &quot;</span>
+            <span class="s2">&quot;the OMM format (CSV/JSON/XML) instead. &quot;</span>
+            <span class="s2">&quot;See: https://celestrak.org/NORAD/elements/gp-faq.php&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">norad_id_int</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_calcTleChecksum</span><span class="p">(</span><span class="n">stringArray</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate TLE checksum per line.</span>
@@ -506,7 +582,11 @@
     <span class="n">line1_str</span> <span class="o">=</span> <span class="n">line1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">line1_str</span> <span class="o">!=</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;_parseTle() received line1 starting with &#39;</span><span class="si">{</span><span class="n">line1_str</span><span class="si">}</span><span class="s2">&#39;. The first character of line1 should be &#39;1&#39;.&quot;</span><span class="p">)</span>
-    <span class="n">satId1_str</span> <span class="o">=</span> <span class="n">line1</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="c1"># Satellite catalog number</span>
+    <span class="n">_check_tle_id_no_overflow</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="s2">&quot;line1&quot;</span><span class="p">)</span>
+    <span class="n">satId1_str</span> <span class="o">=</span> <span class="n">line1</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="c1"># Satellite catalog number (5-char field, max 99999)</span>
+    <span class="n">_check_tle_id_is_not_alpha5_like</span><span class="p">(</span><span class="n">satId1_str</span><span class="p">,</span> <span class="s2">&quot;line1&quot;</span><span class="p">)</span>
+    <span class="n">_check_tle_id_is_5_digit_numeric</span><span class="p">(</span><span class="n">satId1_str</span><span class="p">,</span> <span class="s2">&quot;line1&quot;</span><span class="p">)</span>
+    <span class="n">sat_id_1_clean</span> <span class="o">=</span> <span class="n">satId1_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="n">class_str</span> <span class="o">=</span> <span class="n">line1</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span> <span class="c1"># Classification (U=Unclassified, C=Classified, S=Secret)</span>
     <span class="n">launchYear_str</span> <span class="o">=</span> <span class="n">line1</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span> <span class="c1"># Launch year</span>
     <span class="n">launchNo_str</span> <span class="o">=</span> <span class="n">line1</span><span class="p">[</span><span class="mi">11</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span> <span class="c1"># Launch number of the year</span>
@@ -531,8 +611,11 @@
     <span class="n">line2_str</span> <span class="o">=</span> <span class="n">line2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">line2_str</span> <span class="o">!=</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;_parseTle() received line2 starting with &#39;</span><span class="si">{</span><span class="n">line2_str</span><span class="si">}</span><span class="s2">&#39;. The first character of line2 should be &#39;2&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">_check_tle_id_no_overflow</span><span class="p">(</span><span class="n">line2</span><span class="p">,</span> <span class="s2">&quot;line2&quot;</span><span class="p">)</span>
     <span class="n">satID_2_str</span> <span class="o">=</span> <span class="n">line2</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">satID_2_str</span> <span class="o">!=</span> <span class="n">satId1_str</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+    <span class="n">_check_tle_id_is_not_alpha5_like</span><span class="p">(</span><span class="n">line2</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="s2">&quot;line2&quot;</span><span class="p">)</span>
+    <span class="n">_check_tle_id_is_5_digit_numeric</span><span class="p">(</span><span class="n">line2</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="s2">&quot;line2&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">satID_2_str</span> <span class="o">!=</span> <span class="n">sat_id_1_clean</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;_parseTle() received mismatched satellite ID numbers in line1 (&#39;</span><span class="si">{</span><span class="n">satId1_str</span><span class="si">}</span><span class="s2">&#39;) and line2 (&#39;</span><span class="si">{</span><span class="n">satID_2_str</span><span class="si">}</span><span class="s2">&#39;).&quot;</span><span class="p">)</span>
     <span class="n">inclDeg_str</span> <span class="o">=</span> <span class="n">line2</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span> <span class="c1"># Inclination in degrees</span>
     <span class="n">OmegaDeg_str</span> <span class="o">=</span> <span class="n">line2</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">25</span><span class="p">]</span> <span class="c1"># Right Ascension of Ascending Node in degrees</span>
@@ -548,7 +631,7 @@
 
     <span class="c1"># Parsing numerical values getting</span>
     <span class="n">satName</span> <span class="o">=</span> <span class="n">line0</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="n">noradId</span> <span class="o">=</span> <span class="n">satId1_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">noradId</span> <span class="o">=</span> <span class="n">sat_id_1_clean</span>
     <span class="n">classification</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;U&#39;</span><span class="p">:</span> <span class="s1">&#39;Unclassified&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="s1">&#39;Classified&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="s1">&#39;Secret&#39;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">class_str</span><span class="p">,</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
 
     <span class="n">epochYear</span> <span class="o">=</span> <span class="n">_parseTleYear</span><span class="p">(</span><span class="n">line1</span><span class="p">[</span><span class="mi">18</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
@@ -732,7 +815,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate TLE string directly from mean elements (no conversion).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">Norad_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">tleData</span><span class="o">.</span><span class="n">noradID</span><span class="p">)</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">Norad_str</span> <span class="o">=</span> <span class="n">_norad_id_to_tle_str</span><span class="p">(</span><span class="n">tleData</span><span class="o">.</span><span class="n">noradID</span><span class="p">)</span>
     <span class="n">epoch_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tleData</span><span class="o">.</span><span class="n">tleEpoch</span><span class="si">:</span><span class="s2">%y%j</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">tleData</span><span class="o">.</span><span class="n">tleEpoch</span><span class="o">.</span><span class="n">hour</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3600</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tleData</span><span class="o">.</span><span class="n">tleEpoch</span><span class="o">.</span><span class="n">minute</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tleData</span><span class="o">.</span><span class="n">tleEpoch</span><span class="o">.</span><span class="n">second</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tleData</span><span class="o">.</span><span class="n">tleEpoch</span><span class="o">.</span><span class="n">microsecond</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">SEC_PER_DAY</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
     <span class="n">classification</span> <span class="o">=</span> <span class="n">tleData</span><span class="o">.</span><span class="n">classification</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">tleData</span><span class="o">.</span><span class="n">classification</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;U&#39;</span>
 
@@ -783,7 +866,9 @@
             <span class="n">satTleReady</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span> <span class="c1"># flags to check if all three lines are present</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tle_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">tle_lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="n">tle_text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="n">tle_lines</span> <span class="o">=</span> <span class="n">tle_text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
     <span class="n">noLines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tle_lines</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">noLines</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;constTLE2Elem() received a TLE with </span><span class="si">{</span><span class="n">noLines</span><span class="si">}</span><span class="s2"> lines. A valid TLE must have at least two lines.&quot;</span><span class="p">)</span>
@@ -913,7 +998,7 @@
 <span class="sd">    :param satelliteName: Name of the satellite (optional, default: &quot;BSK-Sat-00&quot;)        [string, &lt;= 24 char]</span>
 <span class="sd">    :param launchYear_dt: Launch date of the satellite (optional, default: current year) [datetime object]</span>
 <span class="sd">    :param launch_Noyear: Launch number of the year (optional, default: 1)               [int]</span>
-<span class="sd">    :param NORAD_ID: NORAD ID (5 digits) of the satellite (optional, default: &quot;00000&quot;)   [str, 5 char]</span>
+<span class="sd">    :param NORAD_ID: NORAD catalog number 0–99999 (optional, default: &quot;00000&quot;). Catalog numbers ≥ 100000 (assigned from ~July 2026) cannot be represented in TLE format.</span>
 <span class="sd">    :param classification: Satellite classification (U: Unclassified, C: Classified, S: Secret | default: &quot;U&quot;) [str, 1 char]</span>
 <span class="sd">    :param PoL: Piece of the launch (optional, default: &quot;A  &quot;)                           [str, 3 char]</span>
 <span class="sd">    :param tleEpoch: Epoch of the TLE as datetime object (optional default: current UTC time) [datetime object]</span>
@@ -940,10 +1025,7 @@
 
     <span class="n">meanOrbElem</span> <span class="o">=</span> <span class="n">_osculating2mean_sgp4</span><span class="p">(</span><span class="n">td</span><span class="p">)</span>
 
-    <span class="c1"># Make sure NORAD_ID is an integer and no longer than 5 characters (truncate)</span>
-    <span class="n">Norad_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">noradID</span><span class="p">)</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">noradID</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TLE Writing: NORAD_ID truncated to 5 digits: </span><span class="si">{</span><span class="n">td</span><span class="o">.</span><span class="n">noradID</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">Norad_str</span> <span class="o">=</span> <span class="n">_norad_id_to_tle_str</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">noradID</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">td</span><span class="o">.</span><span class="n">launchDate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">td</span><span class="o">.</span><span class="n">launchDate</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TLE Writing: Launch date not provided, using current UTC time: </span><span class="si">{</span><span class="n">td</span><span class="o">.</span><span class="n">launchDate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

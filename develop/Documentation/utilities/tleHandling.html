@@ -181,7 +181,7 @@ for one satellite at a time! TLEs for constellations must be concanatenated outs
 :param satelliteName: Name of the satellite (optional, default: “BSK-Sat-00”)        [string, &lt;= 24 char]
 :param launchYear_dt: Launch date of the satellite (optional, default: current year) [datetime object]
 :param launch_Noyear: Launch number of the year (optional, default: 1)               [int]
-:param NORAD_ID: NORAD ID (5 digits) of the satellite (optional, default: “00000”)   [str, 5 char]
+:param NORAD_ID: NORAD catalog number 0–99999 (optional, default: “00000”). Catalog numbers ≥ 100000 (assigned from ~July 2026) cannot be represented in TLE format.
 :param classification: Satellite classification (U: Unclassified, C: Classified, S: Secret | default: “U”) [str, 1 char]
 :param PoL: Piece of the launch (optional, default: “A  “)                           [str, 3 char]
 :param tleEpoch: Epoch of the TLE as datetime object (optional default: current UTC time) [datetime object]
