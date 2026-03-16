@@ -51,6 +51,8 @@ msgPayloadDefC
    ElectronBeamMsgPayload
    EphemerisMsgPayload
    EpochMsgPayload
+   FacetElementBodyMsgPayload
+   FacetElementMsgPayload
    ForceAtSiteMsgPayload
    FuelTankMsgPayload
    GravityGradientMsgPayload
