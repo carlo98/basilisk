@@ -140,6 +140,7 @@ msgPayloadDefC
    VSCMGSpeedMsgPayload
    VehicleConfigMsgPayload
    VoltMsgPayload
+   WindMsgPayload
 .. toctree::
    :maxdepth: 1
    :caption: Directories:
