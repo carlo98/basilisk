@@ -133,12 +133,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">spacecraft</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">messaging</span>
 
-<span class="c1"># Vary the articulated facet initial angles</span>
+<span class="c1"># Vary the articulated facet initial angles and eclipse illumination factor</span>
 <div class="viewcode-block" id="test_facetSRPDynamicEffector">
 <a class="viewcode-back" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/_UnitTest/test_unitFacetSRPDynamicEffector.html#test_unitFacetSRPDynamicEffector.test_facetSRPDynamicEffector">[docs]</a>
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;facetRotAngle1&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="o">-</span><span class="mf">10.4</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="mf">45.2</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="mf">90.0</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="mf">180.0</span><span class="p">])</span>
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;facetRotAngle2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="o">-</span><span class="mf">28.0</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="mf">45.2</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="mf">180.0</span><span class="p">])</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_facetSRPDynamicEffector</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">facetRotAngle1</span><span class="p">,</span> <span class="n">facetRotAngle2</span><span class="p">):</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;eclipseIlluminationFactor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_facetSRPDynamicEffector</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">facetRotAngle1</span><span class="p">,</span> <span class="n">facetRotAngle2</span><span class="p">,</span> <span class="n">eclipseIlluminationFactor</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Verification Test Description**</span>
 
@@ -155,6 +156,7 @@
 <span class="sd">        show_plots (bool): (True) Show plots, (False) Do not show plots</span>
 <span class="sd">        facetRotAngle1 (double): [rad] Articulation angle for facets 7 and 8 (solar panel 1)</span>
 <span class="sd">        facetRotAngle2 (double): [rad] Articulation angle for facets 9 and 10 (solar panel 2)</span>
+<span class="sd">        eclipseIlluminationFactor (double): Eclipse illumination factor (0.0 = full shadow, 1.0 = full sunlight)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">unitTestSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
@@ -214,6 +216,12 @@
     <span class="n">srpEffector</span><span class="o">.</span><span class="n">setNumFacets</span><span class="p">(</span><span class="n">numFacets</span><span class="p">)</span>
     <span class="n">srpEffector</span><span class="o">.</span><span class="n">setNumArticulatedFacets</span><span class="p">(</span><span class="n">numArticulatedFacets</span><span class="p">)</span>
     <span class="n">srpEffector</span><span class="o">.</span><span class="n">sunInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">sunMsg</span><span class="p">)</span>
+
+    <span class="c1"># Create the eclipse message and subscribe if the illumination factor is not full sunlight</span>
+    <span class="n">eclipseMsgData</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">EclipseMsgPayload</span><span class="p">()</span>
+    <span class="n">eclipseMsgData</span><span class="o">.</span><span class="n">illuminationFactor</span> <span class="o">=</span> <span class="n">eclipseIlluminationFactor</span>
+    <span class="n">eclipseMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">EclipseMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">eclipseMsgData</span><span class="p">)</span>
+    <span class="n">srpEffector</span><span class="o">.</span><span class="n">sunEclipseInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">eclipseMsg</span><span class="p">)</span>
     <span class="n">srpEffector</span><span class="o">.</span><span class="n">addArticulatedFacet</span><span class="p">(</span><span class="n">facetRotAngle1Message</span><span class="p">)</span>
     <span class="n">srpEffector</span><span class="o">.</span><span class="n">addArticulatedFacet</span><span class="p">(</span><span class="n">facetRotAngle1Message</span><span class="p">)</span>
     <span class="n">srpEffector</span><span class="o">.</span><span class="n">addArticulatedFacet</span><span class="p">(</span><span class="n">facetRotAngle2Message</span><span class="p">)</span>
@@ -378,6 +386,10 @@
         <span class="n">srpForce_BTruth</span> <span class="o">+=</span> <span class="n">srpForce_BFacet</span>
         <span class="n">srpTorque_BTruth</span> <span class="o">+=</span> <span class="n">srpTorque_BFacet</span>
 
+    <span class="c1"># Scale the truth values by the eclipse illumination factor</span>
+    <span class="n">srpForce_BTruth</span> <span class="o">*=</span> <span class="n">eclipseIlluminationFactor</span>
+    <span class="n">srpTorque_BTruth</span> <span class="o">*=</span> <span class="n">eclipseIlluminationFactor</span>
+
     <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
         <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">srpForce_BSim</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">],</span>
                                    <span class="n">srpForce_BTruth</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
@@ -452,6 +464,7 @@
         <span class="kc">True</span><span class="p">,</span>  <span class="c1"># show plots</span>
         <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span>  <span class="c1"># [rad] facetRotAngle1</span>
         <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span> <span class="o">*</span> <span class="mf">45.0</span><span class="p">,</span>  <span class="c1"># [rad] facetRotAngle2</span>
+        <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># eclipseIlluminationFactor (1.0 = full sunlight)</span>
     <span class="p">)</span>
 </pre></div>
 

@@ -187,7 +187,11 @@ provides information on what this message is used for.</p>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
 <td><p>Input msg for the Sun state information</p></td>
 </tr>
-<tr class="row-odd"><td><p>articulatedFacetDataInMsgs</p></td>
+<tr class="row-odd"><td><p>sunEclipseInMsg</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#eclipsemsgpayload"><span class="std std-ref">EclipseMsgPayload</span></a></p></td>
+<td><p>(Optional) Input msg for the Sun eclipse data. If connected, the SRP force and torque are scaled by the illumination factor (0 = full shadow, 1 = full sunlight)</p></td>
+</tr>
+<tr class="row-even"><td><p>articulatedFacetDataInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/HingedRigidBodyMsgPayload.html#hingedrigidbodymsgpayload"><span class="std std-ref">HingedRigidBodyMsgPayload</span></a></p></td>
 <td><p>(Optional) Input msg vector containing the current articulated facet angles</p></td>
 </tr>
@@ -396,6 +400,11 @@ true values computed in python.</p>
 </li>
 <li><p>Connect the Sun’s ephemeris message to the SRP module:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SRPEffector</span><span class="o">.</span><span class="n">sunInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">sunMsg</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Optionally, connect an eclipse message to account for shadow conditions. If connected, the computed SRP force and torque are scaled by the illumination factor (0.0 = full shadow, 1.0 = full sunlight):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SRPEffector</span><span class="o">.</span><span class="n">sunEclipseInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">eclipseMsg</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -624,6 +633,12 @@ true values computed in python.</p>
 <dd><p>Sun spice ephemeris input message. </p>
 </dd></dl>
 
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23FacetSRPDynamicEffector15sunEclipseInMsgE">
+<span id="_CPPv3N23FacetSRPDynamicEffector15sunEclipseInMsgE"></span><span id="_CPPv2N23FacetSRPDynamicEffector15sunEclipseInMsgE"></span><span id="FacetSRPDynamicEffector::sunEclipseInMsg__ReadFunctor:EclipseMsgPayload:"></span><span class="target" id="class_facet_s_r_p_dynamic_effector_1af3615cce4ca2ccc497beef2a75fd3830"></span><a class="reference internal" href="../../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#_CPPv417EclipseMsgPayload" title="EclipseMsgPayload"><span class="n"><span class="pre">EclipseMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sunEclipseInMsg</span></span></span><a class="headerlink" href="#_CPPv4N23FacetSRPDynamicEffector15sunEclipseInMsgE" title="Link to this definition"></a><br /></dt>
+<dd><p>(optional) Sun eclipse input message </p>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
@@ -649,6 +664,12 @@ true values computed in python.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N23FacetSRPDynamicEffector10scGeometryE">
 <span id="_CPPv3N23FacetSRPDynamicEffector10scGeometryE"></span><span id="_CPPv2N23FacetSRPDynamicEffector10scGeometryE"></span><span id="FacetSRPDynamicEffector::scGeometry__FacetedSRPSpacecraftGeometryData"></span><span class="target" id="class_facet_s_r_p_dynamic_effector_1a36d41f3127680b76b3247daf6c063596"></span><a class="reference internal" href="#_CPPv432FacetedSRPSpacecraftGeometryData" title="FacetedSRPSpacecraftGeometryData"><span class="n"><span class="pre">FacetedSRPSpacecraftGeometryData</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scGeometry</span></span></span><a class="headerlink" href="#_CPPv4N23FacetSRPDynamicEffector10scGeometryE" title="Link to this definition"></a><br /></dt>
 <dd><p>Spacecraft facet data structure. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23FacetSRPDynamicEffector19sunVisibilityFactorE">
+<span id="_CPPv3N23FacetSRPDynamicEffector19sunVisibilityFactorE"></span><span id="_CPPv2N23FacetSRPDynamicEffector19sunVisibilityFactorE"></span><span id="FacetSRPDynamicEffector::sunVisibilityFactor__EclipseMsgPayload"></span><span class="target" id="class_facet_s_r_p_dynamic_effector_1a3ff8461616cc1bf6dd6f67059a5d458a"></span><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#_CPPv417EclipseMsgPayload" title="EclipseMsgPayload"><span class="n"><span class="pre">EclipseMsgPayload</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sunVisibilityFactor</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N23FacetSRPDynamicEffector19sunVisibilityFactorE" title="Link to this definition"></a><br /></dt>
+<dd><p>[-] scaling parameter from 0 (fully obscured) to 1 (fully visible) </p>
 </dd></dl>
 
 <dl class="cpp var">
