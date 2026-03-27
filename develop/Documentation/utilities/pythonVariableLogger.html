@@ -146,38 +146,20 @@
 </div>
 <dl class="py class" id="module-pythonVariableLogger">
 <dt class="sig sig-object py" id="pythonVariableLogger.PythonVariableLogger">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythonVariableLogger.</span></span><span class="sig-name descname"><span class="pre">PythonVariableLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logging_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_log_period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pythonVariableLogger.html#PythonVariableLogger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythonVariableLogger.PythonVariableLogger" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythonVariableLogger.</span></span><span class="sig-name descname"><span class="pre">PythonVariableLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pythonVariableLogger.html#PythonVariableLogger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythonVariableLogger.PythonVariableLogger" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SysModel</span></code></p>
-<p>This a Python Module that will call one or multiple functions
-and store their results. After the simulation is over, these
-values can be retrieved.</p>
-<p>This object is built with a dictionary of functions, and the
-results can be retrieved from the object using the keys of
-this dictionary:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="o">=</span> <span class="n">VariableLogger</span><span class="p">({</span>
+<p>Logs results of arbitrary functions keyed by name.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="o">=</span> <span class="n">PythonVariableLogger</span><span class="p">({</span>
     <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">CurrentSimNanos</span><span class="p">:</span> <span class="n">CurrentSimNanos</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
     <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">CurrentSimNanos</span><span class="p">:</span> <span class="n">CurrentSimNanos</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span>
 <span class="p">})</span>
-
-<span class="c1"># Run simulation</span>
-
-<span class="n">times</span>        <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">times</span><span class="p">()</span>
-<span class="n">timesSquared</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">a</span>
-<span class="n">timesCubed</span>   <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">b</span>
+<span class="c1"># run sim</span>
+<span class="n">times</span>        <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">times</span><span class="p">()</span>  <span class="c1"># array of timestamps</span>
+<span class="n">timesSquared</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>     <span class="c1"># or log.a</span>
+<span class="n">timesCubed</span>   <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>     <span class="c1"># or log.b</span>
 </pre></div>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="pythonVariableLogger.PythonVariableLogger.clear">
-<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pythonVariableLogger.html#PythonVariableLogger.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythonVariableLogger.PythonVariableLogger.clear" title="Link to this definition"></a></dt>
-<dd><p>Called to clear the internal data storages</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pythonVariableLogger.PythonVariableLogger.times">
-<span class="sig-name descname"><span class="pre">times</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pythonVariableLogger.html#PythonVariableLogger.times"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pythonVariableLogger.PythonVariableLogger.times" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the times when the data was logged</p>
-</dd></dl>
-
 </dd></dl>
 
 </section>
