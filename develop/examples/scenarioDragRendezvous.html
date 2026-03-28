@@ -176,7 +176,7 @@ The resulting relative attitude and in-plane Hill trajectory are shown below.</p
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="scenarioDragRendezvous.drag_simulator">
-<span class="sig-prename descclassname"><span class="pre">scenarioDragRendezvous.</span></span><span class="sig-name descname"><span class="pre">drag_simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">altOffset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trueAnomOffset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">densMultiplier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrlType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lqr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useJ2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scenarioDragRendezvous.html#drag_simulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scenarioDragRendezvous.drag_simulator" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">scenarioDragRendezvous.</span></span><span class="sig-name descname"><span class="pre">drag_simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">altOffset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trueAnomOffset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">densMultiplier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrlType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lqr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useJ2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useWind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scenarioDragRendezvous.html#drag_simulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scenarioDragRendezvous.drag_simulator" title="Link to this definition"></a></dt>
 <dd><p>Basilisk simulation of a two-spacecraft rendezvous using relative-attitude driven differential drag. Includes
 both static gain and desensitized time-varying gain options and the option to use simulated attitude control or
 direct reference inputs.</p>
@@ -185,6 +185,11 @@ direct reference inputs.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>chief</strong> (<em>trueAnomOffset - double - deputy true anomaly difference from the</em>)</p></li>
 <li><p><strong>chief</strong></p></li>
+<li><p><strong>density</strong> (<em>densMultiplier - double - multiplicative scale factor applied to the exponential atmosphere base</em>)</p></li>
+<li><p><strong>ctrlType</strong> (<em>str</em>) – Control law type; <code class="docutils literal notranslate"><span class="pre">'lqr'</span></code> for static LQR or <code class="docutils literal notranslate"><span class="pre">'dtv'</span></code> for desensitized time-varying gain</p></li>
+<li><p><strong>useJ2</strong> (<em>bool</em>) – If True, include J2 spherical harmonic gravity perturbation</p></li>
+<li><p><strong>useWind</strong> (<em>bool</em>) – If True, link a <code class="docutils literal notranslate"><span class="pre">ZeroWindModel</span></code> via SPICE so drag is computed against the
+atmosphere-relative velocity.  If False (default), the inertial spacecraft velocity is used directly.</p></li>
 </ul>
 </dd>
 </dl>

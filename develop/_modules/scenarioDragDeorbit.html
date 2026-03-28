@@ -118,6 +118,12 @@
 <span class="sd">:ref:`dragDynamicEffector` dynamics module. The simulation is executed until the altitude falls below some threshold,</span>
 <span class="sd">using a terminal event handler.</span>
 
+<span class="sd">An optional wind model (:ref:`zeroWindModel`) can be enabled via the ``useWind`` argument (default: ``False``).</span>
+<span class="sd">When active, SPICE is loaded with the default ``IAU_EARTH`` frame and drag is computed against the</span>
+<span class="sd">atmosphere-relative velocity rather than the inertial spacecraft velocity.  This is a more accurate treatment</span>
+<span class="sd">for scenarios where Earth&#39;s rotation is relevant, but adds a SPICE dependency.  When ``useWind=False``, the</span>
+<span class="sd">inertial spacecraft velocity is used directly, which is the conventional approximation for simple deorbit studies.</span>
+
 <span class="sd">The script is found in the folder ``basilisk/examples`` and executed by using::</span>
 
 <span class="sd">      python3 scenarioDragDeorbit.py</span>
@@ -163,6 +169,24 @@
 <span class="sd">the drag model::</span>
 
 <span class="sd">    dragEffector.atmoDensInMsg.subscribeTo(atmo.envOutMsgs[0])</span>
+
+<span class="sd">Optionally (``useWind=True``), a :ref:`zeroWindModel` can be linked so drag is computed against the</span>
+<span class="sd">atmosphere-relative velocity.  SPICE is loaded with the default ``IAU_EARTH`` frame so that</span>
+<span class="sd">``J20002Pfix_dot`` is populated; :ref:`windBase` reads those derivatives to derive the Earth rotation</span>
+<span class="sd">rate, giving a physically consistent co-rotation::</span>
+
+<span class="sd">    spiceObject = gravFactory.createSpiceInterface(</span>
+<span class="sd">        time=&quot;2020 MAY 21 18:28:03 (UTC)&quot;,</span>
+<span class="sd">    )</span>
+<span class="sd">    spiceObject.zeroBase = &quot;Earth&quot;</span>
+<span class="sd">    scSim.AddModelToTask(simTaskName, spiceObject, -1)</span>
+
+<span class="sd">    windModel = zeroWindModel.ZeroWindModel()</span>
+<span class="sd">    windModel.ModelTag = &quot;ZeroWind&quot;</span>
+<span class="sd">    windModel.planetPosInMsg.subscribeTo(spiceObject.planetStateOutMsgs[0])</span>
+<span class="sd">    windModel.addSpacecraftToModel(scObject.scStateOutMsg)</span>
+<span class="sd">    scSim.AddModelToTask(simTaskName, windModel)</span>
+<span class="sd">    dragEffector.windVelInMsg.subscribeTo(windModel.envOutMsgs[0])</span>
 
 <span class="sd">Illustration of Simulation Results</span>
 <span class="sd">----------------------------------</span>
@@ -234,6 +258,7 @@
     <span class="n">exponentialAtmosphere</span><span class="p">,</span>
     <span class="n">msisAtmosphere</span><span class="p">,</span>
     <span class="n">spacecraft</span><span class="p">,</span>
+    <span class="n">zeroWindModel</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SimulationBaseClass</span><span class="p">,</span>
@@ -251,7 +276,7 @@
 
 <div class="viewcode-block" id="run">
 <a class="viewcode-back" href="../examples/scenarioDragDeorbit.html#scenarioDragDeorbit.run">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">initialAlt</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">deorbitAlt</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;exponential&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">initialAlt</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">deorbitAlt</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;exponential&quot;</span><span class="p">,</span> <span class="n">useWind</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Initialize a satellite with drag and propagate until it falls below a deorbit altitude. Note that an excessively</span>
 <span class="sd">    low deorbit_alt can lead to intersection with the Earth prior to deorbit being detected, causing some terms to blow</span>
@@ -262,6 +287,8 @@
 <span class="sd">        initialAlt (float): Starting altitude in km</span>
 <span class="sd">        deorbitAlt (float): Terminal altitude in km</span>
 <span class="sd">        model (str): [&quot;exponential&quot;, &quot;msis&quot;]</span>
+<span class="sd">        useWind (bool): If True, link a :ref:`zeroWindModel` so drag is computed against the atmosphere-relative</span>
+<span class="sd">            velocity.  If False (default), the inertial spacecraft velocity is used directly.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Dictionary of figure handles</span>
@@ -331,6 +358,25 @@
     <span class="n">planet</span> <span class="o">=</span> <span class="n">gravFactory</span><span class="o">.</span><span class="n">createEarth</span><span class="p">()</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">planet</span><span class="o">.</span><span class="n">mu</span>
     <span class="n">gravFactory</span><span class="o">.</span><span class="n">addBodiesTo</span><span class="p">(</span><span class="n">scObject</span><span class="p">)</span>
+
+    <span class="c1"># Optionally link a zero-wind model so drag is computed against the atmosphere-relative velocity.</span>
+    <span class="c1"># SPICE is loaded with the default IAU_EARTH frame so that J20002Pfix_dot is populated and</span>
+    <span class="c1"># WindBase can derive the true Earth rotation rate from it, keeping the co-rotation consistent</span>
+    <span class="c1"># with the actual planet orientation.  Omitting this (useWind=False) falls back to using the</span>
+    <span class="c1"># inertial spacecraft velocity directly.</span>
+    <span class="k">if</span> <span class="n">useWind</span><span class="p">:</span>
+        <span class="n">spiceObject</span> <span class="o">=</span> <span class="n">gravFactory</span><span class="o">.</span><span class="n">createSpiceInterface</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="s2">&quot;2020 MAY 21 18:28:03 (UTC)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">spiceObject</span><span class="o">.</span><span class="n">zeroBase</span> <span class="o">=</span> <span class="s2">&quot;Earth&quot;</span>
+        <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">spiceObject</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">windModel</span> <span class="o">=</span> <span class="n">zeroWindModel</span><span class="o">.</span><span class="n">ZeroWindModel</span><span class="p">()</span>
+        <span class="n">windModel</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;ZeroWind&quot;</span>
+        <span class="n">windModel</span><span class="o">.</span><span class="n">planetPosInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">spiceObject</span><span class="o">.</span><span class="n">planetStateOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">windModel</span><span class="o">.</span><span class="n">addSpacecraftToModel</span><span class="p">(</span><span class="n">scObject</span><span class="o">.</span><span class="n">scStateOutMsg</span><span class="p">)</span>
+        <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">simTaskName</span><span class="p">,</span> <span class="n">windModel</span><span class="p">)</span>
+        <span class="n">dragEffector</span><span class="o">.</span><span class="n">windVelInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">windModel</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="c1"># Set up a circular orbit using classical orbit elements</span>
     <span class="n">oe</span> <span class="o">=</span> <span class="n">orbitalMotion</span><span class="o">.</span><span class="n">ClassicElements</span><span class="p">()</span>
@@ -478,7 +524,8 @@
         <span class="n">show_plots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">initialAlt</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
         <span class="n">deorbitAlt</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;msis&quot;</span>   <span class="c1"># &quot;msis&quot;, &quot;exponential&quot;</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;msis&quot;</span><span class="p">,</span>   <span class="c1"># &quot;msis&quot;, &quot;exponential&quot;</span>
+        <span class="n">useWind</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">)</span>
 </pre></div>
 

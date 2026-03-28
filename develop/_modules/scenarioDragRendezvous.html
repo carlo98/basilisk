@@ -177,6 +177,7 @@
     <span class="n">facetDragDynamicEffector</span><span class="p">,</span>
     <span class="n">simpleNav</span><span class="p">,</span>
     <span class="n">exponentialAtmosphere</span><span class="p">,</span>
+    <span class="n">zeroWindModel</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidBodyKinematics</span> <span class="k">as</span> <span class="n">rbk</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBaseClass</span>
@@ -352,7 +353,7 @@
 <div class="viewcode-block" id="drag_simulator">
 <a class="viewcode-back" href="../examples/scenarioDragRendezvous.html#scenarioDragRendezvous.drag_simulator">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">drag_simulator</span><span class="p">(</span>
-    <span class="n">altOffset</span><span class="p">,</span> <span class="n">trueAnomOffset</span><span class="p">,</span> <span class="n">densMultiplier</span><span class="p">,</span> <span class="n">ctrlType</span><span class="o">=</span><span class="s2">&quot;lqr&quot;</span><span class="p">,</span> <span class="n">useJ2</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">altOffset</span><span class="p">,</span> <span class="n">trueAnomOffset</span><span class="p">,</span> <span class="n">densMultiplier</span><span class="p">,</span> <span class="n">ctrlType</span><span class="o">=</span><span class="s2">&quot;lqr&quot;</span><span class="p">,</span> <span class="n">useJ2</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">useWind</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Basilisk simulation of a two-spacecraft rendezvous using relative-attitude driven differential drag. Includes</span>
@@ -362,6 +363,11 @@
 <span class="sd">    Args:</span>
 <span class="sd">        altOffset - double - deputy altitude offset from the chief (&#39;x&#39; hill direction), meters</span>
 <span class="sd">        trueAnomOffset - double - deputy true anomaly difference from the chief (&#39;y&#39; direction), degrees</span>
+<span class="sd">        densMultiplier - double - multiplicative scale factor applied to the exponential atmosphere base density</span>
+<span class="sd">        ctrlType (str): Control law type; ``&#39;lqr&#39;`` for static LQR or ``&#39;dtv&#39;`` for desensitized time-varying gain</span>
+<span class="sd">        useJ2 (bool): If True, include J2 spherical harmonic gravity perturbation</span>
+<span class="sd">        useWind (bool): If True, link a ``ZeroWindModel`` via SPICE so drag is computed against the</span>
+<span class="sd">            atmosphere-relative velocity.  If False (default), the inertial spacecraft velocity is used directly.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">startTime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -437,6 +443,22 @@
     <span class="n">depDrag</span><span class="o">.</span><span class="n">atmoDensInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">atmosphere</span><span class="o">.</span><span class="n">addSpacecraftToModel</span><span class="p">(</span><span class="n">chiefSc</span><span class="o">.</span><span class="n">scStateOutMsg</span><span class="p">)</span>
     <span class="n">chiefDrag</span><span class="o">.</span><span class="n">atmoDensInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">useWind</span><span class="p">:</span>
+        <span class="n">spiceObject</span> <span class="o">=</span> <span class="n">gravFactory</span><span class="o">.</span><span class="n">createSpiceInterface</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="s2">&quot;2020 MAY 21 18:28:03 (UTC)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">spiceObject</span><span class="o">.</span><span class="n">zeroBase</span> <span class="o">=</span> <span class="s2">&quot;Earth&quot;</span>
+        <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">dynTaskName</span><span class="p">,</span> <span class="n">spiceObject</span><span class="p">,</span> <span class="mi">999</span><span class="p">)</span>
+
+        <span class="n">windModel</span> <span class="o">=</span> <span class="n">zeroWindModel</span><span class="o">.</span><span class="n">ZeroWindModel</span><span class="p">()</span>
+        <span class="n">windModel</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;ZeroWind&quot;</span>
+        <span class="n">windModel</span><span class="o">.</span><span class="n">planetPosInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">spiceObject</span><span class="o">.</span><span class="n">planetStateOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">windModel</span><span class="o">.</span><span class="n">addSpacecraftToModel</span><span class="p">(</span><span class="n">depSc</span><span class="o">.</span><span class="n">scStateOutMsg</span><span class="p">)</span>
+        <span class="n">windModel</span><span class="o">.</span><span class="n">addSpacecraftToModel</span><span class="p">(</span><span class="n">chiefSc</span><span class="o">.</span><span class="n">scStateOutMsg</span><span class="p">)</span>
+        <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">dynTaskName</span><span class="p">,</span> <span class="n">windModel</span><span class="p">,</span> <span class="mi">919</span><span class="p">)</span>
+        <span class="n">depDrag</span><span class="o">.</span><span class="n">windVelInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">windModel</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">chiefDrag</span><span class="o">.</span><span class="n">windVelInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">windModel</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="c1">#   Add all dynamics stuff to dynamics task</span>
     <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">dynTaskName</span><span class="p">,</span> <span class="n">atmosphere</span><span class="p">,</span> <span class="mi">920</span><span class="p">)</span>
@@ -568,10 +590,10 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
-    <span class="n">show_plots</span><span class="p">,</span> <span class="n">altOffset</span><span class="p">,</span> <span class="n">trueAnomOffset</span><span class="p">,</span> <span class="n">densMultiplier</span><span class="p">,</span> <span class="n">ctrlType</span><span class="o">=</span><span class="s2">&quot;lqr&quot;</span><span class="p">,</span> <span class="n">useJ2</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">show_plots</span><span class="p">,</span> <span class="n">altOffset</span><span class="p">,</span> <span class="n">trueAnomOffset</span><span class="p">,</span> <span class="n">densMultiplier</span><span class="p">,</span> <span class="n">ctrlType</span><span class="o">=</span><span class="s2">&quot;lqr&quot;</span><span class="p">,</span> <span class="n">useJ2</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">useWind</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">):</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">drag_simulator</span><span class="p">(</span>
-        <span class="n">altOffset</span><span class="p">,</span> <span class="n">trueAnomOffset</span><span class="p">,</span> <span class="n">densMultiplier</span><span class="p">,</span> <span class="n">ctrlType</span><span class="o">=</span><span class="n">ctrlType</span><span class="p">,</span> <span class="n">useJ2</span><span class="o">=</span><span class="n">useJ2</span>
+        <span class="n">altOffset</span><span class="p">,</span> <span class="n">trueAnomOffset</span><span class="p">,</span> <span class="n">densMultiplier</span><span class="p">,</span> <span class="n">ctrlType</span><span class="o">=</span><span class="n">ctrlType</span><span class="p">,</span> <span class="n">useJ2</span><span class="o">=</span><span class="n">useJ2</span><span class="p">,</span> <span class="n">useWind</span><span class="o">=</span><span class="n">useWind</span>
     <span class="p">)</span>
 
     <span class="n">timeData</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;dynTimeData&quot;</span><span class="p">]</span>
@@ -696,6 +718,7 @@
         <span class="mi">1</span><span class="p">,</span>  <span class="c1">#    Density multiplier (nondimensional)</span>
         <span class="n">ctrlType</span><span class="o">=</span><span class="s2">&quot;lqr&quot;</span><span class="p">,</span>
         <span class="n">useJ2</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">useWind</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
 

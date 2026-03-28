@@ -156,7 +156,31 @@
 <span id="id1"></span><h1>test_unitFacetDrag<a class="headerlink" href="#test-unitfacetdrag" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-test_unitFacetDrag"></span></section>
+<dl class="py function" id="module-test_unitFacetDrag">
+<dt class="sig sig-object py" id="test_unitFacetDrag.facetDragComp">
+<span class="sig-prename descclassname"><span class="pre">test_unitFacetDrag.</span></span><span class="sig-name descname"><span class="pre">facetDragComp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">areas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_unitFacetDrag.html#facetDragComp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_unitFacetDrag.facetDragComp" title="Link to this definition"></a></dt>
+<dd><p>Reference facet drag force in body frame using inertial velocity.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_unitFacetDrag.test_facetDragAtmosphereRelativeVelocityWhenWindLinked">
+<span class="sig-prename descclassname"><span class="pre">test_unitFacetDrag.</span></span><span class="sig-name descname"><span class="pre">test_facetDragAtmosphereRelativeVelocityWhenWindLinked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_unitFacetDrag.html#test_facetDragAtmosphereRelativeVelocityWhenWindLinked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_unitFacetDrag.test_facetDragAtmosphereRelativeVelocityWhenWindLinked" title="Link to this definition"></a></dt>
+<dd><p>Test that drag uses atmosphere-relative velocity when wind message is linked.</p>
+<p>Two simulation steps are needed: step 1 populates windInData via ReadInputs();
+step 2’s computeForceTorque uses that cached wind velocity.
+The force at step 2 is compared against facetDragComp using step-1 cached
+density/wind and step-2 velocity/attitude.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_unitFacetDrag.test_facetDragInertialVelocity">
+<span class="sig-prename descclassname"><span class="pre">test_unitFacetDrag.</span></span><span class="sig-name descname"><span class="pre">test_facetDragInertialVelocity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_unitFacetDrag.html#test_facetDragInertialVelocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_unitFacetDrag.test_facetDragInertialVelocity" title="Link to this definition"></a></dt>
+<dd><p>Verify drag uses inertial velocity when no wind message is linked.</p>
+<p>Velocity has a component along the default facet normal [1, 0, 0] to ensure
+non-zero projected area and a non-trivial reference force.</p>
+</dd></dl>
+
+</section>
 
 
            </div>

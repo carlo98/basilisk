@@ -163,33 +163,25 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="test_atmoDrag.test_dragAtmosphereRelativeVelocityDisabled">
-<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_dragAtmosphereRelativeVelocityDisabled</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_dragAtmosphereRelativeVelocityDisabled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_dragAtmosphereRelativeVelocityDisabled" title="Link to this definition"></a></dt>
-<dd><p>Verify nominal drag behavior is unchanged when useAtmosphereRelativeVelocity is False.</p>
+<dt class="sig sig-object py" id="test_atmoDrag.test_dragInertialVelocity">
+<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_dragInertialVelocity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_dragInertialVelocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_dragInertialVelocity" title="Link to this definition"></a></dt>
+<dd><p>Verify drag uses inertial velocity when no wind message is linked.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="test_atmoDrag.test_dragAtmosphereRelativeVelocityEnabled">
-<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_dragAtmosphereRelativeVelocityEnabled</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_dragAtmosphereRelativeVelocityEnabled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_dragAtmosphereRelativeVelocityEnabled" title="Link to this definition"></a></dt>
-<dd><p>Verify drag uses v_rel = v_sc - omega x r when enabled.</p>
+<dt class="sig sig-object py" id="test_atmoDrag.test_drag_wind_velocity_automatic_usage">
+<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_drag_wind_velocity_automatic_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_drag_wind_velocity_automatic_usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_drag_wind_velocity_automatic_usage" title="Link to this definition"></a></dt>
+<dd><p>Verify drag initializes and runs without error when no wind message is linked.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="test_atmoDrag.test_dragAtmosphereRelativeVelocityNearZero">
-<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_dragAtmosphereRelativeVelocityNearZero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_dragAtmosphereRelativeVelocityNearZero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_dragAtmosphereRelativeVelocityNearZero" title="Link to this definition"></a></dt>
-<dd><p>Verify near-zero relative velocity does not produce invalid normalization behavior.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="test_atmoDrag.test_dragAtmosphereRelativeVelocityPositionStateOptional">
-<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_dragAtmosphereRelativeVelocityPositionStateOptional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_dragAtmosphereRelativeVelocityPositionStateOptional"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_dragAtmosphereRelativeVelocityPositionStateOptional" title="Link to this definition"></a></dt>
-<dd><p>Verify position state is only required when atmosphere-relative velocity is enabled.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="test_atmoDrag.test_dragAtmosphereRelativeVelocityResetGuardPosition">
-<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_dragAtmosphereRelativeVelocityResetGuardPosition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_dragAtmosphereRelativeVelocityResetGuardPosition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_dragAtmosphereRelativeVelocityResetGuardPosition" title="Link to this definition"></a></dt>
-<dd><p>Verify Reset emits BSK_ERROR when relative velocity is enabled without a valid position state.</p>
+<dt class="sig sig-object py" id="test_atmoDrag.test_drag_wind_velocity_with_wind_message">
+<span class="sig-prename descclassname"><span class="pre">test_atmoDrag.</span></span><span class="sig-name descname"><span class="pre">test_drag_wind_velocity_with_wind_message</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_atmoDrag.html#test_drag_wind_velocity_with_wind_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_atmoDrag.test_drag_wind_velocity_with_wind_message" title="Link to this definition"></a></dt>
+<dd><p>Verify drag uses atmosphere-relative velocity when wind message is linked.</p>
+<p>Two simulation steps are needed: step 1 populates windInData via UpdateState/ReadInputs;
+step 2’s computeForceTorque uses that cached wind velocity.
+The force at step 2 is compared against cannonballDragComp using step-1 cached
+density/wind and step-2 velocity/attitude.</p>
 </dd></dl>
 
 <dl class="py function">

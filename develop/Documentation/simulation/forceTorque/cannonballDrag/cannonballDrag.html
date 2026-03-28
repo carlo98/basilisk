@@ -172,20 +172,25 @@ expressed in the site frame).</p></td>
 <td><p>Input message providing the inertial state of the site reference frame, including <code class="docutils literal notranslate"><span class="pre">sigma_BN</span></code> (MRPs for
 site frame attitude relative to inertial) and <code class="docutils literal notranslate"><span class="pre">v_BN_N</span></code> (inertial velocity of the site frame origin).</p></td>
 </tr>
-<tr class="row-odd"><td><p>forceOutMsg</p></td>
+<tr class="row-odd"><td><p>windVelInMsg</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/WindMsgPayload.html#windmsgpayload"><span class="std std-ref">WindMsgPayload</span></a></p></td>
+<td><p>(optional) wind velocity input message; when linked, <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> is subtracted from the site frame
+inertial velocity before computing the drag force, yielding the atmosphere-relative velocity.</p></td>
+</tr>
+<tr class="row-even"><td><p>forceOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ForceAtSiteMsgPayload.html#forceatsitemsgpayload"><span class="std std-ref">ForceAtSiteMsgPayload</span></a></p></td>
 <td><p>Output message containing aerodynamic drag force expressed in the site reference frame.</p></td>
 </tr>
-<tr class="row-even"><td><p>forceOutMsgC</p></td>
+<tr class="row-odd"><td><p>forceOutMsgC</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ForceAtSiteMsgPayload.html#forceatsitemsgpayload"><span class="std std-ref">ForceAtSiteMsgPayload</span></a></p></td>
 <td><p>Output message containing aerodynamic drag force expressed in the site reference frame (C-wrapped output).</p></td>
 </tr>
-<tr class="row-odd"><td><p>torqueOutMsg</p></td>
+<tr class="row-even"><td><p>torqueOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/TorqueAtSiteMsgPayload.html#torqueatsitemsgpayload"><span class="std std-ref">TorqueAtSiteMsgPayload</span></a></p></td>
 <td><p>Output message containing aerodynamic torque about the site frame origin, expressed in the site reference
 frame.</p></td>
 </tr>
-<tr class="row-even"><td><p>torqueOutMsgC</p></td>
+<tr class="row-odd"><td><p>torqueOutMsgC</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/TorqueAtSiteMsgPayload.html#torqueatsitemsgpayload"><span class="std std-ref">TorqueAtSiteMsgPayload</span></a></p></td>
 <td><p>Output message containing aerodynamic torque about the site frame origin, expressed in the site reference
 frame (C-wrapped output).</p></td>
@@ -200,12 +205,29 @@ frame (C-wrapped output).</p></td>
 <li><p>Reads the atmospheric density from <code class="docutils literal notranslate"><span class="pre">atmoDensInMsg</span></code>.</p></li>
 <li><p>Reads the drag coefficient, projected area, and center-of-pressure location from <code class="docutils literal notranslate"><span class="pre">dragGeometryInMsg</span></code>.</p></li>
 <li><p>Reads the site frame attitude and inertial velocity from <code class="docutils literal notranslate"><span class="pre">referenceFrameStateInMsg</span></code>.</p></li>
-<li><p>Transforms the inertial velocity into the site frame using the provided attitude.</p></li>
+<li><p>Computes the relative velocity: if <code class="docutils literal notranslate"><span class="pre">windVelInMsg</span></code> is linked, subtracts <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> from the inertial
+velocity; otherwise uses the inertial velocity directly.</p></li>
+<li><p>Transforms the relative velocity into the site frame using the provided attitude.</p></li>
 <li><p>Computes the drag force magnitude and direction in the site frame.</p></li>
 <li><p>Computes the resulting torque about the site frame origin.</p></li>
 <li><p>Publishes the force and torque through <code class="docutils literal notranslate"><span class="pre">forceOutMsg</span></code> and <code class="docutils literal notranslate"><span class="pre">torqueOutMsg</span></code> (and <code class="docutils literal notranslate"><span class="pre">forceOutMsgC</span></code> and <code class="docutils literal notranslate"><span class="pre">torqueOutMsgC</span></code>).</p></li>
 </ol>
 <p>The model assumes quasi-steady aerodynamics and does not account for lift, shadowing, free-molecular effects, or flow angular rates.</p>
+</section>
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
+<p>The following example demonstrates how to configure the <code class="docutils literal notranslate"><span class="pre">CannonballDrag</span></code> module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create cannonball drag module</span>
+<span class="n">cannonball</span> <span class="o">=</span> <span class="n">CannonballDrag</span><span class="p">()</span>
+<span class="n">cannonball</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;cannonball_drag&quot;</span>
+
+<span class="c1"># Connect input messages</span>
+<span class="n">cannonball</span><span class="o">.</span><span class="n">dragGeometryInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">dragGeometryMsg</span><span class="p">)</span>
+<span class="n">cannonball</span><span class="o">.</span><span class="n">atmoDensInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">atmoPropsMsg</span><span class="p">)</span>
+<span class="n">cannonball</span><span class="o">.</span><span class="n">referenceFrameStateInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">siteStateMsg</span><span class="p">)</span>
+<span class="n">cannonball</span><span class="o">.</span><span class="n">windVelInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">windMsg</span><span class="p">)</span>  <span class="c1"># Optional</span>
+</pre></div>
+</div>
 </section>
 <section id="verification-and-testing">
 <h2>Verification and Testing<a class="headerlink" href="#verification-and-testing" title="Link to this heading"></a></h2>
@@ -244,6 +266,10 @@ frame (C-wrapped output).</p></td>
 <dt class="sig sig-object cpp" id="_CPPv4N14CannonballDrag11UpdateStateE8uint64_t">
 <span id="_CPPv3N14CannonballDrag11UpdateStateE8uint64_t"></span><span id="_CPPv2N14CannonballDrag11UpdateStateE8uint64_t"></span><span id="CannonballDrag::UpdateState__uint64_t"></span><span class="target" id="class_cannonball_drag_1ac5de39c941c205b0efd301d15f020417"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UpdateState</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">CurrentSimNanos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N14CannonballDrag11UpdateStateE8uint64_t" title="Link to this definition"></a><br /></dt>
 <dd><p>Advance the model and publish outputs. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If windVelInMsg is linked, wind velocity is used to compute relative velocity. </p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>CurrentSimNanos</strong> – Current simulation time in nanoseconds. </p>
@@ -275,6 +301,12 @@ frame (C-wrapped output).</p></td>
 <dt class="sig sig-object cpp" id="_CPPv4N14CannonballDrag13atmoDensInMsgE">
 <span id="_CPPv3N14CannonballDrag13atmoDensInMsgE"></span><span id="_CPPv2N14CannonballDrag13atmoDensInMsgE"></span><span id="CannonballDrag::atmoDensInMsg__ReadFunctor:AtmoPropsMsgPayload:"></span><span class="target" id="class_cannonball_drag_1a73c9b6c1369ae6349f35c4247ac3c704"></span><a class="reference internal" href="../../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../../architecture/msgPayloadDefC/AtmoPropsMsgPayload.html#_CPPv419AtmoPropsMsgPayload" title="AtmoPropsMsgPayload"><span class="n"><span class="pre">AtmoPropsMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atmoDensInMsg</span></span></span><a class="headerlink" href="#_CPPv4N14CannonballDrag13atmoDensInMsgE" title="Link to this definition"></a><br /></dt>
 <dd><p>Atmospheric properties input. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N14CannonballDrag12windVelInMsgE">
+<span id="_CPPv3N14CannonballDrag12windVelInMsgE"></span><span id="_CPPv2N14CannonballDrag12windVelInMsgE"></span><span id="CannonballDrag::windVelInMsg__ReadFunctor:WindMsgPayload:"></span><span class="target" id="class_cannonball_drag_1a394e3147f874f62e799a1f1d9fc88e2c"></span><a class="reference internal" href="../../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../../architecture/msgPayloadDefC/WindMsgPayload.html#_CPPv414WindMsgPayload" title="WindMsgPayload"><span class="n"><span class="pre">WindMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">windVelInMsg</span></span></span><a class="headerlink" href="#_CPPv4N14CannonballDrag12windVelInMsgE" title="Link to this definition"></a><br /></dt>
+<dd><p>Wind velocity input. </p>
 </dd></dl>
 
 <dl class="cpp var">

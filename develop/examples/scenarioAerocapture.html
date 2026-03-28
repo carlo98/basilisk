@@ -169,13 +169,16 @@ captured by the planet.</p>
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="scenarioAerocapture.run">
-<span class="sig-prename descclassname"><span class="pre">scenarioAerocapture.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_plots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planetCase</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scenarioAerocapture.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scenarioAerocapture.run" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">scenarioAerocapture.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_plots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planetCase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useWind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scenarioAerocapture.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scenarioAerocapture.run" title="Link to this definition"></a></dt>
 <dd><p>The scenarios can be run with the followings setups parameters:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>show_plots</strong> (<em>bool</em>) – Determines if the script should display plots</p></li>
-<li><p><strong>planetCase</strong> (<em>string</em>) – Specify if a <cite>Mars</cite> or <cite>Earth</cite> arrival is simulated</p></li>
+<li><p><strong>planetCase</strong> (<em>string</em>) – Specify if a <code class="docutils literal notranslate"><span class="pre">Mars</span></code> or <code class="docutils literal notranslate"><span class="pre">Earth</span></code> arrival is simulated</p></li>
+<li><p><strong>useWind</strong> (<em>bool</em>) – If True and <code class="docutils literal notranslate"><span class="pre">planetCase</span> <span class="pre">==</span> <span class="pre">'Earth'</span></code>, link a <code class="docutils literal notranslate"><span class="pre">ZeroWindModel</span></code> via SPICE
+so drag is computed against the atmosphere-relative velocity.  If False (default),
+or for Mars, the inertial spacecraft velocity is used directly.</p></li>
 </ul>
 </dd>
 </dl>

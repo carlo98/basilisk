@@ -154,19 +154,19 @@
 <span class="sd">    tolerance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="o">...</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># s</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># [s]</span>
 
     <span class="n">scSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
     <span class="n">dynProcess</span> <span class="o">=</span> <span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewProcess</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
     <span class="n">dynProcess</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewTask</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="n">dt</span><span class="p">)))</span>
 
-    <span class="n">density</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># kg/m^3</span>
-    <span class="n">cd</span> <span class="o">=</span> <span class="mf">1.5</span>
-    <span class="n">area</span> <span class="o">=</span> <span class="mf">2.75</span> <span class="c1"># m^2</span>
-    <span class="n">r_CP_S</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># m</span>
+    <span class="n">density</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># [kg/m^3]</span>
+    <span class="n">cd</span> <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># [-]</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="mf">2.75</span>  <span class="c1"># [m^2]</span>
+    <span class="n">r_CP_S</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># [m]</span>
 
-    <span class="n">v_SN_N</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># m/s</span>
-    <span class="n">sigma_SN</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+    <span class="n">v_SN_N</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># [m/s]</span>
+    <span class="n">sigma_SN</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>  <span class="c1"># [-] MRP</span>
 
     <span class="n">atmoMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">AtmoPropsMsg</span><span class="p">()</span>
     <span class="n">atmoMsg</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">AtmoPropsMsgPayload</span><span class="p">(</span><span class="n">neutralDensity</span><span class="o">=</span><span class="n">density</span><span class="p">))</span>
@@ -209,7 +209,7 @@
     <span class="n">C_BN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rbk</span><span class="o">.</span><span class="n">MRP2C</span><span class="p">(</span><span class="n">sigma_SN</span><span class="p">))</span>  <span class="c1"># maps N components to B=S components</span>
     <span class="n">v_S</span> <span class="o">=</span> <span class="n">C_BN</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v_SN_N</span><span class="p">)</span>
     <span class="n">v_mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_SN_N</span><span class="p">)</span>  <span class="c1"># drag magnitude depends on speed, frame invariant</span>
-    <span class="k">if</span> <span class="n">v_mag</span> <span class="o">&lt;=</span> <span class="mf">1e-12</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">v_mag</span> <span class="o">&lt;=</span> <span class="mf">1e-12</span><span class="p">:</span>  <span class="c1"># [m/s]</span>
         <span class="n">F_exp_S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">T_exp_S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -289,7 +289,7 @@
 
     <span class="n">planetData</span> <span class="o">=</span> <span class="n">simIncludeGravBody</span><span class="o">.</span><span class="n">BODY_DATA</span><span class="p">[</span><span class="n">planetCase</span><span class="p">]</span>
     <span class="n">gravitationalParameter</span> <span class="o">=</span> <span class="n">planetData</span><span class="o">.</span><span class="n">mu</span>
-    <span class="n">planetRadius</span> <span class="o">=</span> <span class="n">planetData</span><span class="o">.</span><span class="n">radEquator</span>
+    <span class="n">planetRadius</span> <span class="o">=</span> <span class="n">planetData</span><span class="o">.</span><span class="n">radEquator</span>  <span class="c1"># [m]</span>
 
     <span class="n">gravityModel</span> <span class="o">=</span> <span class="n">NBodyGravity</span><span class="o">.</span><span class="n">NBodyGravity</span><span class="p">()</span>
     <span class="n">gravityModel</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;gravity&quot;</span>
@@ -301,11 +301,11 @@
     <span class="n">gravityModel</span><span class="o">.</span><span class="n">addGravityTarget</span><span class="p">(</span><span class="n">bodyName</span><span class="p">,</span> <span class="n">mjBody</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">planetCase</span> <span class="o">==</span> <span class="s2">&quot;earth&quot;</span><span class="p">:</span>
-        <span class="n">baseDensity</span> <span class="o">=</span> <span class="mf">1.217</span>
-        <span class="n">scaleHeight</span> <span class="o">=</span> <span class="mf">8500.0</span>
+        <span class="n">baseDensity</span> <span class="o">=</span> <span class="mf">1.217</span>  <span class="c1"># [kg/m^3]</span>
+        <span class="n">scaleHeight</span> <span class="o">=</span> <span class="mf">8500.0</span>  <span class="c1"># [m]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">baseDensity</span> <span class="o">=</span> <span class="mf">0.020</span>
-        <span class="n">scaleHeight</span> <span class="o">=</span> <span class="mf">11100.0</span>
+        <span class="n">baseDensity</span> <span class="o">=</span> <span class="mf">0.020</span>  <span class="c1"># [kg/m^3]</span>
+        <span class="n">scaleHeight</span> <span class="o">=</span> <span class="mf">11100.0</span>  <span class="c1"># [m]</span>
 
     <span class="n">atmoModel</span> <span class="o">=</span> <span class="n">exponentialAtmosphere</span><span class="o">.</span><span class="n">ExponentialAtmosphere</span><span class="p">()</span>
     <span class="n">atmoModel</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;ExpAtmo&quot;</span>
@@ -317,15 +317,15 @@
     <span class="n">comStateMsg</span> <span class="o">=</span> <span class="n">mjBody</span><span class="o">.</span><span class="n">getCenterOfMass</span><span class="p">()</span><span class="o">.</span><span class="n">stateOutMsg</span>
     <span class="n">atmoModel</span><span class="o">.</span><span class="n">addSpacecraftToModel</span><span class="p">(</span><span class="n">comStateMsg</span><span class="p">)</span>
 
-    <span class="n">projectedArea</span> <span class="o">=</span> <span class="mf">10.0</span>
-    <span class="n">dragCoeff</span> <span class="o">=</span> <span class="mf">2.2</span>
+    <span class="n">projectedArea</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># [m^2]</span>
+    <span class="n">dragCoeff</span> <span class="o">=</span> <span class="mf">2.2</span>  <span class="c1"># [-]</span>
 
     <span class="n">dragGeometryMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">DragGeometryMsg</span><span class="p">()</span>
     <span class="n">dragGeometryMsg</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
         <span class="n">messaging</span><span class="o">.</span><span class="n">DragGeometryMsgPayload</span><span class="p">(</span>
             <span class="n">projectedArea</span><span class="o">=</span><span class="n">projectedArea</span><span class="p">,</span>
             <span class="n">dragCoeff</span><span class="o">=</span><span class="n">dragCoeff</span><span class="p">,</span>
-            <span class="n">r_CP_S</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="n">r_CP_S</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>  <span class="c1"># [m]</span>
         <span class="p">)</span>
     <span class="p">)</span>
 
@@ -337,25 +337,25 @@
     <span class="n">dragModel</span><span class="o">.</span><span class="n">dragGeometryInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">dragGeometryMsg</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">orbitCase</span> <span class="o">==</span> <span class="s2">&quot;LPO&quot;</span><span class="p">:</span>
-        <span class="n">orbAltMin</span> <span class="o">=</span> <span class="mf">300e3</span> <span class="c1"># m</span>
+        <span class="n">orbAltMin</span> <span class="o">=</span> <span class="mf">300e3</span>  <span class="c1"># [m]</span>
         <span class="n">orbAltMax</span> <span class="o">=</span> <span class="n">orbAltMin</span>
     <span class="k">elif</span> <span class="n">orbitCase</span> <span class="o">==</span> <span class="s2">&quot;LTO&quot;</span><span class="p">:</span>
-        <span class="n">orbAltMin</span> <span class="o">=</span> <span class="mf">300e3</span> <span class="c1"># m</span>
-        <span class="n">orbAltMax</span> <span class="o">=</span> <span class="mf">800e3</span> <span class="c1"># m</span>
+        <span class="n">orbAltMin</span> <span class="o">=</span> <span class="mf">300e3</span>  <span class="c1"># [m]</span>
+        <span class="n">orbAltMax</span> <span class="o">=</span> <span class="mf">800e3</span>  <span class="c1"># [m]</span>
 
     <span class="n">rMin</span> <span class="o">=</span> <span class="n">planetRadius</span> <span class="o">+</span> <span class="n">orbAltMin</span>
     <span class="n">rMax</span> <span class="o">=</span> <span class="n">planetRadius</span> <span class="o">+</span> <span class="n">orbAltMax</span>
 
     <span class="n">elements</span> <span class="o">=</span> <span class="n">orbitalMotion</span><span class="o">.</span><span class="n">ClassicElements</span><span class="p">()</span>
     <span class="n">elements</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">rMin</span><span class="o">+</span><span class="n">rMax</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
-    <span class="n">elements</span><span class="o">.</span><span class="n">e</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">rMin</span><span class="o">/</span><span class="n">elements</span><span class="o">.</span><span class="n">a</span>
-    <span class="n">elements</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">elements</span><span class="o">.</span><span class="n">Omega</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">elements</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">elements</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">elements</span><span class="o">.</span><span class="n">e</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">rMin</span><span class="o">/</span><span class="n">elements</span><span class="o">.</span><span class="n">a</span>  <span class="c1"># [-]</span>
+    <span class="n">elements</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># [rad]</span>
+    <span class="n">elements</span><span class="o">.</span><span class="n">Omega</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># [rad]</span>
+    <span class="n">elements</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># [rad]</span>
+    <span class="n">elements</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># [rad]</span>
 
-    <span class="n">meanMotion</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gravitationalParameter</span> <span class="o">/</span> <span class="n">elements</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">orbitPeriod</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">meanMotion</span>
+    <span class="n">meanMotion</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gravitationalParameter</span> <span class="o">/</span> <span class="n">elements</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># [rad/s]</span>
+    <span class="n">orbitPeriod</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">meanMotion</span>  <span class="c1"># [s]</span>
     <span class="n">finalTimeNanos</span> <span class="o">=</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="n">orbitPeriod</span><span class="p">)</span>
 
     <span class="n">stateRecorder</span> <span class="o">=</span> <span class="n">comStateMsg</span><span class="o">.</span><span class="n">recorder</span><span class="p">()</span>
@@ -514,6 +514,69 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Drag force vs reference&quot;</span><span class="p">)</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+
+<div class="viewcode-block" id="test_cannonballDragAtmosphereRelativeVelocityWhenWindLinked">
+<a class="viewcode-back" href="../Documentation/simulation/forceTorque/cannonballDrag/_UnitTest/test_cannonballDrag.html#test_cannonballDrag.test_cannonballDragAtmosphereRelativeVelocityWhenWindLinked">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_cannonballDragAtmosphereRelativeVelocityWhenWindLinked</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that drag uses atmosphere-relative velocity when wind message is linked.</span>
+
+<span class="sd">    Uses a static wind message to guarantee isWritten()=True when the drag model runs,</span>
+<span class="sd">    avoiding any task-ordering timing dependency.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># [s]</span>
+
+    <span class="n">scSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
+    <span class="n">dynProcess</span> <span class="o">=</span> <span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewProcess</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+    <span class="n">dynProcess</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">scSim</span><span class="o">.</span><span class="n">CreateNewTask</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="n">dt</span><span class="p">)))</span>
+
+    <span class="n">density</span> <span class="o">=</span> <span class="mf">1.2</span>   <span class="c1"># [kg/m^3]</span>
+    <span class="n">cd</span> <span class="o">=</span> <span class="mf">2.2</span>        <span class="c1"># [-]</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="mf">1.0</span>      <span class="c1"># [m^2]</span>
+    <span class="n">r_CP_S</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>  <span class="c1"># [m]</span>
+
+    <span class="n">v_SN_N</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">7600.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>   <span class="c1"># [m/s]</span>
+    <span class="n">sigma_SN</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>    <span class="c1"># [-] MRP</span>
+    <span class="n">v_air_N</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">510.44</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>  <span class="c1"># [m/s] known co-rotation wind velocity</span>
+
+    <span class="n">atmoMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">AtmoPropsMsg</span><span class="p">()</span>
+    <span class="n">atmoMsg</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">AtmoPropsMsgPayload</span><span class="p">(</span><span class="n">neutralDensity</span><span class="o">=</span><span class="n">density</span><span class="p">))</span>
+
+    <span class="n">dragGeometryMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">DragGeometryMsg</span><span class="p">()</span>
+    <span class="n">dragGeometryMsg</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">DragGeometryMsgPayload</span><span class="p">(</span>
+        <span class="n">projectedArea</span><span class="o">=</span><span class="n">area</span><span class="p">,</span> <span class="n">dragCoeff</span><span class="o">=</span><span class="n">cd</span><span class="p">,</span> <span class="n">r_CP_S</span><span class="o">=</span><span class="n">r_CP_S</span>
+    <span class="p">))</span>
+
+    <span class="n">siteFrameMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">SCStatesMsg</span><span class="p">()</span>
+    <span class="n">siteFrameMsg</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">SCStatesMsgPayload</span><span class="p">(</span>
+        <span class="n">sigma_BN</span><span class="o">=</span><span class="n">sigma_SN</span><span class="p">,</span> <span class="n">v_BN_N</span><span class="o">=</span><span class="n">v_SN_N</span>
+    <span class="p">))</span>
+
+    <span class="n">windMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">WindMsg</span><span class="p">()</span>
+    <span class="n">windMsg</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">WindMsgPayload</span><span class="p">(</span><span class="n">v_air_N</span><span class="o">=</span><span class="n">v_air_N</span><span class="p">))</span>
+
+    <span class="n">drag</span> <span class="o">=</span> <span class="n">cannonballDrag</span><span class="o">.</span><span class="n">CannonballDrag</span><span class="p">()</span>
+    <span class="n">drag</span><span class="o">.</span><span class="n">dragGeometryInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">dragGeometryMsg</span><span class="p">)</span>
+    <span class="n">drag</span><span class="o">.</span><span class="n">atmoDensInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">atmoMsg</span><span class="p">)</span>
+    <span class="n">drag</span><span class="o">.</span><span class="n">referenceFrameStateInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">siteFrameMsg</span><span class="p">)</span>
+    <span class="n">drag</span><span class="o">.</span><span class="n">windVelInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">windMsg</span><span class="p">)</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">drag</span><span class="p">)</span>
+
+    <span class="n">scSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="n">dt</span><span class="p">))</span>
+    <span class="n">scSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span>
+
+    <span class="n">force_S</span> <span class="o">=</span> <span class="n">drag</span><span class="o">.</span><span class="n">forceOutMsg</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">force_S</span>
+
+    <span class="c1"># Expected: drag uses v_rel = v_SN_N - v_air_N</span>
+    <span class="n">C_SN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rbk</span><span class="o">.</span><span class="n">MRP2C</span><span class="p">(</span><span class="n">sigma_SN</span><span class="p">))</span>  <span class="c1"># identity since sigma=[0,0,0]</span>
+    <span class="n">v_rel_S</span> <span class="o">=</span> <span class="n">C_SN</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v_SN_N</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v_air_N</span><span class="p">))</span>
+    <span class="n">v_mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_rel_S</span><span class="p">)</span>
+    <span class="n">F_exp_S</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">density</span> <span class="o">*</span> <span class="n">v_mag</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cd</span> <span class="o">*</span> <span class="n">area</span> <span class="o">*</span> <span class="p">(</span><span class="n">v_rel_S</span> <span class="o">/</span> <span class="n">v_mag</span><span class="p">)</span>
+
+    <span class="n">npt</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">force_S</span><span class="p">,</span> <span class="n">F_exp_S</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span></div>
 
 
 
