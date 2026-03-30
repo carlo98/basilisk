@@ -146,31 +146,76 @@
 <div class="toctree-wrapper compound">
 </div>
 <dl class="py function" id="module-test_locationPointing">
+<dt class="sig sig-object py" id="test_locationPointing.checkReferenceGeometry">
+<span class="sig-prename descclassname"><span class="pre">test_locationPointing.</span></span><span class="sig-name descname"><span class="pre">checkReferenceGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma_RN_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_BN_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_LN_N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_SN_N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pHat_B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cHat_B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_LP_N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isStrip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_locationPointing.html#checkReferenceGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_locationPointing.checkReferenceGeometry" title="Link to this definition"></a></dt>
+<dd><p>Verify geometric properties of the reference attitude.</p>
+<dl class="simple">
+<dt>For every recorded time step this function checks:</dt><dd><ol class="arabic simple">
+<li><p><strong>Pointing constraint</strong> – the body-fixed pointing axis <code class="docutils literal notranslate"><span class="pre">pHat_B</span></code>,
+when expressed in the inertial frame through the reference DCM,
+must be aligned with the target direction <code class="docutils literal notranslate"><span class="pre">r_LS_N</span></code>.</p></li>
+<li><p><strong>Scan-line constraint</strong> (strip imaging only) – the body-fixed
+cross-track axis <code class="docutils literal notranslate"><span class="pre">cHat_B</span></code>, when expressed in the inertial frame,
+must be perpendicular to the strip scanning direction <code class="docutils literal notranslate"><span class="pre">v_LP_N</span></code>.</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma_RN_list</strong> – recorded reference MRP history (N×3).</p></li>
+<li><p><strong>sigma_BN_list</strong> – recorded body MRP history (N×3), used only for indexing.</p></li>
+<li><p><strong>r_LN_N</strong> – inertial target position [m].</p></li>
+<li><p><strong>r_SN_N</strong> – inertial spacecraft position [m].</p></li>
+<li><p><strong>pHat_B</strong> – body-fixed pointing axis.</p></li>
+<li><p><strong>cHat_B</strong> – body-fixed cross-track axis.</p></li>
+<li><p><strong>v_LP_N</strong> – strip velocity in inertial frame.</p></li>
+<li><p><strong>isStrip</strong> – True when strip-imaging mode is active.</p></li>
+<li><p><strong>accuracy</strong> – absolute tolerance for the checks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>number of failures and list of error strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(failCount, messages)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="test_locationPointing.locationPointingTestFunction">
-<span class="sig-prename descclassname"><span class="pre">test_locationPointing.</span></span><span class="sig-name descname"><span class="pre">locationPointingTestFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_plots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_LS_NIn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locationType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use3DRate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_locationPointing.html#locationPointingTestFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_locationPointing.locationPointingTestFunction" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">test_locationPointing.</span></span><span class="sig-name descname"><span class="pre">locationPointingTestFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_plots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_LS_NIn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_LP_NIn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locationType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use3DRate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_locationPointing.html#locationPointingTestFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_locationPointing.locationPointingTestFunction" title="Link to this definition"></a></dt>
 <dd><p>Test method</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="test_locationPointing.test_locationPointing">
-<span class="sig-prename descclassname"><span class="pre">test_locationPointing.</span></span><span class="sig-name descname"><span class="pre">test_locationPointing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_plots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_LS_N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locationType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use3DRate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_locationPointing.html#test_locationPointing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_locationPointing.test_locationPointing" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">test_locationPointing.</span></span><span class="sig-name descname"><span class="pre">test_locationPointing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_plots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_LS_N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locationType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_LP_N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use3DRate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_locationPointing.html#test_locationPointing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_locationPointing.test_locationPointing" title="Link to this definition"></a></dt>
 <dd><p><strong>Validation Test Description</strong></p>
 <p>This unit test ensures that the Attitude Guidance and Attitude Reference messages content are properly computed
-for a series of desired inertial target locations</p>
+for a series of desired inertial target locations.
+For strip imaging (locationType=3), the test also verifies that the extra rotation aligns <code class="docutils literal notranslate"><span class="pre">cHat_B</span></code>
+perpendicular to the scanning direction.</p>
 <p><strong>Test Parameters</strong></p>
-<p>Discuss the test parameters used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>r_LS_N</strong> (<em>float</em>) – position vector of location relative to spacecraft</p></li>
-<li><p><strong>locationType</strong> (<em>int</em>) – choose whether to use <code class="docutils literal notranslate"><span class="pre">locationInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">celBodyInMsg</span></code> or <code class="docutils literal notranslate"><span class="pre">scTargetInMsg</span></code></p></li>
+<li><p><strong>locationType</strong> (<em>int</em>) – choose whether to use <code class="docutils literal notranslate"><span class="pre">locationInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">celBodyInMsg</span></code>,
+<code class="docutils literal notranslate"><span class="pre">scTargetInMsg</span></code>, or <code class="docutils literal notranslate"><span class="pre">locationstripInMsg</span></code></p></li>
+<li><p><strong>v_LP_N</strong> (<em>float</em>) – strip velocity vector relative to the planet (inertial frame),
+only used when locationType=3</p></li>
 <li><p><strong>use3DRate</strong> (<em>bool</em>) – choose between 2D or 3D rate control</p></li>
 <li><p><strong>accuracy</strong> (<em>float</em>) – absolute accuracy value used in the validation tests</p></li>
 </ul>
 </dd>
 </dl>
 <p><strong>Description of Variables Being Tested</strong></p>
-<p>The script checks the attitude and rate outputs.</p>
+<p>The script checks the attitude and rate outputs.
+For strip imaging, it additionally checks that the reference attitude correctly
+constrains the roll degree of freedom so that <code class="docutils literal notranslate"><span class="pre">cHat_B</span></code> is perpendicular to the
+strip scanning direction.</p>
 </dd></dl>
 
 </section>

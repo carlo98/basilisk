@@ -109,11 +109,7 @@
 <span class="c1">#</span>
 <span class="c1">#</span>
 
-<span class="c1">#   Unit Test Script</span>
-<span class="c1">#   Module Name:        locationPointing</span>
-<span class="c1">#   Author:             Hanspeter Schaub</span>
-<span class="c1">#   Creation Date:      May 9, 2021</span>
-<span class="c1">#</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -130,40 +126,52 @@
 <a class="viewcode-back" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/_UnitTest/test_locationPointing.html#test_locationPointing.test_locationPointing">[docs]</a>
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1e-12</span><span class="p">])</span>
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;r_LS_N&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;locationType&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;locationType, v_LP_N&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span>
+<span class="p">])</span>
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;use3DRate&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_locationPointing</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">r_LS_N</span><span class="p">,</span> <span class="n">locationType</span><span class="p">,</span> <span class="n">use3DRate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_locationPointing</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">r_LS_N</span><span class="p">,</span> <span class="n">locationType</span><span class="p">,</span> <span class="n">v_LP_N</span><span class="p">,</span> <span class="n">use3DRate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Validation Test Description**</span>
 
 <span class="sd">    This unit test ensures that the Attitude Guidance and Attitude Reference messages content are properly computed</span>
-<span class="sd">    for a series of desired inertial target locations</span>
-
+<span class="sd">    for a series of desired inertial target locations.</span>
+<span class="sd">    For strip imaging (locationType=3), the test also verifies that the extra rotation aligns ``cHat_B``</span>
+<span class="sd">    perpendicular to the scanning direction.</span>
 
 <span class="sd">    **Test Parameters**</span>
 
-<span class="sd">    Discuss the test parameters used.</span>
-
 <span class="sd">    Args:</span>
 <span class="sd">        r_LS_N (float): position vector of location relative to spacecraft</span>
-<span class="sd">        locationType (int): choose whether to use ``locationInMsg``, ``celBodyInMsg`` or ``scTargetInMsg``</span>
+<span class="sd">        locationType (int): choose whether to use ``locationInMsg``, ``celBodyInMsg``,</span>
+<span class="sd">            ``scTargetInMsg``, or ``locationstripInMsg``</span>
+<span class="sd">        v_LP_N (float): strip velocity vector relative to the planet (inertial frame),</span>
+<span class="sd">            only used when locationType=3</span>
 <span class="sd">        use3DRate (bool): choose between 2D or 3D rate control</span>
 <span class="sd">        accuracy (float): absolute accuracy value used in the validation tests</span>
 
 <span class="sd">    **Description of Variables Being Tested**</span>
 
 <span class="sd">    The script checks the attitude and rate outputs.</span>
+<span class="sd">    For strip imaging, it additionally checks that the reference attitude correctly</span>
+<span class="sd">    constrains the roll degree of freedom so that ``cHat_B`` is perpendicular to the</span>
+<span class="sd">    strip scanning direction.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="p">[</span><span class="n">testResults</span><span class="p">,</span> <span class="n">testMessage</span><span class="p">]</span> <span class="o">=</span> <span class="n">locationPointingTestFunction</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">r_LS_N</span><span class="p">,</span> <span class="n">locationType</span><span class="p">,</span>
-                                                              <span class="n">use3DRate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">testResults</span><span class="p">,</span> <span class="n">testMessage</span><span class="p">]</span> <span class="o">=</span> <span class="n">locationPointingTestFunction</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">r_LS_N</span><span class="p">,</span> <span class="n">v_LP_N</span><span class="p">,</span>
+                                                              <span class="n">locationType</span><span class="p">,</span> <span class="n">use3DRate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">testResults</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">testMessage</span></div>
 
 
 
 <div class="viewcode-block" id="locationPointingTestFunction">
 <a class="viewcode-back" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/_UnitTest/test_locationPointing.html#test_locationPointing.locationPointingTestFunction">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">locationPointingTestFunction</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">r_LS_NIn</span><span class="p">,</span> <span class="n">locationType</span><span class="p">,</span> <span class="n">use3DRate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">locationPointingTestFunction</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">r_LS_NIn</span><span class="p">,</span><span class="n">v_LP_NIn</span><span class="p">,</span><span class="n">locationType</span><span class="p">,</span> <span class="n">use3DRate</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test method&quot;&quot;&quot;</span>
     <span class="n">testFailCount</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">testMessages</span> <span class="o">=</span> <span class="p">[]</span>
@@ -178,17 +186,22 @@
 
     <span class="c1"># setup</span>
     <span class="n">pHat_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">cHat_B</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
     <span class="n">r_SN_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
     <span class="n">r_LS_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_LS_NIn</span><span class="p">)</span>
+    <span class="n">v_LP_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v_LP_NIn</span><span class="p">)</span>
     <span class="n">omega_BN_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">])</span>
     <span class="n">sigma_BN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
     <span class="n">r_LN_N</span> <span class="o">=</span> <span class="n">r_LS_N</span> <span class="o">+</span> <span class="n">r_SN_N</span>
+    <span class="n">r_PN_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">])</span>   <span class="c1"># planet center in inertial frame</span>
+    <span class="n">r_LP_N_pos</span> <span class="o">=</span> <span class="n">r_LN_N</span> <span class="o">-</span> <span class="n">r_PN_N</span>     <span class="c1"># target position relative to planet center</span>
 
     <span class="c1"># setup module to be tested</span>
     <span class="n">module</span> <span class="o">=</span> <span class="n">locationPointing</span><span class="o">.</span><span class="n">locationPointing</span><span class="p">()</span>
     <span class="n">module</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;locationPointingTag&quot;</span>
     <span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
     <span class="n">module</span><span class="o">.</span><span class="n">pHat_B</span> <span class="o">=</span> <span class="n">pHat_B</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">cHat_B</span> <span class="o">=</span> <span class="n">cHat_B</span>
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span>
     <span class="n">module</span><span class="o">.</span><span class="n">smallAngle</span> <span class="o">=</span> <span class="n">eps</span>
     <span class="k">if</span> <span class="n">use3DRate</span><span class="p">:</span>
@@ -218,6 +231,13 @@
         <span class="n">locationInMsgData</span><span class="o">.</span><span class="n">r_BN_N</span> <span class="o">=</span> <span class="n">r_LN_N</span>
         <span class="n">locationInMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">NavTransMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">locationInMsgData</span><span class="p">)</span>
         <span class="n">module</span><span class="o">.</span><span class="n">scTargetInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">locationInMsg</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">locationType</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">locationInMsgData</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">StripStateMsgPayload</span><span class="p">()</span>
+        <span class="n">locationInMsgData</span><span class="o">.</span><span class="n">r_LN_N</span> <span class="o">=</span> <span class="n">r_LN_N</span>
+        <span class="n">locationInMsgData</span><span class="o">.</span><span class="n">r_LP_N</span> <span class="o">=</span> <span class="n">r_LP_N_pos</span>
+        <span class="n">locationInMsgData</span><span class="o">.</span><span class="n">v_LP_N</span> <span class="o">=</span> <span class="n">v_LP_N</span>
+        <span class="n">locationInMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">StripStateMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">locationInMsgData</span><span class="p">)</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">locationstripInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">locationInMsg</span><span class="p">)</span>
 
     <span class="c1"># subscribe input messages to module</span>
     <span class="n">module</span><span class="o">.</span><span class="n">scTransInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">scTransInMsg</span><span class="p">)</span>
@@ -244,8 +264,8 @@
         <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="n">truthSigmaBR</span><span class="p">,</span> <span class="n">truthOmegaBR</span><span class="p">,</span> <span class="n">truthSigmaRN</span><span class="p">,</span> <span class="n">truthOmegaRN_B</span><span class="p">,</span> <span class="n">truthOmegaRN_N</span> <span class="o">=</span> \
-        <span class="n">truthValues</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">,</span> <span class="n">r_LN_N</span><span class="p">,</span> <span class="n">r_SN_N</span><span class="p">,</span> <span class="n">scAttRec</span><span class="o">.</span><span class="n">sigma_BN</span><span class="p">,</span> <span class="n">scAttRec</span><span class="o">.</span><span class="n">omega_BN_B</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">timeStep</span><span class="p">,</span>
-                    <span class="n">use3DRate</span><span class="p">)</span>
+        <span class="n">truthValues</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">,</span> <span class="n">cHat_B</span><span class="p">,</span> <span class="n">r_LN_N</span><span class="p">,</span> <span class="n">r_SN_N</span><span class="p">,</span> <span class="n">scAttRec</span><span class="o">.</span><span class="n">sigma_BN</span><span class="p">,</span> <span class="n">scAttRec</span><span class="o">.</span><span class="n">omega_BN_B</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span>
+                    <span class="n">timeStep</span><span class="p">,</span> <span class="n">use3DRate</span><span class="p">,</span> <span class="n">v_LP_N</span><span class="o">=</span><span class="n">v_LP_N</span><span class="p">,</span> <span class="n">r_LP_N_pos</span><span class="o">=</span><span class="n">r_LP_N_pos</span><span class="p">,</span> <span class="n">isStrip</span><span class="o">=</span><span class="p">(</span><span class="n">locationType</span> <span class="o">==</span> <span class="mi">3</span><span class="p">))</span>
 
     <span class="c1"># compare the module results to the truth values</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">truthSigmaBR</span><span class="p">)):</span>
@@ -288,6 +308,16 @@
                                 <span class="nb">str</span><span class="p">(</span><span class="n">attRefOutMsgRec</span><span class="o">.</span><span class="n">times</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">macros</span><span class="o">.</span><span class="n">NANO2SEC</span><span class="p">)</span> <span class="o">+</span>
                                 <span class="s2">&quot;sec</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
+    <span class="c1"># Geometric property checks on the reference attitude</span>
+    <span class="c1"># Use eps (the module&#39;s smallAngle threshold) as tolerance because the module</span>
+    <span class="c1"># intentionally zeroes sigma_BR when the pointing error is below smallAngle,</span>
+    <span class="c1"># so the reference attitude can be off by up to ~eps in pointing direction.</span>
+    <span class="n">geomFailCount</span><span class="p">,</span> <span class="n">geomMessages</span> <span class="o">=</span> <span class="n">checkReferenceGeometry</span><span class="p">(</span>
+        <span class="n">attRefOutMsgRec</span><span class="o">.</span><span class="n">sigma_RN</span><span class="p">,</span> <span class="n">scAttRec</span><span class="o">.</span><span class="n">sigma_BN</span><span class="p">,</span> <span class="n">r_LN_N</span><span class="p">,</span> <span class="n">r_SN_N</span><span class="p">,</span>
+        <span class="n">pHat_B</span><span class="p">,</span> <span class="n">cHat_B</span><span class="p">,</span> <span class="n">v_LP_N</span><span class="p">,</span> <span class="n">isStrip</span><span class="o">=</span><span class="p">(</span><span class="n">locationType</span> <span class="o">==</span> <span class="mi">3</span><span class="p">),</span> <span class="n">accuracy</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+    <span class="n">testFailCount</span> <span class="o">+=</span> <span class="n">geomFailCount</span>
+    <span class="n">testMessages</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">geomMessages</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">testFailCount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PASSED: &quot;</span> <span class="o">+</span> <span class="n">module</span><span class="o">.</span><span class="n">ModelTag</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -297,7 +327,82 @@
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">truthValues</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">,</span> <span class="n">r_LN_N</span><span class="p">,</span> <span class="n">r_SN_N</span><span class="p">,</span> <span class="n">sigma_BNList</span><span class="p">,</span> <span class="n">omega_BNList</span><span class="p">,</span> <span class="n">smallAngle</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">use3DRate</span><span class="p">):</span>
+<div class="viewcode-block" id="checkReferenceGeometry">
+<a class="viewcode-back" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/_UnitTest/test_locationPointing.html#test_locationPointing.checkReferenceGeometry">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">checkReferenceGeometry</span><span class="p">(</span><span class="n">sigma_RN_list</span><span class="p">,</span> <span class="n">sigma_BN_list</span><span class="p">,</span> <span class="n">r_LN_N</span><span class="p">,</span> <span class="n">r_SN_N</span><span class="p">,</span>
+                           <span class="n">pHat_B</span><span class="p">,</span> <span class="n">cHat_B</span><span class="p">,</span> <span class="n">v_LP_N</span><span class="p">,</span> <span class="n">isStrip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify geometric properties of the reference attitude.</span>
+
+<span class="sd">    For every recorded time step this function checks:</span>
+<span class="sd">        1. **Pointing constraint** – the body-fixed pointing axis ``pHat_B``,</span>
+<span class="sd">           when expressed in the inertial frame through the reference DCM,</span>
+<span class="sd">           must be aligned with the target direction ``r_LS_N``.</span>
+<span class="sd">        2. **Scan-line constraint** (strip imaging only) – the body-fixed</span>
+<span class="sd">           cross-track axis ``cHat_B``, when expressed in the inertial frame,</span>
+<span class="sd">           must be perpendicular to the strip scanning direction ``v_LP_N``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sigma_RN_list: recorded reference MRP history (N×3).</span>
+<span class="sd">        sigma_BN_list: recorded body MRP history (N×3), used only for indexing.</span>
+<span class="sd">        r_LN_N: inertial target position [m].</span>
+<span class="sd">        r_SN_N: inertial spacecraft position [m].</span>
+<span class="sd">        pHat_B: body-fixed pointing axis.</span>
+<span class="sd">        cHat_B: body-fixed cross-track axis.</span>
+<span class="sd">        v_LP_N: strip velocity in inertial frame.</span>
+<span class="sd">        isStrip: True when strip-imaging mode is active.</span>
+<span class="sd">        accuracy: absolute tolerance for the checks.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (failCount, messages): number of failures and list of error strings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">failCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">r_LS_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_LN_N</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_SN_N</span><span class="p">)</span>
+    <span class="n">rHat_LS_N</span> <span class="o">=</span> <span class="n">r_LS_N</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r_LS_N</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sigma_RN_list</span><span class="p">)):</span>
+        <span class="n">sigma_RN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sigma_RN_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">dcm_RN</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">MRP2C</span><span class="p">(</span><span class="n">sigma_RN</span><span class="p">)</span>  <span class="c1"># maps N -&gt; R (body)</span>
+
+        <span class="c1"># --- 1. Pointing check: pHat_B expressed in N must align with rHat_LS_N ---</span>
+        <span class="c1"># dcm_RN maps inertial vectors to body frame, so</span>
+        <span class="c1"># pHat_N = dcm_RN^T . pHat_B</span>
+        <span class="n">pHat_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">dcm_RN</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">)</span>
+        <span class="n">crossProd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">pHat_N</span><span class="p">,</span> <span class="n">rHat_LS_N</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">crossProd</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">accuracy</span><span class="p">:</span>
+            <span class="n">failCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;FAILED: Pointing check at index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;|pHat_N x rHat_LS_N| = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">crossProd</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(should be &lt; </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># --- 2. Scan-line check (strip imaging only) ---</span>
+        <span class="k">if</span> <span class="n">isStrip</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_LP_N</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+            <span class="n">v_hat_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v_LP_N</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_LP_N</span><span class="p">)</span>
+            <span class="c1"># Reproduce the alignmentThreshold check from C code:</span>
+            <span class="c1"># if v_perp = pHat_B x v_TP_B is too small, the C code skips</span>
+            <span class="c1"># the extra strip rotation, so perpendicularity is not guaranteed.</span>
+            <span class="n">alignmentThreshold</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># default value in C code</span>
+            <span class="n">v_TP_B_check</span> <span class="o">=</span> <span class="n">dcm_RN</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v_hat_N</span><span class="p">)</span>
+            <span class="n">v_TP_B_check</span> <span class="o">=</span> <span class="n">v_TP_B_check</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_TP_B_check</span><span class="p">)</span>
+            <span class="n">v_perp_check</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">,</span> <span class="n">v_TP_B_check</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_perp_check</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">alignmentThreshold</span><span class="p">:</span>
+                <span class="n">cHat_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">dcm_RN</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cHat_B</span><span class="p">)</span>
+                <span class="n">dotProduct</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cHat_N</span><span class="p">,</span> <span class="n">v_hat_N</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">dotProduct</span> <span class="o">&gt;</span> <span class="n">accuracy</span><span class="p">:</span>
+                    <span class="n">failCount</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;FAILED: Scan-line perpendicularity check at index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;|cHat_N . vHat| = </span><span class="si">{</span><span class="n">dotProduct</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;(should be &lt; </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">failCount</span><span class="p">,</span> <span class="n">messages</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">truthValues</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">,</span> <span class="n">cHat_B</span><span class="p">,</span> <span class="n">r_LN_N</span><span class="p">,</span> <span class="n">r_SN_N</span><span class="p">,</span> <span class="n">sigma_BNList</span><span class="p">,</span> <span class="n">omega_BNList</span><span class="p">,</span> <span class="n">smallAngle</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span>
+                <span class="n">use3DRate</span><span class="p">,</span> <span class="n">v_LP_N</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">r_LP_N_pos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">isStrip</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="c1"># setup eHat180_B</span>
     <span class="n">eHat180_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">eHat180_B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
@@ -317,7 +422,10 @@
         <span class="n">sigma_BN</span> <span class="o">=</span> <span class="n">sigma_BNList</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
         <span class="n">dcmBN</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">MRP2C</span><span class="p">(</span><span class="n">sigma_BN</span><span class="p">)</span>
         <span class="n">r_LS_B</span> <span class="o">=</span> <span class="n">dcmBN</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r_LS_N</span><span class="p">)</span>
-        <span class="n">phi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">pHat_B</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r_LS_B</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r_LS_B</span><span class="p">))</span>
+        <span class="n">dum1</span> <span class="o">=</span> <span class="n">pHat_B</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r_LS_B</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r_LS_B</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dum1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">dum1</span> <span class="o">=</span> <span class="n">dum1</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dum1</span><span class="p">)</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">dum1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">phi</span> <span class="o">&lt;</span> <span class="n">smallAngle</span><span class="p">:</span>
             <span class="n">sigma_BR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -328,12 +436,59 @@
             <span class="n">eHat_B</span> <span class="o">=</span> <span class="n">eHat_B</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">eHat_B</span><span class="p">)</span>
             <span class="n">sigma_BR</span> <span class="o">=</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">phi</span> <span class="o">/</span> <span class="mf">4.</span><span class="p">)</span> <span class="o">*</span> <span class="n">eHat_B</span>
 
+        <span class="c1"># Compute pointing-only reference attitude sigma_RN</span>
+        <span class="n">sigma_RN</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">addMRP</span><span class="p">(</span><span class="n">sigma_BN</span><span class="p">,</span> <span class="o">-</span><span class="n">sigma_BR</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">isStrip</span> <span class="ow">and</span> <span class="n">v_LP_N</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># --- Extra rotation for strip imaging ---</span>
+            <span class="n">alignmentThreshold</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># default value in C code</span>
+
+            <span class="c1"># Step 1: Transform strip velocity to reference body frame</span>
+            <span class="n">dcmRN</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">MRP2C</span><span class="p">(</span><span class="n">sigma_RN</span><span class="p">)</span>
+            <span class="n">v_hat</span> <span class="o">=</span> <span class="n">v_LP_N</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_LP_N</span><span class="p">)</span>
+            <span class="n">v_TP_B</span> <span class="o">=</span> <span class="n">dcmRN</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v_hat</span><span class="p">)</span>
+            <span class="n">v_TP_B</span> <span class="o">=</span> <span class="n">v_TP_B</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_TP_B</span><span class="p">)</span>
+
+            <span class="c1"># Step 2: Compute v_perp = pHat_B x v_TP_B</span>
+            <span class="n">v_perp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">pHat_B</span><span class="p">,</span> <span class="n">v_TP_B</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_perp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">alignmentThreshold</span><span class="p">:</span>
+                <span class="c1"># Special case: v_TP_B and pHat_B are colinear or nearly colinear.</span>
+                <span class="c1"># v_perp is either not defined or unstable (90-degree shifts).</span>
+                <span class="c1"># No extra rotation performed (matches C code goto skipStripRotation).</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">v_perp</span> <span class="o">=</span> <span class="n">v_perp</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_perp</span><span class="p">)</span>
+
+                <span class="c1"># Step 3: Choose sign of v_perp to minimize rotation from cHat_B</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cHat_B</span><span class="p">,</span> <span class="n">v_perp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                    <span class="n">v_perp</span> <span class="o">=</span> <span class="o">-</span><span class="n">v_perp</span>
+
+                <span class="c1"># Step 4: Compute rotation angle from cHat_B to v_perp</span>
+                <span class="n">dotProd2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cHat_B</span><span class="p">,</span> <span class="n">v_perp</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dotProd2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+                    <span class="n">dotProd2</span> <span class="o">=</span> <span class="n">dotProd2</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dotProd2</span><span class="p">)</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">dotProd2</span><span class="p">)</span>
+
+                <span class="c1"># Step 5: Compute sigma_R2R</span>
+                <span class="k">if</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="n">smallAngle</span><span class="p">:</span>
+                    <span class="n">sigma_R2R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">eHat_R2R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">cHat_B</span><span class="p">,</span> <span class="n">v_perp</span><span class="p">)</span>
+                    <span class="n">eHat_R2R</span> <span class="o">=</span> <span class="n">eHat_R2R</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">eHat_R2R</span><span class="p">)</span>
+                    <span class="n">sigma_R2R</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mf">4.</span><span class="p">)</span> <span class="o">*</span> <span class="n">eHat_R2R</span>
+
+                <span class="c1"># Step 6: Compose sigma_R2N = addMRP(sigma_RN, sigma_R2R)</span>
+                <span class="n">sigma_R2N</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">addMRP</span><span class="p">(</span><span class="n">sigma_RN</span><span class="p">,</span> <span class="n">sigma_R2R</span><span class="p">)</span>
+
+                <span class="c1"># Step 7: Replace sigma_BR with strip-corrected value</span>
+                <span class="n">sigma_BR</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">subMRP</span><span class="p">(</span><span class="n">sigma_BN</span><span class="p">,</span> <span class="n">sigma_R2N</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">dsigma</span> <span class="o">=</span> <span class="p">(</span><span class="n">sigma_BR</span> <span class="o">-</span> <span class="n">sigma_BR_Out</span><span class="p">[</span><span class="n">counter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">dt</span>
             <span class="n">Binv</span> <span class="o">=</span> <span class="n">RigidBodyKinematics</span><span class="o">.</span><span class="n">BinvMRP</span><span class="p">(</span><span class="n">sigma_BR</span><span class="p">)</span>
             <span class="n">omega_BR_B</span> <span class="o">=</span> <span class="n">Binv</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dsigma</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span>
 
-        <span class="k">if</span> <span class="n">use3DRate</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">use3DRate</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isStrip</span><span class="p">:</span>
             <span class="n">rHat_LS_B</span> <span class="o">=</span> <span class="n">r_LS_B</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r_LS_B</span><span class="p">)</span>
             <span class="n">omega_BR_B</span> <span class="o">=</span> <span class="n">omega_BR_B</span> <span class="o">+</span> <span class="p">(</span><span class="n">omega_BNList</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">rHat_LS_B</span><span class="p">))</span><span class="o">*</span><span class="n">rHat_LS_B</span>
 
@@ -350,7 +505,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">locationPointingTestFunction</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
+    <span class="n">locationPointingTestFunction</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
 </pre></div>
 
            </div>

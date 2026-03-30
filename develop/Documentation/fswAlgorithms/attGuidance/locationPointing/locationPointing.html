@@ -146,9 +146,11 @@
 <span id="locationpointing"></span><h1>Module: locationPointing<a class="headerlink" href="#module-locationpointing" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>This module generates an attitude guidance message to make a specified spacecraft pointing vector target an inertial location.
-This location could be on a planet if this module is connected with <a class="reference internal" href="../../../simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> for example, or it could point
-to a celestial object center using <a class="reference internal" href="../../../architecture/msgPayloadDefC/EphemerisMsgPayload.html#ephemerismsgpayload"><span class="std std-ref">EphemerisMsgPayload</span></a>, or a spacecraft location using <a class="reference internal" href="../../../architecture/msgPayloadDefC/NavTransMsgPayload.html#navtransmsgpayload"><span class="std std-ref">NavTransMsgPayload</span></a>.</p>
+<p>This module computes attitude guidance and reference messages for two imaging modes:</p>
+<ul class="simple">
+<li><p><strong>Location Pointing Mode</strong>: An attitude guidance message is generated to make a specified spacecraft pointing vector point at an inertial target location. This location can be on a planet if this module is connected with <a class="reference internal" href="../../../architecture/msgPayloadDefC/GroundStateMsgPayload.html#groundstatemsgpayload"><span class="std std-ref">GroundStateMsgPayload</span></a>, on a celestial object center using <a class="reference internal" href="../../../architecture/msgPayloadDefC/EphemerisMsgPayload.html#ephemerismsgpayload"><span class="std std-ref">EphemerisMsgPayload</span></a>, or on a spacecraft using <a class="reference internal" href="../../../architecture/msgPayloadDefC/NavTransMsgPayload.html#navtransmsgpayload"><span class="std std-ref">NavTransMsgPayload</span></a>.</p></li>
+<li><p><strong>Strip Imaging Mode</strong>: When connected to a <a class="reference internal" href="../../../architecture/msgPayloadDefC/StripStateMsgPayload.html#stripstatemsgpayload"><span class="std std-ref">StripStateMsgPayload</span></a> message, the module first points the body-fixed pointing vector at the moving target on the strip centerline. It then performs an additional rotation about this pointing direction so that a secondary body-fixed vector becomes orthogonal to the strip scanning direction. This secondary rotation is applied only if the pointing vector and the strip scanning direction fulfill the non-collinearity constraint.</p></li>
+</ul>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
@@ -182,19 +184,23 @@ provides information on what this message is used for.</p>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/GroundStateMsgPayload.html#groundstatemsgpayload"><span class="std std-ref">GroundStateMsgPayload</span></a></p></td>
 <td><p>input msg containing the inertial point location of interest</p></td>
 </tr>
-<tr class="row-odd"><td><p>celBodyInMsg</p></td>
+<tr class="row-odd"><td><p>locationstripInMsg</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/StripStateMsgPayload.html#stripstatemsgpayload"><span class="std std-ref">StripStateMsgPayload</span></a></p></td>
+<td><p>(alternative) input msg from <a class="reference internal" href="../../../simulation/environment/stripLocation/stripLocation.html#striplocation"><span class="std std-ref">Module: stripLocation</span></a> containing the inertial position and velocity of the current strip target point</p></td>
+</tr>
+<tr class="row-even"><td><p>celBodyInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EphemerisMsgPayload.html#ephemerismsgpayload"><span class="std std-ref">EphemerisMsgPayload</span></a></p></td>
 <td><p>(alternative) input msg containing the inertial point location of a celestial body of interest</p></td>
 </tr>
-<tr class="row-even"><td><p>scTargetInMsg</p></td>
+<tr class="row-odd"><td><p>scTargetInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/NavTransMsgPayload.html#navtransmsgpayload"><span class="std std-ref">NavTransMsgPayload</span></a></p></td>
 <td><p>(alternative) input msg with inertial target spacecraft translational states</p></td>
 </tr>
-<tr class="row-odd"><td><p>attGuidOutMsg</p></td>
+<tr class="row-even"><td><p>attGuidOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AttGuidMsgPayload.html#attguidmsgpayload"><span class="std std-ref">AttGuidMsgPayload</span></a></p></td>
 <td><p>output message with the attitude guidance</p></td>
 </tr>
-<tr class="row-even"><td><p>attRefOutMsg</p></td>
+<tr class="row-odd"><td><p>attRefOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a></p></td>
 <td><p>output message with the attitude reference</p></td>
 </tr>
@@ -203,54 +209,132 @@ provides information on what this message is used for.</p>
 </section>
 <section id="detailed-module-description">
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
-<p>The inertial location of interest is given by <span class="math notranslate nohighlight">\({\bf r}_{L/N}\)</span> and can be either extracted from <code class="docutils literal notranslate"><span class="pre">locationInMsg</span></code> when
+<section id="location-pointing-mode">
+<h3>Location Pointing Mode<a class="headerlink" href="#location-pointing-mode" title="Link to this heading"></a></h3>
+<p>The inertial location of interest w.r.t the inertial origin is given by <span class="math notranslate nohighlight">\({\bf r}_{L/N}\)</span> and can be either extracted from <code class="docutils literal notranslate"><span class="pre">locationInMsg</span></code> when
 a location on a planet is provided,  <code class="docutils literal notranslate"><span class="pre">celBodyInMsg</span></code> when a celestial body’s ephemeris location is provided (for pointing
-at the Sun or the Earth), or <code class="docutils literal notranslate"><span class="pre">scTargetInMsg</span></code> when pointing at another spacecraft.
+at the Sun or the Earth), <code class="docutils literal notranslate"><span class="pre">scTargetInMsg</span></code> when pointing at another spacecraft, or <code class="docutils literal notranslate"><span class="pre">locationstripInMsg</span></code> when performing
+strip imaging.
 The vector pointing from the satellite location <span class="math notranslate nohighlight">\({\bf r}_{S/N}\)</span> to this location is then</p>
 <div class="math notranslate nohighlight">
 \[{\bf r}_{L/S} = {\bf r}_{L/N} - {\bf r}_{S/N}\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\hat{\bf r}_{L/S}\)</span> be the normalized heading vector to this location.</p>
-<p>The unit vector <span class="math notranslate nohighlight">\(\hat{\bf p}\)</span> is a body-fixed vector and denotes the body axis which is to point towards
-the desired location <span class="math notranslate nohighlight">\(L\)</span>.  Thus this modules performs a 2-degree of freedom attitude guidance and
+<p>The unit vector <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> is a body-fixed vector and denotes the body axis which is to point towards
+the desired location <span class="math notranslate nohighlight">\(L\)</span>.  Thus this mode performs a 2-degree of freedom attitude guidance and
 control solution.</p>
-<p>The eigen-axis to rotate <span class="math notranslate nohighlight">\(\hat{\bf p}\)</span> towards <span class="math notranslate nohighlight">\(\hat{\bf r}_{L/S}\)</span> is given by</p>
+<p>The eigen-axis to rotate <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> towards <span class="math notranslate nohighlight">\(\hat{\bf r}_{L/S}\)</span> is given by</p>
 <div class="math notranslate nohighlight">
-\[\hat{\bf e} = \frac{\hat{\bf p} \times \hat{\bf r}_{L/S}}{|\hat{\bf p} \times \hat{\bf r}_{L/S}|}\]</div>
+\[\hat{\bf e} = \frac{\hat{\bf p}_B \times \hat{\bf r}_{L/S}}{|\hat{\bf p}_B \times \hat{\bf r}_{L/S}|}\]</div>
 <p>The principle rotation angle <span class="math notranslate nohighlight">\(\phi\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[\phi = \arccos (\hat{\bf p} \cdot \hat{\bf r}_{L/S} )\]</div>
+\[\phi = \arccos (\hat{\bf p}_B \cdot \hat{\bf r}_{L/S} )\]</div>
 <p>The attitude tracking error <span class="math notranslate nohighlight">\({\pmb\sigma}_{B/R}\)</span> is then given by</p>
 <div class="math notranslate nohighlight">
 \[{\pmb\sigma}_{B/R} = - \tan(\phi/4) \hat{\bf e}\]</div>
+<p>The reference attitude <span class="math notranslate nohighlight">\({\pmb\sigma}_{R/N}\)</span> is obtained by composing the spacecraft attitude <span class="math notranslate nohighlight">\({\pmb\sigma}_{B/N}\)</span> with the tracking error:</p>
+<div class="math notranslate nohighlight">
+\[{\pmb\sigma}_{R/N} = {\pmb\sigma}_{B/N} \oplus {\pmb\sigma}_{R/B}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\oplus\)</span> denotes the MRP addition operator.</p>
+<p>When the module is <strong>not</strong> in strip imaging mode the outputs are set directly:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{\pmb\sigma}_{B/R}^{\text{out}} &amp;= {\pmb\sigma}_{B/R} \\
+{\pmb\sigma}_{R/N}^{\text{out}} &amp;= {\pmb\sigma}_{R/N}\end{split}\]</div>
+</section>
+<section id="strip-imaging-mode">
+<h3>Strip Imaging Mode<a class="headerlink" href="#strip-imaging-mode" title="Link to this heading"></a></h3>
+<p>When the <code class="docutils literal notranslate"><span class="pre">locationstripInMsg</span></code> input from the <a class="reference internal" href="../../../simulation/environment/stripLocation/stripLocation.html#striplocation"><span class="std std-ref">Module: stripLocation</span></a> module is connected, the module enters
+strip imaging mode.  The <a class="reference internal" href="../../../architecture/msgPayloadDefC/StripStateMsgPayload.html#stripstatemsgpayload"><span class="std std-ref">StripStateMsgPayload</span></a> message provides the inertial position w.r.t to the inertial origin
+<span class="math notranslate nohighlight">\({\bf r}_{L/N}\)</span> and the inertial velocity w.r.t the planet center
+<span class="math notranslate nohighlight">\({\bf v}_{LP/N}\)</span> of the current target point moving along the central line of the strip.</p>
+<p>The standard location pointing computation described above is first performed to obtain
+<span class="math notranslate nohighlight">\({\pmb\sigma}_{R/N}\)</span> (the reference that points <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> at the current target).
+An additional rotation about the pointing axis <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> is then computed so that a
+secondary body-fixed vector <span class="math notranslate nohighlight">\(\hat{\bf c}_B\)</span> specified by the user and in the plane orthogonal to the pointing axis becomes perpendicular to the strip scanning
+direction.  This ensures that the instrument’s cross-track axis is correctly aligned during image acquisition.</p>
+<p><strong>Step 1 – Compute the scanning direction in the reference body frame.</strong>
+The normalized target velocity <span class="math notranslate nohighlight">\(\hat{\bf v}_{LP/N}\)</span> is expressed in the reference frame R using the
+DCM <span class="math notranslate nohighlight">\([RN]\)</span> obtained from <span class="math notranslate nohighlight">\({\pmb\sigma}_{R/N}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\bf v}_{LP/R} = [RN] \, \hat{\bf v}_{LP/N}\]</div>
+<p>The component of <span class="math notranslate nohighlight">\(\hat{\bf v}_{LP/R}\)</span> perpendicular to the pointing axis is then:</p>
+<div class="math notranslate nohighlight">
+\[{\bf v}_{\perp} = \hat{\bf p}_B \times \hat{\bf v}_{LP/R}\]</div>
+<p>and is normalized to <span class="math notranslate nohighlight">\(\hat{\bf v}_{\perp}\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(|\hat{\bf p}_B \times \hat{\bf v}_{LP/R}|\)</span> is smaller than a user-defined threshold <code class="docutils literal notranslate"><span class="pre">alignmentThreshold</span></code>
+(default 0.1), then <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> and <span class="math notranslate nohighlight">\(\hat{\bf v}_{LP/R}\)</span> are nearly collinear and the perpendicular
+direction is undefined or unstable.  In that case no extra rotation is applied and the outputs
+fall back to the standard location-pointing values.</p>
+<p><strong>Step 2 – Choose the sign of</strong> <span class="math notranslate nohighlight">\(\hat{\bf v}_{\perp}\)</span>.
+Both <span class="math notranslate nohighlight">\(+\hat{\bf v}_{\perp}\)</span> and <span class="math notranslate nohighlight">\(-\hat{\bf v}_{\perp}\)</span> are valid perpendicular-to-strip directions.
+The sign is chosen so that the rotation angle is minimized, i.e. the sign that satisfies
+<span class="math notranslate nohighlight">\(\hat{\bf c}_B \cdot \hat{\bf v}_{\perp} &gt; 0\)</span> is selected.</p>
+<p><strong>Step 3 – Compute the extra rotation MRP</strong> <span class="math notranslate nohighlight">\({\pmb\sigma}_{R_2/R}\)</span>.
+The rotation that aligns <span class="math notranslate nohighlight">\(\hat{\bf c}_B\)</span> with <span class="math notranslate nohighlight">\(\hat{\bf v}_{\perp}\)</span> about <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> is
+computed analogously to the standard pointing rotation.  The eigen-axis is:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\bf e}_{2} = \frac{\hat{\bf c}_B \times \hat{\bf v}_{\perp}}{|\hat{\bf c}_B \times \hat{\bf v}_{\perp}|}\]</div>
+<p>and the rotation angle is:</p>
+<div class="math notranslate nohighlight">
+\[\alpha = \arccos\!\left(\hat{\bf c}_B \cdot \hat{\bf v}_{\perp}\right)\]</div>
+<p>The MRP of this extra rotation is then:</p>
+<div class="math notranslate nohighlight">
+\[{\pmb\sigma}_{R_2/R} = \tan(\alpha / 4) \; \hat{\bf e}_{2}\]</div>
+<p><strong>Step 4 – Compose to get the final reference.</strong>
+The combined reference attitude that both points <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> at the target <strong>and</strong> aligns
+<span class="math notranslate nohighlight">\(\hat{\bf c}_B\)</span> perpendicular to the strip scanning direction is:</p>
+<div class="math notranslate nohighlight">
+\[{\pmb\sigma}_{R_2/N} = {\pmb\sigma}_{R/N} \oplus {\pmb\sigma}_{R_2/R}\]</div>
+<p><strong>Step 5 – Compute the final tracking error.</strong>
+The tracking error is recomputed with respect to the updated reference:</p>
+<div class="math notranslate nohighlight">
+\[{\pmb\sigma}_{B/R_2} = {\pmb\sigma}_{B/N} \ominus {\pmb\sigma}_{R_2/N}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ominus\)</span> denotes MRP subtraction.</p>
+<p>The outputs in strip imaging mode are therefore:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{\pmb\sigma}_{B/R}^{\text{out}} &amp;= {\pmb\sigma}_{B/R_2} \\
+{\pmb\sigma}_{R/N}^{\text{out}} &amp;= {\pmb\sigma}_{R_2/N}\end{split}\]</div>
+</section>
+<section id="angular-rate-computation">
+<h3>Angular Rate Computation<a class="headerlink" href="#angular-rate-computation" title="Link to this heading"></a></h3>
 <p>The tracking error rates <span class="math notranslate nohighlight">\({\pmb\omega}_{B/R}\)</span> are obtained through numerical differentiation of the
 MRP values.  During the first module <code class="docutils literal notranslate"><span class="pre">Update</span></code> evaluation the numerical differencing is not possible and
 this value is thus set to zero.</p>
-<p>Using the attitude navigation and guidance messages, this module also computes the reference information in
-the form of <code class="docutils literal notranslate"><span class="pre">attRefOutMsg</span></code>. This additional output message is useful when working with modules that need
-a reference message and cannot accept a guidance message.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The module checks for several conditions such as heading vectors
-being collinear, the MRP switching during the numerical differentiation, etc.</p>
+being collinear, the MRP switching during the numerical differentiation, etc.
+In strip imaging mode, the non-collinearity constraint between <span class="math notranslate nohighlight">\(\hat{\bf p}_B\)</span> and the
+target velocity is also checked.  When the two vectors are nearly parallel, the extra strip
+rotation is skipped and the module falls back to pure location pointing.</p>
 </div>
+</section>
 </section>
 <section id="user-guide">
 <h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>
-<p>The one required variable that must be set is <code class="docutils literal notranslate"><span class="pre">pHat_B</span></code>.  This is body-fixed unit vector which is to be
-pointed at the desired inertial location.</p>
-<p>The user should only connect one location of interest input message, either <code class="docutils literal notranslate"><span class="pre">locationInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">celBodyInMsg</span></code> or <code class="docutils literal notranslate"><span class="pre">scTargetInMsg</span></code>.
-Connecting both will result in a warning and the module defaults to using the <code class="docutils literal notranslate"><span class="pre">locationInMsg</span></code> information.</p>
-<p>This 2D attitude control module provides two output messages in the form of <a class="reference internal" href="../../../architecture/msgPayloadDefC/AttGuidMsgPayload.html#attguidmsgpayload"><span class="std std-ref">AttGuidMsgPayload</span></a> and <a class="reference internal" href="../../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a>.
-The first guidance message, describing body relative to reference tracking errors,
-can be directly connected to an attitude control module.  However, at times we need to have the
-attitude reference message as the output to feed to <a class="reference internal" href="../attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">Module: attTrackingError</span></a>.  Here the <code class="docutils literal notranslate"><span class="pre">B/R</span></code> states are subtracted
-from the <code class="docutils literal notranslate"><span class="pre">B/N</span></code> states to obtain the equivalent <code class="docutils literal notranslate"><span class="pre">R/N</span></code> states.</p>
-<p>The variable <code class="docutils literal notranslate"><span class="pre">smallAngle</span></code> defined the minimum angular separation where two vectors are considered colinear.
-It is defaulted to zero, but can be set to any desired value in radians.</p>
+<p>For <strong>location pointing</strong>, the one required variable that must be set is <code class="docutils literal notranslate"><span class="pre">pHat_B</span></code>.  This is body-fixed unit vector which is to be
+pointed at the desired inertial location. The user should only connect one location of interest input message, either <code class="docutils literal notranslate"><span class="pre">locationInMsg</span></code>,
+<code class="docutils literal notranslate"><span class="pre">celBodyInMsg</span></code> or <code class="docutils literal notranslate"><span class="pre">scTargetInMsg</span></code>. Connecting multiple will result in a warning and the module defaults to using the ground location,
+planet location or spacecraft location, in that order.</p>
 <p>By default this is a 2D attitude control module in attitude and a 2D rate control.  In particular, the rates about the
 desired heading axis are not damped.  By setting the module variable <code class="docutils literal notranslate"><span class="pre">useBoresightRateDamping</span></code> to 1,
 the body rates about about the desired heading
-angle are added to the rate tracking error yielding a 3D rate control implementation.</p>
+angle are added to the rate tracking error yielding a 3D rate control implementation.
+Note that <code class="docutils literal notranslate"><span class="pre">useBoresightRateDamping</span></code> is ignored during strip imaging, as strip imaging already performs
+full 3D attitude control.</p>
+<p>For <strong>strip imaging</strong>, the user should connect <code class="docutils literal notranslate"><span class="pre">locationstripInMsg</span></code> (a <a class="reference internal" href="../../../architecture/msgPayloadDefC/StripStateMsgPayload.html#stripstatemsgpayload"><span class="std std-ref">StripStateMsgPayload</span></a> from <a class="reference internal" href="../../../simulation/environment/stripLocation/stripLocation.html#striplocation"><span class="std std-ref">Module: stripLocation</span></a>)
+and additionally set the <code class="docutils literal notranslate"><span class="pre">cHat_B</span></code> body-fixed vector.  This vector must be perpendicular to <code class="docutils literal notranslate"><span class="pre">pHat_B</span></code> and
+represents the instrument cross-track axis that needs to be aligned perpendicular to the strip scanning direction.
+The variable <code class="docutils literal notranslate"><span class="pre">alignmentThreshold</span></code> (default 0.1) controls the collinearity threshold: if
+<span class="math notranslate nohighlight">\(|\hat{\bf p}_B \times \hat{\bf v}_{LP/R}|\)</span> is below this value the extra strip rotation is skipped.
+The variable <code class="docutils literal notranslate"><span class="pre">stripInertialSpeedThreshold</span></code> (default <span class="math notranslate nohighlight">\(10^{-12}\)</span> m/s) defines the minimum inertial target velocity magnitude (relative to planet origin vector)
+required to compute a valid scanning direction; if the strip speed magnitude is below this threshold, the module
+falls back to pure location pointing.</p>
+<p>This module in both modes provides two output messages in the form of <a class="reference internal" href="../../../architecture/msgPayloadDefC/AttGuidMsgPayload.html#attguidmsgpayload"><span class="std std-ref">AttGuidMsgPayload</span></a> and <a class="reference internal" href="../../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a>.
+The first guidance message, describing body relative to reference tracking errors,
+can be directly connected to an attitude control module.  However, at times we need to have the
+attitude reference message as the output to feed to <a class="reference internal" href="../attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">Module: attTrackingError</span></a>.</p>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">smallAngle</span></code> defines an angular threshold (in radians, default zero) below which a rotation is
+set to zero.  It applies separately to the pointing rotation and the strip rotation.  This is to avoid numerical issues when the angles are very small.</p>
 <hr class="docutils" />
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
@@ -314,21 +398,39 @@ angle are added to the rate tracking error yielding a 3D rate control implementa
 </dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig6cHat_BE">
+<span id="_CPPv3N22locationPointingConfig6cHat_BE"></span><span id="_CPPv2N22locationPointingConfig6cHat_BE"></span><span id="locationPointingConfig::cHat_B__doubleA"></span><span class="target" id="structlocation_pointing_config_1ad31b509321d4eadec4ce5804883693c5"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cHat_B</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig6cHat_BE" title="Link to this definition"></a><br /></dt>
+<dd><p>body fixed vector representing the scan line of the camera (must be orthogonal to pHat_B by definition) </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig10smallAngleE">
 <span id="_CPPv3N22locationPointingConfig10smallAngleE"></span><span id="_CPPv2N22locationPointingConfig10smallAngleE"></span><span id="locationPointingConfig::smallAngle__double"></span><span class="target" id="structlocation_pointing_config_1aa5685087e1066951a4a149c3edb2f740"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">smallAngle</span></span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig10smallAngleE" title="Link to this definition"></a><br /></dt>
-<dd><p>rad An angle value that specifies what is near 0 or 180 degrees </p>
+<dd><p>[rad] angle value that specifies what is near 0 or 180 degrees </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig23useBoresightRateDampingE">
 <span id="_CPPv3N22locationPointingConfig23useBoresightRateDampingE"></span><span id="_CPPv2N22locationPointingConfig23useBoresightRateDampingE"></span><span id="locationPointingConfig::useBoresightRateDamping__i"></span><span class="target" id="structlocation_pointing_config_1a1d5cc6ec067c8012fa58056fa3680ac2"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useBoresightRateDamping</span></span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig23useBoresightRateDampingE" title="Link to this definition"></a><br /></dt>
-<dd><p>[int] flag to use rate damping about the sensor boresight </p>
+<dd><p>[int] flag to use rate damping about the sensor boresight (ignored for strip imaging) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig18alignmentThresholdE">
+<span id="_CPPv3N22locationPointingConfig18alignmentThresholdE"></span><span id="_CPPv2N22locationPointingConfig18alignmentThresholdE"></span><span id="locationPointingConfig::alignmentThreshold__double"></span><span class="target" id="structlocation_pointing_config_1a803dedc503a023f124a6b5ffc0297586"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alignmentThreshold</span></span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig18alignmentThresholdE" title="Link to this definition"></a><br /></dt>
+<dd><p>threshold for collinearity check between pHat_B and v_TP_B during strip imaging; defaults to 0.1 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig27stripInertialSpeedThresholdE">
+<span id="_CPPv3N22locationPointingConfig27stripInertialSpeedThresholdE"></span><span id="_CPPv2N22locationPointingConfig27stripInertialSpeedThresholdE"></span><span id="locationPointingConfig::stripInertialSpeedThreshold__double"></span><span class="target" id="structlocation_pointing_config_1ad9c097e472e460ce9c8ed9e87ec86d3d"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stripInertialSpeedThreshold</span></span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig27stripInertialSpeedThresholdE" title="Link to this definition"></a><br /></dt>
+<dd><p>[m/s] minimum inertial target velocity magnitude (relative to planet origin vector) required to compute strip direction; defaults to 1e-12 </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig12sigma_BR_oldE">
 <span id="_CPPv3N22locationPointingConfig12sigma_BR_oldE"></span><span id="_CPPv2N22locationPointingConfig12sigma_BR_oldE"></span><span id="locationPointingConfig::sigma_BR_old__doubleA"></span><span class="target" id="structlocation_pointing_config_1adb818e090146bf23c080837f8e736a88"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sigma_BR_old</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig12sigma_BR_oldE" title="Link to this definition"></a><br /></dt>
-<dd><p>Older sigma_BR value, stored for finite diff </p>
+<dd><p>older sigma_BR value, stored for finite diff </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -340,13 +442,13 @@ angle are added to the rate tracking error yielding a 3D rate control implementa
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig4initE">
 <span id="_CPPv3N22locationPointingConfig4initE"></span><span id="_CPPv2N22locationPointingConfig4initE"></span><span id="locationPointingConfig::init__double"></span><span class="target" id="structlocation_pointing_config_1a436127ca69dc76f3f297b5ee56365a42"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig4initE" title="Link to this definition"></a><br /></dt>
-<dd><p>moudle initialization counter </p>
+<dd><p>module initialization counter </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig9eHat180_BE">
 <span id="_CPPv3N22locationPointingConfig9eHat180_BE"></span><span id="_CPPv2N22locationPointingConfig9eHat180_BE"></span><span id="locationPointingConfig::eHat180_B__doubleA"></span><span class="target" id="structlocation_pointing_config_1a20572ea0bd0c4e67b68aaf4773e7244f"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eHat180_B</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig9eHat180_BE" title="Link to this definition"></a><br /></dt>
-<dd><p>&amp;#8212; Eigen axis to use if commanded axis is 180 from pHat </p>
+<dd><p>eigen axis to use if commanded axis is 180 from pHat </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -365,6 +467,12 @@ angle are added to the rate tracking error yielding a 3D rate control implementa
 <dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig13locationInMsgE">
 <span id="_CPPv3N22locationPointingConfig13locationInMsgE"></span><span id="_CPPv2N22locationPointingConfig13locationInMsgE"></span><span id="locationPointingConfig::locationInMsg__GroundStateMsg_C"></span><span class="target" id="structlocation_pointing_config_1afa30c47424a01017ba62203868d479ef"></span><span class="n"><span class="pre">GroundStateMsg_C</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">locationInMsg</span></span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig13locationInMsgE" title="Link to this definition"></a><br /></dt>
 <dd><p>input msg with location relative to planet </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22locationPointingConfig18locationstripInMsgE">
+<span id="_CPPv3N22locationPointingConfig18locationstripInMsgE"></span><span id="_CPPv2N22locationPointingConfig18locationstripInMsgE"></span><span id="locationPointingConfig::locationstripInMsg__StripStateMsg_C"></span><span class="target" id="structlocation_pointing_config_1a562ca5e2c98c58f2faed7f9a9ba4af87"></span><span class="n"><span class="pre">StripStateMsg_C</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">locationstripInMsg</span></span></span><a class="headerlink" href="#_CPPv4N22locationPointingConfig18locationstripInMsgE" title="Link to this definition"></a><br /></dt>
+<dd><p>input msg with location and velocity of the current target point on the strip, relative to planet </p>
 </dd></dl>
 
 <dl class="cpp var">
