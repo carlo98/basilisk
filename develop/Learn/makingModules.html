@@ -75,6 +75,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../supportData.html">Support Data Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExternalSites.html">External Sites</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_SDK:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/overview.html">About Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/installing.html">Installing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/writing.html">Writing a Basilisk Plugin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_RL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://avslab.github.io/bsk_rl/">Documentation</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Vizard:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Vizard/Vizard.html">About Vizard</a></li>
@@ -114,7 +124,12 @@
 <span id="makingmodules"></span><h1>Basics of Writing Basilisk Modules<a class="headerlink" href="#basics-of-writing-basilisk-modules" title="Link to this heading"></a></h1>
 <aside class="sidebar">
 <p class="sidebar-title">Making New Modules</p>
-<p>You should build your own Basilisk modules outside of the primary Basilisk source folder.  This keeps your Basilisk source folder free of local customizations that interfere with upgrading the simulation framework.  The only exception is if you are planning on pushing the module back to the primary Basilisk source itself.  Instructions on how to create modules outside of the main source folder are found at <a class="reference internal" href="../Build/buildExtModules.html#buildextmodules"><span class="std std-ref">Building Custom Modules</span></a>.</p>
+<p>You should build your own Basilisk modules outside of the primary Basilisk source folder.  This keeps your Basilisk source folder free of local customizations that interfere with upgrading the simulation framework.  The only exception is if you are planning on pushing the module back to the primary Basilisk source itself.</p>
+<p><strong>Recommended:</strong> Build your module as a <a class="reference internal" href="../Plugins/overview.html#bskplugins"><span class="std std-ref">About Plugins</span></a> — a
+self-contained Python wheel that compiles independently without
+recompiling all of Basilisk and can be shared via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>.</p>
+<p>The older <a class="reference internal" href="../Build/buildExtModules.html#buildextmodules"><span class="std std-ref">Building Custom Modules</span></a> approach is still supported for
+users who need modules folded directly into a from-source Basilisk build.</p>
 </aside>
 <p>This chapter covers the basics of designing Basilisk modules, as well as how to write a module using C++, C or Python.  As always with code documentation, it is never complete and always work-in-progress.</p>
 <p>For general developer support pages on coding guidelines, forking, building the Sphinx documentation system etc., see

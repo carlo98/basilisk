@@ -76,6 +76,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../supportData.html">Support Data Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExternalSites.html">External Sites</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_SDK:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/overview.html">About Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/installing.html">Installing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/writing.html">Writing a Basilisk Plugin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_RL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://avslab.github.io/bsk_rl/">Documentation</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Vizard:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Vizard/Vizard.html">About Vizard</a></li>
@@ -121,6 +131,15 @@
 <p class="sidebar-title">Source Code</p>
 <p>An example external folder with custom Basilisk modules and message definitions can be downloaded <a class="reference download internal" download="" href="../_downloads/c3e8c25c793831fcf0a7524693b08252/External.zip"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
 </aside>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The recommended modern approach for custom modules is <a class="reference internal" href="../Plugins/overview.html#bskplugins"><span class="std std-ref">Plugins</span></a>.
+Plugins compile independently as their own Python wheels so no Basilisk
+source checkout or full recompile is required. Additionally, plugins
+can be distributed as wheels making distribution via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> easier.
+External modules are still supported for users who want custom code folded
+directly into a from-source Basilisk build.</p>
+</div>
 <p>It is preferred that the user not put their own modules inside the official Basilisk folder unless this module is intended to be pushed back to the repository.  This keeps the official Basilisk folder free from local customizations and thus easier to keep up to date.  With Basilisk 2.0 and onwards the user has the ability to create modules which are not included in basilisk repository.  The new build system allows a single folder containing custom BSK modules to be included into a single Basilisk build. This document outlines how this is done.  The resulting build product will contain both the official Basilisk modules as well as modules available within this external folder.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

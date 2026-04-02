@@ -223,6 +223,20 @@ Related Publications
 
 .. toctree::
    :maxdepth: 1
+   :caption: BSK_SDK:
+   :includehidden:
+
+   Overview <Plugins/overview>
+   Install <Plugins/installing>
+   Writing a Plugin <Plugins/writing>
+
+.. toctree::
+   :caption: BSK_RL:
+
+   Documentation <https://avslab.github.io/bsk_rl/>
+
+.. toctree::
+   :maxdepth: 1
    :caption: Vizard:
 
    Vizard/Vizard

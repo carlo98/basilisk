@@ -76,6 +76,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#creating-and-pushing-tags">Creating and Pushing Tags</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#creating-a-release-on-github">Creating a Release on GitHub</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#patch-and-backport-workflow">Patch and Backport Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#releasing-the-bsk-sdk">Releasing the BSK SDK</a></li>
 </ul>
 </li>
 </ul>
@@ -85,6 +86,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Documentation/index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../supportData.html">Support Data Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ExternalSites.html">External Sites</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_SDK:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Plugins/overview.html">About Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Plugins/installing.html">Installing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Plugins/writing.html">Writing a Basilisk Plugin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_RL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://avslab.github.io/bsk_rl/">Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Vizard:</span></p>
 <ul>
@@ -258,6 +269,24 @@ commit hash in the message.</p></li>
 </ul>
 </div>
 </section>
+</section>
+<section id="releasing-the-bsk-sdk">
+<h2>Releasing the BSK SDK<a class="headerlink" href="#releasing-the-bsk-sdk" title="Link to this heading"></a></h2>
+<p>The <a class="reference external" href="https://github.com/AVSLab/bsk_sdk">bsk-sdk</a> package vendors the Basilisk
+SDK headers and runtime for plugin authors. Its version is kept in sync with
+Basilisk, so a new BSK release requires a corresponding SDK release.</p>
+<p>CI automatically checks out the Basilisk submodule at the tag matching the
+version string in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, so no manual submodule update is needed.
+The only manual steps are:</p>
+<ol class="arabic simple">
+<li><p>On a branch of develop, update the <code class="docutils literal notranslate"><span class="pre">version</span></code> field in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>
+to match the new BSK release (e.g. <code class="docutils literal notranslate"><span class="pre">2.X.Y</span></code>).</p></li>
+<li><p>Open a PR merging the updated <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> into <code class="docutils literal notranslate"><span class="pre">develop</span></code> on the
+<code class="docutils literal notranslate"><span class="pre">bsk-sdk</span></code> repo. The PR CI workflow will test the SDK wheel build.</p></li>
+<li><p>Merge <code class="docutils literal notranslate"><span class="pre">develop</span></code> into <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p></li>
+<li><p>Push the matching tag <code class="docutils literal notranslate"><span class="pre">v2.X.Y</span></code> to <code class="docutils literal notranslate"><span class="pre">master</span></code> to trigger the wheel build
+and PyPI publish via GitHub Actions.</p></li>
+</ol>
 </section>
 </section>
 

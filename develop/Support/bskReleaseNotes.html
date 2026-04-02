@@ -87,6 +87,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../supportData.html">Support Data Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ExternalSites.html">External Sites</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_SDK:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/overview.html">About Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/installing.html">Installing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Plugins/writing.html">Writing a Basilisk Plugin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BSK_RL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://avslab.github.io/bsk_rl/">Documentation</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Vizard:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Vizard/Vizard.html">About Vizard</a></li>
@@ -199,6 +209,8 @@ The former scenario uses MuJoCo dynamics and the latter spacecraft dynamics.</p>
 <li><p>Added the scenario <a class="reference internal" href="../examples/scenarioStripImaging.html#scenariostripimaging"><span class="std std-ref">scenarioStripImaging</span></a> showing how to perform strip imaging tasks.</p></li>
 <li><p>Updated Python packaging metadata to use the PEP 639 license fields and require a newer setuptools version that supports them.</p></li>
 <li><p>Added optional <code class="docutils literal notranslate"><span class="pre">sunEclipseInMsg</span></code> input to <a class="reference internal" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.html#facetsrpdynamiceffector"><span class="std std-ref">Module: facetSRPDynamicEffector</span></a> so that eclipse shadow conditions scale the SRP force and torque by the illumination factor.</p></li>
+<li><p>Added documentation for the <code class="docutils literal notranslate"><span class="pre">bsk-sdk</span></code> plugin system, covering how to install,
+write, and distribute out-of-tree Basilisk plugins as standard Python wheels.</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">BSK_SUPPORT_DATA_CACHE</span></code> environment variable to <code class="docutils literal notranslate"><span class="pre">dataFetcher.py</span></code> to allow overriding the default Pooch cache directory for support data files.  See <a class="reference internal" href="Developer/addSupportData.html#addsupportdata"><span class="std std-ref">Adding Support Data Files</span></a> for details.</p></li>
 <li><p>Added missing docstring to <code class="docutils literal notranslate"><span class="pre">gravBodyFactory.createSpiceInterface()</span></code> that prevented it from being built.</p></li>
 <li><p>Added a detailed note for <code class="docutils literal notranslate"><span class="pre">spicePlanetFrames</span></code> describing default <code class="docutils literal notranslate"><span class="pre">IAU_*</span></code> behavior, supported alternatives such as <code class="docutils literal notranslate"><span class="pre">ITRF93</span></code> and <code class="docutils literal notranslate"><span class="pre">J2000</span></code>, and how frame-association FK kernels interact with this setting.</p></li>
