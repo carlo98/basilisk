@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basilisk Release Notes &mdash; Basilisk 2.10.0-beta
+  <title>Basilisk Release Notes &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
@@ -16,7 +16,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b0911c87"></script>
+      <script src="../_static/documentation_options.js?v=53447332"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -57,9 +57,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../Learn.html">Learning Basilisk</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../Support.html">Support</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Basilisk Release Notes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#version-release">Version 2.10.0-beta
+<li class="toctree-l3"><a class="reference internal" href="#version-release">Version 2.11.0beta
 </a></li>
-<li class="toctree-l3"><a class="reference internal" href="#version-2-9-0-jan-28-2026">Version 2.9.0 (Jan. 28 2026)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#version-2-10-0-april-2-2026">Version 2.10.0 (April 2, 2026)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#version-2-9-0-jan-28-2026">Version 2.9.0 (Jan. 28, 2026)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#version-2-8-0-august-30-2025">Version 2.8.0 (August 30, 2025)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#version-2-7-0-april-20-2025">Version 2.7.0 (April 20, 2025)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#version-2-6-0-feb-21-2025">Version  2.6.0  (Feb. 21, 2025)</a></li>
@@ -156,8 +157,11 @@ CAD asteroid or lunar surface terrain.</p></li>
 </ul>
 </aside>
 <section id="version-release">
-<h2>Version 2.10.0-beta
+<h2>Version 2.11.0beta
 <a class="headerlink" href="#version-release" title="Link to this heading"></a></h2>
+</section>
+<section id="version-2-10-0-april-2-2026">
+<h2>Version 2.10.0 (April 2, 2026)<a class="headerlink" href="#version-2-10-0-april-2-2026" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><span class="beta-label">[BETA] Stochastic Integration</span>: Added support for stochastic dynamics (dynamics driven by Stochastic Differential Equations).</p></li>
 <li><p><span class="beta-label">[BETA] Stochastic Integration</span>: Added stochastic dynamics support in core dynamics infrastructure (<code class="docutils literal notranslate"><span class="pre">DynamicObject</span></code>, <code class="docutils literal notranslate"><span class="pre">StateData</span></code>,
@@ -222,8 +226,6 @@ write, and distribute out-of-tree Basilisk plugins as standard Python wheels.</p
 <li><p>Fixed <code class="docutils literal notranslate"><span class="pre">PythonVariableLogger</span></code> to resume logging correctly after <code class="docutils literal notranslate"><span class="pre">Reset()</span></code>, reject negative <code class="docutils literal notranslate"><span class="pre">min_log_period</span></code> values, and support indexed access for logged names that collide with class attributes such as <code class="docutils literal notranslate"><span class="pre">times</span></code>.</p></li>
 <li><p>Added <a class="reference internal" href="../Documentation/simulation/environment/spacecraftChargingEquilibrium/spacecraftChargingEquilibrium.html#spacecraftchargingequilibrium"><span class="std std-ref">Module: spacecraftChargingEquilibrium</span></a> module to solve coupled servicer/target equilibrium potentials with electron-beam current coupling.</p></li>
 <li><p>Update the developer workflow on how release notes are added.  The new method now adds small release notes RST snippets into <code class="docutils literal notranslate"><span class="pre">docs/source/Support/bskReleaseNotesSnippets</span></code> folder.  A README.md file there explains how to do this.</p></li>
-</ul>
-<ul class="simple">
 <li><p>Removed the default <code class="docutils literal notranslate"><span class="pre">--clean</span></code> flag from <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> to allow for incremental pip wheel builds.</p></li>
 <li><p>TLE parsing fixed to be robust to file ending issues between LF and CRLF.</p></li>
 <li><p>Updated <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> to pass <code class="docutils literal notranslate"><span class="pre">compiler.cstd=gnu17</span></code> during Conan build step to avoid <code class="docutils literal notranslate"><span class="pre">cspice/0067</span></code>
@@ -267,7 +269,7 @@ with differential cannonball drag and orbital-element feedback control.</p></li>
 </ul>
 </section>
 <section id="version-2-9-0-jan-28-2026">
-<h2>Version 2.9.0 (Jan. 28 2026)<a class="headerlink" href="#version-2-9-0-jan-28-2026" title="Link to this heading"></a></h2>
+<h2>Version 2.9.0 (Jan. 28, 2026)<a class="headerlink" href="#version-2-9-0-jan-28-2026" title="Link to this heading"></a></h2>
 <ul>
 <li><p>Deploy both release docs at <a class="reference external" href="https://avslab.github.io/basilisk">https://avslab.github.io/basilisk</a> and developer beta
 docs at <a class="reference external" href="https://avslab.github.io/basilisk/developer">https://avslab.github.io/basilisk/developer</a>.</p></li>
