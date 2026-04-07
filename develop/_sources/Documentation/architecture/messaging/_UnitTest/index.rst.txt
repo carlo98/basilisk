@@ -15,6 +15,7 @@ _UnitTest
    test_NonSwigMessaging
    test_RecordInputMessages
    test_deprecatedRecorderFormat
+   test_generatePayloadMetaJson
    test_unsubscribe
 .. toctree::
    :maxdepth: 1
