@@ -138,7 +138,7 @@
 <span class="n">bskPath</span> <span class="o">=</span> <span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBaseClass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">messaging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">bskLogging</span><span class="p">,</span> <span class="n">messaging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">macros</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">dentonFluxModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities.supportDataTools.dataFetcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_path</span><span class="p">,</span> <span class="n">DataFile</span>
@@ -185,6 +185,33 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dentonFluxModelTestFunction</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">param1_Kp</span><span class="p">,</span> <span class="n">param2_LT</span><span class="p">,</span> <span class="n">param3_z</span><span class="p">,</span> <span class="n">param4_r_EN</span><span class="p">,</span>
                                                              <span class="n">accuracy</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="test_dentonFluxModel_missing_file_format_string">
+<a class="viewcode-back" href="../Documentation/simulation/environment/dentonFluxModel/_UnitTest/test_dentonFluxModel.html#test_dentonFluxModel.test_dentonFluxModel_missing_file_format_string">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dentonFluxModel_missing_file_format_string</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Validation Test Description**</span>
+
+<span class="sd">    This test verifies that missing Denton data file paths are logged as string data, even when the path contains</span>
+<span class="sd">    format specifiers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">dentonFluxModel</span><span class="o">.</span><span class="n">DentonFluxModel</span><span class="p">()</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;dentonFluxModule&quot;</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">kpIndex</span> <span class="o">=</span> <span class="s2">&quot;1o&quot;</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">numOutputEnergies</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">missing_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;missing_</span><span class="si">%s</span><span class="s2">_%n_flux.txt&quot;</span><span class="p">)</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">configureDentonFiles</span><span class="p">(</span><span class="n">missing_path</span><span class="p">,</span> <span class="n">missing_path</span><span class="p">)</span>
+
+    <span class="n">module</span><span class="o">.</span><span class="n">scStateInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">SCStatesMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">SCStatesMsgPayload</span><span class="p">()))</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">earthStateInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">SpicePlanetStateMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">SpicePlanetStateMsgPayload</span><span class="p">()))</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">sunStateInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">SpicePlanetStateMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">SpicePlanetStateMsgPayload</span><span class="p">()))</span>
+
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">bskLogging</span><span class="o">.</span><span class="n">BasiliskError</span><span class="p">)</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">Reset</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">missing_path</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
 
 
 

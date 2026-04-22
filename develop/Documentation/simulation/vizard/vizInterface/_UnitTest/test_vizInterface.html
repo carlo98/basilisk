@@ -159,6 +159,15 @@ all elements are captured as expected.</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="test_vizInterface.test_vizInterface_long_gravity_body_name_reset">
+<span class="sig-prename descclassname"><span class="pre">test_vizInterface.</span></span><span class="sig-name descname"><span class="pre">test_vizInterface_long_gravity_body_name_reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_vizInterface.html#test_vizInterface_long_gravity_body_name_reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_vizInterface.test_vizInterface_long_gravity_body_name_reset" title="Link to this definition"></a></dt>
+<dd><p><strong>Validation Test Description</strong></p>
+<p>This test verifies that <code class="docutils literal notranslate"><span class="pre">vizInterface</span></code> can reset with a celestial body name longer than the fixed
+<code class="docutils literal notranslate"><span class="pre">SpicePlanetStateMsgPayload.PlanetName</span></code> storage.  The full body name remains available to the Vizard
+protocol buffer path, while the default SPICE payload name must be copied without overflowing its backing array.</p>
+</dd></dl>
+
 </section>
 
 

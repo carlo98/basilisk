@@ -260,7 +260,7 @@ python script as the corresponding module is created and configured.</p>
 </div>
 <p>If you want to print variables to the logging string, this must be done before calling <code class="docutils literal notranslate"><span class="pre">_bskLog</span></code>, such as in this example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">info</span><span class="p">[</span><span class="n">MAX_LOGGING_LENGTH</span><span class="p">];</span>
-<span class="n">sprintf</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Variable is too large (%d). Setting to max value.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">);</span>
+<span class="n">snprintf</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">info</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Variable is too large (%d). Setting to max value.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">);</span>
 <span class="n">_bskLog</span><span class="p">(</span><span class="n">configData</span><span class="o">-&gt;</span><span class="n">bskLogger</span><span class="p">,</span><span class="w"> </span><span class="n">BSK_ERROR</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">);</span>
 </pre></div>
 </div>

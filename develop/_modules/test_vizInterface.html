@@ -149,7 +149,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">SimulationBaseClass</span><span class="p">,</span> <span class="n">macros</span><span class="p">,</span> <span class="n">orbitalMotion</span><span class="p">,</span> <span class="n">simIncludeGravBody</span><span class="p">,</span> <span class="n">unitTestSupport</span><span class="p">,</span>
                                 <span class="n">vizSupport</span><span class="p">,</span> <span class="n">simIncludeThruster</span><span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">spacecraft</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">messaging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">messaging</span><span class="p">,</span> <span class="n">bskLogging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">thrusterDynamicEffector</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -187,6 +187,33 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="p">[</span><span class="n">testResults</span><span class="p">,</span> <span class="n">testMessage</span><span class="p">]</span> <span class="o">=</span> <span class="n">vizInterfaceTest</span><span class="p">(</span><span class="n">show_plots</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">testResults</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">testMessage</span></div>
+
+
+
+<div class="viewcode-block" id="test_vizInterface_long_gravity_body_name_reset">
+<a class="viewcode-back" href="../Documentation/simulation/vizard/vizInterface/_UnitTest/test_vizInterface.html#test_vizInterface.test_vizInterface_long_gravity_body_name_reset">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_vizInterface_long_gravity_body_name_reset</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Validation Test Description**</span>
+
+<span class="sd">    This test verifies that ``vizInterface`` can reset with a celestial body name longer than the fixed</span>
+<span class="sd">    ``SpicePlanetStateMsgPayload.PlanetName`` storage.  The full body name remains available to the Vizard</span>
+<span class="sd">    protocol buffer path, while the default SPICE payload name must be copied without overflowing its backing array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">vizFound</span><span class="p">:</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;vizInterface is not configured.&quot;</span><span class="p">)</span>
+
+    <span class="n">reset_time</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># [ns]</span>
+    <span class="n">long_body_name</span> <span class="o">=</span> <span class="s2">&quot;body_&quot;</span> <span class="o">+</span> <span class="s2">&quot;x&quot;</span> <span class="o">*</span> <span class="mi">128</span>
+
+    <span class="n">grav_body</span> <span class="o">=</span> <span class="n">vizInterface</span><span class="o">.</span><span class="n">GravBodyInfo</span><span class="p">()</span>
+    <span class="n">grav_body</span><span class="o">.</span><span class="n">bodyName</span> <span class="o">=</span> <span class="n">long_body_name</span>
+
+    <span class="n">viz</span> <span class="o">=</span> <span class="n">vizInterface</span><span class="o">.</span><span class="n">VizInterface</span><span class="p">()</span>
+    <span class="n">viz</span><span class="o">.</span><span class="n">gravBodyInformation</span> <span class="o">=</span> <span class="n">vizInterface</span><span class="o">.</span><span class="n">GravBodyInfoVector</span><span class="p">([</span><span class="n">grav_body</span><span class="p">])</span>
+
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">bskLogging</span><span class="o">.</span><span class="n">BasiliskError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;celestial body name is 133 characters&quot;</span><span class="p">):</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">Reset</span><span class="p">(</span><span class="n">reset_time</span><span class="p">)</span></div>
 
 
 

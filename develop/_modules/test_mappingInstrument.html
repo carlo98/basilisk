@@ -100,15 +100,15 @@
            <div itemprop="articleBody">
              
   <h1>Source code for test_mappingInstrument</h1><div class="highlight"><pre>
-<span></span><span class="c1"># </span>
+<span></span><span class="c1">#</span>
 <span class="c1">#  ISC License</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1">#  Copyright (c) 2022, Autonomous Vehicle Systems Lab, University of Colorado Boulder</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1">#  Permission to use, copy, modify, and/or distribute this software for any</span>
 <span class="c1">#  purpose with or without fee is hereby granted, provided that the above</span>
 <span class="c1">#  copyright notice and this permission notice appear in all copies.</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1">#  THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES</span>
 <span class="c1">#  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF</span>
 <span class="c1">#  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR</span>
@@ -116,11 +116,12 @@
 <span class="c1">#  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN</span>
 <span class="c1">#  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF</span>
 <span class="c1">#  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</span>
-<span class="c1"># </span>
-<span class="c1"># </span>
+<span class="c1">#</span>
+<span class="c1">#</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">messaging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">bskLogging</span><span class="p">,</span> <span class="n">messaging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">mappingInstrument</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBaseClass</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">macros</span>
@@ -140,6 +141,22 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="p">[</span><span class="n">testResults</span><span class="p">,</span> <span class="n">testMessage</span><span class="p">]</span> <span class="o">=</span> <span class="n">mappingInstrumentTestFunction</span><span class="p">()</span>
     <span class="k">assert</span> <span class="n">testResults</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">testMessage</span></div>
+
+
+
+<div class="viewcode-block" id="test_mappingInstrument_rejects_long_data_name">
+<a class="viewcode-back" href="../Documentation/simulation/onboardDataHandling/instrument/mappingInstrument/_UnitTest/test_mappingInstrument.html#test_mappingInstrument.test_mappingInstrument_rejects_long_data_name">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_mappingInstrument_rejects_long_data_name</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This test checks that ``mappingInstrument`` rejects mapping point names that do not fit in the fixed</span>
+<span class="sd">    ``DataNodeUsageMsgPayload.dataName`` storage.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">mappingInstrument</span><span class="o">.</span><span class="n">MappingInstrument</span><span class="p">()</span>
+    <span class="n">accessInMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">AccessMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">messaging</span><span class="o">.</span><span class="n">AccessMsgPayload</span><span class="p">())</span>
+    <span class="n">long_data_name</span> <span class="o">=</span> <span class="s2">&quot;mapping-point-&quot;</span> <span class="o">+</span> <span class="s2">&quot;x&quot;</span> <span class="o">*</span> <span class="mi">128</span>
+
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">bskLogging</span><span class="o">.</span><span class="n">BasiliskError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;dataName is 142 characters&quot;</span><span class="p">):</span>
+        <span class="n">module</span><span class="o">.</span><span class="n">addMappingPoint</span><span class="p">(</span><span class="n">accessInMsg</span><span class="p">,</span> <span class="n">long_data_name</span><span class="p">)</span></div>
 
 
 
@@ -219,8 +236,6 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">test_mappingInstrument</span><span class="p">()</span>
-
-
 </pre></div>
 
            </div>
