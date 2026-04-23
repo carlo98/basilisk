@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: autoCppModule &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: autoCppModule &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -113,7 +114,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">Documentation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">moduleTemplates</a></li>
           <li class="breadcrumb-item"><a href="index.html">autoCppModule</a></li>
-      <li class="breadcrumb-item active">Module: autoCppModule</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: autoCppModule</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/Documentation/moduleTemplates/autoCppModule/autoCppModule.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -123,18 +124,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-autocppmodule">
-<span id="autocppmodule"></span><h1>Module: autoCppModule<a class="headerlink" href="#module-autocppmodule" title="Link to this heading"></a></h1>
+  <section id="c-module-autocppmodule">
+<span id="autocppmodule"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: autoCppModule<a class="headerlink" href="#c-module-autocppmodule" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This is an auto-created sample C++ module.  The description is included with the module class definition</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.
-The module msg connection is set by the user from python.
-The msg type contains a link to the message structure definition, while the description
+<p>The following diagram and table list all the module input and output messages.
+The module message connection is set by the user from Python.
+The message type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../_images/graphviz-4aa019bc7fb9db1708a97613243aa150f804eae7.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">autoCppModule module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -151,31 +155,31 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>someInMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a></p></td>
-<td><p>input msg description</p></td>
+<td><p>Input message description.</p></td>
 </tr>
 <tr class="row-odd"><td><p>some2InMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a></p></td>
-<td><p>input msg description</p></td>
+<td><p>Input message description.</p></td>
 </tr>
 <tr class="row-even"><td><p>anotherInMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/CSSConfigMsgPayload.html#cssconfigmsgpayload"><span class="std std-ref">CSSConfigMsgPayload</span></a></p></td>
-<td><p>input msg description</p></td>
+<td><p>Input message description.</p></td>
 </tr>
 <tr class="row-odd"><td><p>anotherCppInMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefCpp/CSSConfigLogMsgPayload.html#cssconfiglogmsgpayload"><span class="std std-ref">CSSConfigLogMsgPayload</span></a></p></td>
-<td><p>input msg description</p></td>
+<td><p>Input message description.</p></td>
 </tr>
 <tr class="row-even"><td><p>some2OutMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a></p></td>
-<td><p>output msg description</p></td>
+<td><p>Output message description.</p></td>
 </tr>
 <tr class="row-odd"><td><p>someOutMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>output msg description</p></td>
+<td><p>Output message description.</p></td>
 </tr>
 <tr class="row-even"><td><p>anotherCppOutMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefCpp/DataStorageStatusMsgPayload.html#datastoragestatusmsgpayload"><span class="std std-ref">DataStorageStatusMsgPayload</span></a></p></td>
-<td><p>output msg description</p></td>
+<td><p>Output message description.</p></td>
 </tr>
 </tbody>
 </table>
@@ -241,43 +245,43 @@ provides information on what this message is used for.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13AutoCppModule9someInMsgE">
 <span id="_CPPv3N13AutoCppModule9someInMsgE"></span><span id="_CPPv2N13AutoCppModule9someInMsgE"></span><span id="AutoCppModule::someInMsg__ReadFunctor:AttRefMsgPayload:"></span><span class="target" id="class_auto_cpp_module_1a36eaf6e97326ce2ec0abd3d028aaf830"></span><a class="reference internal" href="../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../architecture/msgPayloadDefC/AttRefMsgPayload.html#_CPPv416AttRefMsgPayload" title="AttRefMsgPayload"><span class="n"><span class="pre">AttRefMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">someInMsg</span></span></span><a class="headerlink" href="#_CPPv4N13AutoCppModule9someInMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>input msg description </p>
+<dd><p>Input message description. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13AutoCppModule10some2InMsgE">
 <span id="_CPPv3N13AutoCppModule10some2InMsgE"></span><span id="_CPPv2N13AutoCppModule10some2InMsgE"></span><span id="AutoCppModule::some2InMsg__ReadFunctor:AttRefMsgPayload:"></span><span class="target" id="class_auto_cpp_module_1a86f449263ebc37ef9b9f00c787c83697"></span><a class="reference internal" href="../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../architecture/msgPayloadDefC/AttRefMsgPayload.html#_CPPv416AttRefMsgPayload" title="AttRefMsgPayload"><span class="n"><span class="pre">AttRefMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">some2InMsg</span></span></span><a class="headerlink" href="#_CPPv4N13AutoCppModule10some2InMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>input msg description </p>
+<dd><p>Input message description. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13AutoCppModule12anotherInMsgE">
 <span id="_CPPv3N13AutoCppModule12anotherInMsgE"></span><span id="_CPPv2N13AutoCppModule12anotherInMsgE"></span><span id="AutoCppModule::anotherInMsg__ReadFunctor:CSSConfigMsgPayload:"></span><span class="target" id="class_auto_cpp_module_1ab725289deb9aca83dff75dd758c343f1"></span><a class="reference internal" href="../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../architecture/msgPayloadDefC/CSSConfigMsgPayload.html#_CPPv419CSSConfigMsgPayload" title="CSSConfigMsgPayload"><span class="n"><span class="pre">CSSConfigMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">anotherInMsg</span></span></span><a class="headerlink" href="#_CPPv4N13AutoCppModule12anotherInMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>input msg description </p>
+<dd><p>Input message description. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13AutoCppModule15anotherCppInMsgE">
 <span id="_CPPv3N13AutoCppModule15anotherCppInMsgE"></span><span id="_CPPv2N13AutoCppModule15anotherCppInMsgE"></span><span id="AutoCppModule::anotherCppInMsg__ReadFunctor:CSSConfigLogMsgPayload:"></span><span class="target" id="class_auto_cpp_module_1a5432e73a20ce62ba0ebf4f9a8a486668"></span><a class="reference internal" href="../../architecture/messaging/messaging.html#_CPPv4I0E11ReadFunctor" title="ReadFunctor"><span class="n"><span class="pre">ReadFunctor</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../architecture/msgPayloadDefCpp/CSSConfigLogMsgPayload.html#_CPPv422CSSConfigLogMsgPayload" title="CSSConfigLogMsgPayload"><span class="n"><span class="pre">CSSConfigLogMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">anotherCppInMsg</span></span></span><a class="headerlink" href="#_CPPv4N13AutoCppModule15anotherCppInMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>input msg description </p>
+<dd><p>Input message description. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13AutoCppModule11some2OutMsgE">
 <span id="_CPPv3N13AutoCppModule11some2OutMsgE"></span><span id="_CPPv2N13AutoCppModule11some2OutMsgE"></span><span id="AutoCppModule::some2OutMsg__Message:AttRefMsgPayload:"></span><span class="target" id="class_auto_cpp_module_1a4ff3faa57df1852d21431c1db7297564"></span><a class="reference internal" href="../../architecture/messaging/messaging.html#_CPPv4I0E7Message" title="Message"><span class="n"><span class="pre">Message</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../architecture/msgPayloadDefC/AttRefMsgPayload.html#_CPPv416AttRefMsgPayload" title="AttRefMsgPayload"><span class="n"><span class="pre">AttRefMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">some2OutMsg</span></span></span><a class="headerlink" href="#_CPPv4N13AutoCppModule11some2OutMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>output msg description </p>
+<dd><p>Output message description. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13AutoCppModule10someOutMsgE">
 <span id="_CPPv3N13AutoCppModule10someOutMsgE"></span><span id="_CPPv2N13AutoCppModule10someOutMsgE"></span><span id="AutoCppModule::someOutMsg__Message:SCStatesMsgPayload:"></span><span class="target" id="class_auto_cpp_module_1a8f8bf1360ca1141b426d60fd49bbdc75"></span><a class="reference internal" href="../../architecture/messaging/messaging.html#_CPPv4I0E7Message" title="Message"><span class="n"><span class="pre">Message</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#_CPPv418SCStatesMsgPayload" title="SCStatesMsgPayload"><span class="n"><span class="pre">SCStatesMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">someOutMsg</span></span></span><a class="headerlink" href="#_CPPv4N13AutoCppModule10someOutMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>output msg description </p>
+<dd><p>Output message description. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N13AutoCppModule16anotherCppOutMsgE">
 <span id="_CPPv3N13AutoCppModule16anotherCppOutMsgE"></span><span id="_CPPv2N13AutoCppModule16anotherCppOutMsgE"></span><span id="AutoCppModule::anotherCppOutMsg__Message:DataStorageStatusMsgPayload:"></span><span class="target" id="class_auto_cpp_module_1aa7df700615b40f3b7bbab0232ea6d35e"></span><a class="reference internal" href="../../architecture/messaging/messaging.html#_CPPv4I0E7Message" title="Message"><span class="n"><span class="pre">Message</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../architecture/msgPayloadDefCpp/DataStorageStatusMsgPayload.html#_CPPv427DataStorageStatusMsgPayload" title="DataStorageStatusMsgPayload"><span class="n"><span class="pre">DataStorageStatusMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">anotherCppOutMsg</span></span></span><a class="headerlink" href="#_CPPv4N13AutoCppModule16anotherCppOutMsgE" title="Link to this definition"></a><br /></dt>
-<dd><p>output msg description </p>
+<dd><p>Output message description. </p>
 </dd></dl>
 
 <dl class="cpp var">

@@ -9,8 +9,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -117,14 +118,7 @@
 <span class="c1">#  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF</span>
 <span class="c1">#  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">supportFilePath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;thrArmControlSupport&quot;</span><span class="p">)</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">supportFilePath</span><span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jointThrAllocation</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">stateMerge</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">thrFiringRound</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture</span><span class="w"> </span><span class="kn">import</span> <span class="n">messaging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">macros</span> <span class="k">as</span> <span class="n">mc</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.fswAlgorithms</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -135,10 +129,13 @@
     <span class="n">attTrackingError</span><span class="p">,</span>
     <span class="n">mrpFeedback</span><span class="p">,</span>
     <span class="n">inertialCartFeedback</span><span class="p">,</span>
+    <span class="n">jointThrAllocation</span><span class="p">,</span>
+    <span class="n">thrFiringRound</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">thrOnTimeToForce</span><span class="p">,</span>
     <span class="n">simpleNav</span><span class="p">,</span>
+    <span class="n">stateMerge</span><span class="p">,</span>
 <span class="p">)</span>
 
 

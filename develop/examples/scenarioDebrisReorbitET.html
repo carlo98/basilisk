@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -148,8 +149,8 @@
 <section id="overview">
 <span id="module-scenarioDebrisReorbitET"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>Demonstrates a basic debris reorbit scenario from geostationary orbit using the Electrostatic Tractor (ET) concept and how to visualize the simulation
-data in <a class="reference internal" href="../Vizard/Vizard.html#vizard"><span class="std std-ref">Vizard</span></a>. This scenario shows how to use the <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/etSphericalControl/etSphericalControl.html#etsphericalcontrol"><span class="std std-ref">Module: etSphericalControl</span></a> module for ET relative
-motion control and also illustrates the usage of the <a class="reference internal" href="../Documentation/simulation/dynamics/msmForceTorque/msmForceTorque.html#msmforcetorque"><span class="std std-ref">Module: msmForceTorque</span></a> to calculate the electrostatic forces with the Multi-Sphere Method (MSM). This simulation simply uses a single sphere to represent each spacecraft. The servicing satellite is charged to a positive electric potential, while the other satellite (the debris) is uncontrolled and charged to a negative potential. The purpose of this script is to show an explicit method to
+data in <a class="reference internal" href="../Vizard/Vizard.html#vizard"><span class="std std-ref">Vizard</span></a>. This scenario shows how to use the <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/etSphericalControl/etSphericalControl.html#etsphericalcontrol"><span class="std std-ref">C Module: etSphericalControl</span></a> module for ET relative
+motion control and also illustrates the usage of the <a class="reference internal" href="../Documentation/simulation/dynamics/msmForceTorque/msmForceTorque.html#msmforcetorque"><span class="std std-ref">C++ Module: msmForceTorque</span></a> to calculate the electrostatic forces with the Multi-Sphere Method (MSM). This simulation simply uses a single sphere to represent each spacecraft. The servicing satellite is charged to a positive electric potential, while the other satellite (the debris) is uncontrolled and charged to a negative potential. The purpose of this script is to show an explicit method to
 setup the ET reorbit simulation, and also show how to store the Basilisk simulation data to be able to visualize
 both satellite’s motions within the <a class="reference internal" href="../Vizard/Vizard.html#vizard"><span class="std std-ref">Vizard</span></a> application.</p>
 <p>The script is found in the folder <code class="docutils literal notranslate"><span class="pre">src/examples</span></code> and executed by using:</p>

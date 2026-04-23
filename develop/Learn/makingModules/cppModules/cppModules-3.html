@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -231,7 +232,7 @@ on <code class="docutils literal notranslate"><span class="pre">Reset()</span></
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>If the module contains a vector of output messages, then a public module method needs to be written to create these output vector message instances.  The above sample code illustrate a common scenario where the number of input and output messages is the same.  For example, in <a class="reference internal" href="../../../Documentation/simulation/environment/eclipse/eclipse.html#eclipse"><span class="std std-ref">Module: eclipse</span></a> for each spacecraft state input message added a corresponding eclipse output message must be created.</p>
+<p>If the module contains a vector of output messages, then a public module method needs to be written to create these output vector message instances.  The above sample code illustrate a common scenario where the number of input and output messages is the same.  For example, in <a class="reference internal" href="../../../Documentation/simulation/environment/eclipse/eclipse.html#eclipse"><span class="std std-ref">C++ Module: eclipse</span></a> for each spacecraft state input message added a corresponding eclipse output message must be created.</p>
 <p>Note that with the <code class="docutils literal notranslate"><span class="pre">new</span></code> call above the memory associated with this output message object instance is retained after the method is exited.  In this case the module deconstructor needs to free up the associated message memory.  For the above example this could be done using:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">SomeModule</span><span class="o">::~</span><span class="n">SomeModule</span><span class="p">()</span>
 <span class="p">{</span>

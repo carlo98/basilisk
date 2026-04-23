@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -234,7 +235,7 @@
 <section id="pulling-the-recorded-message-data">
 <h2>Pulling the Recorded Message Data<a class="headerlink" href="#pulling-the-recorded-message-data" title="Link to this heading"></a></h2>
 <p>After the simulation completes, the recorded data is stored inside the <code class="docutils literal notranslate"><span class="pre">msgRec</span></code> and <code class="docutils literal notranslate"><span class="pre">msgRec20</span></code> recorders.  To access the variables of the message, simply use <code class="docutils literal notranslate"><span class="pre">msgRec.variable</span></code> where <code class="docutils literal notranslate"><span class="pre">variable</span></code> is the message structure variable you seek to access.  To access the array of time values where the message was recorded use <code class="docutils literal notranslate"><span class="pre">msgRec.times()</span></code>.    A second time array is available that stores the times where the messages are written with <code class="docutils literal notranslate"><span class="pre">msgRec.timesWritten()</span></code>.  Why two time arrays?  Consider an output message that is only updated every 3s, but the message is being read and recorded every second.  The <code class="docutils literal notranslate"><span class="pre">.timesWritten()</span></code> values will repeat until a new output message is created.</p>
-<p><a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">Module: cModuleTemplate</span></a> output message only contains the array <code class="docutils literal notranslate"><span class="pre">dataVector</span></code>.  In this simulation it is recorded at the rate of 1Hz in <code class="docutils literal notranslate"><span class="pre">msgRec</span></code>, and every 20s in the recorder <code class="docutils literal notranslate"><span class="pre">msgRec20</span></code>.  The simulation creates the following plot:</p>
+<p><a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">C Module: cModuleTemplate</span></a> output message only contains the array <code class="docutils literal notranslate"><span class="pre">dataVector</span></code>.  In this simulation it is recorded at the rate of 1Hz in <code class="docutils literal notranslate"><span class="pre">msgRec</span></code>, and every 20s in the recorder <code class="docutils literal notranslate"><span class="pre">msgRec20</span></code>.  The simulation creates the following plot:</p>
 <img alt="../../_images/bsk-4.svg" class="align-center" src="../../_images/bsk-4.svg" />
 </section>
 <section id="clearing-the-message-recorder-data-log">

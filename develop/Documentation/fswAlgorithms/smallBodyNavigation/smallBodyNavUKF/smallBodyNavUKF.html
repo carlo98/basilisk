@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: smallBodyNavUKF &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: smallBodyNavUKF &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -127,7 +128,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">smallBodyNavigation</a></li>
           <li class="breadcrumb-item"><a href="index.html">smallBodyNavUKF</a></li>
-      <li class="breadcrumb-item active">Module: smallBodyNavUKF</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: smallBodyNavUKF</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/smallBodyNavigation/smallBodyNavUKF/smallBodyNavUKF.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,8 +138,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-smallbodynavukf">
-<span id="smallbodynavukf"></span><h1>Module: smallBodyNavUKF<a class="headerlink" href="#module-smallbodynavukf" title="Link to this heading"></a></h1>
+  <section id="c-module-smallbodynavukf">
+<span id="smallbodynavukf"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: smallBodyNavUKF<a class="headerlink" href="#c-module-smallbodynavukf" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module provides a navigation solution for a spacecraft about a small body. An unscented Kalman filter estimates relative spacecraft position and velocity with respect to the small body, and the non-Keplerian acceleration term.</p>
@@ -146,19 +147,15 @@
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.
-The module msg connection is set by the user from python.
-The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-smallbodynavukf"></span><img alt="../../../../_images/moduleIOSmallBodyNavigationUKF.svg" src="../../../../_images/moduleIOSmallBodyNavigationUKF.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">smallBodyNavUKF()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<p>Note that this C++ FSW module provides both C- and C++-wrapped output messages.  The regular C++ wrapped output messages end with the usual <code class="docutils literal notranslate"><span class="pre">...OutMsg</span></code>.  The C wrapped output messages have the same payload type, but end with <code class="docutils literal notranslate"><span class="pre">...OutMsgC</span></code>.</p>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<p id="moduleio-smallbodynavukf">Note that this C++ FSW module provides both C- and C++-wrapped output messages.  The regular C++ wrapped output messages end with the usual <code class="docutils literal notranslate"><span class="pre">...OutMsg</span></code>.  The C wrapped output messages have the same payload type, but end with <code class="docutils literal notranslate"><span class="pre">...OutMsgC</span></code>.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-f03c5125c06cb29021b266d8ef3a954aede475f4.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">smallBodyNavUKF module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -206,8 +203,8 @@ Future work may consider augmenting the estimates and using more realistic measu
 {}^A\mathbf{a} \\
 \end{bmatrix}\end{split}\]</div>
 <p>The associated frame definitions may be found in the following table.</p>
-<table class="docutils align-default" id="id3">
-<caption><span class="caption-text">Frame Definitions</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Frame Definitions</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 50.0%" />
 <col style="width: 50.0%" />

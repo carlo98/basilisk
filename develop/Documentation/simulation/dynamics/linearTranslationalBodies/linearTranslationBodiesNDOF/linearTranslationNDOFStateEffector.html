@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: linearTranslationNDOFStateEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: linearTranslationNDOFStateEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -155,7 +156,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="../index.html">linearTranslationalBodies</a></li>
           <li class="breadcrumb-item"><a href="index.html">linearTranslationBodiesNDOF</a></li>
-      <li class="breadcrumb-item active">Module: linearTranslationNDOFStateEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: linearTranslationNDOFStateEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../../_sources/Documentation/simulation/dynamics/linearTranslationalBodies/linearTranslationBodiesNDOF/linearTranslationNDOFStateEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -165,8 +166,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-lineartranslationndofstateeffector">
-<span id="lineartranslationndofstateeffector"></span><h1>Module: linearTranslationNDOFStateEffector<a class="headerlink" href="#module-lineartranslationndofstateeffector" title="Link to this heading"></a></h1>
+  <section id="c-module-lineartranslationndofstateeffector">
+<span id="lineartranslationndofstateeffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: linearTranslationNDOFStateEffector<a class="headerlink" href="#c-module-lineartranslationndofstateeffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The N-DoF linear translation body class is an instantiation of the state effector abstract class with <span class="math notranslate nohighlight">\(N\)</span> degrees of freedom. The integrated test is validating the interaction between the linear translation body module and the rigid body hub that it is attached to. In this case, a 4-DoF linear translation body has an inertia tensor and is attached to the hub by four single-degree-of-freedom axes. Each spinning axis is fixed in the parent’s body frame and the effector is rigid, which means that its center of mass location does not move in the <span class="math notranslate nohighlight">\(F\)</span> frame. An optional motor force can be applied on the spinning axis, and the user can also lock the axis through a command. Moreover, the user can input a displacement reference that the effector will track through a spring and damper.</p>
@@ -174,6 +175,9 @@
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the user from python.  The msg type contains a link to the message structure definition, while the description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../../_images/graphviz-30359652ac0dcc89062f75af51ca9945ebf05bfb.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">linearTranslationNDOFStateEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -190,23 +194,23 @@
 <tbody>
 <tr class="row-even"><td><p>translatingBodyOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/LinearTranslationRigidBodyMsgPayload.html#lineartranslationrigidbodymsgpayload"><span class="std std-ref">LinearTranslationRigidBodyMsgPayload</span></a></p></td>
-<td><p>Output message containing the linear translation body state displacement and displacement rate</p></td>
+<td><p>Output message containing the linear translation body state displacement and displacement rate.</p></td>
 </tr>
 <tr class="row-odd"><td><p>motorForceInMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/ArrayMotorForceMsgPayload.html#arraymotorforcemsgpayload"><span class="std std-ref">ArrayMotorForceMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message of the motor force value</p></td>
+<td><p>(Optional) Input message of the motor force value.</p></td>
 </tr>
 <tr class="row-even"><td><p>motorLockInMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/ArrayEffectorLockMsgPayload.html#arrayeffectorlockmsgpayload"><span class="std std-ref">ArrayEffectorLockMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message for locking the axis</p></td>
+<td><p>(Optional) Input message for locking the axis.</p></td>
 </tr>
 <tr class="row-odd"><td><p>translatingBodyRefInMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/LinearTranslationRigidBodyMsgPayload.html#lineartranslationrigidbodymsgpayload"><span class="std std-ref">LinearTranslationRigidBodyMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message for prescribing the displacement and displacement rate</p></td>
+<td><p>(Optional) Input message for prescribing the displacement and displacement rate.</p></td>
 </tr>
 <tr class="row-even"><td><p>translatingBodyConfigLogOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>Output message containing the translating body inertial position and attitude states</p></td>
+<td><p>Output message containing the translating body inertial position and attitude states.</p></td>
 </tr>
 </tbody>
 </table>
@@ -307,7 +311,7 @@ AAS Astrodynamics Specialist Conference, Broomfield, CO, Aug. 11-15, 2024</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scObject</span><span class="o">.</span><span class="n">addStateEffector</span><span class="p">(</span><span class="n">translatingBodyEffector</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="../../spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> documentation on how to set up a spacecraft object.</p>
+<p>See <a class="reference internal" href="../../spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> documentation on how to set up a spacecraft object.</p>
 </li>
 </ol>
 <hr class="docutils" />

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -169,7 +170,7 @@ not its main focus. For context on dynamics using <a class="reference internal" 
 density model. The script illustrates how one defines and handles dynamic states
 that are driven by stochastic terms.</p>
 <p>The spacecraft definition is given in <code class="docutils literal notranslate"><span class="pre">CANNONBALL_SCENE_XML</span></code>; it contains a single
-body for which we set its mass directly. We use the <a class="reference internal" href="../../Documentation/simulation/mujocoDynamics/NBodyGravity/NBodyGravity.html#nbodygravity"><span class="std std-ref">Module: NBodyGravity</span></a> model to compute
+body for which we set its mass directly. We use the <a class="reference internal" href="../../Documentation/simulation/mujocoDynamics/NBodyGravity/NBodyGravity.html#nbodygravity"><span class="std std-ref">C++ Module: NBodyGravity</span></a> model to compute
 the gravity acting on this body due to a point-mass Earth.</p>
 <p>The drag force acting on the body is computed in the <a class="reference internal" href="../../Documentation/simulation/forceTorque/cannonballDrag/cannonballDrag.html#cannonballdrag"><span class="std std-ref">CannonballDrag</span></a>
 module. This takes as input the state of the spacecraft (so that
@@ -178,7 +179,7 @@ on the body-fixed reference frame (more accurately, the body’s center of mass 
 <p>The atmospheric density used on the drag model is given by:</p>
 <div class="math notranslate nohighlight">
 \[\rho_{\text{stoch}} = \rho_{\text{exp}} \left(1 + \delta_\rho\right)\]</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">densityExponential</span></code> is computed by the <a class="reference internal" href="../../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">Module: exponentialAtmosphere</span></a> model
+<p>where <code class="docutils literal notranslate"><span class="pre">densityExponential</span></code> is computed by the <a class="reference internal" href="../../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">C++ Module: exponentialAtmosphere</span></a> model
 while <code class="docutils literal notranslate"><span class="pre">densityCorrection</span></code> (written above as <span class="math notranslate nohighlight">\(\delta_\rho\)</span>) is a stochastic process centered at zero. This process
 is modeled as an Ornstein-Uhlenbeck (OU) process, whose Stochastic Differential
 Equation (SDE) is given by:</p>

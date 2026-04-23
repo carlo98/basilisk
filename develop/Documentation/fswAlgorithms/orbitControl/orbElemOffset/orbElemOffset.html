@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: orbElemOffset &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: orbElemOffset &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -132,7 +133,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">orbitControl</a></li>
           <li class="breadcrumb-item"><a href="index.html">orbElemOffset</a></li>
-      <li class="breadcrumb-item active">Module: orbElemOffset</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: orbElemOffset</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/orbitControl/orbElemOffset/orbElemOffset.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -142,8 +143,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-orbelemoffset">
-<span id="orbelemoffset"></span><h1>Module: orbElemOffset<a class="headerlink" href="#module-orbelemoffset" title="Link to this heading"></a></h1>
+  <section id="c-module-orbelemoffset">
+<span id="orbelemoffset"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: orbElemOffset<a class="headerlink" href="#c-module-orbelemoffset" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">OrbElemOffset</span></code> module combines two classical orbital element messages into a single output element set. One
@@ -188,6 +189,12 @@ element wise, including true anomaly. Optionally, the anomaly offset can be inte
 </section>
 <section id="message-interfaces">
 <h2>Message Interfaces<a class="headerlink" href="#message-interfaces" title="Link to this heading"></a></h2>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-daab3ac588db6f5aa33fd09f3945c7f9924b444c.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">orbElemOffset module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -204,13 +211,11 @@ element wise, including true anomaly. Optionally, the anomaly offset can be inte
 <tbody>
 <tr class="row-even"><td><p>mainElementsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ClassicElementsMsgPayload.html#classicelementsmsgpayload"><span class="std std-ref">ClassicElementsMsgPayload</span></a></p></td>
-<td><p>Input message containing the baseline classical elements
-(<code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">e</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">Omega</span></code>, <code class="docutils literal notranslate"><span class="pre">omega</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code>).</p></td>
+<td><p>Input message containing the baseline classical elements (<code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">e</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">Omega</span></code>, <code class="docutils literal notranslate"><span class="pre">omega</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code>).</p></td>
 </tr>
 <tr class="row-odd"><td><p>offsetElementsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ClassicElementsMsgPayload.html#classicelementsmsgpayload"><span class="std std-ref">ClassicElementsMsgPayload</span></a></p></td>
-<td><p>Input message containing additive offsets for the classical elements. The <code class="docutils literal notranslate"><span class="pre">f</span></code> field is interpreted either
-as <span class="math notranslate nohighlight">\(\Delta f\)</span> or <span class="math notranslate nohighlight">\(\Delta M\)</span> depending on <code class="docutils literal notranslate"><span class="pre">useMeanAnomalyOffset</span></code>.</p></td>
+<td><p>Input message containing additive offsets for the classical elements. The <code class="docutils literal notranslate"><span class="pre">f</span></code> field is interpreted either as <span class="math notranslate nohighlight">\(\Delta f\)</span> or <span class="math notranslate nohighlight">\(\Delta M\)</span> depending on <code class="docutils literal notranslate"><span class="pre">useMeanAnomalyOffset</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p>elementsOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ClassicElementsMsgPayload.html#classicelementsmsgpayload"><span class="std std-ref">ClassicElementsMsgPayload</span></a></p></td>

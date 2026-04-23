@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -165,9 +166,9 @@ relative motion of two spacecraft in Low Earth Orbit: a chief and a deputy.</p>
 <p>The spacecraft are defined in <code class="docutils literal notranslate"><span class="pre">CHIEF_DEPUTY_SCENE_XML</span></code>. Each vehicle is modeled
 as a single point-mass body with three translational sliding joints (x, y, z).
 Their inertial properties are assigned directly in the XML.</p>
-<p>Gravity is modeled using the <a class="reference internal" href="../../Documentation/simulation/mujocoDynamics/NBodyGravity/NBodyGravity.html#nbodygravity"><span class="std std-ref">Module: NBodyGravity</span></a> model, with a point-mass
-Earth defined by <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/pointMassGravityModel.html#pointmassgravitymodel"><span class="std std-ref">Module: pointMassGravityModel</span></a>. The exponential atmospheric model
-(<a class="reference internal" href="../../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">Module: exponentialAtmosphere</span></a>) is optionally added so that the chief and deputy
+<p>Gravity is modeled using the <a class="reference internal" href="../../Documentation/simulation/mujocoDynamics/NBodyGravity/NBodyGravity.html#nbodygravity"><span class="std std-ref">C++ Module: NBodyGravity</span></a> model, with a point-mass
+Earth defined by <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/pointMassGravityModel.html#pointmassgravitymodel"><span class="std std-ref">pointMassGravityModel</span></a>. The exponential atmospheric model
+(<a class="reference internal" href="../../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">C++ Module: exponentialAtmosphere</span></a>) is optionally added so that the chief and deputy
 can experience cannonball drag.</p>
 <p>Aerodynamic drag is computed using <a class="reference internal" href="../../Documentation/simulation/forceTorque/cannonballDrag/cannonballDrag.html#cannonballdrag"><span class="std std-ref">CannonballDrag</span></a>.
 For each spacecraft, the drag model uses:</p>
@@ -190,7 +191,7 @@ forces to a site-fixed force at the deputy’s center of mass using
 <ul class="simple">
 <li><p>How to construct a multi-body MuJoCo scene with two independent spacecraft</p></li>
 <li><p>How to configure translation-only scenarios</p></li>
-<li><p>How to model gravity on multiple bodies using the <a class="reference internal" href="../../Documentation/simulation/mujocoDynamics/NBodyGravity/NBodyGravity.html#nbodygravity"><span class="std std-ref">Module: NBodyGravity</span></a> model</p></li>
+<li><p>How to model gravity on multiple bodies using the <a class="reference internal" href="../../Documentation/simulation/mujocoDynamics/NBodyGravity/NBodyGravity.html#nbodygravity"><span class="std std-ref">C++ Module: NBodyGravity</span></a> model</p></li>
 <li><p>How to apply aerodynamic forces</p></li>
 <li><p>How to configure and apply a classical-element feedback controller for formation control</p></li>
 <li><p>How to record and visualize inertial trajectories, orbital-element histories,

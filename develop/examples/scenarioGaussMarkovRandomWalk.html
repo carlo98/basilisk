@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -165,7 +166,7 @@ in an elliptical Earth orbit and attaches two IMU sensors with different noise c
 <p>The simulation layout is shown in the following illustration. A single simulation process is created which
 contains both the spacecraft simulation module and two IMU sensor modules. Each IMU sensor has different
 configurations for the process noise (P Matrix), state propagation (A Matrix), and walk bounds.</p>
-<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module in an elliptical Earth orbit. The IMU sensors
+<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module in an elliptical Earth orbit. The IMU sensors
 are configured with different parameters:</p>
 <ul class="simple">
 <li><dl class="simple">

@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: planetEphemeris &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: planetEphemeris &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -140,7 +141,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">planetEphemeris</a></li>
-      <li class="breadcrumb-item active">Module: planetEphemeris</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: planetEphemeris</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/planetEphemeris/planetEphemeris.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-planetephemeris">
-<span id="planetephemeris"></span><h1>Module: planetEphemeris<a class="headerlink" href="#module-planetephemeris" title="Link to this heading"></a></h1>
+  <section id="c-module-planetephemeris">
+<span id="planetephemeris"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: planetEphemeris<a class="headerlink" href="#c-module-planetephemeris" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The planetEphemeris module uses classical heliocentric orbit elements to specify a planet’s
@@ -165,14 +166,11 @@ contains further information on this module’s function, how to run it, as well
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-planet-ephemeris"></span><img alt="../../../../_images/planetEphemerisIO.svg" src="../../../../_images/planetEphemerisIO.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">planetEphemeris()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-92f0199caf7f664608d09e2e6f3a33220d3471e6.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">planetEphemeris module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -187,7 +185,7 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>planetOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>vector of planet spice state output messages</p></td>
+<td><p>vector of planet spice state output messages.</p></td>
 </tr>
 </tbody>
 </table>

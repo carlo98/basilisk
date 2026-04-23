@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -145,10 +146,10 @@
 <code class="docutils literal notranslate"><span class="pre">lambertPlanner()</span></code>, <code class="docutils literal notranslate"><span class="pre">lambertSolver()</span></code> and <code class="docutils literal notranslate"><span class="pre">lambertValidator()</span></code>, the computation of a Delta-V maneuver that takes
 the spacecraft to a desired locataion in a given time.</p>
 <p>In this scenario, the goal is to reach a target position at final time tf by performing a maneuver at time tm.
-This is done by solving Lambert’s problem. The Lambert problem is set up using <a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertPlanner/lambertPlanner.html#lambertplanner"><span class="std std-ref">Module: lambertPlanner</span></a>, which provides the
-information in the form of <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/LambertProblemMsgPayload.html#lambertproblemmsgpayload"><span class="std std-ref">LambertProblemMsgPayload</span></a> to <a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertSolver/lambertSolver.html#lambertsolver"><span class="std std-ref">Module: lambertSolver</span></a>. Lambert’s problem is solved within
-<a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertSolver/lambertSolver.html#lambertsolver"><span class="std std-ref">Module: lambertSolver</span></a>, which writes the <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/LambertSolutionMsgPayload.html#lambertsolutionmsgpayload"><span class="std std-ref">LambertSolutionMsgPayload</span></a> and <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/LambertPerformanceMsgPayload.html#lambertperformancemsgpayload"><span class="std std-ref">LambertPerformanceMsgPayload</span></a> output
-messages. Finally, <a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertValidator/lambertValidator.html#lambertvalidator"><span class="std std-ref">Module: lambertValidator</span></a> processes the content of those messages, computes the required Delta-V, and
+This is done by solving Lambert’s problem. The Lambert problem is set up using <a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertPlanner/lambertPlanner.html#lambertplanner"><span class="std std-ref">C++ Module: lambertPlanner</span></a>, which provides the
+information in the form of <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/LambertProblemMsgPayload.html#lambertproblemmsgpayload"><span class="std std-ref">LambertProblemMsgPayload</span></a> to <a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertSolver/lambertSolver.html#lambertsolver"><span class="std std-ref">C++ Module: lambertSolver</span></a>. Lambert’s problem is solved within
+<a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertSolver/lambertSolver.html#lambertsolver"><span class="std std-ref">C++ Module: lambertSolver</span></a>, which writes the <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/LambertSolutionMsgPayload.html#lambertsolutionmsgpayload"><span class="std std-ref">LambertSolutionMsgPayload</span></a> and <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/LambertPerformanceMsgPayload.html#lambertperformancemsgpayload"><span class="std std-ref">LambertPerformanceMsgPayload</span></a> output
+messages. Finally, <a class="reference internal" href="../Documentation/fswAlgorithms/orbitControl/lambertValidator/lambertValidator.html#lambertvalidator"><span class="std std-ref">C++ Module: lambertValidator</span></a> processes the content of those messages, computes the required Delta-V, and
 only writes a non-zero Delta-V message within <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/DvBurnCmdMsgPayload.html#dvburncmdmsgpayload"><span class="std std-ref">DvBurnCmdMsgPayload</span></a> if no constraints are violated
 (minimum orbit radius and final distance from targeted location) and the Delta-V solution has converged.</p>
 <p>The simulation layout is shown in the following illustration. The simulation and flight software (FSW) are divided into

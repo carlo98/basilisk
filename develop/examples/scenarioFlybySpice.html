@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -218,7 +219,7 @@ state input message must be subscribed to the spacecraft object’s state output
 </pre></div>
 </div>
 <p>Next the <code class="docutils literal notranslate"><span class="pre">velocityPoint</span></code> module is configured for each planet case. This module fixes the spacecraft attitude in the
-orbit velocity frame. See <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/velocityPoint/velocityPoint.html#velocitypoint"><span class="std std-ref">Module: velocityPoint</span></a> for a more detailed description of this module. The Mars velocity-pointing case is shown below:</p>
+orbit velocity frame. See <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/velocityPoint/velocityPoint.html#velocitypoint"><span class="std std-ref">C Module: velocityPoint</span></a> for a more detailed description of this module. The Mars velocity-pointing case is shown below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">velMarsGuidance</span> <span class="o">=</span> <span class="n">velocityPoint</span><span class="o">.</span><span class="n">velocityPoint</span><span class="p">()</span>
 <span class="n">velMarsGuidance</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;velocityPointMars&quot;</span>
 <span class="n">velMarsGuidance</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">marsMu</span>
@@ -239,7 +240,7 @@ orbit velocity frame. See <a class="reference internal" href="../Documentation/f
 module points a body-fixed spacecraft axis towards a particular location of interest. Modes for Earth- and Sun-pointing
 are implemented by subscribing the module’s <code class="docutils literal notranslate"><span class="pre">celBodyInMsg</span></code> input message to the desired planet’s ephemeris output
 message. The module’s <code class="docutils literal notranslate"><span class="pre">pHat_B</span></code> vector is set according to which body-fixed vector should point towards the location
-of interest. See <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">Module: locationPointing</span></a> for a more detailed description of this module.
+of interest. See <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">C Module: locationPointing</span></a> for a more detailed description of this module.
 The Earth-pointing guidance module setup is shown below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">earthPointGuidance</span> <span class="o">=</span> <span class="n">locationPointing</span><span class="o">.</span><span class="n">locationPointing</span><span class="p">()</span>
 <span class="n">earthPointGuidance</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;antennaEarthPoint&quot;</span>
@@ -253,7 +254,7 @@ The Earth-pointing guidance module setup is shown below:</p>
 </pre></div>
 </div>
 <p>Next, a science-pointing mode is implemented using the <code class="docutils literal notranslate"><span class="pre">hillPoint</span></code> module. This module points a body-fixed location
-on the spacecraft designated as a camera towards the flyby planet of interest. See <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/hillPoint/hillPoint.html#hillpoint"><span class="std std-ref">Module: hillPoint</span></a> for a more
+on the spacecraft designated as a camera towards the flyby planet of interest. See <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/hillPoint/hillPoint.html#hillpoint"><span class="std std-ref">C Module: hillPoint</span></a> for a more
 detailed description of this module:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cameraLocation</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
 <span class="n">sciencePointGuidance</span> <span class="o">=</span> <span class="n">hillPoint</span><span class="o">.</span><span class="n">hillPoint</span><span class="p">()</span>

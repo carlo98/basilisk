@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -165,7 +166,7 @@ from an initial to a final inertially fixed attitude, the reader is redirected t
 where this process is explained in the details.</p>
 <p>This script uses <a class="reference internal" href="../Documentation/utilities/simIncludeGravBody.html#simincludegravbody"><span class="std std-ref">simIncludeGravBody</span></a> to add Earth and Sun to the simulation. The method <code class="docutils literal notranslate"><span class="pre">createSpiceInterface</span></code>
 to create Spice modules for the celestial bodies and generate the respective Spice planet state messages.
-The <a class="reference internal" href="../Documentation/simulation/dynamics/DynOutput/boreAngCalc/boreAngCalc.html#boreangcalc"><span class="std std-ref">Module: boreAngCalc</span></a> module is set up for each of the instruments that have geometric angular constraints. This module
+The <a class="reference internal" href="../Documentation/simulation/dynamics/DynOutput/boreAngCalc/boreAngCalc.html#boreangcalc"><span class="std std-ref">C++ Module: boreAngCalc</span></a> module is set up for each of the instruments that have geometric angular constraints. This module
 subscribes to the <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a> and <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a> of the bright object (the Sun) and
 returns a <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/BoreAngleMsgPayload.html#boreanglemsgpayload"><span class="std std-ref">BoreAngleMsgPayload</span></a> that contains the angle between the bright object and the direction of the
 boresight vector of the instrument.</p>

@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: spiceInterface &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: spiceInterface &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -140,7 +141,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">spiceInterface</a></li>
-      <li class="breadcrumb-item active">Module: spiceInterface</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: spiceInterface</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/spiceInterface/spiceInterface.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-spiceinterface">
-<span id="spiceinterface"></span><h1>Module: spiceInterface<a class="headerlink" href="#module-spiceinterface" title="Link to this heading"></a></h1>
+  <section id="c-module-spiceinterface">
+<span id="spiceinterface"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: spiceInterface<a class="headerlink" href="#c-module-spiceinterface" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The SPICE interface class gets time and planetary or spacecraft body information from the JPL ephemeris library</p>
@@ -165,6 +166,9 @@ how to run it, as well as testing.</p>
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-9dad1c2e0ee6b8d5447f542b66fb499061f6898a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">spiceInterface module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -181,27 +185,27 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>spiceTimeOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpiceTimeMsgPayload.html#spicetimemsgpayload"><span class="std std-ref">SpiceTimeMsgPayload</span></a></p></td>
-<td><p>spice time sampling output message</p></td>
+<td><p>spice time sampling output message.</p></td>
 </tr>
 <tr class="row-odd"><td><p>epochInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EpochMsgPayload.html#epochmsgpayload"><span class="std std-ref">EpochMsgPayload</span></a></p></td>
-<td><p>(optional) input epoch message</p></td>
+<td><p>(optional) input epoch message.</p></td>
 </tr>
 <tr class="row-even"><td><p>planetStateOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>vector of planet state output messages</p></td>
+<td><p>vector of planet state output messages.</p></td>
 </tr>
 <tr class="row-odd"><td><p>scStateOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>vector of spacecraft state messages</p></td>
+<td><p>vector of spacecraft state messages.</p></td>
 </tr>
 <tr class="row-even"><td><p>attRefStateOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a></p></td>
-<td><p>vector of spacecraft attitude reference state output messages</p></td>
+<td><p>vector of spacecraft attitude reference state output messages.</p></td>
 </tr>
 <tr class="row-odd"><td><p>transRefStateOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/TransRefMsgPayload.html#transrefmsgpayload"><span class="std std-ref">TransRefMsgPayload</span></a></p></td>
-<td><p>vector of spacecraft translation reference state output messages</p></td>
+<td><p>vector of spacecraft translation reference state output messages.</p></td>
 </tr>
 </tbody>
 </table>
@@ -218,7 +222,7 @@ the order that the celestial body names were added.</p>
 the method <code class="docutils literal notranslate"><span class="pre">addSpacecraftNames(vector&lt;string&gt;)</span></code>.  The module provides a vector out corresponding spacecraft state output
 messages in three different formats.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">scStateOutMsgs[]</span></code>: these are the <a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a> state output messages that the <a class="reference internal" href="../../dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module provides</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scStateOutMsgs[]</span></code>: these are the <a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a> state output messages that the <a class="reference internal" href="../../dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module provides</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">attRefStateOutMsgs[]</span></code>: these are the attitude reference messages <a class="reference internal" href="../../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a>.  These are useful to
 only prescribe the spacecraft attitude motion.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">transRefStateOutMsgs[]</span></code>: these are the translational reference message <a class="reference internal" href="../../../architecture/msgPayloadDefC/TransRefMsgPayload.html#transrefmsgpayload"><span class="std std-ref">TransRefMsgPayload</span></a>.  These are useful to only

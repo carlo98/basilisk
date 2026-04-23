@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: linkBudget &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: linkBudget &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -126,7 +127,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">communication</a></li>
           <li class="breadcrumb-item"><a href="index.html">linkBudget</a></li>
-      <li class="breadcrumb-item active">Module: linkBudget</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: linkBudget</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/communication/linkBudget/linkBudget.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,18 +137,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-linkbudget">
-<span id="linkbudget"></span><h1>Module: linkBudget<a class="headerlink" href="#module-linkbudget" title="Link to this heading"></a></h1>
+  <section id="c-module-linkbudget">
+<span id="linkbudget"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: linkBudget<a class="headerlink" href="#c-module-linkbudget" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><strong>[BETA]</strong> <a class="reference internal" href="#linkbudget"><span class="std std-ref">Module: linkBudget</span></a>  is a beta module in an initial public release. This module might be
+<p><strong>[BETA]</strong> <a class="reference internal" href="#linkbudget"><span class="std std-ref">C++ Module: linkBudget</span></a>  is a beta module in an initial public release. This module might be
 subject to changes in future releases.</p>
 </div>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This document describes how the linkBudget module operates within the Basilisk astrodynamics simulation framework. The purpose of this module is to provide a radio link budget calculation between two antennas, enabling the simulation of spacecraft-to-spacecraft or spacecraft-to-ground communication links.</p>
 <p>The module computes the end-to-end link budget accounting for free space path loss (FSPL), atmospheric attenuation (based on <a class="reference external" href="https://www.itu.int/rec/R-REC-P.676">ITU-R P.676</a>), antenna pointing losses, and frequency offset losses. The primary output is the Carrier-to-Noise Ratio (CNR) for each receiving antenna, which is essential for evaluating communication system performance.</p>
-<p>This module requires two connected antenna output messages (e.g. from <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a> modules). The link budget calculation automatically determines the link configuration (space-to-space or space-to-ground) based on the antenna environment types.</p>
+<p>This module requires two connected antenna output messages (e.g. from <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">C++ Module: simpleAntenna</span></a> modules). The link budget calculation automatically determines the link configuration (space-to-space or space-to-ground) based on the antenna environment types.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
@@ -155,43 +156,41 @@ subject to changes in future releases.</p>
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-4ab27dad69d245a9ee5dd1b077702f2c0d3b314d.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">linkBudget module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id4">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
 <colgroup>
-<col style="width: 20.0%" />
 <col style="width: 25.0%" />
-<col style="width: 35.0%" />
-<col style="width: 20.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Msg Variable Name</p></th>
 <th class="head"><p>Msg Type</p></th>
 <th class="head"><p>Description</p></th>
-<th class="head"><p>Note</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>antennaInPayload_1</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AntennaLogMsgPayload.html#antennalogmsgpayload"><span class="std std-ref">AntennaLogMsgPayload</span></a></p></td>
-<td><p>Output message from antenna 1</p></td>
-<td><p>Required</p></td>
+<td><p>Output message from antenna 1.</p></td>
 </tr>
 <tr class="row-odd"><td><p>antennaInPayload_2</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AntennaLogMsgPayload.html#antennalogmsgpayload"><span class="std std-ref">AntennaLogMsgPayload</span></a></p></td>
-<td><p>Output message from antenna 2</p></td>
-<td><p>Required</p></td>
+<td><p>Output message from antenna 2.</p></td>
 </tr>
 <tr class="row-even"><td><p>linkBudgetOutPayload</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/LinkBudgetMsgPayload.html#linkbudgetmsgpayload"><span class="std std-ref">LinkBudgetMsgPayload</span></a></p></td>
-<td><p>Link budget calculation results</p></td>
-<td><p>Output</p></td>
+<td><p>Link budget calculation results.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="detailed-module-description">
 <span id="linkbudget-detailed-module-description"></span><h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
-<p>The linkBudget module calculates the radio link budget between two antennas. It receives antenna state information from two antenna modules (e.g. <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a>) and computes the various losses and the resulting Carrier-to-Noise Ratio (CNR) for each receiving antenna.</p>
+<p>The linkBudget module calculates the radio link budget between two antennas. It receives antenna state information from two antenna modules (e.g. <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">C++ Module: simpleAntenna</span></a>) and computes the various losses and the resulting Carrier-to-Noise Ratio (CNR) for each receiving antenna.</p>
 <p>The module supports the following communication configurations:</p>
 <ul class="simple">
 <li><p><strong>Space &lt;–&gt; Space</strong>: Direct line-of-sight communication between two spacecraft</p></li>
@@ -269,9 +268,9 @@ The FSPL is illustrated in Figure 1, showing two antennas separated by distance 
 <p><span class="caption-text">Figure 3: Illustration of pointing loss due to antenna misalignment (pointing error angle in elevation, <span class="math notranslate nohighlight">\(\| \theta_\mathrm{el} \| &gt; 0^\circ\)</span>)</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>The pointing error loss accounts for signal degradation when the antennas are not perfectly aligned. This loss is computed assuming a Gaussian antenna radiation pattern (consistent with the <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a> module).</p>
+<p>The pointing error loss accounts for signal degradation when the antennas are not perfectly aligned. This loss is computed assuming a Gaussian antenna radiation pattern (consistent with the <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">C++ Module: simpleAntenna</span></a> module).</p>
 <p>For each antenna, the pointing error is decomposed into azimuth and elevation components relative to the antenna boresight direction:</p>
-<p>According to the <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a> gaussian-beam pattern, the pointing loss is computed as:</p>
+<p>According to the <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">C++ Module: simpleAntenna</span></a> gaussian-beam pattern, the pointing loss is computed as:</p>
 <div class="math notranslate nohighlight">
 \[L_\mathrm{point}\,\mathrm{[dB]} = 10 \cdot \log_{10}(e) \cdot 4 \cdot \ln(2) \cdot \left[ \left(\frac{\theta_\mathrm{az}}{\theta_\mathrm{HPBW,az}}\right)^2 + \left(\frac{\theta_\mathrm{el}}{\theta_\mathrm{HPBW,el}}\right)^2 \right]\]</div>
 <p>where:</p>
@@ -392,7 +391,7 @@ For partial overlap (<span class="math notranslate nohighlight">\(0 &lt; B_\math
 <li><p><strong>Doppler shift due to spacecraft motion is currently not considered.</strong> The frequency offset between antennas due to relative motion is not currently computed.</p></li>
 <li><p><strong>Impedance mismatch losses are not included.</strong></p></li>
 <li><p><strong>Polarization is not modeled.</strong></p></li>
-<li><p><strong>Communication between close antennas (&lt; 10 km) may yield inaccurate results.</strong> The Gaussian-beam assumption in <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a> may not get accurate results at close range.</p></li>
+<li><p><strong>Communication between close antennas (&lt; 10 km) may yield inaccurate results.</strong> The Gaussian-beam assumption in <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">C++ Module: simpleAntenna</span></a> may not get accurate results at close range.</p></li>
 <li><p><strong>Multipath effects are not considered.</strong></p></li>
 </ul>
 </section>
@@ -457,7 +456,7 @@ For partial overlap (<span class="math notranslate nohighlight">\(0 &lt; B_\math
 <h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>
 <section id="setting-up-the-link-budget-module">
 <h3>Setting Up the Link Budget Module<a class="headerlink" href="#setting-up-the-link-budget-module" title="Link to this heading"></a></h3>
-<p>To use the linkBudget module, you must first create two antenna modules (using <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a>) and connect their output messages to the link budget module.</p>
+<p>To use the linkBudget module, you must first create two antenna modules (using <a class="reference internal" href="../simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">C++ Module: simpleAntenna</span></a>) and connect their output messages to the link budget module.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">linkBudget</span><span class="p">,</span> <span class="n">simpleAntenna</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationBaseClass</span>
 

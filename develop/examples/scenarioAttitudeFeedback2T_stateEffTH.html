@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -144,11 +145,11 @@
 <section id="overview">
 <span id="module-scenarioAttitudeFeedback2T_stateEffTH"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This scenario is an exact replica of <a class="reference internal" href="scenarioAttitudeFeedback2T_TH.html#scenarioattitudefeedback2t-th"><span class="std std-ref">scenarioAttitudeFeedback2T_TH</span></a>. The only difference lies in the fact that
-this scenario uses the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">Module: thrusterStateEffector</span></a> module instead of <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>. The performance
+this scenario uses the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">C++ Module: thrusterStateEffector</span></a> module instead of <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>. The performance
 and results should be nearly identical to the original scenario, with the small difference that the thrusters do not
 have an on-off behavior, but instead behave like a first-order filter. For more information on the scenario setup, see
 <a class="reference internal" href="scenarioAttitudeFeedback2T_TH.html#scenarioattitudefeedback2t-th"><span class="std std-ref">scenarioAttitudeFeedback2T_TH</span></a>.</p>
-<p>To show that the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">Module: thrusterStateEffector</span></a> thruster module works with variable time step integrators, this scenario
+<p>To show that the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">C++ Module: thrusterStateEffector</span></a> thruster module works with variable time step integrators, this scenario
 uses an RKF78 integrator instead of the usual RK4.</p>
 </section>
 <section id="illustration-of-simulation-results">

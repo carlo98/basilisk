@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: atmosphereBase &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: atmosphereBase &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -24,7 +25,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Module: magneticFieldBase" href="magneticFieldBase.html" />
+    <link rel="next" title="C++ Module: magneticFieldBase" href="magneticFieldBase.html" />
     <link rel="prev" title="_GeneralModuleFiles" href="index.html" /> 
 </head>
 
@@ -140,7 +141,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">_GeneralModuleFiles</a></li>
-      <li class="breadcrumb-item active">Module: atmosphereBase</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: atmosphereBase</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/_GeneralModuleFiles/atmosphereBase.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-atmospherebase">
-<span id="atmospherebase"></span><h1>Module: atmosphereBase<a class="headerlink" href="#module-atmospherebase" title="Link to this heading"></a></h1>
+  <section id="c-module-atmospherebase">
+<span id="atmospherebase"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: atmosphereBase<a class="headerlink" href="#c-module-atmospherebase" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>General atmosphere base class used to calculate neutral density/temperature using arbitrary models
@@ -164,6 +165,9 @@ multiple spacecraft through <code class="docutils literal notranslate"><span cla
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-b49d32cc305fc703e1132e3c8c061f4af501d2b9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">atmosphereBase module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -180,11 +184,11 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>scStateInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>vector of spacecraft state input messages</p></td>
+<td><p>vector of spacecraft state input messages.</p></td>
 </tr>
 <tr class="row-odd"><td><p>envOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AtmoPropsMsgPayload.html#atmopropsmsgpayload"><span class="std std-ref">AtmoPropsMsgPayload</span></a></p></td>
-<td><p>vector of atmospheric density output messages</p></td>
+<td><p>vector of atmospheric density output messages.</p></td>
 </tr>
 <tr class="row-even"><td><p>planetPosInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
@@ -192,7 +196,7 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>epochInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EpochMsgPayload.html#epochmsgpayload"><span class="std std-ref">EpochMsgPayload</span></a></p></td>
-<td><p>(optional) epoch date/time input message</p></td>
+<td><p>(optional) epoch date/time input message.</p></td>
 </tr>
 </tbody>
 </table>
@@ -428,7 +432,7 @@ provides information on what this message is used for.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="_GeneralModuleFiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="magneticFieldBase.html" class="btn btn-neutral float-right" title="Module: magneticFieldBase" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="magneticFieldBase.html" class="btn btn-neutral float-right" title="C++ Module: magneticFieldBase" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

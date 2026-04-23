@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: GravityGradientEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: GravityGradientEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -154,7 +155,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">GravityGradientEffector</a></li>
-      <li class="breadcrumb-item active">Module: GravityGradientEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: GravityGradientEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/GravityGradientEffector/GravityGradientEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -164,11 +165,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-gravitygradienteffector">
-<span id="gravitygradienteffector"></span><h1>Module: GravityGradientEffector<a class="headerlink" href="#module-gravitygradienteffector" title="Link to this heading"></a></h1>
+  <section id="c-module-gravitygradienteffector">
+<span id="gravitygradienteffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: GravityGradientEffector<a class="headerlink" href="#c-module-gravitygradienteffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>This module, a sub-class of <a class="reference internal" href="../_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">Module: dynamicEffector</span></a>, implements a first order gravity gradient torque acting on a spacecraft.  It is written
+<p>This module, a sub-class of <a class="reference internal" href="../_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">C++ Module: dynamicEffector</span></a>, implements a first order gravity gradient torque acting on a spacecraft.  It is written
 in a general manner such that one or more gravitational objects are considered.  This allows a continues simulation to
 apply gravity gradients torque near the Earth, the moon and onwards to Mars.</p>
 </section>
@@ -177,6 +178,9 @@ apply gravity gradients torque near the Earth, the moon and onwards to Mars.</p>
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-e0230fe55dbf76bee5b00fbf7d00bfbf62f22405.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">GravityGradientEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>

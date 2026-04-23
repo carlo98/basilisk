@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: vizInterface &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: vizInterface &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -123,7 +124,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">vizard</a></li>
           <li class="breadcrumb-item"><a href="index.html">vizInterface</a></li>
-      <li class="breadcrumb-item active">Module: vizInterface</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: vizInterface</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/vizard/vizInterface/vizInterface.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -133,8 +134,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-vizinterface">
-<span id="vizinterface"></span><h1>Module: vizInterface<a class="headerlink" href="#module-vizinterface" title="Link to this heading"></a></h1>
+  <section id="c-module-vizinterface">
+<span id="vizinterface"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: vizInterface<a class="headerlink" href="#c-module-vizinterface" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module provides an interface to package up Basilisk messages and pass them onto the <a class="reference internal" href="../../../../Vizard/Vizard.html#vizard"><span class="std std-ref">Vizard</span></a>
@@ -151,6 +152,9 @@ is calling <code class="docutils literal notranslate"><span class="pre">vizInter
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
 <p>The following messages are set directly within <code class="docutils literal notranslate"><span class="pre">vizInterface</span></code>.  Additional messages are set within the
 <code class="docutils literal notranslate"><span class="pre">VizSpacecraftData</span></code> data structures for each spacecraft.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-d3d28ebe662b0ef6cbdfa0fb7e7505c81aec4e52.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">vizInterface module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -159,16 +163,15 @@ is calling <code class="docutils literal notranslate"><span class="pre">vizInter
 <col style="width: 50.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Default</p></th>
+<tr class="row-odd"><th class="head"><p>Msg Variable Name</p></th>
+<th class="head"><p>Msg Type</p></th>
 <th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>opnavImageOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CameraImageMsgPayload.html#cameraimagemsgpayload"><span class="std std-ref">CameraImageMsgPayload</span></a></p></td>
-<td><p>(optional) vector of Image output messages, the corresponding camera configuration input message is setup
-through <code class="docutils literal notranslate"><span class="pre">vizInterface.addCamMsgToModule(msg)</span></code></p></td>
+<td><p>(optional) vector of Image output messages, the corresponding camera configuration input message is setup through <code class="docutils literal notranslate"><span class="pre">vizInterface.addCamMsgToModule(msg)</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>epochInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EpochMsgPayload.html#epochmsgpayload"><span class="std std-ref">EpochMsgPayload</span></a></p></td>
@@ -180,7 +183,7 @@ through <code class="docutils literal notranslate"><span class="pre">vizInterfac
 </tr>
 </tbody>
 </table>
-<p>The <code class="docutils literal notranslate"><span class="pre">VizSpacecraftData</span></code> structure, defined in <a class="reference internal" href="../_GeneralModuleFiles/vizStructures.html#vizstructures"><span class="std std-ref">Module: vizStructures</span></a>, contains a range of input messages for each spacecraft added.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">VizSpacecraftData</span></code> structure, defined in <a class="reference internal" href="../_GeneralModuleFiles/vizStructures.html#vizstructures"><span class="std std-ref">vizStructures</span></a>, contains a range of input messages for each spacecraft added.</p>
 <table class="docutils align-default" id="id2">
 <caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">VizSpacecraftData</span></code> input messages per spacecraft</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <colgroup>

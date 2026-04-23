@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -204,7 +205,7 @@ enabled by adding the line:</p>
 <h2><span class="section-number">1.4. </span>OpNav Dynamics, Flight Software, and Plotting<a class="headerlink" href="#opnav-dynamics-flight-software-and-plotting" title="Link to this heading"></a></h2>
 <p>The simulations use three other main python scripts.</p>
 <p><a class="reference internal" href="modelsOpNav/BSK_OpNavDynamics.html#bsk-opnavdynamics"><span class="std std-ref">BSK_OpNavDynamics</span></a> is similar to the BSKSim versions seen previously. The main additions are
-the instantiation of <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>, and the camera module.</p>
+the instantiation of <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>, and the camera module.</p>
 <p><a class="reference internal" href="modelsOpNav/BSK_OpNavFsw.html#bsk-opnavfsw"><span class="std std-ref">BSK_OpNavFsw</span></a> contains the FSW algorithms used in the scenarios. Examples are the Orbit Determination
 filters, the pointing guidance module, the CNN module, and more. This file also contains the <code class="docutils literal notranslate"><span class="pre">modeRequest</span></code>
 definitions which enable all the tasks necessary to perform a specific action.</p>

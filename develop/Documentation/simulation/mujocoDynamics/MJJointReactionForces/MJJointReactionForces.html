@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: MJJointReactionForces &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: MJJointReactionForces &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -130,7 +131,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">mujocoDynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">MJJointReactionForces</a></li>
-      <li class="breadcrumb-item active">Module: MJJointReactionForces</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: MJJointReactionForces</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/mujocoDynamics/MJJointReactionForces/MJJointReactionForces.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,8 +141,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-mjjointreactionforces">
-<span id="mjjointreactionforces"></span><h1>Module: MJJointReactionForces<a class="headerlink" href="#module-mjjointreactionforces" title="Link to this heading"></a></h1>
+  <section id="c-module-mjjointreactionforces">
+<span id="mjjointreactionforces"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: MJJointReactionForces<a class="headerlink" href="#c-module-mjjointreactionforces" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">MJJointReactionForces</span></code> module extracts the reaction forces and torques acting on the joints from the MuJoCo scene. It also indexes the kinematic tree, parent body, type, and starting degree-of-freedom for each joint.</p>
@@ -156,6 +157,9 @@
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-5f1ae6149a903a6b1863041a44e1b40e2e98c67d.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">MJJointReactionForces module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>

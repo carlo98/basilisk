@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -150,24 +151,24 @@ is above a user-defined threshold. In this case, such threshold is set at 80 Nms
 by a set of 8 thrusters that can provide control about the three principal axes of the spacecraft.
 To perform the momentum dumping, three concatenated modules are used:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/attControl/thrMomentumManagement/thrMomentumManagement.html#thrmomentummanagement"><span class="std std-ref">Module: thrMomentumManagement</span></a>: computes the amount of momentum to be dumped, based on current stored momentum
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/attControl/thrMomentumManagement/thrMomentumManagement.html#thrmomentummanagement"><span class="std std-ref">C Module: thrMomentumManagement</span></a>: computes the amount of momentum to be dumped, based on current stored momentum
 and the user-defined threshold. It is important to notice that, for the three concatenated modules to work
 correctly, this first module cannot be run at simulation time <span class="math notranslate nohighlight">\(t = 0\)</span>. In this script, the method
-<code class="docutils literal notranslate"><span class="pre">Reset</span></code> is called on <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/thrMomentumManagement/thrMomentumManagement.html#thrmomentummanagement"><span class="std std-ref">Module: thrMomentumManagement</span></a> at <span class="math notranslate nohighlight">\(t = 10\)</span> s, which coincides to the time at which
+<code class="docutils literal notranslate"><span class="pre">Reset</span></code> is called on <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/thrMomentumManagement/thrMomentumManagement.html#thrmomentummanagement"><span class="std std-ref">C Module: thrMomentumManagement</span></a> at <span class="math notranslate nohighlight">\(t = 10\)</span> s, which coincides to the time at which
 the first desaturating impulse is fired.</p></li>
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrForceMapping/thrForceMapping.html#thrforcemapping"><span class="std std-ref">Module: thrForceMapping</span></a>: maps the amout of momentum to be dumped into impulses that must be delivered by each
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrForceMapping/thrForceMapping.html#thrforcemapping"><span class="std std-ref">C Module: thrForceMapping</span></a>: maps the amout of momentum to be dumped into impulses that must be delivered by each
 thruster. This module is originally implemented to map a requested torque into forces imparted by the thrusters,
 but it can be applied in this case as well, because the math is the same. The only caveat is that, in this case,
 the output should not be scaled by the thruster maximum torque capability, since the desired output is an impulse
 and not a torque. To deactivate the output scaling, the <code class="docutils literal notranslate"><span class="pre">angErrThresh</span></code> input variable for this module must be
 set to a value larger than <span class="math notranslate nohighlight">\(\pi\)</span>, as specified in the module documentation.</p></li>
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrMomentumDumping/thrMomentumDumping.html#thrmomentumdumping"><span class="std std-ref">Module: thrMomentumDumping</span></a>: computes the thruster on-times required to deliver the desired impulse. A
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrMomentumDumping/thrMomentumDumping.html#thrmomentumdumping"><span class="std std-ref">C Module: thrMomentumDumping</span></a>: computes the thruster on-times required to deliver the desired impulse. A
 <code class="docutils literal notranslate"><span class="pre">maxCounterValue</span></code> of 100 is used in this example to allow the spacecraft to maneuver back to the desired attitude
 after each time the thrusters fire.</p></li>
 </ul>
 <p>For this script to work as intended, it is necessary to run the flight software and the dynamics at two different
 frequencies. In this example, the simulation time step for the flight software is 1 second, whereas for the dynamics
-it is 0.1 seconds. This is necessary because the <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrMomentumDumping/thrMomentumDumping.html#thrmomentumdumping"><span class="std std-ref">Module: thrMomentumDumping</span></a> automatically uses the task time step as
+it is 0.1 seconds. This is necessary because the <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrMomentumDumping/thrMomentumDumping.html#thrmomentumdumping"><span class="std std-ref">C Module: thrMomentumDumping</span></a> automatically uses the task time step as
 control period for the firing. However, if the dynamics is integrated at the same frequency, this does not give
 enough time resolution to appreciate the variation in the momentum.</p>
 <p>The script is found in the folder <code class="docutils literal notranslate"><span class="pre">basilisk/examples</span></code> and executed by using:</p>
@@ -178,7 +179,7 @@ enough time resolution to appreciate the variation in the momentum.</p>
 <section id="illustration-of-simulation-results">
 <h2>Illustration of Simulation Results<a class="headerlink" href="#illustration-of-simulation-results" title="Link to this heading"></a></h2>
 <p>In this examples, the spacecraft is already at the desired attitude, but the four reaction wheels are saturated (the total
-angular momentum exceeds the threshold). The desaturation happens at <span class="math notranslate nohighlight">\(t = 10\)</span> when the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/thrMomentumManagement/thrMomentumManagement.html#thrmomentummanagement"><span class="std std-ref">Module: thrMomentumManagement</span></a> is
+angular momentum exceeds the threshold). The desaturation happens at <span class="math notranslate nohighlight">\(t = 10\)</span> when the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/thrMomentumManagement/thrMomentumManagement.html#thrmomentummanagement"><span class="std std-ref">C Module: thrMomentumManagement</span></a> is
 reset. Three firings are sufficient to dump the momentum below the set threshold. The following figures illustrate the change
 in momentum for the four wheels <span class="math notranslate nohighlight">\(H_i\)</span> for <span class="math notranslate nohighlight">\(i = 1,...,4\)</span> and the total angular momentum <span class="math notranslate nohighlight">\(\|H\|\)</span>, and the
 attitude errors, as functions of time, with respect to the desired target attitude.</p>

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -184,7 +185,7 @@
 a combination of 6 different scenarios. Each scenario uses either one or two thrusters, while also changing the
 thruster’s locations and whether thruster 1 is firing or not.</p>
 <p>For information on how the thruster module works and what the closed-form solution for the <code class="docutils literal notranslate"><span class="pre">thrustFactor</span></code> variable
-is, see <a class="reference internal" href="../thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">Module: thrusterStateEffector</span></a>. Given the <code class="docutils literal notranslate"><span class="pre">thrustFactor</span></code> <span class="math notranslate nohighlight">\(\kappa\)</span>, the thrust is computed as follows:</p>
+is, see <a class="reference internal" href="../thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">C++ Module: thrusterStateEffector</span></a>. Given the <code class="docutils literal notranslate"><span class="pre">thrustFactor</span></code> <span class="math notranslate nohighlight">\(\kappa\)</span>, the thrust is computed as follows:</p>
 <div class="math notranslate nohighlight">
 \[\textbf{F} = \kappa \cdot F_{\mathrm{max}} \cdot \hat{n}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{n}\)</span> is the thruster’s direction vector. The torque is computed by:</p>
@@ -219,7 +220,7 @@ second term represents the swirl torque. The mass flow rate is given by:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">thrTorque</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mDot</span></code></p></li>
 </ul>
-<p>All these variables are compared to the true values from the closed-form expressions given in <a class="reference internal" href="../thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">Module: thrusterStateEffector</span></a>.</p>
+<p>All these variables are compared to the true values from the closed-form expressions given in <a class="reference internal" href="../thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">C++ Module: thrusterStateEffector</span></a>.</p>
 </dd></dl>
 
 </section>

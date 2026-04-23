@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: spaceWeatherData &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: spaceWeatherData &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">spaceWeatherData</a></li>
-      <li class="breadcrumb-item active">Module: spaceWeatherData</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: spaceWeatherData</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/spaceWeatherData/spaceWeatherData.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,12 +153,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-spaceweatherdata">
-<span id="spaceweatherdata"></span><h1>Module: spaceWeatherData<a class="headerlink" href="#module-spaceweatherdata" title="Link to this heading"></a></h1>
+  <section id="c-module-spaceweatherdata">
+<span id="spaceweatherdata"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: spaceWeatherData<a class="headerlink" href="#c-module-spaceweatherdata" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">spaceWeatherData</span></code> module reads a CelesTrak-style space-weather CSV table and publishes the
-23 <a class="reference internal" href="../../../architecture/msgPayloadDefC/SwDataMsgPayload.html#swdatamsgpayload"><span class="std std-ref">SwDataMsgPayload</span></a> output messages required by <a class="reference internal" href="../MsisAtmosphere/msisAtmosphere.html#msisatmosphere"><span class="std std-ref">Module: msisAtmosphere</span></a>.  On every simulation
+23 <a class="reference internal" href="../../../architecture/msgPayloadDefC/SwDataMsgPayload.html#swdatamsgpayload"><span class="std std-ref">SwDataMsgPayload</span></a> output messages required by <a class="reference internal" href="../MsisAtmosphere/msisAtmosphere.html#msisatmosphere"><span class="std std-ref">C++ Module: msisAtmosphere</span></a>.  On every simulation
 update step the module determines the current UTC calendar date and time from the linked
 <a class="reference internal" href="../../../architecture/msgPayloadDefC/EpochMsgPayload.html#epochmsgpayload"><span class="std std-ref">EpochMsgPayload</span></a>, looks up the corresponding rows in the loaded table, and assembles the
 NRLMSISE-00 / NRLMSIS 2.0 space-weather index vector before writing it to its output message array.</p>
@@ -167,6 +168,9 @@ NRLMSISE-00 / NRLMSIS 2.0 space-weather index vector before writing it to its ou
 <p>The following table lists all the module input and output messages.  The module msg connection is
 set by the user from Python.  The msg type contains a link to the message structure definition,
 while the description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-fd7b7a79bf5e9a0adce216864b80ba6248bd08c3.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">spaceWeatherData module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -181,26 +185,23 @@ while the description provides information on what this message is used for.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">epochInMsg</span></code></p></td>
+<tr class="row-even"><td><p>epochInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EpochMsgPayload.html#epochmsgpayload"><span class="std std-ref">EpochMsgPayload</span></a></p></td>
-<td><p>Simulation start epoch in UTC (year, month, day, hours, minutes, seconds).  Must be linked
-before <code class="docutils literal notranslate"><span class="pre">Reset</span></code> is called; an error is logged otherwise.</p></td>
+<td><p>Simulation start epoch in UTC (year, month, day, hours, minutes, seconds).  Must be linked before <code class="docutils literal notranslate"><span class="pre">Reset</span></code> is called; an error is logged otherwise.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">swDataOutMsgs[0]</span></code></p></td>
+<tr class="row-odd"><td><p>swDataOutMsgs[0]</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SwDataMsgPayload.html#swdatamsgpayload"><span class="std std-ref">SwDataMsgPayload</span></a></p></td>
 <td><p>Daily Ap average (<code class="docutils literal notranslate"><span class="pre">AP_AVG</span></code>) of the current day — MSIS channel <code class="docutils literal notranslate"><span class="pre">ap_24_0</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">swDataOutMsgs[1..20]</span></code></p></td>
+<tr class="row-even"><td><p>swDataOutMsgs[1..20]</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SwDataMsgPayload.html#swdatamsgpayload"><span class="std std-ref">SwDataMsgPayload</span></a></p></td>
-<td><p>Twenty consecutive 3-hour Ap values stepping back from the current bin — MSIS channels
-<code class="docutils literal notranslate"><span class="pre">ap_3_0</span></code> through <code class="docutils literal notranslate"><span class="pre">ap_3_-57</span></code>.</p></td>
+<td><p>Twenty consecutive 3-hour Ap values stepping back from the current bin — MSIS channels <code class="docutils literal notranslate"><span class="pre">ap_3_0</span></code> through <code class="docutils literal notranslate"><span class="pre">ap_3_-57</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">swDataOutMsgs[21]</span></code></p></td>
+<tr class="row-odd"><td><p>swDataOutMsgs[21]</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SwDataMsgPayload.html#swdatamsgpayload"><span class="std std-ref">SwDataMsgPayload</span></a></p></td>
-<td><p>Centered 81-day observed F10.7 of the current day (<code class="docutils literal notranslate"><span class="pre">F10.7_OBS_CENTER81</span></code>) — MSIS channel
-<code class="docutils literal notranslate"><span class="pre">f107_1944_0</span></code>.</p></td>
+<td><p>Centered 81-day observed F10.7 of the current day (<code class="docutils literal notranslate"><span class="pre">F10.7_OBS_CENTER81</span></code>) — MSIS channel <code class="docutils literal notranslate"><span class="pre">f107_1944_0</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">swDataOutMsgs[22]</span></code></p></td>
+<tr class="row-even"><td><p>swDataOutMsgs[22]</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SwDataMsgPayload.html#swdatamsgpayload"><span class="std std-ref">SwDataMsgPayload</span></a></p></td>
 <td><p>Observed daily F10.7 of the previous day (<code class="docutils literal notranslate"><span class="pre">F10.7_OBS</span></code>) — MSIS channel <code class="docutils literal notranslate"><span class="pre">f107_24_-24</span></code>.</p></td>
 </tr>

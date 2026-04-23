@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: thrusterPlatformState &mdash; Basilisk 2.11.0beta
+  <title>C Module: thrusterPlatformState &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -71,12 +72,14 @@
 <li class="toctree-l4"><a class="reference internal" href="../hingedJointArrayMotor/index.html">hingedJointArrayMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyPIDMotor/index.html">hingedRigidBodyPIDMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../jointMotionCompensator/index.html">jointMotionCompensator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jointThrAllocation/index.html">jointThrAllocation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedRot2DOF/index.html">prescribedRot2DOF</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorTorque/index.html">rwMotorTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorVoltage/index.html">rwMotorVoltage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwNullSpace/index.html">rwNullSpace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../solarArrayReference/index.html">solarArrayReference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringRemainder/index.html">thrFiringRemainder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thrFiringRound/index.html">thrFiringRound</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringSchmitt/index.html">thrFiringSchmitt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrForceMapping/index.html">thrForceMapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrJointCompensation/index.html">thrJointCompensation</a></li>
@@ -149,7 +152,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">effectorInterfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">thrusterPlatformState</a></li>
-      <li class="breadcrumb-item active">Module: thrusterPlatformState</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: thrusterPlatformState</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/effectorInterfaces/thrusterPlatformState/thrusterPlatformState.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -159,15 +162,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-thrusterplatformstate">
-<span id="thrusterplatformstate"></span><h1>Module: thrusterPlatformState<a class="headerlink" href="#module-thrusterplatformstate" title="Link to this heading"></a></h1>
+  <section id="c-module-thrusterplatformstate">
+<span id="thrusterplatformstate"></span><h1><span class="module-type-label module-type-c">C</span> Module: thrusterPlatformState<a class="headerlink" href="#c-module-thrusterplatformstate" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module simulates receives the measured tip and tilt angles of the thruster platform, together with the thruster configuration information expressed in platform-frame coordinates. The purpose of this module is to output the thruster configuration information in body-frame coordinates, at any instant in time, given the measured platform states (tip-and-tilt angles).</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg variable name is set by the user from python.  The msg type contains a link to the message structure definition, while the description provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-48f68253e1150a2bc1bf491397577a2d0ae37019.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">thrusterPlatformState module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -203,8 +211,8 @@
 </section>
 <section id="detailed-module-description">
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
-<p>This module reads the tip and tilt angles from the <a class="reference internal" href="../../../simulation/dynamics/spinningBodies/spinningBodiesTwoDOF/spinningBodyTwoDOFStateEffector.html#spinningbodytwodofstateeffector"><span class="std std-ref">Module: spinningBodyTwoDOFStateEffector</span></a> that simulates the platform. These angles allow to define the direction cosine matrix <span class="math notranslate nohighlight">\([\mathcal{FM}]\)</span> that describes the rotation between the platform frame <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> with respect to the mount frame <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>. Accounting for the known offsets between the two frames, as well as the offset between the thruster application point and the origin of the frame <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>, this module outputs the thrust direction vector in body-frame coordinates <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{t}\)</span> and the position of the thrust application point with respect to the origin of the body frame <span class="math notranslate nohighlight">\({}^\mathcal{B}r_{T/B}\)</span>.</p>
-<p>A more detailed description of the thruster-platform assembly can be found in <a class="reference external" href="http://hanspeterschaub.info/Papers/Calaon2023a.pdf">R. Calaon, L. Kiner, C. Allard and H. Schaub, “Momentum Management of a Spacecraft equipped with a Dual-Gimballed Electric Thruster”</a> and in <a class="reference internal" href="../thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">Module: thrusterPlatformReference</span></a>.</p>
+<p>This module reads the tip and tilt angles from the <a class="reference internal" href="../../../simulation/dynamics/spinningBodies/spinningBodiesTwoDOF/spinningBodyTwoDOFStateEffector.html#spinningbodytwodofstateeffector"><span class="std std-ref">C++ Module: spinningBodyTwoDOFStateEffector</span></a> that simulates the platform. These angles allow to define the direction cosine matrix <span class="math notranslate nohighlight">\([\mathcal{FM}]\)</span> that describes the rotation between the platform frame <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> with respect to the mount frame <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>. Accounting for the known offsets between the two frames, as well as the offset between the thruster application point and the origin of the frame <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>, this module outputs the thrust direction vector in body-frame coordinates <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{t}\)</span> and the position of the thrust application point with respect to the origin of the body frame <span class="math notranslate nohighlight">\({}^\mathcal{B}r_{T/B}\)</span>.</p>
+<p>A more detailed description of the thruster-platform assembly can be found in <a class="reference external" href="http://hanspeterschaub.info/Papers/Calaon2023a.pdf">R. Calaon, L. Kiner, C. Allard and H. Schaub, “Momentum Management of a Spacecraft equipped with a Dual-Gimballed Electric Thruster”</a> and in <a class="reference internal" href="../thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">C Module: thrusterPlatformReference</span></a>.</p>
 </section>
 <section id="user-guide">
 <h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>

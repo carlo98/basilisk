@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -147,7 +148,7 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>Demonstrates how to use RWs to stabilize the tumble of a spacecraft orbiting the Earth.
 This script sets up a 6-DOF spacecraft which is orbiting the Earth.  The goal is to
-illustrate how the Reaction Wheel (RW) state effector can be added to the rigid <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> hub,
+illustrate how the Reaction Wheel (RW) state effector can be added to the rigid <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> hub,
 and what flight algorithm module is used to control these RWs.</p>
 <p>The first setup runs the RW control to produce a desired set of RW motor torques
 which are then connected directly to the RW device input states.  The second setup illustrates
@@ -164,7 +165,7 @@ modules.</p>
 tracking errors, as well as the RW motor torque components, as well as the RW wheel speeds.</p>
 <p>The fundamental simulation setup is the same as the one used in
 <a class="reference internal" href="scenarioAttitudeFeedback.html#scenarioattitudefeedback"><span class="std std-ref">scenarioAttitudeFeedback</span></a>.
-The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module to which an Earth gravity
+The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module to which an Earth gravity
 effector is attached.  The simple navigation module is still used to output the inertial attitude,
 angular rate, as well as position and velocity message. The simulation is setup to run in a single
 process again.  If the flight algorithms and simulation tasks are to run at different rates, then see
@@ -175,7 +176,7 @@ process again.  If the flight algorithms and simulation tasks are to run at diff
 <p>For the spacecraft simulation side of this script, the new element is adding RW effectors to the
 the rigid spacecraft hub.  The support macro <code class="docutils literal notranslate"><span class="pre">simIncludeRW.py</span></code> provides several convenient tools to facilitate
 this simulated RW setup process.  This script allows the user to readily create RWs from a database of
-public RW specifications, customize them if needed, and add them to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module.</p>
+public RW specifications, customize them if needed, and add them to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module.</p>
 <p>The first task is to create a fresh instance of the RW factory class <code class="docutils literal notranslate"><span class="pre">rwFactory()</span></code>.  This factory is able
 to create a list of RW devices, and return copies that can easily be manipulated and customized if needed.
 The next step in this code is to store the correct <code class="docutils literal notranslate"><span class="pre">RWModel</span></code> state.  This can be either a balanced wheel,
@@ -270,9 +271,9 @@ starting with 1.</p></td>
 </tr>
 </tbody>
 </table>
-<p>The command <code class="docutils literal notranslate"><span class="pre">addToSpacecraft()</span></code> adds all the created RWs to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module.  The final step
+<p>The command <code class="docutils literal notranslate"><span class="pre">addToSpacecraft()</span></code> adds all the created RWs to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module.  The final step
 is as always to add the vector of RW effectors (called <code class="docutils literal notranslate"><span class="pre">rwStateEffector</span></code> above) to the list of simulation
-tasks.  However, note that the dynamic effector should be evaluated before the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module,
+tasks.  However, note that the dynamic effector should be evaluated before the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module,
 which is why it is being added with a higher priority than the <code class="docutils literal notranslate"><span class="pre">scObject</span></code> task.  Generally speaking
 we should have the execution order:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">effectors</span> <span class="o">-&gt;</span> <span class="n">dynamics</span> <span class="o">-&gt;</span> <span class="n">sensors</span>
@@ -294,8 +295,8 @@ For example, the above modification could also be done with:</p>
 <section id="flight-algorithm-changes-to-control-rws">
 <h2>Flight Algorithm Changes to Control RWs<a class="headerlink" href="#flight-algorithm-changes-to-control-rws" title="Link to this heading"></a></h2>
 <p>The general flight algorithm setup is the same as in the earlier simulation script. Here we
-use again the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> guidance module, the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">Module: attTrackingError</span></a> module to evaluate the
-tracking error states, and the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">Module: mrpFeedback</span></a> module to provide the desired <span class="math notranslate nohighlight">\({\mathbf L}_r\)</span>
+use again the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> guidance module, the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">C Module: attTrackingError</span></a> module to evaluate the
+tracking error states, and the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">C Module: mrpFeedback</span></a> module to provide the desired <span class="math notranslate nohighlight">\({\mathbf L}_r\)</span>
 control torque vector.  In this simulation we want the MRP attitude control module to take
 advantage of the RW spin information.  This is achieved by adding the 2 extra lines:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mrpControl</span><span class="o">.</span><span class="n">rwParamsInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">rwParamMsg</span><span class="p">)</span>
@@ -309,7 +310,7 @@ are not provided, then the BSK control modules automatically turn off any RW gyr
 compensation.</p>
 <p>Instead of directly simulating this control torque vector, new
 algorithm modules are required to first map <span class="math notranslate nohighlight">\({\mathbf L}_r\)</span> on the set of RW motor torques
-<span class="math notranslate nohighlight">\(u_B\)</span>.  This is achieved by adding the <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/rwMotorTorque/rwMotorTorque.html#rwmotortorque"><span class="std std-ref">Module: rwMotorTorque</span></a> module.
+<span class="math notranslate nohighlight">\(u_B\)</span>.  This is achieved by adding the <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/rwMotorTorque/rwMotorTorque.html#rwmotortorque"><span class="std std-ref">C Module: rwMotorTorque</span></a> module.
 Note that the output vector of RW motor torques <span class="math notranslate nohighlight">\(u_B\)</span> is set to connect with
 the RW state effector command input message.  Further, this module inputs the typical
 vehicle configuration message, as well as a message containing the flight algorithm

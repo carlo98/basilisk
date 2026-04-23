@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -158,8 +159,8 @@ at <span class="math notranslate nohighlight">\(t_f\)</span>, the landmark pixel
 projection <span class="math notranslate nohighlight">\(\hat c_1\)</span>, <span class="math notranslate nohighlight">\(\hat c_2\)</span> and <span class="math notranslate nohighlight">\(\hat c_3\)</span> onto the Hill or Orbit frame axes
 <span class="math notranslate nohighlight">\(\hat\imath_r\)</span>, <span class="math notranslate nohighlight">\(\hat\imath_{\theta}\)</span> and <span class="math notranslate nohighlight">\(\hat\imath_h\)</span>.</p>
 <p>The basic simulation setup is very similar as the one used in <a class="reference internal" href="scenarioAttitudeGuidance.html#scenarioattitudeguidance"><span class="std std-ref">scenarioAttitudeGuidance</span></a>.
-The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module to which a gravity
-effector is attached. Eros gravity is setup through a <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">Module: planetEphemeris</span></a> module which simulates
+The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module to which a gravity
+effector is attached. Eros gravity is setup through a <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">C++ Module: planetEphemeris</span></a> module which simulates
 Eros heliocentric motion. The flight software modules are copied from <a class="reference internal" href="scenarioAttitudeGuidance.html#scenarioattitudeguidance"><span class="std std-ref">scenarioAttitudeGuidance</span></a>
 as to align the spacecraft body frame, thus also the camera frame, with the Hill frame. The goal is to
 keep the camera pointing towards Eros center of mass in order to observe surface landmarks. In this

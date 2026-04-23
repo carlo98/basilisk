@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: thrusterDynamicEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: thrusterDynamicEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -153,7 +154,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="../index.html">Thrusters</a></li>
           <li class="breadcrumb-item"><a href="index.html">thrusterDynamicEffector</a></li>
-      <li class="breadcrumb-item active">Module: thrusterDynamicEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: thrusterDynamicEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../../_sources/Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -163,8 +164,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-thrusterdynamiceffector">
-<span id="thrusterdynamiceffector"></span><h1>Module: thrusterDynamicEffector<a class="headerlink" href="#module-thrusterdynamiceffector" title="Link to this heading"></a></h1>
+  <section id="c-module-thrusterdynamiceffector">
+<span id="thrusterdynamiceffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: thrusterDynamicEffector<a class="headerlink" href="#c-module-thrusterdynamiceffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Thruster dynamics class used to provide thruster effects on body.  This class is used to hold and operate a set of thrusters that are located
@@ -190,6 +191,9 @@ how to run it, as well as testing.</p>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../../_images/graphviz-fd876075cdf99381754beeb2e06ba1c60c5bf484.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">thrusterDynamicEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -210,13 +214,13 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>thrusterOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefCpp/THROutputMsgPayload.html#throutputmsgpayload"><span class="std std-ref">THROutputMsgPayload</span></a></p></td>
-<td><p>output message vector for thruster data</p></td>
+<td><p>output message vector for thruster data.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The dynamic behaviour of this module is governed by the variables inside <a class="reference internal" href="../../_GeneralModuleFiles/THRTimePair.html#thrtimepair"><span class="std std-ref">Module: THRTimePair</span></a>, which determine the on and off-ramp characteristics. The default behaviour is to not have on and off-ramps active. The <code class="docutils literal notranslate"><span class="pre">cutoffFrequency</span></code> variable inside <a class="reference internal" href="../../_GeneralModuleFiles/THRSimConfig.html#thrsimconfig"><span class="std std-ref">Module: THRSimConfig</span></a> has no impact on this module and is instead supposed to be used to determine the dynamic behaviour within <a class="reference internal" href="../thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">Module: thrusterStateEffector</span></a>.</p>
+<p>The dynamic behaviour of this module is governed by the variables inside <a class="reference internal" href="../../_GeneralModuleFiles/THRTimePair.html#thrtimepair"><span class="std std-ref">THRTimePair</span></a>, which determine the on and off-ramp characteristics. The default behaviour is to not have on and off-ramps active. The <code class="docutils literal notranslate"><span class="pre">cutoffFrequency</span></code> variable inside <a class="reference internal" href="../../_GeneralModuleFiles/THRSimConfig.html#thrsimconfig"><span class="std std-ref">THRSimConfig</span></a> has no impact on this module and is instead supposed to be used to determine the dynamic behaviour within <a class="reference internal" href="../thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">C++ Module: thrusterStateEffector</span></a>.</p>
 </div>
 <hr class="docutils" />
 <dl class="cpp class">

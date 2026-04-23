@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@
 </aside>
 <p>Next we study how the Basilisk tasks can be both disabled and enabled.  Why would we do this?  You might setup a set of BSK modules to mimic a sun-pointing behavior in a task.  Next, you setup another set of BSK modules to create a science pointing mode.  Being able to enable and disable tasks means that you can creates these tasks once, but then control which flight software modules are actually executed.</p>
 <img alt="../../_images/qs-bsk-8.svg" class="align-center" src="../../_images/qs-bsk-8.svg" />
-<p>The sample script below sets up a single process which contains 2 tasks called <code class="docutils literal notranslate"><span class="pre">cTask</span></code> and <code class="docutils literal notranslate"><span class="pre">cppTask</span></code>.  The <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">Module: cModuleTemplate</span></a> and <a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">Module: cppModuleTemplate</span></a> are added to these tasks respectively.</p>
+<p>The sample script below sets up a single process which contains 2 tasks called <code class="docutils literal notranslate"><span class="pre">cTask</span></code> and <code class="docutils literal notranslate"><span class="pre">cppTask</span></code>.  The <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">C Module: cModuleTemplate</span></a> and <a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">C++ Module: cppModuleTemplate</span></a> are added to these tasks respectively.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>
 <span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.moduleTemplates</span><span class="w"> </span><span class="kn">import</span> <span class="n">cModuleTemplate</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.moduleTemplates</span><span class="w"> </span><span class="kn">import</span> <span class="n">cppModuleTemplate</span>

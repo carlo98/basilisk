@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: sunSafePoint &mdash; Basilisk 2.11.0beta
+  <title>C Module: sunSafePoint &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -140,7 +141,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attGuidance</a></li>
           <li class="breadcrumb-item"><a href="index.html">sunSafePoint</a></li>
-      <li class="breadcrumb-item active">Module: sunSafePoint</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: sunSafePoint</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attGuidance/sunSafePoint/sunSafePoint.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-sunsafepoint">
-<span id="sunsafepoint"></span><h1>Module: sunSafePoint<a class="headerlink" href="#module-sunsafepoint" title="Link to this heading"></a></h1>
+  <section id="c-module-sunsafepoint">
+<span id="sunsafepoint"></span><h1><span class="module-type-label module-type-c">C</span> Module: sunSafePoint<a class="headerlink" href="#c-module-sunsafepoint" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module provides the attitude guidance output for a sun pointing mode.  This could be used for safe mode, or a power generation mode.  The input is the sun direction vector which does not have to be normalized, as well as the body rate information.  The output is the standard BSK attitude reference state message.  The sun direction measurement is cross with the desired body axis that is to point at the sun to create a principle rotation vector.  The dot product between these two vectors is used to extract the principal rotation angle.  With these a tracking error MRP state is computer.  The body rate tracking errors relative to the reference frame are set equal to the measured body rates to bring the vehicle to rest when pointing at the sun.  Thus, the reference angular rate and acceleration vectors relative to the inertial frame are nominally set to zero.  If the sun vector is not available, then the reference rate is set to a body-fixed value while the attitude tracking error is set to zero.</p>
@@ -161,9 +162,12 @@ contains further information on this module’s function, how to run it, as well
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-d1d2d5bf108d29ac20f74b48ed8eb8a650f83909.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">sunSafePoint module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>

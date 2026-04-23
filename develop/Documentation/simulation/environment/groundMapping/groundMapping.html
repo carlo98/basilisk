@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: groundMapping &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: groundMapping &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -140,7 +141,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">groundMapping</a></li>
-      <li class="breadcrumb-item active">Module: groundMapping</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: groundMapping</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/groundMapping/groundMapping.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-groundmapping">
-<span id="groundmapping"></span><h1>Module: groundMapping<a class="headerlink" href="#module-groundmapping" title="Link to this heading"></a></h1>
+  <section id="c-module-groundmapping">
+<span id="groundmapping"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: groundMapping<a class="headerlink" href="#c-module-groundmapping" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module checks that a vector of mapping points are visible to a spacecraft instrument, outputting a vector of access
@@ -169,6 +170,9 @@ also assumes the spacecraft instrument has a spherical field-of-view (FOV).</p>
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-07273d4cc7160c8cace6e22ce041163d3bc20725.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">groundMapping module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -185,19 +189,19 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>planetInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>(optional) Planet state input message</p></td>
+<td><p>(optional) Planet state input message.</p></td>
 </tr>
 <tr class="row-odd"><td><p>scStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>Spacecraft state input message</p></td>
+<td><p>Spacecraft state input message.</p></td>
 </tr>
 <tr class="row-even"><td><p>accessOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AccessMsgPayload.html#accessmsgpayload"><span class="std std-ref">AccessMsgPayload</span></a></p></td>
-<td><p>vector of ground location access messages</p></td>
+<td><p>vector of ground location access messages.</p></td>
 </tr>
 <tr class="row-odd"><td><p>currentGroundStateOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/GroundStateMsgPayload.html#groundstatemsgpayload"><span class="std std-ref">GroundStateMsgPayload</span></a></p></td>
-<td><p>vector of ground state messages</p></td>
+<td><p>vector of ground state messages.</p></td>
 </tr>
 </tbody>
 </table>
@@ -211,7 +215,7 @@ provides information on what this message is used for.</p>
 </ol>
 <section id="range-and-elevation">
 <h3>Range and Elevation<a class="headerlink" href="#range-and-elevation" title="Link to this heading"></a></h3>
-<p>The range and elevation check follows the same logic as the <a class="reference internal" href="../groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> module.</p>
+<p>The range and elevation check follows the same logic as the <a class="reference internal" href="../groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a> module.</p>
 </section>
 <section id="fov-checking">
 <h3>FOV Checking<a class="headerlink" href="#fov-checking" title="Link to this heading"></a></h3>

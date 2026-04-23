@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: meanOEFeedback &mdash; Basilisk 2.11.0beta
+  <title>C Module: meanOEFeedback &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">formationFlying</a></li>
           <li class="breadcrumb-item"><a href="index.html">meanOEFeedback</a></li>
-      <li class="breadcrumb-item active">Module: meanOEFeedback</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: meanOEFeedback</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/formationFlying/meanOEFeedback/meanOEFeedback.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -144,8 +145,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-meanoefeedback">
-<span id="meanoefeedback"></span><h1>Module: meanOEFeedback<a class="headerlink" href="#module-meanoefeedback" title="Link to this heading"></a></h1>
+  <section id="c-module-meanoefeedback">
+<span id="meanoefeedback"></span><h1><span class="module-type-label module-type-c">C</span> Module: meanOEFeedback<a class="headerlink" href="#c-module-meanoefeedback" title="Link to this heading"></a></h1>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
 <p>The primary purpose of this module is to calculate feedback control input for deputy spacecraft in terms of mean orbital element difference.
@@ -163,15 +164,18 @@ osculating oe. Then, osculating oe is converted to mean oe by Brower’s theory.
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg variable name is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
-<span id="moduleio-meanoefeedback"></span><table class="docutils align-default" id="id1">
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-b8a7907e0200c5422d8793930e226cdd10a67931.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">meanOEFeedback module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
-<col style="width: 16.7%" />
-<col style="width: 16.7%" />
-<col style="width: 66.7%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Msg Variable Name</p></th>
@@ -190,8 +194,7 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-even"><td><p>forceOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdForceInertialMsgPayload.html#cmdforceinertialmsgpayload"><span class="std std-ref">CmdForceInertialMsgPayload</span></a></p></td>
-<td><p>Calculated Force to control orbital element difference
-output message</p></td>
+<td><p>Calculated Force to control orbital element difference output message</p></td>
 </tr>
 </tbody>
 </table>

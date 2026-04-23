@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -156,8 +157,8 @@ This script is found in the folder <code class="docutils literal notranslate"><s
 </div>
 <p>The simulation layout is shown in the following illustration.
 Two spacecraft are orbiting the earth at close distance. No perturbation in assumed.
-Each spacecraft sends a <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a> output message of type <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/NavAttMsgPayload.html#navattmsgpayload"><span class="std std-ref">NavAttMsgPayload</span></a> message at a certain period
-to <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/spacecraftReconfig/spacecraftReconfig.html#spacecraftreconfig"><span class="std std-ref">Module: spacecraftReconfig</span></a>,
+Each spacecraft sends a <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a> output message of type <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/NavAttMsgPayload.html#navattmsgpayload"><span class="std std-ref">NavAttMsgPayload</span></a> message at a certain period
+to <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/spacecraftReconfig/spacecraftReconfig.html#spacecraftreconfig"><span class="std std-ref">C Module: spacecraftReconfig</span></a>,
 where burn scheduling is executed to achieve reconfiguration.</p>
 <img alt="../_images/test_scenarioFormationReconfig.svg" class="align-center" src="../_images/test_scenarioFormationReconfig.svg" />
 </section>

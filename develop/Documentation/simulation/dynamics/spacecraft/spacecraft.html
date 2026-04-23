@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: spacecraft &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: spacecraft &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -154,7 +155,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">spacecraft</a></li>
-      <li class="breadcrumb-item active">Module: spacecraft</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: spacecraft</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/spacecraft/spacecraft.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -164,15 +165,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-spacecraft">
-<span id="spacecraft"></span><h1>Module: spacecraft<a class="headerlink" href="#module-spacecraft" title="Link to this heading"></a></h1>
+  <section id="c-module-spacecraft">
+<span id="spacecraft"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: spacecraft<a class="headerlink" href="#c-module-spacecraft" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>This module provides the spacecraft rigid body translational and rotation motion.  It is the typical module used to simulate the 6-DOF spacecraft motion.  This <code class="docutils literal notranslate"><span class="pre">spacecraft</span></code> module is setup such that additional spacecraft effectors can be added such as <a class="reference internal" href="../reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">Module: reactionWheelStateEffector</span></a>, <a class="reference internal" href="../Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>, etc.  See <a class="reference external" href="http://hanspeterschaub.info/Papers/grads/CodyAllard.pdf">Dr. Cody Allard’s dissertation</a> for more information.</p>
-<p>This is an instantiation of the <a class="reference internal" href="../_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">Module: dynamicObject</span></a> abstract class that is a spacecraft with <a class="reference internal" href="../_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">Module: stateEffector</span></a>’s and
-<a class="reference internal" href="../_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">Module: dynamicEffector</span></a>’s attached to it. The <code class="docutils literal notranslate"><span class="pre">spacecraft</span></code> module allows for both translation and
-rotation. <a class="reference internal" href="../_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">Module: stateEffector</span></a>’s such as RWs, flexible solar panel, fuel slosh etc can be added to the spacecraft by attaching
-stateEffectors. <a class="reference internal" href="../_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">Module: dynamicEffector</span></a>’s such as thrusters, external force and torque, SRP etc can be added to the spacecraft
+<p>This module provides the spacecraft rigid body translational and rotation motion.  It is the typical module used to simulate the 6-DOF spacecraft motion.  This <code class="docutils literal notranslate"><span class="pre">spacecraft</span></code> module is setup such that additional spacecraft effectors can be added such as <a class="reference internal" href="../reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">C++ Module: reactionWheelStateEffector</span></a>, <a class="reference internal" href="../Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>, etc.  See <a class="reference external" href="http://hanspeterschaub.info/Papers/grads/CodyAllard.pdf">Dr. Cody Allard’s dissertation</a> for more information.</p>
+<p>This is an instantiation of the <a class="reference internal" href="../_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">C++ Module: dynamicObject</span></a> abstract class that is a spacecraft with <a class="reference internal" href="../_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">C++ Module: stateEffector</span></a>’s and
+<a class="reference internal" href="../_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">C++ Module: dynamicEffector</span></a>’s attached to it. The <code class="docutils literal notranslate"><span class="pre">spacecraft</span></code> module allows for both translation and
+rotation. <a class="reference internal" href="../_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">C++ Module: stateEffector</span></a>’s such as RWs, flexible solar panel, fuel slosh etc can be added to the spacecraft by attaching
+stateEffectors. <a class="reference internal" href="../_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">C++ Module: dynamicEffector</span></a>’s such as thrusters, external force and torque, SRP etc can be added to the spacecraft
 by attaching dynamicEffectors. This class performs all of this interaction between stateEffectors, dynamicEffectors and
 the hub.</p>
 <p>The module
@@ -185,14 +186,11 @@ how to run it, as well as testing.</p>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-spacecraft-plus"></span><img alt="../../../../_images/moduleSpacecraft.svg" src="../../../../_images/moduleSpacecraft.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">Spacecraft()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-4828668e31f5c00b0233cad5385201aa7f1eec60.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">spacecraft module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -207,19 +205,19 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>scStateOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>Spacecraft state output message</p></td>
+<td><p>Spacecraft state output message.</p></td>
 </tr>
 <tr class="row-odd"><td><p>scMassStateOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCMassPropsMsgPayload.html#scmasspropsmsgpayload"><span class="std std-ref">SCMassPropsMsgPayload</span></a></p></td>
-<td><p>Output message containing the spacecraft mass properties</p></td>
+<td><p>Output message containing the spacecraft mass properties.</p></td>
 </tr>
 <tr class="row-even"><td><p>attRefInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AttRefMsgPayload.html#attrefmsgpayload"><span class="std std-ref">AttRefMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message to specify a prescribed attitude motion</p></td>
+<td><p>(Optional) Input message to specify a prescribed attitude motion.</p></td>
 </tr>
 <tr class="row-odd"><td><p>transRefInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/TransRefMsgPayload.html#transrefmsgpayload"><span class="std std-ref">TransRefMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message to specify a prescribed translational motion</p></td>
+<td><p>(Optional) Input message to specify a prescribed translational motion.</p></td>
 </tr>
 </tbody>
 </table>
@@ -271,8 +269,8 @@ input message of type <a class="reference internal" href="../../../architecture/
 </div>
 </li>
 </ol>
-<table class="docutils align-default" id="id3">
-<caption><span class="caption-text">Spacecraft Parameters Table</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Spacecraft Parameters Table</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />

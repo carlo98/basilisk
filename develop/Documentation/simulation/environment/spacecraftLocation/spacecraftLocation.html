@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: spacecraftLocation &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: spacecraftLocation &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">spacecraftLocation</a></li>
-      <li class="breadcrumb-item active">Module: spacecraftLocation</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: spacecraftLocation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/spacecraftLocation/spacecraftLocation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,8 +153,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-spacecraftlocation">
-<span id="spacecraftlocation"></span><h1>Module: spacecraftLocation<a class="headerlink" href="#module-spacecraftlocation" title="Link to this heading"></a></h1>
+  <section id="c-module-spacecraftlocation">
+<span id="spacecraftlocation"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: spacecraftLocation<a class="headerlink" href="#c-module-spacecraftlocation" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module determines if one satellite has a line of sight vector to another satellite.  An oblate planet is modeled through the equatorial and the polar radius. If the line of sight vector between two satellites is above this surface, then the output access message is set to true.  The module has a primary spacecraft which determines access to <cite>N</cite> other spacecraft orbiting the same planet.</p>
@@ -170,6 +171,9 @@
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-b399735ef7c47080fd49eeda9c30c89c129d393a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">spacecraftLocation module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -190,11 +194,11 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>primaryScStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>primary spacecraft state message relative to which to evaluate access to other spacecraft in <code class="docutils literal notranslate"><span class="pre">scStateInMsgs</span></code></p></td>
+<td><p>primary spacecraft state message relative to which to evaluate access to other spacecraft in <code class="docutils literal notranslate"><span class="pre">scStateInMsgs</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p>scStateInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>vector of other spacecraft state input messages.  These are set through <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code></p></td>
+<td><p>vector of other spacecraft state input messages.  These are set through <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>sunInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
@@ -206,7 +210,7 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>accessOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AccessMsgPayload.html#accessmsgpayload"><span class="std std-ref">AccessMsgPayload</span></a></p></td>
-<td><p>output vector of ground location access messages</p></td>
+<td><p>output vector of ground location access messages.</p></td>
 </tr>
 </tbody>
 </table>

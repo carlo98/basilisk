@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -169,7 +170,7 @@ function which configures the RW pyramid’s properties and messages.</p>
 </section>
 <section id="custom-fsw-configurations-instructions">
 <h2><span class="section-number">2.3. </span>Custom FSW Configurations Instructions<a class="headerlink" href="#custom-fsw-configurations-instructions" title="Link to this heading"></a></h2>
-<p>To configure the desired <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> FSW mode the user must declare the following modules
+<p>To configure the desired <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> FSW mode the user must declare the following modules
 within the <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> function in <a class="reference internal" href="../models/BSK_Fsw.html#bsk-fsw"><span class="std std-ref">BSK_Fsw</span></a>.
 These provide the initial setup for an attitude guidance system that makes use of an inertial pointing model, a module
 that tracks the error of the spacecraft’s MRP parameters against the pointing model, and a module that takes that
@@ -182,7 +183,7 @@ of the FSW modules with the appropriate information and message names.</p>
 configuration messages that are linked into the attitude guidance modules called <code class="docutils literal notranslate"><span class="pre">SetVehicleConfiguration()</span></code> and
 <code class="docutils literal notranslate"><span class="pre">SetRWConfigMsg()</span></code>.</p>
 <p>After each configuration module has been properly initialized with various message names, FSW tasks are generated.
-The two tasks required for the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> mode are <code class="docutils literal notranslate"><span class="pre">inertial3DPointTask</span></code> and <code class="docutils literal notranslate"><span class="pre">mrpFeedbackRWsTask</span></code>.
+The two tasks required for the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> mode are <code class="docutils literal notranslate"><span class="pre">inertial3DPointTask</span></code> and <code class="docutils literal notranslate"><span class="pre">mrpFeedbackRWsTask</span></code>.
 Note how the tasks are divided between the pointing model and control loop. These modular tasks allow
 for simple FSW reconfigurations should the user want to use a different pointing model, but to use the same feedback
 control loop. This will be seen and discussed in later scenarios.</p>
@@ -191,7 +192,7 @@ stand-along (gateway) message to connect these tasks.  These are setup with the 
 Note that if a C FSW module re-directs its message writing to such a stand-alone message, when recording
 the message this stand-alone message should be recorded.  The output message payload within the module itself
 remain zero in such a case.</p>
-<p>Finally, the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> mode call in <a class="reference internal" href="#scenario-feedbackrw"><span class="std std-ref">scenario_FeedbackRW</span></a> needs to be triggered by:</p>
+<p>Finally, the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> mode call in <a class="reference internal" href="#scenario-feedbackrw"><span class="std std-ref">scenario_FeedbackRW</span></a> needs to be triggered by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SimBase</span><span class="o">.</span><span class="n">createNewEvent</span><span class="p">(</span><span class="s2">&quot;initiateInertial3D&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">processTasksTimeStep</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>
               <span class="n">conditionFunction</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">modeRequest</span> <span class="o">==</span> <span class="s2">&quot;inertial3D&quot;</span><span class="p">,</span>
               <span class="n">actionFunction</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="p">(</span>

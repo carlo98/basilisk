@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: headingSuKF &mdash; Basilisk 2.11.0beta
+  <title>C Module: headingSuKF &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -132,7 +133,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attDetermination</a></li>
           <li class="breadcrumb-item"><a href="index.html">headingSuKF</a></li>
-      <li class="breadcrumb-item active">Module: headingSuKF</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: headingSuKF</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attDetermination/headingSuKF/headingSuKF.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -142,8 +143,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-headingsukf">
-<span id="headingsukf"></span><h1>Module: headingSuKF<a class="headerlink" href="#module-headingsukf" title="Link to this heading"></a></h1>
+  <section id="c-module-headingsukf">
+<span id="headingsukf"></span><h1><span class="module-type-label module-type-c">C</span> Module: headingSuKF<a class="headerlink" href="#c-module-headingsukf" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module implements and tests a Switch Unscented Kalman Filter in order to estimate an arbitrary heading direction.
@@ -152,9 +153,12 @@ More information on can be found in the
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-c50dbfaa0d4630e03c7707ea59066f857030053a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">headingSuKF module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -171,11 +175,11 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>opnavDataOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/OpNavMsgPayload.html#opnavmsgpayload"><span class="std std-ref">OpNavMsgPayload</span></a></p></td>
-<td><p>output message with opnav information</p></td>
+<td><p>Output message with opnav information</p></td>
 </tr>
 <tr class="row-odd"><td><p>filtDataOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/HeadingFilterMsgPayload.html#headingfiltermsgpayload"><span class="std std-ref">HeadingFilterMsgPayload</span></a></p></td>
-<td><p>output message with filter state data information</p></td>
+<td><p>Output message with filter state data information</p></td>
 </tr>
 <tr class="row-even"><td><p>opnavDataInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/OpNavMsgPayload.html#opnavmsgpayload"><span class="std std-ref">OpNavMsgPayload</span></a></p></td>

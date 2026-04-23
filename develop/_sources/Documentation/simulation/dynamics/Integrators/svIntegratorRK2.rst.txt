@@ -1,7 +1,7 @@
 .. _svIntegratorRK2:
 
-Module: svIntegratorRK2
-=======================
+svIntegratorRK2
+===============
 
 
 RK2 integrator. It only implements the method integrate() to advance one time step.

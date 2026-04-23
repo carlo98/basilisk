@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: simplePowerMonitor &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: simplePowerMonitor &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -129,7 +130,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">power</a></li>
           <li class="breadcrumb-item"><a href="index.html">simplePowerMonitor</a></li>
-      <li class="breadcrumb-item active">Module: simplePowerMonitor</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: simplePowerMonitor</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/power/simplePowerMonitor/simplePowerMonitor.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -139,11 +140,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-simplepowermonitor">
-<span id="simplepowermonitor"></span><h1>Module: simplePowerMonitor<a class="headerlink" href="#module-simplepowermonitor" title="Link to this heading"></a></h1>
+  <section id="c-module-simplepowermonitor">
+<span id="simplepowermonitor"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: simplePowerMonitor<a class="headerlink" href="#c-module-simplepowermonitor" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>The SimplePowerMonitor class is a minimal representation of the PowerStorageBase base class that could represent an electrical battery.  It tracks the integrated net power of a set of attached devices analagous to the behavior of the <a class="reference internal" href="../simpleBattery/simpleBattery.html#simplebattery"><span class="std std-ref">Module: simpleBattery</span></a> module. The main difference is that SimplePowerMonitor does not limit the amount of energy that can be stored.  Thus, it is useful as a power monitor module that simple tracks the positive or negative net energy usage history.  The functionality includes:</p>
+<p>The SimplePowerMonitor class is a minimal representation of the PowerStorageBase base class that could represent an electrical battery.  It tracks the integrated net power of a set of attached devices analagous to the behavior of the <a class="reference internal" href="../simpleBattery/simpleBattery.html#simplebattery"><span class="std std-ref">C++ Module: simpleBattery</span></a> module. The main difference is that SimplePowerMonitor does not limit the amount of energy that can be stored.  Thus, it is useful as a power monitor module that simple tracks the positive or negative net energy usage history.  The functionality includes:</p>
 <ol class="arabic">
 <li><p>Compute the integrated and instantaneous net power of all attached devices. Integration is performed with a simple Euler method.</p>
 <blockquote>
@@ -155,11 +156,11 @@
 </section>
 <section id="module-assumptions-and-limitations">
 <h2>Module Assumptions and Limitations<a class="headerlink" href="#module-assumptions-and-limitations" title="Link to this heading"></a></h2>
-<p>See <a class="reference internal" href="../_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">Module: powerStorageBase</span></a> class for inherited assumption and limitations.  The SimpleBattery class assumes that the net energy storage amount is a fixed value.</p>
+<p>See <a class="reference internal" href="../_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">C++ Module: powerStorageBase</span></a> class for inherited assumption and limitations.  The SimpleBattery class assumes that the net energy storage amount is a fixed value.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>This module only uses the input and output messages of the <a class="reference internal" href="../_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">Module: powerStorageBase</span></a> base class.  Because this module does not use the storage capacity, the output message sets the variable <code class="docutils literal notranslate"><span class="pre">storageCapacity</span></code> to -1.</p>
+<p>This module only uses the input and output messages of the <a class="reference internal" href="../_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">C++ Module: powerStorageBase</span></a> base class.  Because this module does not use the storage capacity, the output message sets the variable <code class="docutils literal notranslate"><span class="pre">storageCapacity</span></code> to -1.</p>
 </section>
 <section id="user-guide">
 <h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>

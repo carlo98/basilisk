@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: msisAtmosphere &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: msisAtmosphere &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -24,7 +25,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Module: nrlmsise-00" href="nrlmsise-00.html" />
+    <link rel="next" title="nrlmsise-00" href="nrlmsise-00.html" />
     <link rel="prev" title="MsisAtmosphere" href="index.html" /> 
 </head>
 
@@ -140,7 +141,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">MsisAtmosphere</a></li>
-      <li class="breadcrumb-item active">Module: msisAtmosphere</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: msisAtmosphere</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/MsisAtmosphere/msisAtmosphere.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-msisatmosphere">
-<span id="msisatmosphere"></span><h1>Module: msisAtmosphere<a class="headerlink" href="#module-msisatmosphere" title="Link to this heading"></a></h1>
+  <section id="c-module-msisatmosphere">
+<span id="msisatmosphere"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: msisAtmosphere<a class="headerlink" href="#c-module-msisatmosphere" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Atmosphere class used to calculate temperature / density above a body using multiple models.
@@ -163,11 +164,14 @@ one MsisAtmosphere model associated with it linked to the spacecraft in orbit ab
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The module is a sub-class of the <a class="reference internal" href="../_GeneralModuleFiles/atmosphereBase.html#atmospherebase"><span class="std std-ref">Module: atmosphereBase</span></a> base class.  See that class for the nominal messages
+<p>The module is a sub-class of the <a class="reference internal" href="../_GeneralModuleFiles/atmosphereBase.html#atmospherebase"><span class="std std-ref">C++ Module: atmosphereBase</span></a> base class.  See that class for the nominal messages
 used and general instructions.</p>
 <p>The following table lists all the module specific input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-b379c1f97866835f555ce05bfc1cf26a48692cef.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">msisAtmosphere module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -184,7 +188,7 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>swDataInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SwDataMsgPayload.html#swdatamsgpayload"><span class="std std-ref">SwDataMsgPayload</span></a></p></td>
-<td><p>vector of 23 space weather data input messages</p></td>
+<td><p>vector of 23 space weather data input messages.</p></td>
 </tr>
 </tbody>
 </table>
@@ -371,7 +375,7 @@ provides information on what this message is used for.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="MsisAtmosphere" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="nrlmsise-00.html" class="btn btn-neutral float-right" title="Module: nrlmsise-00" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="nrlmsise-00.html" class="btn btn-neutral float-right" title="nrlmsise-00" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

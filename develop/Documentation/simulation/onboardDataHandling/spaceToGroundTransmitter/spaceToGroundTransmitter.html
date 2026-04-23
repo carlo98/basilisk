@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: spaceToGroundTransmitter &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: spaceToGroundTransmitter &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -125,7 +126,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">onboardDataHandling</a></li>
           <li class="breadcrumb-item"><a href="index.html">spaceToGroundTransmitter</a></li>
-      <li class="breadcrumb-item active">Module: spaceToGroundTransmitter</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: spaceToGroundTransmitter</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/onboardDataHandling/spaceToGroundTransmitter/spaceToGroundTransmitter.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -135,22 +136,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-spacetogroundtransmitter">
-<span id="spacetogroundtransmitter"></span><h1>Module: spaceToGroundTransmitter<a class="headerlink" href="#module-spacetogroundtransmitter" title="Link to this heading"></a></h1>
+  <section id="c-module-spacetogroundtransmitter">
+<span id="spacetogroundtransmitter"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: spaceToGroundTransmitter<a class="headerlink" href="#c-module-spacetogroundtransmitter" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module provides a model of access-dependent data downlink from a simple transmitter at a fixed baud rate. Specifically, the transmitter reads a <a class="reference internal" href="../../../architecture/msgPayloadDefCpp/DataStorageStatusMsgPayload.html#datastoragestatusmsgpayload"><span class="std std-ref">DataStorageStatusMsgPayload</span></a> from the storage unit it is subscribed to, searches for the data buffer with the maximum amount of data, and downlinks a packet of data at a fixed baud rate. The transmitter writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefC/DataNodeUsageMsgPayload.html#datanodeusagemsgpayload"><span class="std std-ref">DataNodeUsageMsgPayload</span></a> describing the data name and baud rate of the data it wants to downlink.</p>
-<p>In comparison to <a class="reference internal" href="../transmitter/simpleTransmitter.html#simpletransmitter"><span class="std std-ref">Module: simpleTransmitter</span></a>, downlink is only enabled when a <a class="reference internal" href="../../../architecture/msgPayloadDefC/AccessMsgPayload.html#accessmsgpayload"><span class="std std-ref">AccessMsgPayload</span></a> indicates that the spacecraft for which the transmitter is associated has access to an object that can provide it (such as a <a class="reference internal" href="../../environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a>.)</p>
+<p>In comparison to <a class="reference internal" href="../transmitter/simpleTransmitter.html#simpletransmitter"><span class="std std-ref">C++ Module: simpleTransmitter</span></a>, downlink is only enabled when a <a class="reference internal" href="../../../architecture/msgPayloadDefC/AccessMsgPayload.html#accessmsgpayload"><span class="std std-ref">AccessMsgPayload</span></a> indicates that the spacecraft for which the transmitter is associated has access to an object that can provide it (such as a <a class="reference internal" href="../../environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a>.)</p>
 <p>For more information on how to set up and use this module, see the simple data system example: <a class="reference internal" href="../../../../examples/scenarioDataDemo.html#scenariodatademo"><span class="std std-ref">scenarioDataDemo</span></a></p>
 </section>
 <section id="module-assumptions-and-limitations">
 <h2>Module Assumptions and Limitations<a class="headerlink" href="#module-assumptions-and-limitations" title="Link to this heading"></a></h2>
-<p>This module makes no additional assumptions outside of those already made in the <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">Module: dataNodeBase</span></a> base class.</p>
+<p>This module makes no additional assumptions outside of those already made in the <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">C++ Module: dataNodeBase</span></a> base class.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>This module uses the input and output messages of the <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">Module: dataNodeBase</span></a> base class, plus an
+<p>This module uses the input and output messages of the <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">C++ Module: dataNodeBase</span></a> base class, plus an
 additional <a class="reference internal" href="../../../architecture/msgPayloadDefCpp/DataStorageStatusMsgPayload.html#datastoragestatusmsgpayload"><span class="std std-ref">DataStorageStatusMsgPayload</span></a> input message subscribed to and read <cite>customRead()</cite> method.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-4d8eebd4fc1eb58bbc687e8f10e7fc0dbdedebc0.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">spaceToGroundTransmitter module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -178,9 +182,9 @@ additional <a class="reference internal" href="../../../architecture/msgPayloadD
 </section>
 <section id="user-guide">
 <h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>
-<p>This module inherits the user guide from the <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">Module: dataNodeBase</span></a> base class, but there are several key differences from other <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">Module: dataNodeBase</span></a> child classes:</p>
+<p>This module inherits the user guide from the <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">C++ Module: dataNodeBase</span></a> base class, but there are several key differences from other <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">C++ Module: dataNodeBase</span></a> child classes:</p>
 <ul class="simple">
-<li><p>Unlike other child classes of <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">Module: dataNodeBase</span></a>, this module does not require a user to set a <cite>nodeDataName</cite></p></li>
+<li><p>Unlike other child classes of <a class="reference internal" href="../_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">C++ Module: dataNodeBase</span></a>, this module does not require a user to set a <cite>nodeDataName</cite></p></li>
 <li><p>The <cite>nodeBaudRate</cite> variable should be set to a negative value in order to remove data from the storage unit.</p></li>
 <li><p>The user must specify a <cite>packetSize</cite> variable (negative value) in addition to the <cite>nodeBaudRate</cite> variable</p></li>
 <li><p>The user must specify the number of buffers <cite>numBuffers</cite> variable so the transmitter knows how many buffers to search through</p></li>
@@ -209,7 +213,7 @@ additional <a class="reference internal" href="../../../architecture/msgPayloadD
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scenarioSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">taskName</span><span class="p">,</span> <span class="n">transmitter</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Follow the <a class="reference internal" href="../storageUnit/partitionedStorageUnit.html#partitionedstorageunit"><span class="std std-ref">Module: partitionedStorageUnit</span></a> or <a class="reference internal" href="../storageUnit/simpleStorageUnit.html#simplestorageunit"><span class="std std-ref">Module: simpleStorageUnit</span></a> instructions to add the transmitter to a storage unit.</p>
+<p>Follow the <a class="reference internal" href="../storageUnit/partitionedStorageUnit.html#partitionedstorageunit"><span class="std std-ref">C++ Module: partitionedStorageUnit</span></a> or <a class="reference internal" href="../storageUnit/simpleStorageUnit.html#simplestorageunit"><span class="std std-ref">C++ Module: simpleStorageUnit</span></a> instructions to add the transmitter to a storage unit.</p>
 <p>For more information on how to set up and use this module, see the simple data system example: <a class="reference internal" href="../../../../examples/scenarioDataDemo.html#scenariodatademo"><span class="std std-ref">scenarioDataDemo</span></a></p>
 <hr class="docutils" />
 <dl class="cpp class">

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -144,8 +145,8 @@
 <p>Demonstrates how to use magnetic torque bars to drive the angular momentum of RWs to desired values.
 The basic spacecraft setup with RWs is similar to that seen in <a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a>.
 A magnetic field is simulated, and a three-axis magnetometer (TAM) sensor device is added.  Three orthogonally
-aligned magnetic torque bars (MTBs) (see <a class="reference internal" href="../Documentation/simulation/dynamics/MtbEffector/MtbEffector.html#mtbeffector"><span class="std std-ref">Module: MtbEffector</span></a>) are included to provide a magnetic torque.  Finally,
-the RW angular momentum management module using MTBs, called <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mtbMomentumManagement/mtbMomentumManagement.html#mtbmomentummanagement"><span class="std std-ref">Module: mtbMomentumManagement</span></a>,
+aligned magnetic torque bars (MTBs) (see <a class="reference internal" href="../Documentation/simulation/dynamics/MtbEffector/MtbEffector.html#mtbeffector"><span class="std std-ref">C++ Module: MtbEffector</span></a>) are included to provide a magnetic torque.  Finally,
+the RW angular momentum management module using MTBs, called <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mtbMomentumManagement/mtbMomentumManagement.html#mtbmomentummanagement"><span class="std std-ref">C Module: mtbMomentumManagement</span></a>,
 is used to drive the RW spin rates
 to desired values.  The spacecraft is setup to stabilize and point in a fixed inertial direction while
 this RW momentum control is engaged.</p>
@@ -163,7 +164,7 @@ this RW momentum control is engaged.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">show_plots</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<p>The first plot illustrates that the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> module is able to achieve a stable inertial pointing.</p>
+<p>The first plot illustrates that the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> module is able to achieve a stable inertial pointing.</p>
 <img alt="../_images/scenarioMtbMomentumManagement1.svg" class="align-center" src="../_images/scenarioMtbMomentumManagement1.svg" />
 <p>The next plots illustrate the RW states.  The motor torque are initially large to stabilize the
 spacecraft orientation.  After this they return to small values that are compensating for the

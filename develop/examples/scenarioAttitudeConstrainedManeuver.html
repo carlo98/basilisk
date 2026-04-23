@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -149,7 +150,7 @@
 The spacecraft is modelled according to the specifics of the Bevo-2 satellite, that has a sensitive
 star tracker aligned with the x body axis and two sun sensors aligned with the y and z body axes.
 In contrast with <a class="reference internal" href="scenarioAttitudeConstraintViolation.html#scenarioattitudeconstraintviolation"><span class="std std-ref">scenarioAttitudeConstraintViolation</span></a> the goal of this scenario is to illustrate
-how to set up a Basilisk simulation using the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/constrainedAttitudeManeuver/constrainedAttitudeManeuver.html#constrainedattitudemaneuver"><span class="std std-ref">Module: constrainedAttitudeManeuver</span></a> module to perform a
+how to set up a Basilisk simulation using the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/constrainedAttitudeManeuver/constrainedAttitudeManeuver.html#constrainedattitudemaneuver"><span class="std std-ref">C++ Module: constrainedAttitudeManeuver</span></a> module to perform a
 slew maneuver while ensuring constraint compliance.</p>
 <p>The script is found in the folder <code class="docutils literal notranslate"><span class="pre">basilisk/examples</span></code> and executed by using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenarioAttitudeConstrainedManeuver</span><span class="o">.</span><span class="n">py</span>
@@ -157,7 +158,7 @@ slew maneuver while ensuring constraint compliance.</p>
 </div>
 <p>This simulation is set up identically to <a class="reference internal" href="scenarioAttitudeConstraintViolation.html#scenarioattitudeconstraintviolation"><span class="std std-ref">scenarioAttitudeConstraintViolation</span></a>. The reader is referred
 to this scenario for a detailed description of the setup. The only difference in this scenario is that the
-constraint-naive <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> module for attitude pointing is replaced with the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/constrainedAttitudeManeuver/constrainedAttitudeManeuver.html#constrainedattitudemaneuver"><span class="std std-ref">Module: constrainedAttitudeManeuver</span></a>
+constraint-naive <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> module for attitude pointing is replaced with the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/constrainedAttitudeManeuver/constrainedAttitudeManeuver.html#constrainedattitudemaneuver"><span class="std std-ref">C++ Module: constrainedAttitudeManeuver</span></a>
 module.</p>
 </section>
 <section id="illustration-of-simulation-results">
@@ -169,11 +170,11 @@ the Sun (fig. 6). Each plot features a dashed line that represents an angular th
 <p>Each plot describes a slew maneuver performed from an initial inertial attitude <span class="math notranslate nohighlight">\(\sigma_{\mathcal{B/N},i}\)</span> to
 a final inertial attitude <span class="math notranslate nohighlight">\(\sigma_{\mathcal{B/N},f}\)</span>. In <a class="reference internal" href="scenarioAttitudeConstraintViolation.html#scenarioattitudeconstraintviolation"><span class="std std-ref">scenarioAttitudeConstraintViolation</span></a>, these
 sets of attitudes and constraints were chosen to highlight specific constraint violations. This scenario shows how,
-using <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/constrainedAttitudeManeuver/constrainedAttitudeManeuver.html#constrainedattitudemaneuver"><span class="std std-ref">Module: constrainedAttitudeManeuver</span></a>, the constraints are not violated.</p>
+using <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/constrainedAttitudeManeuver/constrainedAttitudeManeuver.html#constrainedattitudemaneuver"><span class="std std-ref">C++ Module: constrainedAttitudeManeuver</span></a>, the constraints are not violated.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">show_plots</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">use2SunSensors</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">starTrackerFov</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">sunSensorFov</span> <span class="o">=</span> <span class="mi">70</span><span class="p">,</span> <span class="n">attitudeSetCase</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>This case features the violation of the keep in constraint of the sun sensor only when <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> is used.
+<p>This case features the violation of the keep in constraint of the sun sensor only when <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> is used.
 Just for this case, only the sun sensor along the y body axis is considered. Now, the keep in constraint is not violated
 as the boresight angle never exceeds the 70 def field of view of the instrument.</p>
 <img alt="../_images/scenarioAttitudeConstrainedManeuver5020700.svg" class="align-center" src="../_images/scenarioAttitudeConstrainedManeuver5020700.svg" />
@@ -181,14 +182,14 @@ as the boresight angle never exceeds the 70 def field of view of the instrument.
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">show_plots</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">use2SunSensors</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">starTrackerFov</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">sunSensorFov</span> <span class="o">=</span> <span class="mi">70</span><span class="p">,</span> <span class="n">attitudeSetCase</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>In this case, using <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a>, both the sun sensor boresights exceed the respective thresholds.
+<p>In this case, using <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a>, both the sun sensor boresights exceed the respective thresholds.
 In this scenario, however, they do not.</p>
 <img alt="../_images/scenarioAttitudeConstrainedManeuver5120701.svg" class="align-center" src="../_images/scenarioAttitudeConstrainedManeuver5120701.svg" />
 <img alt="../_images/scenarioAttitudeConstrainedManeuver6120701.svg" class="align-center" src="../_images/scenarioAttitudeConstrainedManeuver6120701.svg" />
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">show_plots</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">use2SunSensors</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">starTrackerFov</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">sunSensorFov</span> <span class="o">=</span> <span class="mi">70</span><span class="p">,</span> <span class="n">attitudeSetCase</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<p>In this case, <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> violates the keep out constraint of the star tracker, alongside with the keep in
+<p>In this case, <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> violates the keep out constraint of the star tracker, alongside with the keep in
 constraints for both the sun sensors. The following simulation shows how all the constraints are respected.</p>
 <img alt="../_images/scenarioAttitudeConstrainedManeuver5120702.svg" class="align-center" src="../_images/scenarioAttitudeConstrainedManeuver5120702.svg" />
 <img alt="../_images/scenarioAttitudeConstrainedManeuver6120702.svg" class="align-center" src="../_images/scenarioAttitudeConstrainedManeuver6120702.svg" />

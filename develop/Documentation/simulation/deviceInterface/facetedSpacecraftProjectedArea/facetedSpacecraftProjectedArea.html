@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: facetedSpacecraftProjectedArea &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: facetedSpacecraftProjectedArea &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">deviceInterface</a></li>
           <li class="breadcrumb-item"><a href="index.html">facetedSpacecraftProjectedArea</a></li>
-      <li class="breadcrumb-item active">Module: facetedSpacecraftProjectedArea</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: facetedSpacecraftProjectedArea</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/deviceInterface/facetedSpacecraftProjectedArea/facetedSpacecraftProjectedArea.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -144,8 +145,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-facetedspacecraftprojectedarea">
-<span id="facetedspacecraftprojectedarea"></span><h1>Module: facetedSpacecraftProjectedArea<a class="headerlink" href="#module-facetedspacecraftprojectedarea" title="Link to this heading"></a></h1>
+  <section id="c-module-facetedspacecraftprojectedarea">
+<span id="facetedspacecraftprojectedarea"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: facetedSpacecraftProjectedArea<a class="headerlink" href="#c-module-facetedspacecraftprojectedarea" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The faceted spacecraft projected area module computes the per-facet and total projected area of a faceted spacecraft
@@ -188,12 +189,15 @@ is not permitted.</p>
 The module msg connections are set by the user from Python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what each message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-68f4087d505cd26ac69e5455f513523aa4c5da06.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">facetedSpacecraftProjectedArea module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
-<col style="width: 30.0%" />
 <col style="width: 25.0%" />
-<col style="width: 45.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Msg Variable Name</p></th>
@@ -204,27 +208,27 @@ provides information on what each message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>bodyHeadingInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/BodyHeadingMsgPayload.html#bodyheadingmsgpayload"><span class="std std-ref">BodyHeadingMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message for the direct body heading vector</p></td>
+<td><p>Optional input message for the direct body heading vector.</p></td>
 </tr>
 <tr class="row-odd"><td><p>spacecraftStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message for the spacecraft inertial state. Used to compute either the velocity-based heading or the sun-direction heading</p></td>
+<td><p>Optional input message for the spacecraft inertial state. Used to compute either the velocity-based heading or the sun-direction heading.</p></td>
 </tr>
 <tr class="row-even"><td><p>sunStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message for the Sun inertial state used with <code class="docutils literal notranslate"><span class="pre">spacecraftStateInMsg</span></code> to compute a sun-direction heading</p></td>
+<td><p>Optional input message for the Sun inertial state used with <code class="docutils literal notranslate"><span class="pre">spacecraftStateInMsg</span></code> to compute a sun-direction heading.</p></td>
 </tr>
 <tr class="row-odd"><td><p>facetElementBodyInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/FacetElementBodyMsgPayload.html#facetelementbodymsgpayload"><span class="std std-ref">FacetElementBodyMsgPayload</span></a></p></td>
-<td><p>(Required) Input msg vector containing all facet geometry expressed in the spacecraft hub body frame</p></td>
+<td><p>Required input message vector containing all facet geometry expressed in the spacecraft hub body frame.</p></td>
 </tr>
 <tr class="row-even"><td><p>facetProjectedAreaOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ProjectedAreaMsgPayload.html#projectedareamsgpayload"><span class="std std-ref">ProjectedAreaMsgPayload</span></a></p></td>
-<td><p>Output msg vector containing the projected area for each facet</p></td>
+<td><p>Output message vector containing the projected area for each facet.</p></td>
 </tr>
 <tr class="row-odd"><td><p>totalProjectedAreaOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ProjectedAreaMsgPayload.html#projectedareamsgpayload"><span class="std std-ref">ProjectedAreaMsgPayload</span></a></p></td>
-<td><p>Output msg containing the total projected area summed over all facets</p></td>
+<td><p>Output message containing the total projected area summed over all facets.</p></td>
 </tr>
 </tbody>
 </table>

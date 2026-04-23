@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: thrustCMEstimation &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: thrustCMEstimation &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -126,7 +127,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">stateEstimation</a></li>
           <li class="breadcrumb-item"><a href="index.html">thrustCMEstimation</a></li>
-      <li class="breadcrumb-item active">Module: thrustCMEstimation</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: thrustCMEstimation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/stateEstimation/thrustCMEstimation/thrustCMEstimation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,16 +137,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-thrustcmestimation">
-<span id="thrustcmestimation"></span><h1>Module: thrustCMEstimation<a class="headerlink" href="#module-thrustcmestimation" title="Link to this heading"></a></h1>
+  <section id="c-module-thrustcmestimation">
+<span id="thrustcmestimation"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: thrustCMEstimation<a class="headerlink" href="#c-module-thrustcmestimation" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module estimates the location of the center of mass (CM) of the entire spacecraft system based on a series of torque measurements. The module assumes the ability to measure and provide the control torques delivered to the system at steady state, to ensure equilibrium. Torque measurements are provided sequentially, and measurements updates are performed for each new measurement using a sequential, weighted least-squares (LS) algorithm.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages. The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-953ae5ac441decfb165adb30a5659cef8f8fd1af.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">thrustCMEstimation module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -192,7 +197,7 @@ provides information on what this message is used for.</p>
 <p>This module assumes the presence of a gimbaled thruster that is periodically actuated in order to change the direction of the thrust vector with respect to the body frame. This is done primarily beacuse one thrust measurement alone is not enough to resolve the three components of the CM location. Moreover, fixing the thrust vector along a certain direction causes momentum to build up on the system if such direction is not aligned with the CM. The relative attitude <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}_\mathcal{B/R}\)</span> and relative angular rates <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_\mathcal{B/R}\)</span> of the spacecraft hub with respect to the reference are part of the inputs because measurements are only processed when the attitude and rate errors drop below a certain user-defined threshold:</p>
 <div class="math notranslate nohighlight">
 \[\epsilon = \sqrt{\left| \sigma_\mathcal{B/R} \right|^2 + \left| \omega_\mathcal{B/R} \right|^2}\]</div>
-<p>This is done because the torque measurement should only be processed when the spacecraft hub has converged to the reference within a certain accuracy, which means that the integral feedback torque has converged to the external perturbation. Measurements updates do not happen when <code class="docutils literal notranslate"><span class="pre">attGuidInMsg</span></code> is not written. Whenever the thrust vector is not aligned with the CM, the thruster torque is acting as an external perturbation on the system, which is what is used in this module to infer the location of the CM. During the time when the thruster remains fixed in the body-frame, such disturbance is constant, which aligns with the assumption of a constant unmodeled torque that can be compensated by the integral feedback term in <a class="reference internal" href="../../attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">Module: mrpFeedback</span></a>. <a class="reference internal" href="../../effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">Module: thrusterPlatformReference</span></a> computes the ideal reference angles for a dual-gimbaled thruster platform in order to articulate the thruster in a way that ensures that momentum is constantly dumped and does not cause wheel saturation.</p>
+<p>This is done because the torque measurement should only be processed when the spacecraft hub has converged to the reference within a certain accuracy, which means that the integral feedback torque has converged to the external perturbation. Measurements updates do not happen when <code class="docutils literal notranslate"><span class="pre">attGuidInMsg</span></code> is not written. Whenever the thrust vector is not aligned with the CM, the thruster torque is acting as an external perturbation on the system, which is what is used in this module to infer the location of the CM. During the time when the thruster remains fixed in the body-frame, such disturbance is constant, which aligns with the assumption of a constant unmodeled torque that can be compensated by the integral feedback term in <a class="reference internal" href="../../attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">C Module: mrpFeedback</span></a>. <a class="reference internal" href="../../effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">C Module: thrusterPlatformReference</span></a> computes the ideal reference angles for a dual-gimbaled thruster platform in order to articulate the thruster in a way that ensures that momentum is constantly dumped and does not cause wheel saturation.</p>
 <p>With <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span> being the thrust vector and <span class="math notranslate nohighlight">\(\boldsymbol{Z}\)</span> being the negative of the integral feedback term, the following quantities are defined at each step:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\([\boldsymbol{C}_n] = [\boldsymbol{\tilde{t}}]\)</span> : linear model</p></li>
@@ -211,7 +216,7 @@ provides information on what this message is used for.</p>
 <section id="module-assumptions-and-limitations">
 <h2>Module Assumptions and Limitations<a class="headerlink" href="#module-assumptions-and-limitations" title="Link to this heading"></a></h2>
 <p>The correct functioning of this module can only be guaranteed as long as multiple, linearly independent torque measurements are being provided. One static measurement is not enough to resolve the CM location.</p>
-<p>When additional external disturbances act on the system, the estimated CM location can be affected. In the presence of a biased, unmodeled external torque such as SRP, the estimated location does not coincide with the CM location, but rather the point through which the thruster produces a torque that cancels the SRP effect. Despite the bias in the measurement, this result is still useful combined with <a class="reference internal" href="../../effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">Module: thrusterPlatformReference</span></a> because it guarantees to reach a steady-state equilibrium. See <a class="reference internal" href="../../../../examples/scenarioSepMomentumManagement.html#scenariosepmomentummanagement"><span class="std std-ref">scenarioSepMomentumManagement</span></a> for an integrated example scenario.</p>
+<p>When additional external disturbances act on the system, the estimated CM location can be affected. In the presence of a biased, unmodeled external torque such as SRP, the estimated location does not coincide with the CM location, but rather the point through which the thruster produces a torque that cancels the SRP effect. Despite the bias in the measurement, this result is still useful combined with <a class="reference internal" href="../../effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">C Module: thrusterPlatformReference</span></a> because it guarantees to reach a steady-state equilibrium. See <a class="reference internal" href="../../../../examples/scenarioSepMomentumManagement.html#scenariosepmomentummanagement"><span class="std std-ref">scenarioSepMomentumManagement</span></a> for an integrated example scenario.</p>
 <p>The frequency at which the thruster is articulated needs to be chosen carefully, because holding the thruster fixed for too long can cause reaction wheel saturation, with consequent loss of attitude and inability to estimate the CM location.</p>
 <p>More details can be found in <a class="reference external" href="http://hanspeterschaub.info/Papers/Calaon2023b.pdf">R. Calaon, C. Allard, and H. Schaub, “Continuous Center-Of-Mass Estimation For A Gimbaled Ion-Thruster Equipped Spacecraft”</a>.</p>
 </section>

@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: pixelLineConverter &mdash; Basilisk 2.11.0beta
+  <title>C Module: pixelLineConverter &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -128,7 +129,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">imageProcessing</a></li>
           <li class="breadcrumb-item"><a href="index.html">pixelLineConverter</a></li>
-      <li class="breadcrumb-item active">Module: pixelLineConverter</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: pixelLineConverter</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/imageProcessing/pixelLineConverter/pixelLineConverter.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,8 +139,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-pixellineconverter">
-<span id="pixellineconverter"></span><h1>Module: pixelLineConverter<a class="headerlink" href="#module-pixellineconverter" title="Link to this heading"></a></h1>
+  <section id="c-module-pixellineconverter">
+<span id="pixellineconverter"></span><h1><span class="module-type-label module-type-c">C</span> Module: pixelLineConverter<a class="headerlink" href="#c-module-pixellineconverter" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Converter that takes a image processing message and camera information and outputs a relative position to the object.</p>
@@ -150,17 +151,14 @@ how to run it, as well as testing.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-pixellineconverter"></span><img alt="../../../../_images/moduleImgPixelLineConverter.svg" src="../../../../_images/moduleImgPixelLineConverter.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">pixelLineConverter()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-79b8f79189ddf855c0d39ad963787cb0015d0526.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">pixelLineConverter module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -165,7 +166,7 @@ ambient lighting the following code is used:</p>
 <span class="n">viz</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">ambient</span> <span class="o">=</span> <span class="mf">0.5</span>
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">scObject</span></code> is a <a class="reference internal" href="../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> instance.  This can also be a list of spacecraft objects
+<p>Here <code class="docutils literal notranslate"><span class="pre">scObject</span></code> is a <a class="reference internal" href="../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> instance.  This can also be a list of spacecraft objects
 for a multi-satellite simulation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="p">[</span><span class="n">scObject1</span><span class="p">,</span> <span class="n">scObject2</span><span class="p">,</span> <span class="n">scObject3</span><span class="p">]</span>
                                           <span class="p">,</span> <span class="n">saveFile</span><span class="o">=</span><span class="n">fileName</span><span class="p">)</span>
@@ -964,7 +965,7 @@ of parent body’s mesh to prevent obstruction of view.</p></td>
 </a>
 <p>It is also possible to create one or more custom instrument camera view for <code class="docutils literal notranslate"><span class="pre">opNav</span></code> mode which points in an
 arbitrary direction as illustrate in the image above. Such a camera can be created first creating the camera
-configuration message <code class="docutils literal notranslate"><span class="pre">camMsg</span></code> of type <a class="reference internal" href="../../Documentation/architecture/msgPayloadDefC/CameraConfigMsgPayload.html#cameraconfigmsgpayload"><span class="std std-ref">CameraConfigMsgPayload</span></a> and then adding this to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>
+configuration message <code class="docutils literal notranslate"><span class="pre">camMsg</span></code> of type <a class="reference internal" href="../../Documentation/architecture/msgPayloadDefC/CameraConfigMsgPayload.html#cameraconfigmsgpayload"><span class="std std-ref">CameraConfigMsgPayload</span></a> and then adding this to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>
 through the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="n">scObject</span><span class="p">)</span>
 <span class="n">viz</span><span class="o">.</span><span class="n">addCamMsgToModule</span><span class="p">(</span><span class="n">camMsg</span><span class="p">)</span>
@@ -972,7 +973,7 @@ through the command:</p>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">addCamMsgToModule()</span></code> is called multiple times then multiple Vizard instrument cameras are created.</p>
 <p>The following helper method is an example of how such an instrument camera message can be
-created directly and added to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> directly:</p>
+created directly and added to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> directly:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vizSupport</span><span class="o">.</span><span class="n">createCameraConfigMsg</span><span class="p">(</span><span class="n">viz</span><span class="p">,</span> <span class="n">cameraID</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fieldOfView</span><span class="o">=</span><span class="mi">10</span> <span class="o">*</span> <span class="n">macros</span><span class="o">.</span><span class="n">D2R</span><span class="p">,</span>
                                      <span class="n">resolution</span><span class="o">=</span><span class="p">[</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">],</span> <span class="n">renderRate</span><span class="o">=</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
                                      <span class="n">cameraPos_B</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">sigma_CB</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">])</span>
@@ -1265,7 +1266,7 @@ the number of spacecraft:</p>
 <p>Vizard can show the both the simulation time that has elapsed, or the mission time.  If now epoch message has been
 set then Basilisk assumes a default January 1, 2019, 00:00:00 epoch time and date.  The simulation time elapsed is
 thus the time since epoch.  To specify a different simulation epoch data and time the <a class="reference internal" href="../../Documentation/architecture/msgPayloadDefC/EpochMsgPayload.html#epochmsgpayload"><span class="std std-ref">EpochMsgPayload</span></a> can be
-setup as discussed in <a class="reference internal" href="../../examples/scenarioMagneticFieldWMM.html#scenariomagneticfieldwmm"><span class="std std-ref">scenarioMagneticFieldWMM</span></a>.  To tell <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> what epoch message to read use:</p>
+setup as discussed in <a class="reference internal" href="../../examples/scenarioMagneticFieldWMM.html#scenariomagneticfieldwmm"><span class="std std-ref">scenarioMagneticFieldWMM</span></a>.  To tell <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> what epoch message to read use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="o">.</span><span class="n">epochInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">epochMsg</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1278,7 +1279,7 @@ call <code class="docutils literal notranslate"><span class="pre">vizSupport.ena
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rwEffectorList</span><span class="o">=</span><span class="n">rwStateEffector</span>
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">rwStateEffector</span></code> is an instance of a single <a class="reference internal" href="../../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">Module: reactionWheelStateEffector</span></a> which already has all
+<p>Here <code class="docutils literal notranslate"><span class="pre">rwStateEffector</span></code> is an instance of a single <a class="reference internal" href="../../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">C++ Module: reactionWheelStateEffector</span></a> which already has all
 the spacecraft’s RW devices added to it.  If you have multiple spacecraft, then use a list of RW effectors,
 one effector per spacecraft:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rwEffectorList</span><span class="o">=</span><span class="p">[</span><span class="n">rwStateEffector1</span><span class="p">,</span> <span class="n">rwStateEffector2</span><span class="p">]</span>
@@ -1296,7 +1297,7 @@ call <code class="docutils literal notranslate"><span class="pre">vizSupport.ena
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cssList</span><span class="o">=</span><span class="p">[</span><span class="n">cssDeviceList</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">cssDeviceList</span></code> is a list of <a class="reference internal" href="../../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">Module: coarseSunSensor</span></a> objects.  The length of <code class="docutils literal notranslate"><span class="pre">cssDeviceList</span></code>
+<p>Here <code class="docutils literal notranslate"><span class="pre">cssDeviceList</span></code> is a list of <a class="reference internal" href="../../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">C++ Module: coarseSunSensor</span></a> objects.  The length of <code class="docutils literal notranslate"><span class="pre">cssDeviceList</span></code>
 must match the number of spacecraft being modeled.  If a spacecraft has no CSS devices, then use
 the <code class="docutils literal notranslate"><span class="pre">None</span></code> label.  See <a class="reference internal" href="../../examples/scenarioCSS.html#scenariocss"><span class="std std-ref">scenarioCSS</span></a> for an example of CSS devices being visualized in Vizard.</p>
 </section>
@@ -1307,7 +1308,7 @@ call <code class="docutils literal notranslate"><span class="pre">vizSupport.ena
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thrEffectorList</span><span class="o">=</span><span class="n">thrusterSet</span>
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">thrusterSet</span></code> is an instance of a single <a class="reference internal" href="../../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a> which already has all
+<p>Here <code class="docutils literal notranslate"><span class="pre">thrusterSet</span></code> is an instance of a single <a class="reference internal" href="../../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a> which already has all
 the spacecraft’s THR devices added to this one THR cluster.  If you have multiple spacecraft, or a spacecraft
 has multiple clusters of THR devices such as ACS and DV thrusters, then use a double list of THR effectors.
 The outer list has one entry per spacecraft, and the inner list has one entry per spacecraft THR cluster:</p>
@@ -1333,7 +1334,7 @@ add <code class="docutils literal notranslate"><span class="pre">None</span></co
 </section>
 <section id="adding-location-or-communication-stations">
 <h3>Adding Location or Communication Stations<a class="headerlink" href="#adding-location-or-communication-stations" title="Link to this heading"></a></h3>
-<p>The <a class="reference internal" href="../../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> is able to simulate a location on a celestial body like Earth.
+<p>The <a class="reference internal" href="../../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a> is able to simulate a location on a celestial body like Earth.
 The location can also be fixed to a satellite.  Vizard will show a line between a satellite
 and this location including if the satellite is within the
 field of view of this location.  Vizard can illustrate this ground location using the
@@ -1460,7 +1461,7 @@ parameters are set using:</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">GenericSensor</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>, it is
+<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">GenericSensor</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>, it is
 important that the python structure is retained in memory.  If the python structure instance
 is created in a manner where this is not the case, use <code class="docutils literal notranslate"><span class="pre">genericSensor.this.disown()</span></code>
 to ensure the python structure remains intact throughout the simulation.</p>
@@ -1572,7 +1573,7 @@ then a single angle should be provided.</p>
 </div>
 <p>However, if the input message is specified then this value is replaced with the content of the input message.</p>
 <p>Multiple generic sensors can be created for each spacecraft, and multiple spacecraft are supported.  Using
-the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">genericSensorList</span></code>:</p>
+the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">genericSensorList</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="n">scObject</span>
                                           <span class="p">,</span> <span class="n">saveFile</span><span class="o">=</span><span class="n">fileName</span>
                                           <span class="p">,</span> <span class="n">genericSensorList</span><span class="o">=</span><span class="n">genericSensor</span>
@@ -1616,7 +1617,7 @@ parameters are set using:</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">Transceiver</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>, it is
+<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">Transceiver</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>, it is
 important that the python structure is retained in memory.  If the python structure instance
 is created in a manner where this is not the case, use <code class="docutils literal notranslate"><span class="pre">transceiverHUD.this.disown()</span></code>
 to ensure the python structure remains intact throughout the simulation.</p>
@@ -1723,7 +1724,7 @@ the transceiver state input message if such an input message is provided.</p></t
 </div>
 <p>However, if the input message is specified then this value is replaced with the content of the input message.</p>
 <p>Multiple transceiver HUD elements can be setup for each spacecraft, and multiple spacecraft are supported.  Using
-the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">genericSensorList</span></code>:</p>
+the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">genericSensorList</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="n">scObject</span>
                                           <span class="p">,</span> <span class="n">saveFile</span><span class="o">=</span><span class="n">fileName</span>
                                           <span class="p">,</span> <span class="n">transceiverList</span><span class="o">=</span><span class="n">transceiverHUD</span>
@@ -1850,13 +1851,13 @@ orange if the storage is more than 80% full, you could use:</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">GenericStorage</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>, it is
+<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">GenericStorage</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>, it is
 important that the python structure is retained in memory.  If the python structure instance
 is created in a manner where this is not the case, use <code class="docutils literal notranslate"><span class="pre">hdDevicePanel.this.disown()</span></code>
 to ensure the python structure remains intact throughout the simulation.</p>
 </div>
 <p>Multiple storage panel elements can be setup for each spacecraft, and multiple spacecraft are supported.  Using
-the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the generic storage structures list is sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">genericStorageList</span></code>:</p>
+the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the generic storage structures list is sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">genericStorageList</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="n">scObject</span>
                                           <span class="p">,</span> <span class="n">saveFile</span><span class="o">=</span><span class="n">fileName</span>
                                           <span class="p">,</span> <span class="n">genericStorageList</span><span class="o">=</span><span class="n">hdDevicePanel</span>
@@ -1896,7 +1897,7 @@ parameters are set using:</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">Light</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>, it is
+<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">Light</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>, it is
 important that the python structure is retained in memory.  If the python structure instance
 is created in a manner where this is not the case, use <code class="docutils literal notranslate"><span class="pre">scLight.this.disown()</span></code>
 to ensure the python structure remains intact throughout the simulation.</p>
@@ -2013,7 +2014,7 @@ of the lens flare, default is 0.3</p></td>
 </tbody>
 </table>
 <p>Multiple light devices can be created for each spacecraft, and multiple spacecraft are supported.  Using
-the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">lightList</span></code>:</p>
+the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">lightList</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="n">scObject</span>
                                           <span class="p">,</span> <span class="n">saveFile</span><span class="o">=</span><span class="n">fileName</span>
                                           <span class="p">,</span> <span class="n">lightList</span><span class="o">=</span><span class="n">scLight</span>
@@ -2169,7 +2170,7 @@ parameters are set using:</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">Ellipsoid</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>, it is
+<p>As a pointer to the <code class="docutils literal notranslate"><span class="pre">Ellipsoid</span></code> structure is connected to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>, it is
 important that the python structure is retained in memory.  If the python structure instance
 is created in a manner where this is not the case, use <code class="docutils literal notranslate"><span class="pre">gncEllipsoid.this.disown()</span></code>
 to ensure the python structure remains intact throughout the simulation.</p>
@@ -2235,7 +2236,7 @@ is set to 1, then the ellipsoid is drawn relative to the body frame, not the orb
 </tbody>
 </table>
 <p>Multiple ellipsoid objects can be created for each spacecraft, and multiple spacecraft are supported.  Using
-the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">ellipsoidList</span></code>:</p>
+the <code class="docutils literal notranslate"><span class="pre">vizSupport.py</span></code> file, the sensors are sent to <a class="reference internal" href="../../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> using they keyword <code class="docutils literal notranslate"><span class="pre">ellipsoidList</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="n">scObject</span>
                                           <span class="p">,</span> <span class="n">saveFile</span><span class="o">=</span><span class="n">fileName</span>
                                           <span class="p">,</span> <span class="n">ellipsoidList</span><span class="o">=</span><span class="n">gncEllipsoid</span>
@@ -2254,15 +2255,15 @@ then lists of lists are required:</p>
 <section id="displaying-time-varying-components-of-a-spacecraft">
 <h3>Displaying Time Varying Components of a Spacecraft<a class="headerlink" href="#displaying-time-varying-components-of-a-spacecraft" title="Link to this heading"></a></h3>
 <p>The spacecraft may have rigid body components attached whose position and orientation varies with time.  One
-example would be <a class="reference internal" href="../../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">Module: hingedRigidBodyStateEffector</span></a> where a rigid body is hinged about a body fixed axis.
+example would be <a class="reference internal" href="../../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">C++ Module: hingedRigidBodyStateEffector</span></a> where a rigid body is hinged about a body fixed axis.
 These effectors output a spacecraft state message containing its inertial position and orientation
 information.  This allows Vizard to show this rigid body as a separate spacecraft object.</p>
-<p>To show these time-varying body components such as <a class="reference internal" href="../../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">Module: hingedRigidBodyStateEffector</span></a>,
-<a class="reference internal" href="../../Documentation/simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">Module: spinningBodyOneDOFStateEffector</span></a> or <a class="reference internal" href="../../Documentation/simulation/dynamics/dualHingedRigidBodies/dualHingedRigidBodyStateEffector.html#dualhingedrigidbodystateeffector"><span class="std std-ref">Module: dualHingedRigidBodyStateEffector</span></a> , the BSK modules can be
+<p>To show these time-varying body components such as <a class="reference internal" href="../../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">C++ Module: hingedRigidBodyStateEffector</span></a>,
+<a class="reference internal" href="../../Documentation/simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">C++ Module: spinningBodyOneDOFStateEffector</span></a> or <a class="reference internal" href="../../Documentation/simulation/dynamics/dualHingedRigidBodies/dualHingedRigidBodyStateEffector.html#dualhingedrigidbodystateeffector"><span class="std std-ref">C++ Module: dualHingedRigidBodyStateEffector</span></a> , the BSK modules can be
 added to the <code class="docutils literal notranslate"><span class="pre">enableUnityVisualization</span></code> spacecraft list.  The parent spacecraft object
 should be listed first, followed by the spacecraft effector objects as a list of
 the effector name and effector state output message.  Let <code class="docutils literal notranslate"><span class="pre">panel1</span></code> and <code class="docutils literal notranslate"><span class="pre">panel2</span></code>
-be instances of <a class="reference internal" href="../../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">Module: hingedRigidBodyStateEffector</span></a> which are attached to spacecraft <code class="docutils literal notranslate"><span class="pre">scObject</span></code>,
+be instances of <a class="reference internal" href="../../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">C++ Module: hingedRigidBodyStateEffector</span></a> which are attached to spacecraft <code class="docutils literal notranslate"><span class="pre">scObject</span></code>,
 all three components can be visualized using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span> <span class="o">=</span> <span class="n">vizSupport</span><span class="o">.</span><span class="n">enableUnityVisualization</span><span class="p">(</span><span class="n">scSim</span><span class="p">,</span> <span class="n">simTaskName</span><span class="p">,</span> <span class="p">[</span><span class="n">scObject</span>
                                                                 <span class="p">,</span> <span class="p">[</span><span class="n">panel1</span><span class="o">.</span><span class="n">ModelTag</span><span class="p">,</span> <span class="n">panel1</span><span class="o">.</span><span class="n">hingedRigidBodyConfigLogOutMsg</span><span class="p">]</span>
@@ -2392,7 +2393,7 @@ is -1 which yield the Vizard default opacity value.</p></td>
 </table>
 <p>The following code illustrates how to add support for visualizing
 MSM charge values in Vizard.  Here a single spacecraft is simulated with
-an <a class="reference internal" href="../../Documentation/simulation/dynamics/msmForceTorque/msmForceTorque.html#msmforcetorque"><span class="std std-ref">Module: msmForceTorque</span></a> to emulate the charging.  The charge values are read in from an input
+an <a class="reference internal" href="../../Documentation/simulation/dynamics/msmForceTorque/msmForceTorque.html#msmforcetorque"><span class="std std-ref">C++ Module: msmForceTorque</span></a> to emulate the charging.  The charge values are read in from an input
 message.  The MSM body-fixed positions are stored in the list <code class="docutils literal notranslate"><span class="pre">spPosListDebris</span></code>, while
 the MSM radii are stored in the list <code class="docutils literal notranslate"><span class="pre">rListDebris</span></code>.  The sample code is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">msmInfoDebris</span> <span class="o">=</span> <span class="n">vizInterface</span><span class="o">.</span><span class="n">MultiShapeInfo</span><span class="p">()</span>

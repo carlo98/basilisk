@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: mtbMomentumManagement &mdash; Basilisk 2.11.0beta
+  <title>C Module: mtbMomentumManagement &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -133,7 +134,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attControl</a></li>
           <li class="breadcrumb-item"><a href="index.html">mtbMomentumManagement</a></li>
-      <li class="breadcrumb-item active">Module: mtbMomentumManagement</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: mtbMomentumManagement</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attControl/mtbMomentumManagement/mtbMomentumManagement.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -143,17 +144,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-mtbmomentummanagement">
-<span id="mtbmomentummanagement"></span><h1>Module: mtbMomentumManagement<a class="headerlink" href="#module-mtbmomentummanagement" title="Link to this heading"></a></h1>
+  <section id="c-module-mtbmomentummanagement">
+<span id="mtbmomentummanagement"></span><h1><span class="module-type-label module-type-c">C</span> Module: mtbMomentumManagement<a class="headerlink" href="#c-module-mtbmomentummanagement" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module computes the appropriate wheel torques and magnetic torque bar dipoles to bias the wheels to their desired speeds. Note that there is no gurantee that the wheel speeds will converge to their bias when less than 3 orthornormal torque rods are in use. In this case it is recommended that a nullspace controller be used to drive the wheels toward their bias. Documentation for the math used in this module can be found in a <a class="reference external" href="http://dx.doi.org/10.2514/1.G000812">paper</a> by Eric Hogan.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-0e04d6edbc85cf8751f974078923f0ed32d36981.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">mtbMomentumManagement module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -170,31 +174,31 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>rwParamsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/RWArrayConfigMsgPayload.html#rwarrayconfigmsgpayload"><span class="std std-ref">RWArrayConfigMsgPayload</span></a></p></td>
-<td><p>input message for RW parameters</p></td>
+<td><p>Input message for RW parameters</p></td>
 </tr>
 <tr class="row-odd"><td><p>mtbParamsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/MTBArrayConfigMsgPayload.html#mtbarrayconfigmsgpayload"><span class="std std-ref">MTBArrayConfigMsgPayload</span></a></p></td>
-<td><p>input message for MTB layout</p></td>
+<td><p>Input message for MTB layout</p></td>
 </tr>
 <tr class="row-even"><td><p>tamSensorBodyInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/TAMSensorBodyMsgPayload.html#tamsensorbodymsgpayload"><span class="std std-ref">TAMSensorBodyMsgPayload</span></a></p></td>
-<td><p>input message for magnetic field sensor data</p></td>
+<td><p>Input message for magnetic field sensor data</p></td>
 </tr>
 <tr class="row-odd"><td><p>rwSpeedsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/RWSpeedMsgPayload.html#rwspeedmsgpayload"><span class="std std-ref">RWSpeedMsgPayload</span></a></p></td>
-<td><p>input message for RW speeds</p></td>
+<td><p>Input message for RW speeds</p></td>
 </tr>
 <tr class="row-even"><td><p>rwMotorTorqueInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ArrayMotorTorqueMsgPayload.html#arraymotortorquemsgpayload"><span class="std std-ref">ArrayMotorTorqueMsgPayload</span></a></p></td>
-<td><p>input message for RW motor torques</p></td>
+<td><p>Input message for RW motor torques</p></td>
 </tr>
 <tr class="row-odd"><td><p>mtbCmdOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/MTBCmdMsgPayload.html#mtbcmdmsgpayload"><span class="std std-ref">MTBCmdMsgPayload</span></a></p></td>
-<td><p>output message for MTB dipole commands</p></td>
+<td><p>Output message for MTB dipole commands</p></td>
 </tr>
 <tr class="row-even"><td><p>rwMotorTorqueOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ArrayMotorTorqueMsgPayload.html#arraymotortorquemsgpayload"><span class="std std-ref">ArrayMotorTorqueMsgPayload</span></a></p></td>
-<td><p>output message for RW motor torques</p></td>
+<td><p>Output message for RW motor torques</p></td>
 </tr>
 </tbody>
 </table>

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
 </div>
 <section id="overview">
 <span id="module-scenarioAttitudeFeedbackRWPower"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>Illustrates how to add a <a class="reference internal" href="../Documentation/simulation/power/ReactionWheelPower/ReactionWheelPower.html#reactionwheelpower"><span class="std std-ref">Module: ReactionWheelPower</span></a> to the simulation to track the RW power usages.  Further,
+<p>Illustrates how to add a <a class="reference internal" href="../Documentation/simulation/power/ReactionWheelPower/ReactionWheelPower.html#reactionwheelpower"><span class="std std-ref">C++ Module: ReactionWheelPower</span></a> to the simulation to track the RW power usages.  Further,
 a the RW power modules are connected to a battery to illustrate the energy usage during this maneuver.
 This script expands on <a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a>.</p>
 <p>The script is found in the folder <code class="docutils literal notranslate"><span class="pre">basilisk/examples</span></code> and executed by using:</p>
@@ -151,10 +152,10 @@ This script expands on <a class="reference internal" href="scenarioAttitudeFeedb
 </div>
 <p>The simulation layout is shown in the following illustration.  A single simulation process is created
 which contains both the spacecraft simulation modules, as well as the Flight Software (FSW) algorithm
-modules.  The 3 separate <a class="reference internal" href="../Documentation/simulation/power/ReactionWheelPower/ReactionWheelPower.html#reactionwheelpower"><span class="std std-ref">Module: ReactionWheelPower</span></a> instances are created to model the RW power requirements.
+modules.  The 3 separate <a class="reference internal" href="../Documentation/simulation/power/ReactionWheelPower/ReactionWheelPower.html#reactionwheelpower"><span class="std std-ref">C++ Module: ReactionWheelPower</span></a> instances are created to model the RW power requirements.
 For more examples on using the RW power module see <a class="reference internal" href="../Documentation/simulation/power/ReactionWheelPower/_UnitTest/test_unitReactionWheelPower.html#test-unitreactionwheelpower"><span class="std std-ref">test_unitReactionWheelPower</span></a>.
 Next, a battery module is created
-using <a class="reference internal" href="../Documentation/simulation/power/simpleBattery/simpleBattery.html#simplebattery"><span class="std std-ref">Module: simpleBattery</span></a>.  All the RW power draw messages are connected to the battery to model the total
+using <a class="reference internal" href="../Documentation/simulation/power/simpleBattery/simpleBattery.html#simplebattery"><span class="std std-ref">C++ Module: simpleBattery</span></a>.  All the RW power draw messages are connected to the battery to model the total
 energy usage.</p>
 <img alt="../_images/test_scenarioAttitudeFeedbackRWPower.svg" class="align-center" src="../_images/test_scenarioAttitudeFeedbackRWPower.svg" />
 </section>

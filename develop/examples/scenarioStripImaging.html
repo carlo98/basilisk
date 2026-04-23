@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -146,7 +147,7 @@
 <section id="overview">
 <span id="module-scenarioStripImaging"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This scenario demonstrates sequential strip imaging of three ground strips using the
-<a class="reference internal" href="../Documentation/simulation/environment/stripLocation/stripLocation.html#striplocation"><span class="std std-ref">Module: stripLocation</span></a> and <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">Module: locationPointing</span></a> modules. A spacecraft in a low-Earth
+<a class="reference internal" href="../Documentation/simulation/environment/stripLocation/stripLocation.html#striplocation"><span class="std std-ref">C++ Module: stripLocation</span></a> and <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">C Module: locationPointing</span></a> modules. A spacecraft in a low-Earth
 equatorial orbit images three strips one after another, each with a different orientation
 relative to the orbit track:</p>
 <ol class="arabic simple">
@@ -158,15 +159,15 @@ relative to the orbit track:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenarioStripImaging</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>Each strip is defined by a start and end geodetic coordinate using the <a class="reference internal" href="../Documentation/simulation/environment/stripLocation/stripLocation.html#striplocation"><span class="std std-ref">Module: stripLocation</span></a>
+<p>Each strip is defined by a start and end geodetic coordinate using the <a class="reference internal" href="../Documentation/simulation/environment/stripLocation/stripLocation.html#striplocation"><span class="std std-ref">C++ Module: stripLocation</span></a>
 module, which propagates a target point along the great-circle arc between the two endpoints
-at a configurable acquisition speed. The <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">Module: locationPointing</span></a> module provides three-degree-of-freedom
+at a configurable acquisition speed. The <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">C Module: locationPointing</span></a> module provides three-degree-of-freedom
 attitude guidance: it points the body-fixed boresight axis <code class="docutils literal notranslate"><span class="pre">pHat_B</span></code> toward the moving target while
 aligning the scanning-line axis <code class="docutils literal notranslate"><span class="pre">cHat_B</span></code> orthogonal to the scanning direction.</p>
 <p>Before each imaging phase, a pre-imaging period allows the attitude control system to achieve acceptable
 attitude accuracy and/or wait for an acceptable viewing angle.</p>
-<p>Attitude control is implemented with an MRP steering law (<a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpSteering/mrpSteering.html#mrpsteering"><span class="std std-ref">Module: mrpSteering</span></a>), a rate servo
-(<a class="reference internal" href="../Documentation/fswAlgorithms/attControl/rateServoFullNonlinear/rateServoFullNonlinear.html#rateservofullnonlinear"><span class="std std-ref">Module: rateServoFullNonlinear</span></a>), and three reaction wheels (<a class="reference internal" href="../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">Module: reactionWheelStateEffector</span></a>).</p>
+<p>Attitude control is implemented with an MRP steering law (<a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpSteering/mrpSteering.html#mrpsteering"><span class="std std-ref">C Module: mrpSteering</span></a>), a rate servo
+(<a class="reference internal" href="../Documentation/fswAlgorithms/attControl/rateServoFullNonlinear/rateServoFullNonlinear.html#rateservofullnonlinear"><span class="std std-ref">C Module: rateServoFullNonlinear</span></a>), and three reaction wheels (<a class="reference internal" href="../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">C++ Module: reactionWheelStateEffector</span></a>).</p>
 <p>Two imaging constraints are tracked throughout the mission:</p>
 <ul class="simple">
 <li><p><strong>Minimum elevation angle</strong> (10 deg): the view angle between the spacecraft and the target
@@ -190,7 +191,7 @@ does not.</p>
 <img alt="../_images/scenarioStripImaging2.svg" class="align-center" src="../_images/scenarioStripImaging2.svg" />
 <p>The third plot shows the norm of the perpendicular velocity component
 <span class="math notranslate nohighlight">\(\|\mathbf{v}_{\perp}\|\)</span>. When this value is small (hatched red region), the boresight
-and target velocity are nearly collinear and the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">Module: locationPointing</span></a> module falls back to
+and target velocity are nearly collinear and the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">C Module: locationPointing</span></a> module falls back to
 point-only targeting.</p>
 <img alt="../_images/scenarioStripImaging3.svg" class="align-center" src="../_images/scenarioStripImaging3.svg" />
 </section>

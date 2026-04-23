@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: simpleInstrumentController &mdash; Basilisk 2.11.0beta
+  <title>C Module: simpleInstrumentController &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -130,7 +131,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">sensorInterfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">simpleInstrumentController</a></li>
-      <li class="breadcrumb-item active">Module: simpleInstrumentController</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: simpleInstrumentController</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/sensorInterfaces/simpleInstrumentController/simpleInstrumentController.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,20 +141,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-simpleinstrumentcontroller">
-<span id="simpleinstrumentcontroller"></span><h1>Module: simpleInstrumentController<a class="headerlink" href="#module-simpleinstrumentcontroller" title="Link to this heading"></a></h1>
+  <section id="c-module-simpleinstrumentcontroller">
+<span id="simpleinstrumentcontroller"></span><h1><span class="module-type-label module-type-c">C</span> Module: simpleInstrumentController<a class="headerlink" href="#c-module-simpleinstrumentcontroller" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>This module generates a command in the form of a <a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceCmdMsgPayload.html#devicecmdmsgpayload"><span class="std std-ref">DeviceCmdMsgPayload</span></a> that turns on a <a class="reference internal" href="../../../simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">Module: simpleInstrument</span></a>
-if the spacecraft a.) has access to a <a class="reference internal" href="../../../simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> and b.) the associated attitude error and attitude rate
+<p>This module generates a command in the form of a <a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceCmdMsgPayload.html#devicecmdmsgpayload"><span class="std std-ref">DeviceCmdMsgPayload</span></a> that turns on a <a class="reference internal" href="../../../simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">C++ Module: simpleInstrument</span></a>
+if the spacecraft a.) has access to a <a class="reference internal" href="../../../simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a> and b.) the associated attitude error and attitude rate
 error from an attitude guidance message is within the given tolerance.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.
-The module msg connection is set by the user from python.
-The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-f2d4f2d274244865974e1eea9af8b988c00946ae.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">simpleInstrumentController module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -170,11 +173,11 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>locationAccessInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AccessMsgPayload.html#accessmsgpayload"><span class="std std-ref">AccessMsgPayload</span></a></p></td>
-<td><p>input msg containing the ground location access</p></td>
+<td><p>Input msg containing the ground location access</p></td>
 </tr>
 <tr class="row-odd"><td><p>attGuidInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AttGuidMsgPayload.html#attguidmsgpayload"><span class="std std-ref">AttGuidMsgPayload</span></a></p></td>
-<td><p>input message containing the attitude guidance</p></td>
+<td><p>Input message containing the attitude guidance</p></td>
 </tr>
 <tr class="row-even"><td><p>deviceStatusInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceStatusMsgPayload.html#devicestatusmsgpayload"><span class="std std-ref">DeviceStatusMsgPayload</span></a></p></td>
@@ -182,14 +185,14 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>deviceCmdOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceCmdMsgPayload.html#devicecmdmsgpayload"><span class="std std-ref">DeviceCmdMsgPayload</span></a></p></td>
-<td><p>output message with the device command</p></td>
+<td><p>Output message with the device command</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="detailed-module-description">
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
-<p>This module writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceCmdMsgPayload.html#devicecmdmsgpayload"><span class="std std-ref">DeviceCmdMsgPayload</span></a> to turn on an instrument, i.e. <a class="reference internal" href="../../../simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">Module: simpleInstrument</span></a>.</p>
+<p>This module writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceCmdMsgPayload.html#devicecmdmsgpayload"><span class="std std-ref">DeviceCmdMsgPayload</span></a> to turn on an instrument, i.e. <a class="reference internal" href="../../../simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">C++ Module: simpleInstrument</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This module assumes that the simulated data is generated instantaneously. Therefore, the <code class="docutils literal notranslate"><span class="pre">baudRate</span></code> of the
@@ -199,7 +202,7 @@ simpleInstrument must be sized as such.</p>
 variable defaults to 1 (active), but the user may set the variable to 0 (inactive) with the <code class="docutils literal notranslate"><span class="pre">deviceStatusInMsg</span></code>
 or <code class="docutils literal notranslate"><span class="pre">controllerStatus</span></code> variable. Then, the module checks if target has already been imaged.  If the target has
 not been imaged, the module then checks if the norm of the attitude error is less than the user specified tolerance
-and if the <a class="reference internal" href="../../../simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> is accessible. If both are true, the module sets the <code class="docutils literal notranslate"><span class="pre">deviceCmd</span></code> to 1. Otherwise,
+and if the <a class="reference internal" href="../../../simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a> is accessible. If both are true, the module sets the <code class="docutils literal notranslate"><span class="pre">deviceCmd</span></code> to 1. Otherwise,
 the <code class="docutils literal notranslate"><span class="pre">deviceCmd</span></code> is set to 0.</p>
 </section>
 <section id="user-guide">

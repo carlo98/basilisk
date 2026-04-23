@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: rateServoFullNonlinear &mdash; Basilisk 2.11.0beta
+  <title>C Module: rateServoFullNonlinear &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -133,7 +134,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attControl</a></li>
           <li class="breadcrumb-item"><a href="index.html">rateServoFullNonlinear</a></li>
-      <li class="breadcrumb-item active">Module: rateServoFullNonlinear</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: rateServoFullNonlinear</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attControl/rateServoFullNonlinear/rateServoFullNonlinear.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -143,8 +144,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-rateservofullnonlinear">
-<span id="rateservofullnonlinear"></span><h1>Module: rateServoFullNonlinear<a class="headerlink" href="#module-rateservofullnonlinear" title="Link to this heading"></a></h1>
+  <section id="c-module-rateservofullnonlinear">
+<span id="rateservofullnonlinear"></span><h1><span class="module-type-label module-type-c">C</span> Module: rateServoFullNonlinear<a class="headerlink" href="#c-module-rateservofullnonlinear" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module implements a nonlinear rate servo control uses the attiude steering message and determine the ADCS control torque vector.</p>
@@ -155,9 +156,12 @@ how to run it, as well as testing.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-691a858a408a57b755f078641fbefc186d37159d.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">rateServoFullNonlinear module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -174,15 +178,15 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>cmdTorqueOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdTorqueBodyMsgPayload.html#cmdtorquebodymsgpayload"><span class="std std-ref">CmdTorqueBodyMsgPayload</span></a></p></td>
-<td><p>commanded torque output message</p></td>
+<td><p>Commanded torque output message</p></td>
 </tr>
 <tr class="row-odd"><td><p>guidInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AttGuidMsgPayload.html#attguidmsgpayload"><span class="std std-ref">AttGuidMsgPayload</span></a></p></td>
-<td><p>attitude guidance input message</p></td>
+<td><p>Attitude guidance input message</p></td>
 </tr>
 <tr class="row-even"><td><p>vehConfigInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/VehicleConfigMsgPayload.html#vehicleconfigmsgpayload"><span class="std std-ref">VehicleConfigMsgPayload</span></a></p></td>
-<td><p>vehicle configuration input message</p></td>
+<td><p>Vehicle configuration input message</p></td>
 </tr>
 <tr class="row-odd"><td><p>rwSpeedsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/RWSpeedMsgPayload.html#rwspeedmsgpayload"><span class="std std-ref">RWSpeedMsgPayload</span></a></p></td>
@@ -198,7 +202,7 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-even"><td><p>rateSteeringInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/RateCmdMsgPayload.html#ratecmdmsgpayload"><span class="std std-ref">RateCmdMsgPayload</span></a></p></td>
-<td><p>commanded rate input message</p></td>
+<td><p>Commanded rate input message</p></td>
 </tr>
 </tbody>
 </table>

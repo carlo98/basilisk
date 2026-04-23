@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: simpleAntenna &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: simpleAntenna &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -126,7 +127,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">communication</a></li>
           <li class="breadcrumb-item"><a href="index.html">simpleAntenna</a></li>
-      <li class="breadcrumb-item active">Module: simpleAntenna</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: simpleAntenna</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/communication/simpleAntenna/simpleAntenna.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,8 +137,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-simpleantenna">
-<span id="simpleantenna"></span><h1>Module: simpleAntenna<a class="headerlink" href="#module-simpleantenna" title="Link to this heading"></a></h1>
+  <section id="c-module-simpleantenna">
+<span id="simpleantenna"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: simpleAntenna<a class="headerlink" href="#c-module-simpleantenna" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><span class="beta-label">[BETA] simpleAntenna</span> is a beta module in an initial public release. This module might be
@@ -154,56 +155,50 @@ subject to changes in future releases.</p>
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-df99bdef250040eaaa8ed284ecd269cda0313472.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">simpleAntenna module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id4">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
 <colgroup>
-<col style="width: 14.3%" />
-<col style="width: 19.0%" />
-<col style="width: 28.6%" />
-<col style="width: 38.1%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Msg Variable Name</p></th>
 <th class="head"><p>Msg Type</p></th>
 <th class="head"><p>Description</p></th>
-<th class="head"><p>Note</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>scStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>spacecraft state</p></td>
-<td><p>Required for space-based antennas</p></td>
+<td><p>Spacecraft state. Required for space-based antennas.</p></td>
 </tr>
 <tr class="row-odd"><td><p>groundStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/GroundStateMsgPayload.html#groundstatemsgpayload"><span class="std std-ref">GroundStateMsgPayload</span></a></p></td>
-<td><p>ground state</p></td>
-<td><p>Required for ground-based antennas</p></td>
+<td><p>Ground state. Required for ground-based antennas.</p></td>
 </tr>
 <tr class="row-even"><td><p>antennaSetStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AntennaStateMsgPayload.html#antennastatemsgpayload"><span class="std std-ref">AntennaStateMsgPayload</span></a></p></td>
-<td><p>setting antenna to [off / Rx / Tx / RxTx]</p></td>
-<td><p>optional, default is ‘Off’</p></td>
+<td><p>Setting antenna to [off / Rx / Tx / RxTx]. Optional, default is ‘Off’.</p></td>
 </tr>
 <tr class="row-odd"><td><p>sunInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>sun ephemeris data input message</p></td>
-<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground-based antennas)</p></td>
+<td><p>Sun ephemeris data input message. Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>), and irrelevant for ground-based antennas.</p></td>
 </tr>
 <tr class="row-even"><td><p>planetInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>vector of planet ephemeris data input messages</p></td>
-<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground-based antennas)</p></td>
+<td><p>Vector of planet ephemeris data input messages. Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>), and irrelevant for ground-based antennas.</p></td>
 </tr>
 <tr class="row-odd"><td><p>sunEclipseInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#eclipsemsgpayload"><span class="std std-ref">EclipseMsgPayload</span></a></p></td>
-<td><p>sun eclipse state input message</p></td>
-<td><p>Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>) (irrelevant for ground-based antennas)</p></td>
+<td><p>Sun eclipse state input message. Optional, required for advanced sky noise temperature calculation (see <a class="reference internal" href="#detailed-module-description"><span class="std std-ref">Detailed Module Description</span></a>), and irrelevant for ground-based antennas.</p></td>
 </tr>
 <tr class="row-even"><td><p>antennaOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AntennaLogMsgPayload.html#antennalogmsgpayload"><span class="std std-ref">AntennaLogMsgPayload</span></a></p></td>
-<td><p>output msg description</p></td>
-<td><p>Output message containing antenna state information</p></td>
+<td><p>Output message containing antenna state information.</p></td>
 </tr>
 </tbody>
 </table>

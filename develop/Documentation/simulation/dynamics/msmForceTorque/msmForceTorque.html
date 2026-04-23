@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: msmForceTorque &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: msmForceTorque &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -152,7 +153,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">msmForceTorque</a></li>
-      <li class="breadcrumb-item active">Module: msmForceTorque</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: msmForceTorque</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/msmForceTorque/msmForceTorque.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -162,8 +163,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-msmforcetorque">
-<span id="msmforcetorque"></span><h1>Module: msmForceTorque<a class="headerlink" href="#module-msmforcetorque" title="Link to this heading"></a></h1>
+  <section id="c-module-msmforcetorque">
+<span id="msmforcetorque"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: msmForceTorque<a class="headerlink" href="#c-module-msmforcetorque" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module uses the Multi-Sphere-Method (MSM) to evaluate the mutual electrostatic force and torque interactions between a series of spacecraft object.  The charging is specified through a voltage where the object is assumed to have a constant voltage across the surface.  The MSM model for each space object is given through a list of body-fixed sphere locations and sphere radii.  See <a class="reference external" href="http://dx.doi.org/10.1016/j.asr.2012.08.014">Multi-Sphere Method for Modeling Electrostatic Forces and Torques</a> for more information on the MSM method.  The goal of this module is to simulate charged astrodynamics and include the influence of charging on relative motion.</p>
@@ -174,14 +175,11 @@
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-msm-force-torque"></span><img alt="../../../../_images/moduleMsmForceTorque.svg" src="../../../../_images/moduleMsmForceTorque.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">msmForceTorque()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-4b0c4a1859eda5f7168e5a07ff609a97911c0aa6.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">msmForceTorque module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -196,23 +194,23 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>scStateInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>vector of spacecraft state input messages</p></td>
+<td><p>vector of spacecraft state input messages.</p></td>
 </tr>
 <tr class="row-odd"><td><p>voltInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/VoltMsgPayload.html#voltmsgpayload"><span class="std std-ref">VoltMsgPayload</span></a></p></td>
-<td><p>vector of voltage input messages</p></td>
+<td><p>vector of voltage input messages.</p></td>
 </tr>
 <tr class="row-even"><td><p>eTorqueOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdTorqueBodyMsgPayload.html#cmdtorquebodymsgpayload"><span class="std std-ref">CmdTorqueBodyMsgPayload</span></a></p></td>
-<td><p>vector of E-torques in body frame components</p></td>
+<td><p>vector of E-torques in body frame components.</p></td>
 </tr>
 <tr class="row-odd"><td><p>eForceOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdForceInertialMsgPayload.html#cmdforceinertialmsgpayload"><span class="std std-ref">CmdForceInertialMsgPayload</span></a></p></td>
-<td><p>vector of E-forces in inertial frame components</p></td>
+<td><p>vector of E-forces in inertial frame components.</p></td>
 </tr>
 <tr class="row-even"><td><p>chargeMsmOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefCpp/ChargeMsmMsgPayload.html#chargemsmmsgpayload"><span class="std std-ref">ChargeMsmMsgPayload</span></a></p></td>
-<td><p>vector of MSM charge messages</p></td>
+<td><p>vector of MSM charge messages.</p></td>
 </tr>
 </tbody>
 </table>

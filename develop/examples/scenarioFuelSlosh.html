@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -180,7 +181,7 @@ a sixth plot, representing the fuel slosh particle motion.</p>
 <p>The model used to simulate the fuel slosh is a classic mass spring
 damper system coupled with the rest of the spacecraft.
 The fuel slosh particle is added to the simulation using the
-<a class="reference internal" href="../Documentation/simulation/dynamics/LinearSpringMassDamper/linearSpringMassDamper.html#linearspringmassdamper"><span class="std std-ref">Module: linearSpringMassDamper</span></a> module.</p>
+<a class="reference internal" href="../Documentation/simulation/dynamics/LinearSpringMassDamper/linearSpringMassDamper.html#linearspringmassdamper"><span class="std std-ref">C++ Module: linearSpringMassDamper</span></a> module.</p>
 <p>The fuel slosh partile <span class="math notranslate nohighlight">\(k\)</span> is the spring constant in kg/s^2 (N/m),
 <span class="math notranslate nohighlight">\(c\)</span> is the damping coefficient expressed in kg/s.</p>
 <p>As we can see from the following illustrations, <code class="docutils literal notranslate"><span class="pre">r_PB_B</span></code> is the vector
@@ -193,7 +194,7 @@ fuel mass that is moving in the selected direction.</p>
 <img alt="../_images/test_scenarioFuelSloshSpacecraft.svg" class="align-center" src="../_images/test_scenarioFuelSloshSpacecraft.svg" />
 <p>For further information on the model implemented you can consult this
 <a class="reference external" href="http://hanspeterschaub.info/Papers/Allard2016a.pdf">conference paper</a>.</p>
-<p>Next the <a class="reference internal" href="../Documentation/simulation/dynamics/FuelTank/fuelTank.html#fueltank"><span class="std std-ref">Module: fuelTank</span></a> module is used to initialize and define the
+<p>Next the <a class="reference internal" href="../Documentation/simulation/dynamics/FuelTank/fuelTank.html#fueltank"><span class="std std-ref">C++ Module: fuelTank</span></a> module is used to initialize and define the
 tank properties and the particles are introduced in it.
 The fuel tank is represented by a constant volume sphere. The radius is set
 to 0.5 m using the radiusTankInit variable.

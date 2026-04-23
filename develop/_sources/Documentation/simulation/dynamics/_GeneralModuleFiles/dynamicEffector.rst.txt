@@ -1,7 +1,7 @@
 .. _dynamicEffector:
 
-Module: dynamicEffector
-=======================
+:module-type:`C++` Module: dynamicEffector
+==========================================
 
 
 Abstract class that is used to implement an effector impacting a dynamic body that does not itself maintain a

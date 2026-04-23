@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: extForceTorque &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: extForceTorque &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -152,7 +153,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">extForceTorque</a></li>
-      <li class="breadcrumb-item active">Module: extForceTorque</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: extForceTorque</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/extForceTorque/extForceTorque.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -162,8 +163,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-extforcetorque">
-<span id="extforcetorque"></span><h1>Module: extForceTorque<a class="headerlink" href="#module-extforcetorque" title="Link to this heading"></a></h1>
+  <section id="c-module-extforcetorque">
+<span id="extforcetorque"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: extForceTorque<a class="headerlink" href="#c-module-extforcetorque" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Class used to provide a direct external force and torque on body. This class is used to simulate an external for or torque acting on the body.
@@ -180,6 +181,9 @@ how to run it, as well as testing.</p>
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-36babc2d52e5511234f5218d68651c8b7073f1ab.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">extForceTorque module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -196,15 +200,15 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>cmdTorqueInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdTorqueBodyMsgPayload.html#cmdtorquebodymsgpayload"><span class="std std-ref">CmdTorqueBodyMsgPayload</span></a></p></td>
-<td><p>commanded torque input msg</p></td>
+<td><p>commanded torque input msg.</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmdForceBodyInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdForceBodyMsgPayload.html#cmdforcebodymsgpayload"><span class="std std-ref">CmdForceBodyMsgPayload</span></a></p></td>
-<td><p>commanded force input msg in B frame</p></td>
+<td><p>commanded force input msg in B frame.</p></td>
 </tr>
 <tr class="row-even"><td><p>cmdForceInertialInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdForceInertialMsgPayload.html#cmdforceinertialmsgpayload"><span class="std std-ref">CmdForceInertialMsgPayload</span></a></p></td>
-<td><p>commanded force input msg in N frame</p></td>
+<td><p>commanded force input msg in N frame.</p></td>
 </tr>
 </tbody>
 </table>

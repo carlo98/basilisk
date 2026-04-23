@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: hillStateConverter &mdash; Basilisk 2.11.0beta
+  <title>C Module: hillStateConverter &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">formationFlying</a></li>
           <li class="breadcrumb-item"><a href="index.html">hillStateConverter</a></li>
-      <li class="breadcrumb-item active">Module: hillStateConverter</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: hillStateConverter</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/formationFlying/hillStateConverter/hillStateConverter.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -144,14 +145,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-hillstateconverter">
-<span id="hillstateconverter"></span><h1>Module: hillStateConverter<a class="headerlink" href="#module-hillstateconverter" title="Link to this heading"></a></h1>
+  <section id="c-module-hillstateconverter">
+<span id="hillstateconverter"></span><h1><span class="module-type-label module-type-c">C</span> Module: hillStateConverter<a class="headerlink" href="#c-module-hillstateconverter" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module converts two inertial spacecraft positions into a Hill-frame relative position and velocity.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-d248df1016282d5164528bb7689c90d60667dcf3.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">hillStateConverter module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -230,7 +237,7 @@ to computing relative orbit states.</p>
     <span class="n">hillRecorder</span> <span class="o">=</span> <span class="n">hillStateNavData</span><span class="o">.</span><span class="n">hillStateOutMsg</span><span class="o">.</span><span class="n">recorder</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>In addition, this module is used in the example script <a class="reference internal" href="../../../../examples/scenarioDragRendezvous.html#scenariodragrendezvous"><span class="std std-ref">scenarioDragRendezvous</span></a> as an input to the <a class="reference internal" href="../hillToAttRef/hillToAttRef.html#hilltoattref"><span class="std std-ref">Module: hillToAttRef</span></a> module.</p>
+<p>In addition, this module is used in the example script <a class="reference internal" href="../../../../examples/scenarioDragRendezvous.html#scenariodragrendezvous"><span class="std std-ref">scenarioDragRendezvous</span></a> as an input to the <a class="reference internal" href="../hillToAttRef/hillToAttRef.html#hilltoattref"><span class="std std-ref">C Module: hillToAttRef</span></a> module.</p>
 <hr class="docutils" />
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>

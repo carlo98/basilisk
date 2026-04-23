@@ -1,7 +1,7 @@
 .. _autoCModule:
 
-Module: autoCModule
-===================
+:module-type:`C` Module: autoCModule
+====================================
 
 Executive Summary
 -----------------
@@ -9,33 +9,30 @@ This is an auto-created sample C module.  The description is included with the m
 
 Message Connection Descriptions
 -------------------------------
-The following table lists all the module input and output messages.  
-The module msg connection is set by the user from python.  
-The msg type contains a link to the message structure definition, while the description 
+The following diagram and table list all the module input and output messages.  
+The module message connection is set by the user from Python.  
+The message type contains a link to the message structure definition, while the description 
 provides information on what this message is used for.
 
-.. list-table:: Module I/O Messages
-    :widths: 25 25 50
-    :header-rows: 1
+.. bsk-module-io:: autoCModule
+    :caption: Module I/O Messages
+    :module-type: C
 
-    * - Msg Variable Name
-      - Msg Type
-      - Description
-    * - someInMsg
-      - :ref:`AttRefMsgPayload`
-      - input msg description
-    * - some2InMsg
-      - :ref:`AttRefMsgPayload`
-      - input msg description
-    * - anotherInMsg
-      - :ref:`CSSConfigMsgPayload`
-      - input msg description
-    * - some2OutMsg
-      - :ref:`AttRefMsgPayload`
-      - output msg description
-    * - someOutMsg
-      - :ref:`SCStatesMsgPayload`
-      - output msg description
+    input someInMsg AttRefMsgPayload
+        Input message description.
+
+    input some2InMsg AttRefMsgPayload
+        Input message description.
+
+    input anotherInMsg CSSConfigMsgPayload
+        Input message description.
+
+    output some2OutMsg AttRefMsgPayload
+        Output message description.
+
+    output someOutMsg SCStatesMsgPayload
+        Output message description.
+
 
 
 

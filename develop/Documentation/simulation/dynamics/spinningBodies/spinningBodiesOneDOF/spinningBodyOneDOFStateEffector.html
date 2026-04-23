@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: spinningBodyOneDOFStateEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: spinningBodyOneDOFStateEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -153,7 +154,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="../index.html">spinningBodies</a></li>
           <li class="breadcrumb-item"><a href="index.html">spinningBodiesOneDOF</a></li>
-      <li class="breadcrumb-item active">Module: spinningBodyOneDOFStateEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: spinningBodyOneDOFStateEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../../_sources/Documentation/simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -163,8 +164,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-spinningbodyonedofstateeffector">
-<span id="spinningbodyonedofstateeffector"></span><h1>Module: spinningBodyOneDOFStateEffector<a class="headerlink" href="#module-spinningbodyonedofstateeffector" title="Link to this heading"></a></h1>
+  <section id="c-module-spinningbodyonedofstateeffector">
+<span id="spinningbodyonedofstateeffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: spinningBodyOneDOFStateEffector<a class="headerlink" href="#c-module-spinningbodyonedofstateeffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The spinning body class is an instantiation of the state effector abstract class. The integrated test is validating the interaction between the spinning body module and the rigid body hub that it is attached to. In this case, a 1-DoF spinning body has an inertia tensor and is attached to the hub by a single degree of freedom axis. This module can represent multiple different effectors, such as a hinged solar panel, a reaction wheel or a single-gimbal. The spinning axis is fixed in the body frame and the effector is rigid, which means that its center of mass location does not move in the spinning frame S. An optional motor torque can be applied on the spinning axis, and the user can also lock the axis through a command.</p>
@@ -172,6 +173,9 @@
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the user from python.  The msg type contains a link to the message structure definition, while the description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../../_images/graphviz-280ba5dd517cd1238b08ef0e3b01a15f6a0261ae.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">spinningBodyOneDOFStateEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -188,23 +192,23 @@
 <tbody>
 <tr class="row-even"><td><p>spinningBodyOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/HingedRigidBodyMsgPayload.html#hingedrigidbodymsgpayload"><span class="std std-ref">HingedRigidBodyMsgPayload</span></a></p></td>
-<td><p>Output message containing the spinning body state angle and angle rate</p></td>
+<td><p>Output message containing the spinning body state angle and angle rate.</p></td>
 </tr>
 <tr class="row-odd"><td><p>motorTorqueInMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/ArrayMotorTorqueMsgPayload.html#arraymotortorquemsgpayload"><span class="std std-ref">ArrayMotorTorqueMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message of the motor torque value</p></td>
+<td><p>(Optional) Input message of the motor torque value.</p></td>
 </tr>
 <tr class="row-even"><td><p>motorLockInMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/ArrayEffectorLockMsgPayload.html#arrayeffectorlockmsgpayload"><span class="std std-ref">ArrayEffectorLockMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message for locking the axis</p></td>
+<td><p>(Optional) Input message for locking the axis.</p></td>
 </tr>
 <tr class="row-odd"><td><p>spinningBodyRefInMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/HingedRigidBodyMsgPayload.html#hingedrigidbodymsgpayload"><span class="std std-ref">HingedRigidBodyMsgPayload</span></a></p></td>
-<td><p>(Optional) Input message for prescribing the angle and angle rate</p></td>
+<td><p>(Optional) Input message for prescribing the angle and angle rate.</p></td>
 </tr>
 <tr class="row-even"><td><p>spinningBodyConfigLogOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>Output message containing the spinning body inertial position and attitude states</p></td>
+<td><p>Output message containing the spinning body inertial position and attitude states.</p></td>
 </tr>
 </tbody>
 </table>
@@ -297,7 +301,7 @@ Mountain GN&amp;C Conference, Breckenridge, CO, Feb. 2–8, 2023</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scObject</span><span class="o">.</span><span class="n">addStateEffector</span><span class="p">(</span><span class="n">spinningBody</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="../../spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> documentation on how to set up a spacecraft object.</p>
+<p>See <a class="reference internal" href="../../spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> documentation on how to set up a spacecraft object.</p>
 </li>
 <li><p>Add the module to the task list:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">spinningBody</span><span class="p">)</span>

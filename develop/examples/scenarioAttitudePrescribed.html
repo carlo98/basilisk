@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -157,9 +158,9 @@ time steps can be taken.</p>
 which contains both the spacecraft simulation modules, as well as the Flight Software (FSW) algorithm
 modules.</p>
 <img alt="../_images/test_scenarioAttitudePrescribed.svg" class="align-center" src="../_images/test_scenarioAttitudePrescribed.svg" />
-<p>In this scenario we use <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attRefCorrection/attRefCorrection.html#attrefcorrection"><span class="std std-ref">Module: attRefCorrection</span></a> to change the Hill pointing
+<p>In this scenario we use <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attRefCorrection/attRefCorrection.html#attrefcorrection"><span class="std std-ref">C Module: attRefCorrection</span></a> to change the Hill pointing
 reference message to align any desired set of body axes with the Hill frame.  The resulting output message
-is connected to the optional <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> attitude input message to drive this orientation.</p>
+is connected to the optional <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> attitude input message to drive this orientation.</p>
 </section>
 <section id="illustration-of-simulation-results">
 <h2>Illustration of Simulation Results<a class="headerlink" href="#illustration-of-simulation-results" title="Link to this heading"></a></h2>

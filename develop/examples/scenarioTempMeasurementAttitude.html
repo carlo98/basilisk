@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -144,12 +145,12 @@
 <span id="module-scenarioTempMeasurementAttitude"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This scenario illustrates how to add a RW temperature sensor and include some random noise
 in the temperature measurement.  The RW-based attitude control component is based on
-<a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a>. This scenario uses the <a class="reference internal" href="../Documentation/simulation/thermal/motorThermal/motorThermal.html#motorthermal"><span class="std std-ref">Module: motorThermal</span></a> module model
-the true temperature data from reaction wheels and <a class="reference internal" href="../Documentation/simulation/deviceInterface/tempMeasurement/tempMeasurement.html#tempmeasurement"><span class="std std-ref">Module: tempMeasurement</span></a> module for
+<a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a>. This scenario uses the <a class="reference internal" href="../Documentation/simulation/thermal/motorThermal/motorThermal.html#motorthermal"><span class="std std-ref">C++ Module: motorThermal</span></a> module model
+the true temperature data from reaction wheels and <a class="reference internal" href="../Documentation/simulation/deviceInterface/tempMeasurement/tempMeasurement.html#tempmeasurement"><span class="std std-ref">C++ Module: tempMeasurement</span></a> module for
 adding noise into the temperature readings.</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>For the <a class="reference internal" href="../Documentation/simulation/deviceInterface/tempMeasurement/tempMeasurement.html#tempmeasurement"><span class="std std-ref">Module: tempMeasurement</span></a> module to provide random noise it is critical that the module
+<p>For the <a class="reference internal" href="../Documentation/simulation/deviceInterface/tempMeasurement/tempMeasurement.html#tempmeasurement"><span class="std std-ref">C++ Module: tempMeasurement</span></a> module to provide random noise it is critical that the module
 variable <code class="docutils literal notranslate"><span class="pre">RNGSeed</span></code> is set to a unique value.  Setting it to the same value will result
 in the same random numbers being generated each run.</p>
 </div>

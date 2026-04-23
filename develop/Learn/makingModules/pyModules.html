@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -138,6 +139,22 @@ implement these methods in C++. Remember to always call <code class="docutils li
 the parent class <code class="docutils literal notranslate"><span class="pre">SysModel</span></code> if you are implementing your own <code class="docutils literal notranslate"><span class="pre">__init__</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ModelTag</span></code> value of these python BSK modules will be a unique positive number,
 same as with C/C++ BSK modules.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To include a pure Python BSK module in the generated Basilisk Python package
+and wheel, place it in a module folder and give the folder and Python file
+the same lower camel case name.  For example, a flight software module named
+<code class="docutils literal notranslate"><span class="pre">someModule</span></code> should live in
+<code class="docutils literal notranslate"><span class="pre">src/fswAlgorithms/&lt;moduleCategory&gt;/someModule/someModule.py</span></code>.  The same
+pattern is supported under <code class="docutils literal notranslate"><span class="pre">src/simulation</span></code>.  The <code class="docutils literal notranslate"><span class="pre">src/architecture</span></code>
+folder contains support code and message infrastructure, not BSK modules.
+Define the BSK module class inside that file using upper camel case, such
+as <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">SomeModule(sysModel.SysModel):</span></code>.  After configuring and building
+Basilisk, users can import it from the corresponding Basilisk package, such
+as <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">Basilisk.fswAlgorithms</span> <span class="pre">import</span> <span class="pre">someModule</span></code> or
+<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">Basilisk.simulation</span> <span class="pre">import</span> <span class="pre">someModule</span></code>, and instantiate it with
+<code class="docutils literal notranslate"><span class="pre">someModule.SomeModule()</span></code>.</p>
+</div>
 <p>All Python modules have a logger stored in <code class="docutils literal notranslate"><span class="pre">bskLogger</span></code> (although it will
 not be available until the module has been added to a simulation). Additionally,
 you may declare any other variables, methods, messages, etc. within your Python module.</p>

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -144,20 +145,20 @@
 <section id="overview">
 <span id="module-scenarioDeployingSolarArrays"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This scenario demonstrates the multi-body prescribed motion dynamics capability of the
-<a class="reference internal" href="../Documentation/simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">Module: prescribedMotionStateEffector</span></a> module through an illustrative rotational solar array deployment scenario.
+<a class="reference internal" href="../Documentation/simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">C++ Module: prescribedMotionStateEffector</span></a> module through an illustrative rotational solar array deployment scenario.
 The spacecraft in this example consists of a rigid hub and two symmetrical solar arrays. Each array is modeled as a
-collection of 10 prescribed motion elements. Therefore, 20 instances of the <a class="reference internal" href="../Documentation/simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">Module: prescribedMotionStateEffector</span></a> module
+collection of 10 prescribed motion elements. Therefore, 20 instances of the <a class="reference internal" href="../Documentation/simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">C++ Module: prescribedMotionStateEffector</span></a> module
 are required to simulate the array deployments.</p>
 <p>Note that in order to simulate hub-relative prescribed motion, kinematic profiler modules must be connected to the
 prescribed motion state effector modules. The kinematic profiler modules specify the translational and rotational
 states of each prescribed sub-component relative to the spacecraft hub and write the sub-component states at each time
 step to the prescribed motions state effector modules using the Basilisk messaging system. Currently two kinematic
 profiler modules exist in Basilisk that can be used to simulate prescribed motion. The first
-<a class="reference internal" href="../Documentation/simulation/deviceInterface/prescribedLinearTranslation/prescribedLinearTranslation.html#prescribedlineartranslation"><span class="std std-ref">Module: prescribedLinearTranslation</span></a> module prescribes linear translational motion of a prescribed sub-component
-relative to the hub; while the second <a class="reference internal" href="../Documentation/simulation/deviceInterface/prescribedRotation1DOF/prescribedRotation1DOF.html#prescribedrotation1dof"><span class="std std-ref">Module: prescribedRotation1DOF</span></a> module prescribes 1 DOF rotational motion relative
+<a class="reference internal" href="../Documentation/simulation/deviceInterface/prescribedLinearTranslation/prescribedLinearTranslation.html#prescribedlineartranslation"><span class="std std-ref">C++ Module: prescribedLinearTranslation</span></a> module prescribes linear translational motion of a prescribed sub-component
+relative to the hub; while the second <a class="reference internal" href="../Documentation/simulation/deviceInterface/prescribedRotation1DOF/prescribedRotation1DOF.html#prescribedrotation1dof"><span class="std std-ref">C++ Module: prescribedRotation1DOF</span></a> module prescribes 1 DOF rotational motion relative
 to the hub.</p>
 <p>The type of deployment simulated in this scenario is a purely 1 DOF rotational solar array deployment; therefore only the
-<a class="reference internal" href="../Documentation/simulation/deviceInterface/prescribedRotation1DOF/prescribedRotation1DOF.html#prescribedrotation1dof"><span class="std std-ref">Module: prescribedRotation1DOF</span></a> module is used in this scenario to profile the array element prescribed motion. Note that
+<a class="reference internal" href="../Documentation/simulation/deviceInterface/prescribedRotation1DOF/prescribedRotation1DOF.html#prescribedrotation1dof"><span class="std std-ref">C++ Module: prescribedRotation1DOF</span></a> module is used in this scenario to profile the array element prescribed motion. Note that
 20 instances of this rotational profiler module are required to profile the array deployments. Also note that because
 only rotational motion is profiled in this scenario, stand-alone <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/PrescribedTranslationMsgPayload.html#prescribedtranslationmsgpayload"><span class="std std-ref">PrescribedTranslationMsgPayload</span></a> messages
 are required to be written for each array element and must be connected directly to the element prescribed motion state

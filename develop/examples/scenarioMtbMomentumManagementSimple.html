@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -144,16 +145,16 @@
 <p>Demonstrates how to use magnetic torque bars to drive the net angular momentum of the RW cluster
 to zero rather than driving
 the individual wheels speeds to desired values as in <a class="reference internal" href="scenarioMtbMomentumManagement.html#scenariomtbmomentummanagement"><span class="std std-ref">scenarioMtbMomentumManagement</span></a>.  As in this
-scenario, the spacecraft is initialized with a small tumble and the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> module is used to stabilize
+scenario, the spacecraft is initialized with a small tumble and the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> module is used to stabilize
 to and hold a desired orientation.</p>
 <p>In this script a series of modules are used
 to control the momentum of the reaction wheels and interface with magnetic torque
-bars: <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mtbMomentumManagementSimple/mtbMomentumManagementSimple.html#mtbmomentummanagementsimple"><span class="std std-ref">Module: mtbMomentumManagementSimple</span></a>, <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/torque2Dipole/torque2Dipole.html#torque2dipole"><span class="std std-ref">Module: torque2Dipole</span></a>, <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/dipoleMapping/dipoleMapping.html#dipolemapping"><span class="std std-ref">Module: dipoleMapping</span></a>, and <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mtbFeedforward/mtbFeedforward.html#mtbfeedforward"><span class="std std-ref">Module: mtbFeedforward</span></a>.
-Four magnetic torque bars (MTBs) (see <a class="reference internal" href="../Documentation/simulation/dynamics/MtbEffector/MtbEffector.html#mtbeffector"><span class="std std-ref">Module: MtbEffector</span></a>)
+bars: <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mtbMomentumManagementSimple/mtbMomentumManagementSimple.html#mtbmomentummanagementsimple"><span class="std std-ref">C Module: mtbMomentumManagementSimple</span></a>, <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/torque2Dipole/torque2Dipole.html#torque2dipole"><span class="std std-ref">C Module: torque2Dipole</span></a>, <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/dipoleMapping/dipoleMapping.html#dipolemapping"><span class="std std-ref">C Module: dipoleMapping</span></a>, and <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mtbFeedforward/mtbFeedforward.html#mtbfeedforward"><span class="std std-ref">C Module: mtbFeedforward</span></a>.
+Four magnetic torque bars (MTBs) (see <a class="reference internal" href="../Documentation/simulation/dynamics/MtbEffector/MtbEffector.html#mtbeffector"><span class="std std-ref">C++ Module: MtbEffector</span></a>)
 are included to provide a magnetic torque. It’s important to point out that driving the net momentum
 of the reaction wheels to zero does not necessarily mean driving the individual reaction wheel speeds to zero
 because the wheels can be spun up in their null space, if it exists, and still have a net momentum of zero.
-As a result, the <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/rwNullSpace/rwNullSpace.html#rwnullspace"><span class="std std-ref">Module: rwNullSpace</span></a> module is used to control
+As a result, the <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/rwNullSpace/rwNullSpace.html#rwnullspace"><span class="std std-ref">C Module: rwNullSpace</span></a> module is used to control
 the null space of the wheels. The basic spacecraft setup with RWs is similar to that seen
 in <a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a>.  A magnetic field is simulated, and a three-axis magnetometer (TAM)
 sensor device is added. The spacecraft is setup to stabilize
@@ -168,7 +169,7 @@ and point in a fixed inertial direction while this RW momentum control is engage
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">show_plots</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<p>The first plot illustrates that the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> module is able to achieve a stable inertial pointing.</p>
+<p>The first plot illustrates that the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> module is able to achieve a stable inertial pointing.</p>
 <img alt="../_images/scenarioMtbMomentumManagementSimple1.svg" class="align-center" src="../_images/scenarioMtbMomentumManagementSimple1.svg" />
 <p>The next plots illustrate the RW states.  The motor torque are initially large to stabilize the
 spacecraft orientation.  After this they return to small values that are compensating for the

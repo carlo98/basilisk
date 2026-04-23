@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -170,8 +171,8 @@ where they are pointing.</p>
 <img alt="../_images/scenarioVizPoint2.svg" class="align-center" src="../_images/scenarioVizPoint2.svg" />
 <img alt="../_images/scenarioVizPoint3.svg" class="align-center" src="../_images/scenarioVizPoint3.svg" />
 <p>In each case a spacecraft fixed camera is simulated.
-This is done by connecting to the <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> input message
-<code class="docutils literal notranslate"><span class="pre">cameraConfInMsg</span></code>  The <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> module
+This is done by connecting to the <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> input message
+<code class="docutils literal notranslate"><span class="pre">cameraConfInMsg</span></code>  The <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> module
 checks this input message by default.  If it is linked, then the camera information
 is read in and sent across to Vizard to render out that camera view point image.
 Open Vizard and play back the resulting simulation binary file to see the camera window.</p>

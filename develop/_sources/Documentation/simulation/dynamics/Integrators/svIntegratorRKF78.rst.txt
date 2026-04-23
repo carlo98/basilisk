@@ -1,7 +1,7 @@
 .. _svIntegratorRKF78:
 
-Module: svIntegratorRKF78
-=========================
+svIntegratorRKF78
+=================
 
 
 RKF78 integrator. It implements the method integrate() to advance one simulation time step, but can scale intermediate time steps according to the current relative error and the module's relative tolerance.

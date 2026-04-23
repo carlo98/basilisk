@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -145,7 +146,7 @@
 <p>This scenario demonstrates how to use the <code class="docutils literal notranslate"><span class="pre">smallBodyNavUKF()</span></code> for translational state and non-Keplerian gravity
 acceleration estimation about a small body. In this example, Vesta is chosen (<code class="docutils literal notranslate"><span class="pre">supportData/LocalGravData/VESTA20H.txt</span></code>).
 However, any small body could be selected as long as the appropriate gravitational parameter is set.</p>
-<p>In this scenario, <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a> and <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">Module: planetEphemeris</span></a> provide measurements to the UKF in the form of
+<p>In this scenario, <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a> and <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">C++ Module: planetEphemeris</span></a> provide measurements to the UKF in the form of
 <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/NavTransMsgPayload.html#navtransmsgpayload"><span class="std std-ref">NavTransMsgPayload</span></a> and <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/EphemerisMsgPayload.html#ephemerismsgpayload"><span class="std std-ref">EphemerisMsgPayload</span></a> input messages. The UKF takes in these measurements at each
 timestep and updates the state estimate, outputting this state estimate in its own standalone message, a
 <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/SmallBodyNavUKFMsgPayload.html#smallbodynavukfmsgpayload"><span class="std std-ref">SmallBodyNavUKFMsgPayload</span></a>.</p>

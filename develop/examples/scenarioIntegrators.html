@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -154,7 +155,7 @@ which contains the spacecraft object.  Gravity effectors are attached to the spa
 simulate the gravitational accelerations.  The spacecraft object provides the states that the integration
 module needs to perform the time integration.</p>
 <img alt="../_images/test_scenarioIntegrators.svg" class="align-center" src="../_images/test_scenarioIntegrators.svg" />
-<p>If <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a>, or any other dynamics module, is created without specifying a particular
+<p>If <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a>, or any other dynamics module, is created without specifying a particular
 integration type, the fixed time step 4th order Runge-Kutta method is used by default.  To invoke a
 different integration scheme, the following code is used before the dynamics module is added to the
 python task list:</p>

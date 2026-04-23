@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: prescribedRot2DOF &mdash; Basilisk 2.11.0beta
+  <title>C Module: prescribedRot2DOF &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -71,12 +72,14 @@
 <li class="toctree-l4"><a class="reference internal" href="../hingedJointArrayMotor/index.html">hingedJointArrayMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyPIDMotor/index.html">hingedRigidBodyPIDMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../jointMotionCompensator/index.html">jointMotionCompensator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jointThrAllocation/index.html">jointThrAllocation</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="index.html">prescribedRot2DOF</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorTorque/index.html">rwMotorTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorVoltage/index.html">rwMotorVoltage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwNullSpace/index.html">rwNullSpace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../solarArrayReference/index.html">solarArrayReference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringRemainder/index.html">thrFiringRemainder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thrFiringRound/index.html">thrFiringRound</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringSchmitt/index.html">thrFiringSchmitt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrForceMapping/index.html">thrForceMapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrJointCompensation/index.html">thrJointCompensation</a></li>
@@ -149,7 +152,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">effectorInterfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">prescribedRot2DOF</a></li>
-      <li class="breadcrumb-item active">Module: prescribedRot2DOF</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: prescribedRot2DOF</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/effectorInterfaces/prescribedRot2DOF/prescribedRot2DOF.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -159,8 +162,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-prescribedrot2dof">
-<span id="prescribedrot2dof"></span><h1>Module: prescribedRot2DOF<a class="headerlink" href="#module-prescribedrot2dof" title="Link to this heading"></a></h1>
+  <section id="c-module-prescribedrot2dof">
+<span id="prescribedrot2dof"></span><h1><span class="module-type-label module-type-c">C</span> Module: prescribedRot2DOF<a class="headerlink" href="#c-module-prescribedrot2dof" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module profiles a <a class="reference internal" href="../../../architecture/msgPayloadDefC/PrescribedRotationMsgPayload.html#prescribedrotationmsgpayload"><span class="std std-ref">PrescribedRotationMsgPayload</span></a> message for a specified 2 DOF rotation
@@ -172,7 +175,7 @@ in this module are: <code class="docutils literal notranslate"><span class="pre"
 rotation that is profiled is a 1 DOF rotation. The module converts two given reference angles and their corresponding
 rotation axes for the rotation to a single 1 DOF rotation for the rotation. Simple Principal Rotation Vector (PRV)
 addition is used on the two given reference PRVs to determine the single PRV required for the rotation.</p>
-<p>To use this module for prescribed motion, it must be connected to the <a class="reference internal" href="../../../simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">Module: prescribedMotionStateEffector</span></a>
+<p>To use this module for prescribed motion, it must be connected to the <a class="reference internal" href="../../../simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">C++ Module: prescribedMotionStateEffector</span></a>
 dynamics module in order to profile the rotational states of the secondary body. A second kinematic profiler module
 must also be connected to the prescribed motion dynamics module to profile the translational states of the prescribed
 body. The required rotation is determined from the user-specified scalar maximum angular acceleration for the rotation,
@@ -187,10 +190,12 @@ The corresponding angle the prescribed body moves through during the rotation is
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.
-The module msg connection is set by the user from python.
-The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-0cc4428ac7c578fa4930172d3d03c7b445093225.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">prescribedRot2DOF module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -207,15 +212,15 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>spinningBodyRef1InMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/HingedRigidBodyMsgPayload.html#hingedrigidbodymsgpayload"><span class="std std-ref">HingedRigidBodyMsgPayload</span></a></p></td>
-<td><p>input msg with the scalar spinning body rotational reference states for the first rotation</p></td>
+<td><p>Input msg with the scalar spinning body rotational reference states for the first rotation</p></td>
 </tr>
 <tr class="row-odd"><td><p>spinningBodyRef2InMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/HingedRigidBodyMsgPayload.html#hingedrigidbodymsgpayload"><span class="std std-ref">HingedRigidBodyMsgPayload</span></a></p></td>
-<td><p>input msg with the scalar spinning body rotational reference states for the second rotation</p></td>
+<td><p>Input msg with the scalar spinning body rotational reference states for the second rotation</p></td>
 </tr>
 <tr class="row-even"><td><p>prescribedMotionOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/PrescribedRotationMsgPayload.html#prescribedrotationmsgpayload"><span class="std std-ref">PrescribedRotationMsgPayload</span></a></p></td>
-<td><p>output message with the prescribed spinning body rotational states</p></td>
+<td><p>Output message with the prescribed spinning body rotational states</p></td>
 </tr>
 </tbody>
 </table>
@@ -300,7 +305,7 @@ Rotation Vector <code class="docutils literal notranslate"><span class="pre">prv
 the rotation, <code class="docutils literal notranslate"><span class="pre">prv_P1P0</span></code> <span class="math notranslate nohighlight">\((\Phi_{1a}, \hat{\boldsymbol{e}}_{1a})\)</span> and <code class="docutils literal notranslate"><span class="pre">prv_P2P1</span></code>
 <span class="math notranslate nohighlight">\((\Phi_{1b}, \hat{\boldsymbol{e}}_{1b})\)</span>.</p>
 <p>This module provides a single output message in the form of <a class="reference internal" href="../../../architecture/msgPayloadDefC/PrescribedRotationMsgPayload.html#prescribedrotationmsgpayload"><span class="std std-ref">PrescribedRotationMsgPayload</span></a>. This prescribed
-motion output message can be connected to the <a class="reference internal" href="../../../simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">Module: prescribedMotionStateEffector</span></a> dynamics module to directly profile
+motion output message can be connected to the <a class="reference internal" href="../../../simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">C++ Module: prescribedMotionStateEffector</span></a> dynamics module to directly profile
 a state effector’s rotational motion. Note that a separate translational profiler module must also be connected to
 the prescribed motion dynamics module to fully define the kinematic motion of the prescribed body.</p>
 <p>This section is to outline the steps needed to setup a prescribed 2 DOF rotational module in python using Basilisk.</p>

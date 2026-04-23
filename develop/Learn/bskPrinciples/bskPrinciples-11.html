@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -147,7 +148,7 @@ be found in <a class="reference internal" href="../makingModules/advancedTopics/
 dynamic effectors compatible as “child” effectors is summarized in the table below. Green shows
 currently supported configurations, yellow shows configurations expected to be supported in the
 future, and red shows configurations not planned to be supported. Additionally, blue shows the
-special case of prescribed effector branching explained in <a class="reference internal" href="../../Documentation/simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">Module: prescribedMotionStateEffector</span></a>.</p>
+special case of prescribed effector branching explained in <a class="reference internal" href="../../Documentation/simulation/dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">C++ Module: prescribedMotionStateEffector</span></a>.</p>
 <style>
   /* Responsive wrapper */
   .table-wrapper {
@@ -414,7 +415,7 @@ attached to the hub, increasing outward from the hub. For example, spinningBodyO
 will always attach to segment 1, attaching to the second to last segment of a 7DOF robotic arm would
 be segment 6. Note that in either case the dynamic effector is still added to the sim task.</p>
 <p>However, some effectors use alternative methods for adding to a spacecraft. For example, the
-attachment of a <a class="reference internal" href="../../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a> set using the <a class="reference internal" href="../../Documentation/utilities/simIncludeThruster.html#simincludethruster"><span class="std std-ref">simIncludeThruster</span></a>:</p>
+attachment of a <a class="reference internal" href="../../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a> set using the <a class="reference internal" href="../../Documentation/utilities/simIncludeThruster.html#simincludethruster"><span class="std std-ref">simIncludeThruster</span></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thrusterSet</span> <span class="o">=</span> <span class="n">thrusterDynamicEffector</span><span class="o">.</span><span class="n">ThrusterDynamicEffector</span><span class="p">()</span>
 <span class="n">thFactory</span> <span class="o">=</span> <span class="n">simIncludeThruster</span><span class="o">.</span><span class="n">thrusterFactory</span><span class="p">()</span>
 <span class="n">thFactory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;MOOG_Monarc_22_6&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
@@ -426,7 +427,7 @@ attachment of a <a class="reference internal" href="../../Documentation/simulati
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thFactory</span><span class="o">.</span><span class="n">addToSpacecraftSubcomponent</span><span class="p">(</span><span class="n">thrModelTag</span><span class="p">,</span> <span class="n">thrusterSet</span><span class="p">,</span> <span class="n">stateEff</span><span class="p">,</span> <span class="n">segment</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Additionally, the <a class="reference internal" href="../../Documentation/simulation/dynamics/constraintEffector/constraintDynamicEffector.html#constraintdynamiceffector"><span class="std std-ref">Module: constraintDynamicEffector</span></a> requires attachment to two parents. It works with
+<p>Additionally, the <a class="reference internal" href="../../Documentation/simulation/dynamics/constraintEffector/constraintDynamicEffector.html#constraintdynamiceffector"><span class="std std-ref">C++ Module: constraintDynamicEffector</span></a> requires attachment to two parents. It works with
 either a hub attached to the state effector of another vehicle, or the attachment of two different
 state effectors to one another.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scObject2</span> <span class="o">=</span> <span class="n">spacecraft</span><span class="o">.</span><span class="n">Spacecraft</span><span class="p">()</span>

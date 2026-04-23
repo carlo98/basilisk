@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -156,13 +157,13 @@ chief using attitude-driven differential drag using the strategy outlined in <a 
 </pre></div>
 </div>
 <p>The simulation layout is shown in the following illustration. Two spacecraft are orbiting the earth at
-close distance. Perturbations from atmospheric drag, provided by <a class="reference internal" href="../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">Module: exponentialAtmosphere</span></a> and
-<a class="reference internal" href="../Documentation/simulation/dynamics/facetDragEffector/facetDragDynamicEffector.html#facetdragdynamiceffector"><span class="std std-ref">Module: facetDragDynamicEffector</span></a>,  are implemented by default; the <span class="math notranslate nohighlight">\(J_2\)</span> gravity perturbation
-can also be included. Each spacecraft sends a <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a>
-output message of type <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/NavAttMsgPayload.html#navattmsgpayload"><span class="std std-ref">NavAttMsgPayload</span></a> continuously to a <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/hillStateConverter/hillStateConverter.html#hillstateconverter"><span class="std std-ref">Module: hillStateConverter</span></a> module,
+close distance. Perturbations from atmospheric drag, provided by <a class="reference internal" href="../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">C++ Module: exponentialAtmosphere</span></a> and
+<a class="reference internal" href="../Documentation/simulation/dynamics/facetDragEffector/facetDragDynamicEffector.html#facetdragdynamiceffector"><span class="std std-ref">C++ Module: facetDragDynamicEffector</span></a>,  are implemented by default; the <span class="math notranslate nohighlight">\(J_2\)</span> gravity perturbation
+can also be included. Each spacecraft sends a <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a>
+output message of type <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/NavAttMsgPayload.html#navattmsgpayload"><span class="std std-ref">NavAttMsgPayload</span></a> continuously to a <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/hillStateConverter/hillStateConverter.html#hillstateconverter"><span class="std std-ref">C Module: hillStateConverter</span></a> module,
 which is assumed to be a part of the deputy (maneuvering)
-spacecraft’s flight software stack. The <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/hillStateConverter/hillStateConverter.html#hillstateconverter"><span class="std std-ref">Module: hillStateConverter</span></a> module then writes
-a <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/HillRelStateMsgPayload.html#hillrelstatemsgpayload"><span class="std std-ref">HillRelStateMsgPayload</span></a>, which is read by the <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/hillToAttRef/hillToAttRef.html#hilltoattref"><span class="std std-ref">Module: hillToAttRef</span></a> module implementing
+spacecraft’s flight software stack. The <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/hillStateConverter/hillStateConverter.html#hillstateconverter"><span class="std std-ref">C Module: hillStateConverter</span></a> module then writes
+a <a class="reference internal" href="../Documentation/architecture/msgPayloadDefC/HillRelStateMsgPayload.html#hillrelstatemsgpayload"><span class="std std-ref">HillRelStateMsgPayload</span></a>, which is read by the <a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/hillToAttRef/hillToAttRef.html#hilltoattref"><span class="std std-ref">C Module: hillToAttRef</span></a> module implementing
 the differential drag attitude guidance law.</p>
 <img alt="../_images/scenarioDragRendezvousDiagram.png" class="align-center" src="../_images/scenarioDragRendezvousDiagram.png" />
 </section>

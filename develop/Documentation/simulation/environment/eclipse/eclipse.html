@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: eclipse &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: eclipse &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">eclipse</a></li>
-      <li class="breadcrumb-item active">Module: eclipse</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: eclipse</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/eclipse/eclipse.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,8 +153,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-eclipse">
-<span id="eclipse"></span><h1>Module: eclipse<a class="headerlink" href="#module-eclipse" title="Link to this heading"></a></h1>
+  <section id="c-module-eclipse">
+<span id="eclipse"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: eclipse<a class="headerlink" href="#c-module-eclipse" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The eclipse module is responsible for determining whether or not a spacecraft is experiencing a solar eclipse and
@@ -164,6 +165,9 @@ how much of it is occluded. The module works on a list of spacecraft state messa
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-35a06e614a06e26aa1c3bf088d5843e7ba92c866.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">eclipse module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -180,19 +184,19 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>sunInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>sun ephemeris input message name</p></td>
+<td><p>sun ephemeris input message name.</p></td>
 </tr>
 <tr class="row-odd"><td><p>planetInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>A vector of planet incoming state message names ordered by the sequence in which planet are added to the module</p></td>
+<td><p>A vector of planet incoming state message names ordered by the sequence in which planet are added to the module.</p></td>
 </tr>
 <tr class="row-even"><td><p>positionInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>vector of msgs for each spacecraft position state for which to evaluate eclipse conditions</p></td>
+<td><p>vector of msgs for each spacecraft position state for which to evaluate eclipse conditions.</p></td>
 </tr>
 <tr class="row-odd"><td><p>eclipseOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#eclipsemsgpayload"><span class="std std-ref">EclipseMsgPayload</span></a></p></td>
-<td><p>vector of eclipse output msg names</p></td>
+<td><p>vector of eclipse output msg names.</p></td>
 </tr>
 </tbody>
 </table>

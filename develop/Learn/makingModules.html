@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@ users who need modules folded directly into a from-source Basilisk build.</p>
 <p>This chapter covers the basics of designing Basilisk modules, as well as how to write a module using C++, C or Python.  As always with code documentation, it is never complete and always work-in-progress.</p>
 <p>For general developer support pages on coding guidelines, forking, building the Sphinx documentation system etc., see
 <code class="docutils literal notranslate"><span class="pre">Support/Developer</span> <span class="pre">Information</span></code> in <a class="reference internal" href="#makingmodules"><span class="std std-ref">Basics of Writing Basilisk Modules</span></a>.</p>
-<p>The following pages cover the primary tasks required to make a Basilisk module.  This includes how to design the basic module function, how messages work, what methods are required for a module, etc.  Note that the dynamics modules are both Basilisk modules and also a sub-class of either <a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">Module: dynamicEffector</span></a> (provide external forces and torques acting on the body, but doesn’t have state differential equations to integrate), or <a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">Module: stateEffector</span></a> (has internal state differential equations to integrate that couple with the spacecraft rigid hub).</p>
+<p>The following pages cover the primary tasks required to make a Basilisk module.  This includes how to design the basic module function, how messages work, what methods are required for a module, etc.  Note that the dynamics modules are both Basilisk modules and also a sub-class of either <a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">C++ Module: dynamicEffector</span></a> (provide external forces and torques acting on the body, but doesn’t have state differential equations to integrate), or <a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">C++ Module: stateEffector</span></a> (has internal state differential equations to integrate that couple with the spacecraft rigid hub).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The goal of the following content is to facilitate the process of creating new modules.  However, this documentation does not avoid the need to study the Basilisk source code, including how other modules were written, to understand how to create new modules.</p>

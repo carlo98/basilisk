@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: saturationSingleActuator &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: saturationSingleActuator &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">deviceInterface</a></li>
           <li class="breadcrumb-item"><a href="index.html">saturationSingleActuator</a></li>
-      <li class="breadcrumb-item active">Module: saturationSingleActuator</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: saturationSingleActuator</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/deviceInterface/saturationSingleActuator/saturationSingleActuator.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -144,8 +145,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-saturationsingleactuator">
-<span id="saturationsingleactuator"></span><h1>Module: saturationSingleActuator<a class="headerlink" href="#module-saturationsingleactuator" title="Link to this heading"></a></h1>
+  <section id="c-module-saturationsingleactuator">
+<span id="saturationsingleactuator"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: saturationSingleActuator<a class="headerlink" href="#c-module-saturationsingleactuator" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">saturationSingleActuator</span></code> module applies optional saturation limits to a
@@ -160,6 +161,9 @@ user-defined minimum and maximum value,</p>
 <section id="message-connection-description">
 <h2>Message Connection Description<a class="headerlink" href="#message-connection-description" title="Link to this heading"></a></h2>
 <p>The following table lists the module input and output messages.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-2c96d4adadfbea709c842a139b6aea48f38f8e84.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">saturationSingleActuator module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -176,11 +180,11 @@ user-defined minimum and maximum value,</p>
 <tbody>
 <tr class="row-even"><td><p>actuatorInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SingleActuatorMsgPayload.html#singleactuatormsgpayload"><span class="std std-ref">SingleActuatorMsgPayload</span></a></p></td>
-<td><p>Input scalar actuator command</p></td>
+<td><p>Input scalar actuator command.</p></td>
 </tr>
 <tr class="row-odd"><td><p>actuatorOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SingleActuatorMsgPayload.html#singleactuatormsgpayload"><span class="std std-ref">SingleActuatorMsgPayload</span></a></p></td>
-<td><p>Output saturated or pass-through actuator command</p></td>
+<td><p>Output saturated or pass-through actuator command.</p></td>
 </tr>
 </tbody>
 </table>

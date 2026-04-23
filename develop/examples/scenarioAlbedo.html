@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -158,9 +159,9 @@ without considering the gravity effector. In both scenarios, rotational  motion 
 <section id="simulation-scenario-setup-details">
 <h2>Simulation Scenario Setup Details<a class="headerlink" href="#simulation-scenario-setup-details" title="Link to this heading"></a></h2>
 <p>A simulation process is created which contains both the spacecraft simulation module,
-as well as one albedo module from <a class="reference internal" href="../Documentation/simulation/environment/albedo/albedo.html#albedo"><span class="std std-ref">Module: albedo</span></a> module using CSS configuration.
-The dynamics simulation is setup using <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a>.
-The CSS module is created using <a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">Module: coarseSunSensor</span></a>.
+as well as one albedo module from <a class="reference internal" href="../Documentation/simulation/environment/albedo/albedo.html#albedo"><span class="std std-ref">C++ Module: albedo</span></a> module using CSS configuration.
+The dynamics simulation is setup using <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a>.
+The CSS module is created using <a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">C++ Module: coarseSunSensor</span></a>.
 The input message <code class="docutils literal notranslate"><span class="pre">sunPositionInMsg</span></code> specifies an input message that contains the sun’s position.</p>
 <p>Albedo module calculates the albedo value for any instrument location. The instrument configuration can be set
 through the variables:</p>

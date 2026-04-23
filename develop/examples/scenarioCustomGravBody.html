@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -162,14 +163,14 @@ orbit is defined relative to the asteroid.  Note, this feature requires <a class
 <p>The simulation layout is shown in the following illustration.  A single simulation process is created
 which contains both modules.</p>
 <img alt="../_images/test_scenarioCustomGravBody.svg" class="align-center" src="../_images/test_scenarioCustomGravBody.svg" />
-<p><a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">Module: planetEphemeris</span></a> is used to create the planet ephemeris states. The sun is assumed to be stationary,
+<p><a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">C++ Module: planetEphemeris</span></a> is used to create the planet ephemeris states. The sun is assumed to be stationary,
 while Earth is on a circular orbit and Itokawa is on its elliptical heliocentric orbit.</p>
 <p>The method <code class="docutils literal notranslate"><span class="pre">createCustomGravObject()</span></code> is used to create the BSK grav bodies for both earth and Itokawa.
 The earth body is already supported in <a class="reference internal" href="../Documentation/utilities/simIncludeGravBody.html#simincludegravbody"><span class="std std-ref">simIncludeGravBody</span></a>, but in this script we show how this could
-be customized.  The gravity body ephemeris states are connected to the <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">Module: planetEphemeris</span></a> planet
+be customized.  The gravity body ephemeris states are connected to the <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">C++ Module: planetEphemeris</span></a> planet
 state output messages.</p>
-<p>Finally, the recorded states will all be relative to the inertial origin at the sun.  <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">Module: planetEphemeris</span></a> does not
-have the <code class="docutils literal notranslate"><span class="pre">zeroBase</span></code> capability as <a class="reference internal" href="../Documentation/simulation/environment/spiceInterface/spiceInterface.html#spiceinterface"><span class="std std-ref">Module: spiceInterface</span></a> has.  This script also records the asteroid
+<p>Finally, the recorded states will all be relative to the inertial origin at the sun.  <a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">C++ Module: planetEphemeris</span></a> does not
+have the <code class="docutils literal notranslate"><span class="pre">zeroBase</span></code> capability as <a class="reference internal" href="../Documentation/simulation/environment/spiceInterface/spiceInterface.html#spiceinterface"><span class="std std-ref">C++ Module: spiceInterface</span></a> has.  This script also records the asteroid
 states so that the plot is done of the spacecraft motion relative to the asteroid.</p>
 <p>The simulation executes and shows a plot of the spacecraft motion relative to the asteroid.</p>
 </section>

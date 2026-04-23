@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -168,7 +169,7 @@ if <code class="docutils literal notranslate"><span class="pre">pyLimitedAPI</sp
 SWIG 4.4.0 introduces a new C-API codepath for Python 3.13 that expects newer
 definition macros which are not present when targeting older <code class="docutils literal notranslate"><span class="pre">abi3</span></code> compatibility. As such, when building
 Basilisk with Python 3.13 or above, we automatically default to using the newer cp313 ABI.</p></li>
-<li><p>The <a class="reference internal" href="../Documentation/simulation/communication/simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">Module: simpleAntenna</span></a> module raises a warning for each of the following messages not being connected: <code class="docutils literal notranslate"><span class="pre">sunInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">planetInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">sunEclipseInMsg</span></code>, even for ground based antennas.
+<li><p>The <a class="reference internal" href="../Documentation/simulation/communication/simpleAntenna/simpleAntenna.html#simpleantenna"><span class="std std-ref">C++ Module: simpleAntenna</span></a> module raises a warning for each of the following messages not being connected: <code class="docutils literal notranslate"><span class="pre">sunInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">planetInMsg</span></code>, <code class="docutils literal notranslate"><span class="pre">sunEclipseInMsg</span></code>, even for ground based antennas.
 These messages are not relevant for ground based antennas and the warning should therefore not be risen for an antenna on ground.</p></li>
 <li><p>If you install Basilisk via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">bsk</span></code>, note that the <code class="docutils literal notranslate"><span class="pre">basilisk/supportData</span></code> folder does not
 exist in your folder.  Simulation script importing directly using a local file path to <code class="docutils literal notranslate"><span class="pre">supportData</span></code>
@@ -176,8 +177,8 @@ will not work.  Rather, <code class="docutils literal notranslate"><span class="
 cache folder on your system.  See <a class="reference internal" href="../Learn/bskPrinciples/bskPrinciples-6a.html#bskprinciples-6a"><span class="std std-ref">Importing External Data Sources</span></a> on how to get a file data path and import it.</p></li>
 <li><p>The method <code class="docutils literal notranslate"><span class="pre">loadGravFromFile()</span></code> was hard-coded to load a 2nd order gravity field.  This is fixed in current
 version.</p></li>
-<li><p>In <a class="reference internal" href="../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">Module: reactionWheelStateEffector</span></a>, mixed balanced and jitter wheel-model configurations could log <code class="docutils literal notranslate"><span class="pre">theta</span></code> to the wrong wheel output index. This is fixed in current version.</p></li>
-<li><p>In <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrJointCompensation/thrJointCompensation.html#thrjointcompensation"><span class="std std-ref">Module: thrJointCompensation</span></a>, the sign convention for the computed compensation torque was incorrect. This is fixed in current version.</p></li>
+<li><p>In <a class="reference internal" href="../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">C++ Module: reactionWheelStateEffector</span></a>, mixed balanced and jitter wheel-model configurations could log <code class="docutils literal notranslate"><span class="pre">theta</span></code> to the wrong wheel output index. This is fixed in current version.</p></li>
+<li><p>In <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrJointCompensation/thrJointCompensation.html#thrjointcompensation"><span class="std std-ref">C++ Module: thrJointCompensation</span></a>, the sign convention for the computed compensation torque was incorrect. This is fixed in current version.</p></li>
 </ul>
 </section>
 <section id="version-2-9-0">
@@ -192,11 +193,11 @@ if <code class="docutils literal notranslate"><span class="pre">pyLimitedAPI</sp
 SWIG 4.4.0 introduces a new C-API codepath for Python 3.13 that expects newer
 definition macros which are not present when targeting older <code class="docutils literal notranslate"><span class="pre">abi3</span></code> compatibility. As such, when building
 Basilisk with Python 3.13 or above, we automatically default to using the newer cp313 ABI.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/gravityEffector.html#gravityeffector"><span class="std std-ref">Module: gravityEffector</span></a> had a typo where the total gravity potential contribution of the celestial bodies
+<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/gravityEffector.html#gravityeffector"><span class="std std-ref">C++ Module: gravityEffector</span></a> had a typo where the total gravity potential contribution of the celestial bodies
 was not being computed properly. Fixed now.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/mujocoDynamics/_GeneralModuleFiles/MJSite.html#mjsite"><span class="std std-ref">Module: MJSite</span></a> has an issue where the angular velocity that was being written into the stateOutMsg
+<li><p><a class="reference internal" href="../Documentation/simulation/mujocoDynamics/_GeneralModuleFiles/MJSite.html#mjsite"><span class="std std-ref">MJSite</span></a> has an issue where the angular velocity that was being written into the stateOutMsg
 was in the inertial frame components not the body frame components.  This is now fixed.</p></li>
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">Module: locationPointing</span></a> was calculating the value of <code class="docutils literal notranslate"><span class="pre">omega_RN_B</span></code> but not saving it to the
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">C Module: locationPointing</span></a> was calculating the value of <code class="docutils literal notranslate"><span class="pre">omega_RN_B</span></code> but not saving it to the
 <code class="docutils literal notranslate"><span class="pre">attGuidOutMsg</span></code>. This value is now being saved properly.</p></li>
 <li><p>The way body-fixed locations are added to Vizard data is changed.  Now Vizard retains a copy of the
 list of locations and only incremental changes have to be sent using the <code class="docutils literal notranslate"><span class="pre">vizSupport.changeLocation()</span></code>
@@ -205,16 +206,16 @@ If only <code class="docutils literal notranslate"><span class="pre">addLocation
 simulation script are required.  To do live updates to location it is recommended to use
 <code class="docutils literal notranslate"><span class="pre">vizSupport.changeLocation()</span></code>.</p></li>
 <li><p>The support file <a class="reference internal" href="../Documentation/utilities/vizSupport.html#vizsupport"><span class="std std-ref">vizSupport</span></a> is updated to only have <code class="docutils literal notranslate"><span class="pre">enableUnityVisualization()</span></code> check
-if <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> has been built or not.  It is recommended that user scripts safe-guard
+if <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> has been built or not.  It is recommended that user scripts safe-guard
 their simulation usage of <a class="reference internal" href="../Documentation/utilities/vizSupport.html#vizsupport"><span class="std std-ref">vizSupport</span></a> function by checking that <code class="docutils literal notranslate"><span class="pre">vizSupport.vizFound</span></code> is true.</p></li>
 <li><p>In <a class="reference internal" href="../Documentation/utilities/vizSupport.html#vizsupport"><span class="std std-ref">vizSupport</span></a>, in the method <code class="docutils literal notranslate"><span class="pre">setInstrumentGuiSetting()</span></code>, corrected the spelling of
 <code class="docutils literal notranslate"><span class="pre">showTransceiverFrustrum</span></code> to be <code class="docutils literal notranslate"><span class="pre">showTransceiverFrustum</span></code>.  The prior argument name has
 been deprecated and will be removed after October 11, 2026.</p></li>
-<li><p>For <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>.settings, changed the name of <code class="docutils literal notranslate"><span class="pre">viewCameraConeHUD</span></code> to <code class="docutils literal notranslate"><span class="pre">viewCameraFrustrumHUD</span></code>.
+<li><p>For <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>.settings, changed the name of <code class="docutils literal notranslate"><span class="pre">viewCameraConeHUD</span></code> to <code class="docutils literal notranslate"><span class="pre">viewCameraFrustrumHUD</span></code>.
 Using the old settings name results in the setting not being applied.</p></li>
 <li><p>When building the Basilisk documentation with doxygen 1.15 or newer, warnings associated with
 unclosed quotes are treated as errors and cause the build to fail. Quotes are fixed now.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">Module: spinningBodyOneDOFStateEffector</span></a> and <a class="reference internal" href="../Documentation/simulation/dynamics/spinningBodies/spinningBodiesNDOF/spinningBodyNDOFStateEffector.html#spinningbodyndofstateeffector"><span class="std std-ref">Module: spinningBodyNDOFStateEffector</span></a> both registered
+<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">C++ Module: spinningBodyOneDOFStateEffector</span></a> and <a class="reference internal" href="../Documentation/simulation/dynamics/spinningBodies/spinningBodiesNDOF/spinningBodyNDOFStateEffector.html#spinningbodyndofstateeffector"><span class="std std-ref">C++ Module: spinningBodyNDOFStateEffector</span></a> both registered
 their state variables under the same names, resulting in one overwriting the other when both are
 added to the same simulation and producing a <code class="docutils literal notranslate"><span class="pre">BSK_ERROR</span></code>. State names are now made unique.</p></li>
 </ul>
@@ -224,8 +225,8 @@ added to the same simulation and producing a <code class="docutils literal notra
 <ul class="simple">
 <li><p>pip-based installation in editable mode using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code> is not currently supported.
 Developers and users alike should continue to use <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">conanfile.py</span></code> installation.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">Reset()</span></code> function in <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/forceTorqueThrForceMapping/forceTorqueThrForceMapping.html#forcetorquethrforcemapping"><span class="std std-ref">Module: forceTorqueThrForceMapping</span></a> was not working properly. This has been addressed in the current release.</p></li>
-<li><p>The reaction wheel configuration message was moved from C++ messages to the dynamics folder and renamed to <a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/RWConfigPayload.html#rwconfigpayload"><span class="std std-ref">Module: RWConfigPayload</span></a>.
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Reset()</span></code> function in <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/forceTorqueThrForceMapping/forceTorqueThrForceMapping.html#forcetorquethrforcemapping"><span class="std std-ref">C Module: forceTorqueThrForceMapping</span></a> was not working properly. This has been addressed in the current release.</p></li>
+<li><p>The reaction wheel configuration message was moved from C++ messages to the dynamics folder and renamed to <a class="reference internal" href="../Documentation/simulation/dynamics/_GeneralModuleFiles/RWConfigPayload.html#rwconfigpayload"><span class="std std-ref">RWConfigPayload</span></a>.
 The reaction wheel factory was changed accordingly. Users that created the message on their own should now call <code class="docutils literal notranslate"><span class="pre">reactionWheelStateEffector.RWConfigPayload</span></code> instead of <code class="docutils literal notranslate"><span class="pre">messaging</span></code>.</p></li>
 <li><p>Simulations that previously logged to <code class="docutils literal notranslate"><span class="pre">BSK_ERROR</span></code> and expected to keep running successfully
 will now raise a <code class="docutils literal notranslate"><span class="pre">BasiliskError</span></code> exception and stop the simulation immediately.</p></li>
@@ -265,9 +266,9 @@ is to store these objects directly on your simulation object. For example:</p>
 </div>
 <p>See specific documentation for:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">Module: coarseSunSensor</span></a></p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">Module: reactionWheelStateEffector</span></a></p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a></p></li>
+<li><p><a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">C++ Module: coarseSunSensor</span></a></p></li>
+<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">C++ Module: reactionWheelStateEffector</span></a></p></li>
+<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a></p></li>
 </ul>
 <p>For working examples, refer to these scenarios:</p>
 <ul class="simple">
@@ -284,12 +285,12 @@ is to store these objects directly on your simulation object. For example:</p>
 <li><p>pip-based installation in editable mode using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code> is not currently supported.
 Developers and users alike should continue to use <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">conanfile.py</span></code> installation.</p></li>
 <li><p>When using <cite>senNoiseStd()</cite> to set the sensor noise standard deviations
-in <a class="reference internal" href="../Documentation/simulation/sensors/magnetometer/magnetometer.html#magnetometer"><span class="std std-ref">Module: magnetometer</span></a> and <a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">Module: coarseSunSensor</span></a>
+in <a class="reference internal" href="../Documentation/simulation/sensors/magnetometer/magnetometer.html#magnetometer"><span class="std std-ref">C++ Module: magnetometer</span></a> and <a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">C++ Module: coarseSunSensor</span></a>
 the value was being multiplied by 1.5 when creating the diagonal noise matrix.
 This 1.5x multiplier has now been removed. This is corrected in current release.</p></li>
 <li><p>SWIG wrapper does not fully support all array types in message payloads. This affects custom message
 payloads that use these types for array members. Workaround is to add them to <code class="docutils literal notranslate"><span class="pre">swig_conly_data.i</span></code>.</p></li>
-<li><p>A bug was fixed in the <a class="reference internal" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.html#facetsrpdynamiceffector"><span class="std std-ref">Module: facetSRPDynamicEffector</span></a> module. A transpose was required to be added to a dcm
+<li><p>A bug was fixed in the <a class="reference internal" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.html#facetsrpdynamiceffector"><span class="std std-ref">C++ Module: facetSRPDynamicEffector</span></a> module. A transpose was required to be added to a dcm
 in order to correctly express rotated facet normals in the spacecraft body frame.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">MtbEffector.py</span></code> module was not being imported correctly in Python due to lack of <code class="docutils literal notranslate"><span class="pre">swig_eigen.i</span></code>
 include file in <code class="docutils literal notranslate"><span class="pre">MtbEffector.i</span></code>. This is fixed in the current release, however it remains unknown why
@@ -303,10 +304,10 @@ setup with <code class="docutils literal notranslate"><span class="pre">conan</s
 <li><p><a class="reference internal" href="../Documentation/utilities/simIncludeGravBody.html#simincludegravbody"><span class="std std-ref">simIncludeGravBody</span></a> set the moon radius in km, not meters, and was thus 1000x too small when visualized.</p></li>
 <li><p>In the python library <a class="reference internal" href="../Documentation/utilities/RigidBodyKinematics.html#rigidbodykinematics"><span class="std std-ref">RigidBodyKinematics</span></a> the <code class="docutils literal notranslate"><span class="pre">subMRP()</span></code> routine didn’t compute the expected
 result if the denominator was small.  This is now corrected.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> was not respecting the case where <code class="docutils literal notranslate"><span class="pre">maximumRange</span> <span class="pre">==</span> <span class="pre">-1.0</span></code> in the method <code class="docutils literal notranslate"><span class="pre">checkInstrumentFOV</span></code>.</p></li>
+<li><p><a class="reference internal" href="../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a> was not respecting the case where <code class="docutils literal notranslate"><span class="pre">maximumRange</span> <span class="pre">==</span> <span class="pre">-1.0</span></code> in the method <code class="docutils literal notranslate"><span class="pre">checkInstrumentFOV</span></code>.</p></li>
 <li><p>Sensor noise models were not being initialized correctly in sensor models such as
-<a class="reference internal" href="../Documentation/simulation/sensors/magnetometer/magnetometer.html#magnetometer"><span class="std std-ref">Module: magnetometer</span></a> and <a class="reference internal" href="../Documentation/simulation/sensors/simpleVoltEstimator/simpleVoltEstimator.html#simplevoltestimator"><span class="std std-ref">Module: simpleVoltEstimator</span></a> modules. This is now fixed in the current release.</p></li>
-<li><p>Propagation matrices were private in the <a class="reference internal" href="../Documentation/simulation/sensors/simpleVoltEstimator/simpleVoltEstimator.html#simplevoltestimator"><span class="std std-ref">Module: simpleVoltEstimator</span></a> and <a class="reference internal" href="../Documentation/simulation/sensors/starTracker/starTracker.html#startracker"><span class="std std-ref">Module: starTracker</span></a> modules.
+<a class="reference internal" href="../Documentation/simulation/sensors/magnetometer/magnetometer.html#magnetometer"><span class="std std-ref">C++ Module: magnetometer</span></a> and <a class="reference internal" href="../Documentation/simulation/sensors/simpleVoltEstimator/simpleVoltEstimator.html#simplevoltestimator"><span class="std std-ref">C++ Module: simpleVoltEstimator</span></a> modules. This is now fixed in the current release.</p></li>
+<li><p>Propagation matrices were private in the <a class="reference internal" href="../Documentation/simulation/sensors/simpleVoltEstimator/simpleVoltEstimator.html#simplevoltestimator"><span class="std std-ref">C++ Module: simpleVoltEstimator</span></a> and <a class="reference internal" href="../Documentation/simulation/sensors/starTracker/starTracker.html#startracker"><span class="std std-ref">C++ Module: starTracker</span></a> modules.
 This is now fixed in the current release by the addition of public methods to set and get the propagation matrices.</p></li>
 </ul>
 </section>
@@ -321,9 +322,9 @@ before being assigned.  This is now corrected.</p></li>
 from JPL server.  However, if the download is interrupted, then the next build will find the file and
 not attempt to re-download it.  This is now fixed in the current version where the file is only
 stored in the <code class="docutils literal notranslate"><span class="pre">supportData</span></code> folder if the download was complete.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> was not able to save to a binary data file.
+<li><p><a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> was not able to save to a binary data file.
 This is now fixed in the current release.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> was not saving the Vizard settings to the binary file.  Fixed now.</p></li>
+<li><p><a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> was not saving the Vizard settings to the binary file.  Fixed now.</p></li>
 <li><p>Installing Basilisk 2.4.0 while <code class="docutils literal notranslate"><span class="pre">packaging&lt;22</span></code> is installed can lead to an incompatibility and raise a
 “TypeError: <code class="docutils literal notranslate"><span class="pre">canonicalize_version()</span></code> got an unexpected keyword argument <code class="docutils literal notranslate"><span class="pre">strip_trailing_zero</span></code>” error.
 Newer versions of Basilisk now upgrade <code class="docutils literal notranslate"><span class="pre">packaging&gt;=22</span></code> to solve this issue.</p></li>
@@ -335,10 +336,10 @@ specified even if a prebuilt RW data set is used. This is corrected in the curre
 <h2>Version 2.4.0<a class="headerlink" href="#version-2-4-0" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>The fuel tank models have become classes and python simulation code using tank modules need to be
-updated.  See <a class="reference internal" href="../Documentation/simulation/dynamics/FuelTank/fuelTank.html#fueltank"><span class="std std-ref">Module: fuelTank</span></a> or <a class="reference internal" href="../examples/scenarioFuelSlosh.html#scenariofuelslosh"><span class="std std-ref">scenarioFuelSlosh</span></a> for further documentation.</p></li>
+updated.  See <a class="reference internal" href="../Documentation/simulation/dynamics/FuelTank/fuelTank.html#fueltank"><span class="std std-ref">C++ Module: fuelTank</span></a> or <a class="reference internal" href="../examples/scenarioFuelSlosh.html#scenariofuelslosh"><span class="std std-ref">scenarioFuelSlosh</span></a> for further documentation.</p></li>
 <li><p>The CI test builds starting failing running the <cite>gtest</cite> unit test suite with the error
 <code class="docutils literal notranslate"><span class="pre">CMake</span> <span class="pre">Error:</span> <span class="pre">Unknown</span> <span class="pre">argument:</span> <span class="pre">--gtest_output</span></code>.  The current release fixes this issue.</p></li>
-<li><p>There was an issue with the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">Module: thrusterStateEffector</span></a> such that its mass depletion rate was
+<li><p>There was an issue with the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">C++ Module: thrusterStateEffector</span></a> such that its mass depletion rate was
 hard-coded to 100% for all firings. This is corrected in the current release.</p></li>
 <li><p>pip-based installation in editable mode using <cite>pip install -e .</cite> is not currently supported.
 Developers and users alike should continue to use <cite>python conanfile.py</cite> installation.</p></li>
@@ -367,16 +368,16 @@ support for this version of swig.</p></li>
 <section id="version-2-2-1">
 <h2>Version 2.2.1<a class="headerlink" href="#version-2-2-1" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>There was an issue with <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">Module: thrusterStateEffector</span></a> where if there are multiple instances of the
+<li><p>There was an issue with <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.html#thrusterstateeffector"><span class="std std-ref">C++ Module: thrusterStateEffector</span></a> where if there are multiple instances of the
 thruster state effector then the last effector will over-write all the state of the earlier thrusters.
 This is corrected in the current release.</p></li>
 <li><p>Doing a clean Basilisk build with <cite>opNav</cite> flag on fails building openCV.  The conan
 install script is updated this is corrected in the current release.</p></li>
 <li><p>We found a slow memory leak if messages with arrays or vectors were accessed from python.  The <code class="docutils literal notranslate"><span class="pre">swig</span></code>
 issue has now been fixed in the current release.</p></li>
-<li><p>The <a class="reference internal" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.html#facetsrpdynamiceffector"><span class="std std-ref">Module: facetSRPDynamicEffector</span></a> module was double counting a cosine term in the SRP force calculation. This is
+<li><p>The <a class="reference internal" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.html#facetsrpdynamiceffector"><span class="std std-ref">C++ Module: facetSRPDynamicEffector</span></a> module was double counting a cosine term in the SRP force calculation. This is
 corrected in the current release.</p></li>
-<li><p>The <a class="reference internal" href="../Documentation/simulation/dynamics/facetDragEffector/facetDragDynamicEffector.html#facetdragdynamiceffector"><span class="std std-ref">Module: facetDragDynamicEffector</span></a> module was missing a negative sign in the drag torque calculation. This is
+<li><p>The <a class="reference internal" href="../Documentation/simulation/dynamics/facetDragEffector/facetDragDynamicEffector.html#facetdragdynamiceffector"><span class="std std-ref">C++ Module: facetDragDynamicEffector</span></a> module was missing a negative sign in the drag torque calculation. This is
 corrected in the current release.</p></li>
 </ul>
 </section>
@@ -400,7 +401,7 @@ that building with <code class="docutils literal notranslate"><span class="pre">
 <section id="version-2-1-6">
 <h2>Version 2.1.6<a class="headerlink" href="#version-2-1-6" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>in <a class="reference internal" href="../Documentation/simulation/dynamics/DynOutput/boreAngCalc/boreAngCalc.html#boreangcalc"><span class="std std-ref">Module: boreAngCalc</span></a>, the variable <code class="docutils literal notranslate"><span class="pre">boreVecPoint</span></code> is now called <code class="docutils literal notranslate"><span class="pre">boreVec_Po</span></code>.</p></li>
+<li><p>in <a class="reference internal" href="../Documentation/simulation/dynamics/DynOutput/boreAngCalc/boreAngCalc.html#boreangcalc"><span class="std std-ref">C++ Module: boreAngCalc</span></a>, the variable <code class="docutils literal notranslate"><span class="pre">boreVecPoint</span></code> is now called <code class="docutils literal notranslate"><span class="pre">boreVec_Po</span></code>.</p></li>
 </ul>
 </section>
 <section id="version-2-1-5">
@@ -409,9 +410,9 @@ that building with <code class="docutils literal notranslate"><span class="pre">
 <li><p>In Xcode, when editing <code class="docutils literal notranslate"><span class="pre">vizInterface.c/h</span></code> files, the protobuffer library is not properly found
 when opNav is included.
 The code compiles, but auto-completion etc. doesn’t work in that module.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">Module: hingedRigidBodyStateEffector</span></a> and <a class="reference internal" href="../Documentation/simulation/dynamics/dualHingedRigidBodies/dualHingedRigidBodyStateEffector.html#dualhingedrigidbodystateeffector"><span class="std std-ref">Module: dualHingedRigidBodyStateEffector</span></a> module inertial state outputs are relative to the central gravity body,
+<li><p><a class="reference internal" href="../Documentation/simulation/dynamics/HingedRigidBodies/hingedRigidBodyStateEffector.html#hingedrigidbodystateeffector"><span class="std std-ref">C++ Module: hingedRigidBodyStateEffector</span></a> and <a class="reference internal" href="../Documentation/simulation/dynamics/dualHingedRigidBodies/dualHingedRigidBodyStateEffector.html#dualhingedrigidbodystateeffector"><span class="std std-ref">C++ Module: dualHingedRigidBodyStateEffector</span></a> module inertial state outputs are relative to the central gravity body,
 not the inertial frame.  This is now corrected.</p></li>
-<li><p>Adding an instrument camera to <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> has changed.  See <a class="reference internal" href="../Vizard/vizardAdvanced/vizardSettings.html#vizardsettings"><span class="std std-ref">BSK Scripting Settings</span></a> on how
+<li><p>Adding an instrument camera to <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> has changed.  See <a class="reference internal" href="../Vizard/vizardAdvanced/vizardSettings.html#vizardsettings"><span class="std std-ref">BSK Scripting Settings</span></a> on how
 to use the new method <code class="docutils literal notranslate"><span class="pre">addCamMsgToModule()</span></code>.</p></li>
 </ul>
 </section>
@@ -422,9 +423,9 @@ to use the new method <code class="docutils literal notranslate"><span class="pr
 when opNav is included.
 The code compiles, but auto-completion etc. doesn’t work in that module.</p></li>
 <li><p>prior version had a bug in computer the latitude in <code class="docutils literal notranslate"><span class="pre">PCPF2LLA()</span></code> inside <a class="reference internal" href="../Documentation/architecture/utilities/geodeticConversion.html#geodeticconversion"><span class="std std-ref">geodeticConversion</span></a>.  This is used
-in the <code class="docutils literal notranslate"><span class="pre">specifyLocationPCPF()</span></code> method inside <a class="reference internal" href="../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a>, and in
-<a class="reference internal" href="../Documentation/simulation/environment/MsisAtmosphere/msisAtmosphere.html#msisatmosphere"><span class="std std-ref">Module: msisAtmosphere</span></a> and <a class="reference internal" href="../Documentation/simulation/environment/albedo/albedo.html#albedo"><span class="std std-ref">Module: albedo</span></a>.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">Module: coarseSunSensor</span></a> now receives in <code class="docutils literal notranslate"><span class="pre">sensorList</span></code> a list of CSS configuration state pointers, not
+in the <code class="docutils literal notranslate"><span class="pre">specifyLocationPCPF()</span></code> method inside <a class="reference internal" href="../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a>, and in
+<a class="reference internal" href="../Documentation/simulation/environment/MsisAtmosphere/msisAtmosphere.html#msisatmosphere"><span class="std std-ref">C++ Module: msisAtmosphere</span></a> and <a class="reference internal" href="../Documentation/simulation/environment/albedo/albedo.html#albedo"><span class="std std-ref">C++ Module: albedo</span></a>.</p></li>
+<li><p><a class="reference internal" href="../Documentation/simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">C++ Module: coarseSunSensor</span></a> now receives in <code class="docutils literal notranslate"><span class="pre">sensorList</span></code> a list of CSS configuration state pointers, not
 a copy to the configuration structures.  This allows these values to be changed on the fly from
 within python.  However, the simulation code must ensure that the CSS configuration structures
 are retained in memory or a segmentation fault will ensue.</p></li>
@@ -442,7 +443,7 @@ modification in this release.  This is fixed in the latest release.</p></li>
 <li><p>In Xcode, when editing <code class="docutils literal notranslate"><span class="pre">vizInterface.c/h</span></code> files, the protobuffer library is not properly found
 when opNav is included.
 The code compiles, but auto-completion etc. doesn’t work in that module.</p></li>
-<li><p><a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">Module: planetEphemeris</span></a> was not computing the correct orientation, this is fixed in current release</p></li>
+<li><p><a class="reference internal" href="../Documentation/simulation/environment/planetEphemeris/planetEphemeris.html#planetephemeris"><span class="std std-ref">C++ Module: planetEphemeris</span></a> was not computing the correct orientation, this is fixed in current release</p></li>
 <li><p>updated <code class="docutils literal notranslate"><span class="pre">examples/OpNavScenarios/BSK_OpNav.py</span></code> path to the Vizard binary. If you are calling
 Vizard 2.1+ from the python script, the Vizard binary name changed from <code class="docutils literal notranslate"><span class="pre">Basilisk</span> <span class="pre">Vizard`</span> <span class="pre">to</span>
 <span class="pre">simply</span> <span class="pre">``Vizard</span></code>.</p></li>
@@ -483,7 +484,7 @@ The code compiles, but auto-completion etc. doesn’t work in that module.</p></
 <li><p><code class="docutils literal notranslate"><span class="pre">conan</span></code> changed the default repos in version 1.40 onwards which broke the Basilisk installation.
 This is now corrected in the latest release.  After pulling the latest code release, you’ll need to
 delete the <code class="docutils literal notranslate"><span class="pre">.conan</span></code> folder in your home directory to create a fresh copy.  This only has to be done once.</p></li>
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/spacecraftReconfig/spacecraftReconfig.html#spacecraftreconfig"><span class="std std-ref">Module: spacecraftReconfig</span></a> has been changed to read in the spacecraft mass from an input message, not be set as
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/formationFlying/spacecraftReconfig/spacecraftReconfig.html#spacecraftreconfig"><span class="std std-ref">C Module: spacecraftReconfig</span></a> has been changed to read in the spacecraft mass from an input message, not be set as
 a module variable</p></li>
 </ul>
 </section>
@@ -714,14 +715,14 @@ This means in the IDE like Xcode and Visual Studio the code in <code class="docu
 this library name.  Thus, for example, code in <code class="docutils literal notranslate"><span class="pre">src/simulation/environment/_GeneralModuleFiles</span></code>
 are shown in the IDE folder <code class="docutils literal notranslate"><span class="pre">environmentLib</span></code> within the <code class="docutils literal notranslate"><span class="pre">environment</span></code> parent folder.  This keeps the BSK
 folders cleaner and with less duplicated code being displayed.</p></li>
-<li><p>A new python package dependency is <code class="docutils literal notranslate"><span class="pre">Pillow</span></code>.  This is needed for the test scripts for <a class="reference internal" href="../Documentation/simulation/sensors/camera/camera.html#camera"><span class="std std-ref">Module: camera</span></a> to run.</p></li>
+<li><p>A new python package dependency is <code class="docutils literal notranslate"><span class="pre">Pillow</span></code>.  This is needed for the test scripts for <a class="reference internal" href="../Documentation/simulation/sensors/camera/camera.html#camera"><span class="std std-ref">C++ Module: camera</span></a> to run.</p></li>
 <li><p>In Xcode the build will complain that it can’t find the <code class="docutils literal notranslate"><span class="pre">&lt;Eigen/Dense&gt;</span></code> library.  The code compiles ok.  The work
 around this conan issue is to run the build twice, once for Debug and once for Release.  At that point it can
 be run just once.</p></li>
 </ul>
 <p><strong>Version 1.7.5</strong></p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> was not converting between the planet and inertial frame correctly.  This is now fixed in
+<li><p><a class="reference internal" href="../Documentation/simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a> was not converting between the planet and inertial frame correctly.  This is now fixed in
 the later releases.</p></li>
 </ul>
 <p><strong>Version 1.7.4</strong></p>

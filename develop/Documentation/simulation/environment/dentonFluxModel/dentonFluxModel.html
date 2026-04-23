@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: dentonFluxModel &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: dentonFluxModel &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">dentonFluxModel</a></li>
-      <li class="breadcrumb-item active">Module: dentonFluxModel</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: dentonFluxModel</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/dentonFluxModel/dentonFluxModel.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,8 +153,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dentonfluxmodel">
-<span id="dentonfluxmodel"></span><h1>Module: dentonFluxModel<a class="headerlink" href="#module-dentonfluxmodel" title="Link to this heading"></a></h1>
+  <section id="c-module-dentonfluxmodel">
+<span id="dentonfluxmodel"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: dentonFluxModel<a class="headerlink" href="#c-module-dentonfluxmodel" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module provides the GEO electron and ion flux based on 82 satellite-years as discussed in <a class="reference external" href="https://doi.org/10.1002/2015SW001168">this paper</a> by M. H. Denton and on <a class="reference external" href="https://gemelli.spacescience.org/mdenton/">this website</a>.
@@ -167,14 +168,11 @@ flux data.</p>
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-denton-flux-model"></span><img alt="../../../../_images/moduleDentonFluxModel.svg" src="../../../../_images/moduleDentonFluxModel.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">dentonFluxModel()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-d974cee0e50f1ceb8021a5ae13fe8fede32037af.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">dentonFluxModel module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -187,21 +185,21 @@ provides information on what this message is used for.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scStateInMsg</span></code></p></td>
+<tr class="row-even"><td><p>scStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>spacecraft state input message</p></td>
+<td><p>spacecraft state input message.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">earthStateInMsg</span></code></p></td>
+<tr class="row-odd"><td><p>earthStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>Earth planet state input message</p></td>
+<td><p>Earth planet state input message.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sunStateInMsg</span></code></p></td>
+<tr class="row-even"><td><p>sunStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>Sun state input message</p></td>
+<td><p>Sun state input message.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fluxOutMsg</span></code></p></td>
+<tr class="row-odd"><td><p>fluxOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/PlasmaFluxMsgPayload.html#plasmafluxmsgpayload"><span class="std std-ref">PlasmaFluxMsgPayload</span></a></p></td>
-<td><p>output ion and electron fluxes</p></td>
+<td><p>output ion and electron fluxes.</p></td>
 </tr>
 </tbody>
 </table>

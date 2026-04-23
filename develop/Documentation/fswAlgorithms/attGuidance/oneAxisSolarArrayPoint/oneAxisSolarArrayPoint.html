@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: oneAxisSolarArrayPoint &mdash; Basilisk 2.11.0beta
+  <title>C Module: oneAxisSolarArrayPoint &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attGuidance</a></li>
           <li class="breadcrumb-item"><a href="index.html">oneAxisSolarArrayPoint</a></li>
-      <li class="breadcrumb-item active">Module: oneAxisSolarArrayPoint</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: oneAxisSolarArrayPoint</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attGuidance/oneAxisSolarArrayPoint/oneAxisSolarArrayPoint.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,16 +153,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-oneaxissolararraypoint">
-<span id="oneaxissolararraypoint"></span><h1>Module: oneAxisSolarArrayPoint<a class="headerlink" href="#module-oneaxissolararraypoint" title="Link to this heading"></a></h1>
+  <section id="c-module-oneaxissolararraypoint">
+<span id="oneaxissolararraypoint"></span><h1><span class="module-type-label module-type-c">C</span> Module: oneAxisSolarArrayPoint<a class="headerlink" href="#c-module-oneaxissolararraypoint" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module computes a reference attitude frame that simultaneously satisfies multiple pointing constraints. The first constraint consists of aligning a body-frame direction <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{h}_1\)</span> with a certain inertial reference direction <span class="math notranslate nohighlight">\({}^\mathcal{N}\hat{h}_\text{ref}\)</span>. This locks two out of three degrees of freedom that characterize a rigid body rotation. The second constraints consists in achieving maximum power generation on the solar arrays, assuming that the solar arrays can rotate about their drive axis. This condition is obtained ensuring that the body-fixed solar array drive direction <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{a}_1\)</span> is as close to perpendicular as possible to the Sun direction. When maximum power generation is possible, two solutions can be found that satisfy the previous two constraints simultaneously. When this happens, it is possible to consider a third body-fixed direction <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{a}_2\)</span> which should remain as close as possible to the Sun direction, while maintaining the other two constraints satisfied. This allows to discriminate between the two frames, and to pick the one that drives <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{a}_2\)</span> closer to the Sun. It is possible to provide a second body frame direction <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{h}_2\)</span> as an optional parameter: in this case the module chooses whether to align <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{h}_1\)</span> or <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{h}_2\)</span> with <span class="math notranslate nohighlight">\({}^\mathcal{N}\hat{h}_\text{ref}\)</span> depending on which provides a better alignment of <span class="math notranslate nohighlight">\({}^\mathcal{B}\hat{a}_2\)</span> with the Sun direction.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages. The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-3ec6d9543adbf5ece9ad01d566847d0f76e3d389.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">oneAxisSolarArrayPoint module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -178,7 +183,7 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>attNavInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/NavAttMsgPayload.html#navattmsgpayload"><span class="std std-ref">NavAttMsgPayload</span></a></p></td>
-<td><p>Input message containing current attitude and Sun direction in body-frame coordinates. Note that, for the Sun direction to appear in the message, the <a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a> must be provided as input msg to <a class="reference internal" href="../../../simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a>, otherwise the Sun direction is zeroed by default.</p></td>
+<td><p>Input message containing current attitude and Sun direction in body-frame coordinates. Note that, for the Sun direction to appear in the message, the <a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a> must be provided as input msg to <a class="reference internal" href="../../../simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a>, otherwise the Sun direction is zeroed by default.</p></td>
 </tr>
 <tr class="row-odd"><td><p>bodyHeadingInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/BodyHeadingMsgPayload.html#bodyheadingmsgpayload"><span class="std std-ref">BodyHeadingMsgPayload</span></a></p></td>

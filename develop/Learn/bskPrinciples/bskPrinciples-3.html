@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -132,7 +133,7 @@
 <p class="sidebar-title">Source Code</p>
 <p>The python code shown below can be downloaded <a class="reference download internal" download="" href="../../_downloads/821b34b167141eb490d4681e19f91a08/bsk-3.py"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
 </aside>
-<p>So far we have learned how to add C or C++ Basilisk modules to a task, setting priorities to execute those modules, and specifying update rates; next we will look at how to connect module messages to one another. Messages are anything that a module outputs after it is executed, such as spacecraft state information, battery power, etc.  Again we use both <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">Module: cModuleTemplate</span></a> and <a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">Module: cppModuleTemplate</span></a> as the stand-in modules to illustrate setting message connections.  Note that the input and output message connections of these modules are of the same type.  The following simulation script again uses a single process and task.  The modules are created and their input and output messages are connected as illustrated below.</p>
+<p>So far we have learned how to add C or C++ Basilisk modules to a task, setting priorities to execute those modules, and specifying update rates; next we will look at how to connect module messages to one another. Messages are anything that a module outputs after it is executed, such as spacecraft state information, battery power, etc.  Again we use both <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">C Module: cModuleTemplate</span></a> and <a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">C++ Module: cppModuleTemplate</span></a> as the stand-in modules to illustrate setting message connections.  Note that the input and output message connections of these modules are of the same type.  The following simulation script again uses a single process and task.  The modules are created and their input and output messages are connected as illustrated below.</p>
 <img alt="../../_images/qs-bsk-3.svg" class="align-center" src="../../_images/qs-bsk-3.svg" />
 <p>The source code is shown below.  As we are going to be using the Basilisk messaging system now, it is important to import the <code class="docutils literal notranslate"><span class="pre">messaging</span></code> package from <code class="docutils literal notranslate"><span class="pre">Basilisk.architecture</span></code>.  Without this the python code will not know how to subscribe to any message type, or how to create a stand-alone message.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>

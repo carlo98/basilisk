@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -153,13 +154,13 @@
 <p id="module-scenarioReactionWheel">Recommended first scenario to learn MuJoCo-based simulation!</p>
 <p>This script shows how to simulate a CubeSat with a reaction wheel using the
 Mujoco-based dynamic object in Basilisk.</p>
-<p>Traditional Basilisk simulations (which use the <a class="reference internal" href="../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">DynamicObject</span></a>)
+<p>Traditional Basilisk simulations (which use the <a class="reference internal" href="../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">DynamicObject</span></a>)
 are ‘<cite>hub</cite>’-centric. This means that one usually considers a single body to be
 the ‘main’ body of the simulation, where forces and torques are applied.
 <code class="docutils literal notranslate"><span class="pre">DynamicEffectors</span></code> and <code class="docutils literal notranslate"><span class="pre">StateEffectors</span></code> are attached to this <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">DynamicObject</span></a>, which
 simulate these forces/torques or provide some (limited) multi-body behavior.
 For example, the <code class="docutils literal notranslate"><span class="pre">reactionWheelStateEffector</span></code> can be used to simulate a reaction
-wheel on a <a class="reference internal" href="../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">DynamicObject</span></a>.</p>
+wheel on a <a class="reference internal" href="../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">DynamicObject</span></a>.</p>
 <p>On the other hand, the Mujoco-based <a class="reference internal" href="../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicObject.html#dynamicobject"><span class="std std-ref">DynamicObject</span></a> (<a class="reference internal" href="../../Documentation/simulation/mujocoDynamics/_GeneralModuleFiles/MJScene.html#mjscene"><span class="std std-ref">MJScene</span></a>) is more general
 and allows for more complex multi-body dynamics. Under this formulation, there
 is no ‘main’ body, and all bodies are treated equally. Forces and torques can

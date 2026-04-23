@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: rateMsgConverter &mdash; Basilisk 2.11.0beta
+  <title>C Module: rateMsgConverter &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -130,7 +131,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">sensorInterfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">rateMsgConverter</a></li>
-      <li class="breadcrumb-item active">Module: rateMsgConverter</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: rateMsgConverter</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/sensorInterfaces/rateMsgConverter/rateMsgConverter.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,17 +141,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-ratemsgconverter">
-<span id="ratemsgconverter"></span><h1>Module: rateMsgConverter<a class="headerlink" href="#module-ratemsgconverter" title="Link to this heading"></a></h1>
+  <section id="c-module-ratemsgconverter">
+<span id="ratemsgconverter"></span><h1><span class="module-type-label module-type-c">C</span> Module: rateMsgConverter<a class="headerlink" href="#c-module-ratemsgconverter" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The purpose of this module is to read in the IMU sensor body message from message type <a class="reference internal" href="../../../architecture/msgPayloadDefC/IMUSensorBodyMsgPayload.html#imusensorbodymsgpayload"><span class="std std-ref">IMUSensorBodyMsgPayload</span></a>, and store it in the output message of type <a class="reference internal" href="../../../architecture/msgPayloadDefC/NavAttMsgPayload.html#navattmsgpayload"><span class="std std-ref">NavAttMsgPayload</span></a>.  The output message of type  <a class="reference internal" href="../../../architecture/msgPayloadDefC/NavAttMsgPayload.html#navattmsgpayload"><span class="std std-ref">NavAttMsgPayload</span></a> is used as a common attitude input message by the FSW modules.  This output message is first zeroed, and then the rate vector is copied into the variable <cite>omega_BN_B</cite>.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-c6d99e8efdb444e731524e89cccd20f7b899fb77.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">rateMsgConverter module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>

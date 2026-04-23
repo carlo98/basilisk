@@ -1,7 +1,7 @@
 .. _simpleVoltEstimator:
 
-Module: simpleVoltEstimator
-===========================
+:module-type:`C++` Module: simpleVoltEstimator
+==============================================
 
 Executive Summary
 -----------------
@@ -20,20 +20,13 @@ The following table lists all the module input and output messages.  The module 
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.
 
-.. list-table:: Module I/O Messages
-    :widths: 25 25 50
-    :header-rows: 1
+.. bsk-module-io:: simpleVoltEstimator
 
-    * - Msg Variable Name
-      - Msg Type
-      - Description
-    * - voltOutMsg
-      - :ref:`VoltMsgPayload`
-      - spacecraft voltage output msg
-    * - voltInMsg
-      - :ref:`VoltMsgPayload`
-      - spacecraft voltage input msg
+   output voltOutMsg VoltMsgPayload
+      spacecraft voltage output msg
 
+   input voltInMsg VoltMsgPayload
+      spacecraft voltage input msg
 
 User Guide
 ----------
@@ -43,6 +36,7 @@ the standard deviation is specified using ``sVoltObject.PMatrix``. Note that the
 standard deviation must be a list to work for the :ref:`gauss_markov` module.
 
 If no walk bound or standard deviation is specified, then the voltage measurement will not be corrupted with noise.
+
 
 ----
 

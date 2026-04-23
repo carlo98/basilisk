@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -139,7 +140,7 @@
 <p>The python code shown below can be downloaded <a class="reference download internal" download="" href="../../_downloads/3529cd2bd37868562c7ec87065c6d323/bsk-5.py"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
 </aside>
 <p>The prior example showed how to connect messages that are embedded within the Basilisk modules.  However, there are times where you might need to create a stand-alone copy of such a message.  Some flight algorithm modules require the input of a stand-alone message that provides information about the spacecraft mass and inertia properties, or thruster or reaction wheel configuration information.  For example, the module unit test ideally just runs the module being tested. Any input messages that this module needs should be created as stand-alone messages.  This avoids the unit test script depending on other modules output messages, but makes the module test function on its own.</p>
-<p>This tutorial shows you how to create a stand-alone message and connect the <a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">Module: cppModuleTemplate</span></a> input message to it.  The syntax is identical to connect a stand-alone message to a C module.  Further, this example illustrates how the simulation can be started and stopped multiple times while the message or module variables are changed between runs.</p>
+<p>This tutorial shows you how to create a stand-alone message and connect the <a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">C++ Module: cppModuleTemplate</span></a> input message to it.  The syntax is identical to connect a stand-alone message to a C module.  Further, this example illustrates how the simulation can be started and stopped multiple times while the message or module variables are changed between runs.</p>
 <img alt="../../_images/qs-bsk-5.svg" class="align-center" src="../../_images/qs-bsk-5.svg" />
 <p>To create a stand-alone message, the message payload (i.e. data) container must be created first.  Let us assume the message is of type <code class="docutils literal notranslate"><span class="pre">someMsg</span></code>.  The corresponding payload is called <code class="docutils literal notranslate"><span class="pre">someMsgPayload</span></code>.  Thus, the payload container is created using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">msgData</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">someMsgPayload</span><span class="p">()</span>

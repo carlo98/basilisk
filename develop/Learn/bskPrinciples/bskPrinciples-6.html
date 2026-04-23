@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -144,8 +145,8 @@ module variable logging is for debugging and unit tests.</p>
 the single task.  However, no messages are connected here.  Rather, this sample code illustrates how
 to record module internal variables.  The variables are either public C++ class variables,
 private C++ variables which have a getter method, or they are
-variables with the C module configuration structure.  Both <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">Module: cModuleTemplate</span></a> and
-<a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">Module: cppModuleTemplate</span></a> have the exact same variables for easy comparison.</p>
+variables with the C module configuration structure.  Both <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">C Module: cModuleTemplate</span></a> and
+<a class="reference internal" href="../../Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.html#cppmoduletemplate"><span class="std std-ref">C++ Module: cppModuleTemplate</span></a> have the exact same variables for easy comparison.</p>
 <img alt="../../_images/qs-bsk-6.svg" class="align-center" src="../../_images/qs-bsk-6.svg" />
 <p>The sample code is shown below.  The C and C++ modules are set up as before.  The variable
 <code class="docutils literal notranslate"><span class="pre">someVariable</span></code> of module <code class="docutils literal notranslate"><span class="pre">someModule</span></code> is set in python using <code class="docutils literal notranslate"><span class="pre">someModule.someVariable</span> <span class="pre">=</span> <span class="pre">...</span></code>

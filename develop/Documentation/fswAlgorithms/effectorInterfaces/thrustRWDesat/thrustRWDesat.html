@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: thrustRWDesat &mdash; Basilisk 2.11.0beta
+  <title>C Module: thrustRWDesat &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -69,12 +70,14 @@
 <li class="toctree-l4"><a class="reference internal" href="../hingedJointArrayMotor/index.html">hingedJointArrayMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hingedRigidBodyPIDMotor/index.html">hingedRigidBodyPIDMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../jointMotionCompensator/index.html">jointMotionCompensator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jointThrAllocation/index.html">jointThrAllocation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedRot2DOF/index.html">prescribedRot2DOF</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorTorque/index.html">rwMotorTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorVoltage/index.html">rwMotorVoltage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwNullSpace/index.html">rwNullSpace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../solarArrayReference/index.html">solarArrayReference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringRemainder/index.html">thrFiringRemainder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thrFiringRound/index.html">thrFiringRound</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringSchmitt/index.html">thrFiringSchmitt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrForceMapping/index.html">thrForceMapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrJointCompensation/index.html">thrJointCompensation</a></li>
@@ -147,7 +150,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">effectorInterfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">thrustRWDesat</a></li>
-      <li class="breadcrumb-item active">Module: thrustRWDesat</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: thrustRWDesat</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/effectorInterfaces/thrustRWDesat/thrustRWDesat.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -157,8 +160,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-thrustrwdesat">
-<span id="thrustrwdesat"></span><h1>Module: thrustRWDesat<a class="headerlink" href="#module-thrustrwdesat" title="Link to this heading"></a></h1>
+  <section id="c-module-thrustrwdesat">
+<span id="thrustrwdesat"></span><h1><span class="module-type-label module-type-c">C</span> Module: thrustRWDesat<a class="headerlink" href="#c-module-thrustrwdesat" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This algorithm is used to control both the RCS and DV thrusters when
@@ -166,9 +169,12 @@ executing a trajectory adjustment.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-702fbdbd2651829679f1077e07402c36a5e02fa0.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">thrustRWDesat module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>

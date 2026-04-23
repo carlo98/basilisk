@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: vscmgStateEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: vscmgStateEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -152,7 +153,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">VSCMGs</a></li>
-      <li class="breadcrumb-item active">Module: vscmgStateEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: vscmgStateEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/VSCMGs/vscmgStateEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -162,8 +163,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-vscmgstateeffector">
-<span id="vscmgstateeffector"></span><h1>Module: vscmgStateEffector<a class="headerlink" href="#module-vscmgstateeffector" title="Link to this heading"></a></h1>
+  <section id="c-module-vscmgstateeffector">
+<span id="vscmgstateeffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: vscmgStateEffector<a class="headerlink" href="#c-module-vscmgstateeffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This dynamic effector class implements a variable speed control moment gyroscope or VSCMG device.</p>
@@ -177,6 +178,9 @@ how to run it, as well as testing.</p>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-7e08d0ba9e11e15921edd92a9b0551958da9d688.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">vscmgStateEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -193,15 +197,15 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>cmdsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/VSCMGArrayTorqueMsgPayload.html#vscmgarraytorquemsgpayload"><span class="std std-ref">VSCMGArrayTorqueMsgPayload</span></a></p></td>
-<td><p>motor torque command input message</p></td>
+<td><p>motor torque command input message.</p></td>
 </tr>
 <tr class="row-odd"><td><p>speedOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/VSCMGSpeedMsgPayload.html#vscmgspeedmsgpayload"><span class="std std-ref">VSCMGSpeedMsgPayload</span></a></p></td>
-<td><p>VSCMG speed output message</p></td>
+<td><p>VSCMG speed output message.</p></td>
 </tr>
 <tr class="row-even"><td><p>vscmgOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefCpp/VSCMGConfigMsgPayload.html#vscmgconfigmsgpayload"><span class="std std-ref">VSCMGConfigMsgPayload</span></a></p></td>
-<td><p>vector of VSCMG output messages</p></td>
+<td><p>vector of VSCMG output messages.</p></td>
 </tr>
 </tbody>
 </table>

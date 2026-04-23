@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: planetNav &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: planetNav &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -70,6 +71,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../planetHeading/index.html">planetHeading</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="index.html">planetNav</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../simpleNav/index.html">simpleNav</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stateMerge/index.html">stateMerge</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../onboardDataHandling/index.html">onboardDataHandling</a></li>
@@ -124,7 +126,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">navigation</a></li>
           <li class="breadcrumb-item"><a href="index.html">planetNav</a></li>
-      <li class="breadcrumb-item active">Module: planetNav</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: planetNav</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/navigation/planetNav/planetNav.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -134,11 +136,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-planetnav">
-<span id="planetnav"></span><h1>Module: planetNav<a class="headerlink" href="#module-planetnav" title="Link to this heading"></a></h1>
+  <section id="c-module-planetnav">
+<span id="planetnav"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: planetNav<a class="headerlink" href="#c-module-planetnav" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>This module is used to generate noisy ephemeris data, similar to what <a class="reference internal" href="../simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a> does for spacecraft states. These
+<p>This module is used to generate noisy ephemeris data, similar to what <a class="reference internal" href="../simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a> does for spacecraft states. These
 noisy states can either serve as a stand-in for a filter that estimates the body’s ephemeris or as measurements input
 into such a filter. This module is most useful for small bodies like comets or asteroids where large uncertainty in the
 body’s ephemeris is present. This module is not recommended for larger bodies like the Earth or the sun.</p>
@@ -164,6 +166,9 @@ added to the simulation utilities that allows the user to configure a random wal
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-784913dfc3686d11ac4f7c3b8d48673ef13b8d9e.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">planetNav module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>

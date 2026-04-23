@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -143,7 +144,7 @@
 <span id="module-scenario_AttGuidance"></span><h2><span class="section-number">3.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This script sets up a 6-DOF spacecraft orbiting Earth. The goal of the scenario is to
 make use of the hill pointing module with
-the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">Module: mrpFeedback</span></a> module and a reaction wheel pyramid
+the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">C Module: mrpFeedback</span></a> module and a reaction wheel pyramid
 to control the attitude all within the new BSK_Sim architecture.</p>
 <p>The script is found in the folder <code class="docutils literal notranslate"><span class="pre">basilisk/examples/BskSim/scenarios</span></code> and executed by using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenario_AttGuidance</span><span class="o">.</span><span class="n">py</span>
@@ -161,7 +162,7 @@ to control the attitude all within the new BSK_Sim architecture.</p>
 </section>
 <section id="custom-fsw-configurations-instructions">
 <h2><span class="section-number">3.3. </span>Custom FSW Configurations Instructions<a class="headerlink" href="#custom-fsw-configurations-instructions" title="Link to this heading"></a></h2>
-<p>Three of the four modules required to configure the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/hillPoint/hillPoint.html#hillpoint"><span class="std std-ref">Module: hillPoint</span></a> FSW mode have already been included
+<p>Three of the four modules required to configure the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/hillPoint/hillPoint.html#hillpoint"><span class="std std-ref">C Module: hillPoint</span></a> FSW mode have already been included
 within the <a class="reference internal" href="../models/BSK_Fsw.html#bsk-fsw"><span class="std std-ref">BSK_Fsw</span></a> framework
 (<code class="docutils literal notranslate"><span class="pre">mrpFeedbackRWConfig()</span></code>, <code class="docutils literal notranslate"><span class="pre">attTrackingErrorConfig()</span></code>, <code class="docutils literal notranslate"><span class="pre">rwMotorTorqueConfig()</span></code>). The only remaining
 module is the hill pointing module itself which is set within <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>.</p>

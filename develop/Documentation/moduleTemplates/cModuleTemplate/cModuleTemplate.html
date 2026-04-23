@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: cModuleTemplate &mdash; Basilisk 2.11.0beta
+  <title>C Module: cModuleTemplate &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -115,7 +116,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">Documentation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">moduleTemplates</a></li>
           <li class="breadcrumb-item"><a href="index.html">cModuleTemplate</a></li>
-      <li class="breadcrumb-item active">Module: cModuleTemplate</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: cModuleTemplate</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -125,8 +126,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-cmoduletemplate">
-<span id="cmoduletemplate"></span><h1>Module: cModuleTemplate<a class="headerlink" href="#module-cmoduletemplate" title="Link to this heading"></a></h1>
+  <section id="c-module-cmoduletemplate">
+<span id="cmoduletemplate"></span><h1><span class="module-type-label module-type-c">C</span> Module: cModuleTemplate<a class="headerlink" href="#c-module-cmoduletemplate" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Provide a brief introduction to purpose and intent of this module.  This should be a short description.
@@ -135,17 +136,14 @@ section below.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg variable name is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-fsw-module-template"></span><img alt="../../../_images/moduleIOcModuleTemplate.svg" src="../../../_images/moduleIOcModuleTemplate.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">cModuleTemplate()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../_images/graphviz-03d4aa3f654b2c3e1e9b6a8b7ec19ed1db5926eb.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">cModuleTemplate module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -160,8 +158,7 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>dataInMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/CModuleTemplateMsgPayload.html#cmoduletemplatemsgpayload"><span class="std std-ref">CModuleTemplateMsgPayload</span></a></p></td>
-<td><p>(optional) Input message description.  Note here if this message is optional, and what the default behavior
-is if this message is not provided.</p></td>
+<td><p>(optional) Input message description.  Note here if this message is optional, and what the default behavior is if this message is not provided.</p></td>
 </tr>
 <tr class="row-odd"><td><p>dataOutMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/CModuleTemplateMsgPayload.html#cmoduletemplatemsgpayload"><span class="std std-ref">CModuleTemplateMsgPayload</span></a></p></td>
@@ -260,10 +257,10 @@ enough resolution to look good on high-resolution displays.</p>
 </pre></div>
 </div>
 <p>This yields</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id2">
 <span id="figlabel"></span><img alt="../../../_images/fig1.svg" src="../../../_images/fig1.svg" />
 <figcaption>
-<p><span class="caption-text">Figure 2: Concept Illustration of the Math used in this Module</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">Figure 2: Concept Illustration of the Math used in this Module</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>You can cite the figure using <code class="docutils literal notranslate"><span class="pre">:ref:`figLabel`</span></code>. For example, as seen in <a class="reference internal" href="#figlabel"><span class="std std-ref">Figure 2: Concept Illustration of the Math used in this Module</span></a>, the figure can
@@ -294,8 +291,8 @@ For example, the code:</p>
 </pre></div>
 </div>
 <p>will generate the following table:</p>
-<table class="docutils align-default" id="id4">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Header row, column 1
 (header rows optional)</p></th>
@@ -355,8 +352,8 @@ For example, the code:</p>
 </pre></div>
 </div>
 <p>will produce this table:</p>
-<table class="docutils align-default" id="id5">
-<caption><span class="caption-text">List Based Table Title</span><a class="headerlink" href="#id5" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">List Based Table Title</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Header 1</p></th>
 <th class="head"><p>Header 2</p></th>

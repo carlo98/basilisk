@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: hingedRigidBodyPIDMotor &mdash; Basilisk 2.11.0beta
+  <title>C Module: hingedRigidBodyPIDMotor &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -71,12 +72,14 @@
 <li class="toctree-l4"><a class="reference internal" href="../hingedJointArrayMotor/index.html">hingedJointArrayMotor</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="index.html">hingedRigidBodyPIDMotor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../jointMotionCompensator/index.html">jointMotionCompensator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jointThrAllocation/index.html">jointThrAllocation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../prescribedRot2DOF/index.html">prescribedRot2DOF</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorTorque/index.html">rwMotorTorque</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwMotorVoltage/index.html">rwMotorVoltage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../rwNullSpace/index.html">rwNullSpace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../solarArrayReference/index.html">solarArrayReference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringRemainder/index.html">thrFiringRemainder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thrFiringRound/index.html">thrFiringRound</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrFiringSchmitt/index.html">thrFiringSchmitt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrForceMapping/index.html">thrForceMapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../thrJointCompensation/index.html">thrJointCompensation</a></li>
@@ -149,7 +152,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">effectorInterfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">hingedRigidBodyPIDMotor</a></li>
-      <li class="breadcrumb-item active">Module: hingedRigidBodyPIDMotor</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: hingedRigidBodyPIDMotor</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/effectorInterfaces/hingedRigidBodyPIDMotor/hingedRigidBodyPIDMotor.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -159,18 +162,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-hingedrigidbodypidmotor">
-<span id="hingedrigidbodypidmotor"></span><h1>Module: hingedRigidBodyPIDMotor<a class="headerlink" href="#module-hingedrigidbodypidmotor" title="Link to this heading"></a></h1>
+  <section id="c-module-hingedrigidbodypidmotor">
+<span id="hingedrigidbodypidmotor"></span><h1><span class="module-type-label module-type-c">C</span> Module: hingedRigidBodyPIDMotor<a class="headerlink" href="#c-module-hingedrigidbodypidmotor" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module implements a simple Proportional-Integral-Derivative (PID) control law to provide the commanded
-torque to a <a class="reference internal" href="../../../simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">Module: spinningBodyOneDOFStateEffector</span></a>.</p>
+torque to a <a class="reference internal" href="../../../simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">C++ Module: spinningBodyOneDOFStateEffector</span></a>.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-e530c44e0b48f17cef54ca0431ab803ac6889dd8.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">hingedRigidBodyPIDMotor module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -208,7 +214,7 @@ overdamped, or critically damped) depends on the choice of gains provided as inp
 <section id="detailed-module-description">
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
 <p>For this module to operate, the user needs to provide control gains <code class="docutils literal notranslate"><span class="pre">K</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">I</span></code>. Let’s define <span class="math notranslate nohighlight">\(\theta_R\)</span> and <span class="math notranslate nohighlight">\(\dot{\theta}_R\)</span> the reference angle and angle rate contained in the
-<code class="docutils literal notranslate"><span class="pre">hingedRigidBodyRefInMsg</span></code>, and <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\dot{\theta}\)</span> the current solar array angle and angle rate contained in the <code class="docutils literal notranslate"><span class="pre">hingedRigidBodyInMsg</span></code>, which is provided as an output of the <a class="reference internal" href="../../../simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">Module: spinningBodyOneDOFStateEffector</span></a>. The control torque is obtained as follows:</p>
+<code class="docutils literal notranslate"><span class="pre">hingedRigidBodyRefInMsg</span></code>, and <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\dot{\theta}\)</span> the current solar array angle and angle rate contained in the <code class="docutils literal notranslate"><span class="pre">hingedRigidBodyInMsg</span></code>, which is provided as an output of the <a class="reference internal" href="../../../simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">C++ Module: spinningBodyOneDOFStateEffector</span></a>. The control torque is obtained as follows:</p>
 <div class="math notranslate nohighlight">
 \[T = K (\theta_R - \theta) + P (\dot{\theta}_R - \dot{\theta}) + I \int_0^t (\theta_R - \theta) \text{d}\tau.\]</div>
 </section>

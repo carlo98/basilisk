@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: mrpFeedback &mdash; Basilisk 2.11.0beta
+  <title>C Module: mrpFeedback &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -135,7 +136,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attControl</a></li>
           <li class="breadcrumb-item"><a href="index.html">mrpFeedback</a></li>
-      <li class="breadcrumb-item active">Module: mrpFeedback</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: mrpFeedback</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -145,8 +146,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-mrpfeedback">
-<span id="mrpfeedback"></span><h1>Module: mrpFeedback<a class="headerlink" href="#module-mrpfeedback" title="Link to this heading"></a></h1>
+  <section id="c-module-mrpfeedback">
+<span id="mrpfeedback"></span><h1><span class="module-type-label module-type-c">C</span> Module: mrpFeedback<a class="headerlink" href="#c-module-mrpfeedback" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module provides a general MRP feedback control law.  This 3-axis control can asymptotically track a general
@@ -156,17 +157,14 @@ gyroscopic terms are compensated for. If the wheel information is not present, t
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg variable name is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-mrpfeedback"></span><img alt="../../../../_images/moduleIOMrpFeedback.svg" src="../../../../_images/moduleIOMrpFeedback.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">mrpFeedback()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-3b78b083b98a0dba9fc6b81a11804d7d8f285bd9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">mrpFeedback module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -197,15 +195,15 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-even"><td><p>rwParamsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/RWArrayConfigMsgPayload.html#rwarrayconfigmsgpayload"><span class="std std-ref">RWArrayConfigMsgPayload</span></a></p></td>
-<td><p>Reaction wheel array configuration input message</p></td>
+<td><p>(optional) Reaction wheel array configuration input message</p></td>
 </tr>
 <tr class="row-odd"><td><p>rwSpeedsInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/RWSpeedMsgPayload.html#rwspeedmsgpayload"><span class="std std-ref">RWSpeedMsgPayload</span></a></p></td>
-<td><p>Reaction wheel speeds message</p></td>
+<td><p>(optional) Reaction wheel speeds input message</p></td>
 </tr>
 <tr class="row-even"><td><p>rwAvailInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/RWAvailabilityMsgPayload.html#rwavailabilitymsgpayload"><span class="std std-ref">RWAvailabilityMsgPayload</span></a></p></td>
-<td><p>Reaction wheel availability message.</p></td>
+<td><p>(optional) Reaction wheel availability input message</p></td>
 </tr>
 </tbody>
 </table>
@@ -214,7 +212,7 @@ provides information on what this message is used for.</p>
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
 <section id="general-function">
 <h3>General Function<a class="headerlink" href="#general-function" title="Link to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">mrpFeedback</span></code> module creates the MRP attitude feedback control torque <span class="math notranslate nohighlight">\({\bf L}_{r}\)</span> developed in chapter 8 of <a class="reference external" href="http://doi.org/10.2514/4.105210">Analytical Mechanics of Space Systems</a>.  The input and output messages are illustrated in <a class="reference internal" href="#moduleio-mrpfeedback"><span class="std std-ref">Figure 1: mrpFeedback() Module I/O Illustration</span></a>.  The output message is a body-frame control torque vector.  The required attitude guidance message contains both attitude tracking error states as well as reference frame states.  This message is read in with every update cycle. The vehicle configuration message is only read in on reset and contains the spacecraft inertia tensor about the vehicle’s center of mass location.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mrpFeedback</span></code> module creates the MRP attitude feedback control torque <span class="math notranslate nohighlight">\({\bf L}_{r}\)</span> developed in chapter 8 of <a class="reference external" href="http://doi.org/10.2514/4.105210">Analytical Mechanics of Space Systems</a>.  The input and output messages are summarized in the Message Connection Descriptions section above.  The output message is a body-frame control torque vector.  The required attitude guidance message contains both attitude tracking error states as well as reference frame states.  This message is read in with every update cycle. The vehicle configuration message is only read in on reset and contains the spacecraft inertia tensor about the vehicle’s center of mass location.</p>
 <p>The MRP feedback control can compensate for Reaction Wheel (RW) gyroscopic effects as well.  This is an optional input message where the RW configuration array message contains the RW spin axis <span class="math notranslate nohighlight">\(\hat{\bf g}_{s,i}\)</span> information and the RW polar inertia about the spin axis <span class="math notranslate nohighlight">\(I_{W_{s,i}}\)</span>.  This is only read in on reset.  The RW speed message contains the RW speed <span class="math notranslate nohighlight">\(\Omega_{i}\)</span> and is read in every time step.  The optional RW availability message can be used to include or not include RWs in the MRP feedback.  This allows the module to selectively turn off some RWs.  The default is that all RWs are operational and are included.</p>
 </section>
 <section id="initialization">

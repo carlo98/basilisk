@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: smallBodyWaypointFeedback &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: smallBodyWaypointFeedback &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -132,7 +133,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">orbitControl</a></li>
           <li class="breadcrumb-item"><a href="index.html">smallBodyWaypointFeedback</a></li>
-      <li class="breadcrumb-item active">Module: smallBodyWaypointFeedback</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: smallBodyWaypointFeedback</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/orbitControl/smallBodyWaypointFeedback/smallBodyWaypointFeedback.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -142,18 +143,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-smallbodywaypointfeedback">
-<span id="smallbodywaypointfeedback"></span><h1>Module: smallBodyWaypointFeedback<a class="headerlink" href="#module-smallbodywaypointfeedback" title="Link to this heading"></a></h1>
+  <section id="c-module-smallbodywaypointfeedback">
+<span id="smallbodywaypointfeedback"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: smallBodyWaypointFeedback<a class="headerlink" href="#c-module-smallbodywaypointfeedback" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module is provides a feedback control law for waypoint-to-waypoint control about a small body. The waypoints are defined in the Hill frame of the body.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.
-The module msg connection is set by the user from python.
-The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-7647649ee0c0301dbe962666c9e5ddda5f7b314a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">smallBodyWaypointFeedback module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -202,7 +205,7 @@ provides information on what this message is used for.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">smallBodyWaypointFeedback()</span></code> module provides a solution for waypoint-to-waypoint control about a small body. The feedback
 control law is similar to the cartesian coordinate continuous feedback control law in Chapter 14 of <a class="reference external" href="http://doi.org/10.2514/4.105210">Analytical Mechanics of Space Systems</a>.
 A cannonball SRP model, third body perturbations from the sun, and point-mass gravity are utilized. The state inputs are
-messages written out by <a class="reference internal" href="../../../simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a> and <a class="reference internal" href="../../../simulation/navigation/planetNav/planetNav.html#planetnav"><span class="std std-ref">Module: planetNav</span></a> modules or an estimator that provides the same input messages.</p>
+messages written out by <a class="reference internal" href="../../../simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a> and <a class="reference internal" href="../../../simulation/navigation/planetNav/planetNav.html#planetnav"><span class="std std-ref">C++ Module: planetNav</span></a> modules or an estimator that provides the same input messages.</p>
 </section>
 <section id="algorithm">
 <h3>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading"></a></h3>
@@ -258,7 +261,7 @@ of the module is also shown here. The module is first initialized as follows:</p
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">waypointFeedback</span> <span class="o">=</span> <span class="n">smallBodyWaypointFeedback</span><span class="o">.</span><span class="n">SmallBodyWaypointFeedback</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The asteroid ephemeris input message is then connected. In this example, we use the <a class="reference internal" href="../../../simulation/navigation/planetNav/planetNav.html#planetnav"><span class="std std-ref">Module: planetNav</span></a> module.</p>
+<p>The asteroid ephemeris input message is then connected. In this example, we use the <a class="reference internal" href="../../../simulation/navigation/planetNav/planetNav.html#planetnav"><span class="std std-ref">C++ Module: planetNav</span></a> module.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">waypointFeedback</span><span class="o">.</span><span class="n">asteroidEphemerisInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">planetNavMeas</span><span class="o">.</span><span class="n">ephemerisOutMsg</span><span class="p">)</span>
 </pre></div>
 </div>

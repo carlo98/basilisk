@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: facetSRPDynamicEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: facetSRPDynamicEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -154,7 +155,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">facetSRPDynamicEffector</a></li>
-      <li class="breadcrumb-item active">Module: facetSRPDynamicEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: facetSRPDynamicEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -164,8 +165,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-facetsrpdynamiceffector">
-<span id="facetsrpdynamiceffector"></span><h1>Module: facetSRPDynamicEffector<a class="headerlink" href="#module-facetsrpdynamiceffector" title="Link to this heading"></a></h1>
+  <section id="c-module-facetsrpdynamiceffector">
+<span id="facetsrpdynamiceffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: facetSRPDynamicEffector<a class="headerlink" href="#c-module-facetsrpdynamiceffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This dynamic effector module uses a faceted spacecraft model to calculate the force and torque acting on a spacecraft
@@ -180,6 +181,9 @@ articulating facets. The unit test for this module shows how to set up this part
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-74958734c5314ef8964db8aed75961e89de69700.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">facetSRPDynamicEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -196,15 +200,15 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>sunInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>Input msg for the Sun state information</p></td>
+<td><p>Input msg for the Sun state information.</p></td>
 </tr>
 <tr class="row-odd"><td><p>sunEclipseInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EclipseMsgPayload.html#eclipsemsgpayload"><span class="std std-ref">EclipseMsgPayload</span></a></p></td>
-<td><p>(Optional) Input msg for the Sun eclipse data. If connected, the SRP force and torque are scaled by the illumination factor (0 = full shadow, 1 = full sunlight)</p></td>
+<td><p>(Optional) Input msg for the Sun eclipse data. If connected, the SRP force and torque are scaled by the illumination factor (0 = full shadow, 1 = full sunlight).</p></td>
 </tr>
 <tr class="row-even"><td><p>articulatedFacetDataInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/HingedRigidBodyMsgPayload.html#hingedrigidbodymsgpayload"><span class="std std-ref">HingedRigidBodyMsgPayload</span></a></p></td>
-<td><p>(Optional) Input msg vector containing the current articulated facet angles</p></td>
+<td><p>(Optional) Input msg vector containing the current articulated facet angles.</p></td>
 </tr>
 </tbody>
 </table>
@@ -423,7 +427,7 @@ true values computed in python.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scObject</span><span class="o">.</span><span class="n">addDynamicEffector</span><span class="p">(</span><span class="n">SRPEffector</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="../spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> documentation on how to set up a spacecraft object.</p>
+<p>See <a class="reference internal" href="../spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> documentation on how to set up a spacecraft object.</p>
 </li>
 <li><p>Finally, add the SRP effector module to the task list:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">SRPEffector</span><span class="p">)</span>

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -64,6 +65,8 @@
 <li class="toctree-l3"><a class="reference internal" href="makingNewBskModule.html">Making a New C/C++ Basilisk Module</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Using Sphinx to Document Basilisk Modules and Folders</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#adding-documentation-to-a-basilisk-module">Adding Documentation to a Basilisk Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-type-labels">Module Type Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documenting-module-i-o-messages">Documenting Module I/O Messages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#adding-documentation-to-a-basilisk-folder">Adding Documentation to a Basilisk Folder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#overriding-the-folder-s-auto-generated-index-rst-file">Overriding the Folder’s Auto-Generated <code class="docutils literal notranslate"><span class="pre">index.rst</span></code> File</a></li>
 </ul>
@@ -136,7 +139,7 @@
 <p>This document assumes you are already familiar with the Restructured Text format.  Some sources for help can be found at:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://docutils.sourceforge.net/rst.html">restructured Text</a></p></li>
-<li><p><a class="reference external" href="http://www.sphinx-doc.org/en/master/">Spinx Documenation</a></p></li>
+<li><p><a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx Documentation</a></p></li>
 <li><p><a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">Quickguide for restructured text</a></p></li>
 </ul>
 </div>
@@ -148,7 +151,43 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">genericModule.h</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">genericModule.i</span></code></p></li>
 </ul>
-<p>Simply add the the desired module documentation as <code class="docutils literal notranslate"><span class="pre">genericModule.rst</span></code> to this folder.  The <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">Module: cModuleTemplate</span></a> has a sample module documentation file that you can copy into your folder.  This content will be parsed ahead of the module function descriptions.  When running <code class="docutils literal notranslate"><span class="pre">cmake</span></code> the <code class="docutils literal notranslate"><span class="pre">genericModule.rst</span></code> file should be included in the IDE such as Xcode if the module is a C++ module.  The <code class="docutils literal notranslate"><span class="pre">*.rst</span></code> is not shown in the IDE if it is a C-module.</p>
+<p>Simply add the the desired module documentation as <code class="docutils literal notranslate"><span class="pre">genericModule.rst</span></code> to this folder.  The <a class="reference internal" href="../../Documentation/moduleTemplates/cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">C Module: cModuleTemplate</span></a> has a sample module documentation file that you can copy into your folder.  This content will be parsed ahead of the module function descriptions.  When running <code class="docutils literal notranslate"><span class="pre">cmake</span></code> the <code class="docutils literal notranslate"><span class="pre">genericModule.rst</span></code> file should be included in the IDE such as Xcode if the module is a C++ module.  The <code class="docutils literal notranslate"><span class="pre">*.rst</span></code> is not shown in the IDE if it is a C-module.</p>
+</section>
+<section id="module-type-labels">
+<h2>Module Type Labels<a class="headerlink" href="#module-type-labels" title="Link to this heading"></a></h2>
+<p>The generated HTML pages for BSK modules include a module type label next to
+the page title.  The documentation build infers this label from the module
+source files and applies <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">C++</span></code>, or <code class="docutils literal notranslate"><span class="pre">Python</span></code> automatically.  Module
+documentation files do not need to add this label manually.</p>
+<p>The labels are only applied to BSK module pages under <code class="docutils literal notranslate"><span class="pre">src/fswAlgorithms</span></code> and
+<code class="docutils literal notranslate"><span class="pre">src/simulation</span></code>.  The template modules under <code class="docutils literal notranslate"><span class="pre">src/moduleTemplates</span></code> are also
+tagged for developer reference.  Documentation pages for <code class="docutils literal notranslate"><span class="pre">src/architecture</span></code>,
+message definitions, <code class="docutils literal notranslate"><span class="pre">_GeneralModuleFiles</span></code> support code and other support
+files use regular untagged titles.</p>
+</section>
+<section id="documenting-module-i-o-messages">
+<h2>Documenting Module I/O Messages<a class="headerlink" href="#documenting-module-i-o-messages" title="Link to this heading"></a></h2>
+<p>Module documentation can use the <code class="docutils literal notranslate"><span class="pre">bsk-module-io</span></code> directive to generate both a
+Graphviz module I/O diagram and the standard Basilisk I/O message table from
+one RST block.  This keeps the visual diagram and table entries synchronized.
+The diagram module element uses the inferred module type label colors.  If the
+directive is used outside a generated module page, the <code class="docutils literal notranslate"><span class="pre">:module-type:</span></code> option
+can be set to <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">C++</span></code>, or <code class="docutils literal notranslate"><span class="pre">Python</span></code>.</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">bsk-module-io</span><span class="p">::</span> GenericModule
+   <span class="nc">:caption:</span> Module I/O Messages
+   <span class="nc">:module-type:</span> C++
+
+   input dataInMsg DataMsgPayload
+      Input data message.
+
+   output dataOutMsg DataMsgPayload
+      Output data message.
+</pre></div>
+</div>
+<p>Each entry begins with <code class="docutils literal notranslate"><span class="pre">input</span></code> or <code class="docutils literal notranslate"><span class="pre">output</span></code>, followed by the module message
+variable name and the payload type.  The indented text below the entry is used
+as the table description.  Payload types are automatically rendered as
+<code class="docutils literal notranslate"><span class="pre">:ref:</span></code> links in the generated table.</p>
 </section>
 <section id="adding-documentation-to-a-basilisk-folder">
 <h2>Adding Documentation to a Basilisk Folder<a class="headerlink" href="#adding-documentation-to-a-basilisk-folder" title="Link to this heading"></a></h2>

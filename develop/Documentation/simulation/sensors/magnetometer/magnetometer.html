@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: magnetometer &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: magnetometer &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -130,7 +131,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">sensors</a></li>
           <li class="breadcrumb-item"><a href="index.html">magnetometer</a></li>
-      <li class="breadcrumb-item active">Module: magnetometer</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: magnetometer</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/sensors/magnetometer/magnetometer.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,8 +141,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-magnetometer">
-<span id="magnetometer"></span><h1>Module: magnetometer<a class="headerlink" href="#module-magnetometer" title="Link to this heading"></a></h1>
+  <section id="c-module-magnetometer">
+<span id="magnetometer"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: magnetometer<a class="headerlink" href="#c-module-magnetometer" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This document describes how Three-Axis Magnetometer (TAM) devices are modeled in the Basilisk software. The purpose of this module is to implement magnetic field measurements on the sensor frame <span class="math notranslate nohighlight">\(S\)</span>.</p>
@@ -158,6 +159,9 @@
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the user from python.  The msg type contains a link to the message structure definition, while the description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-bff38b445c84016f8169cd8f02a6afa7b8359bd7.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">magnetometer module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -189,7 +193,7 @@
 </section>
 <section id="detailed-module-description">
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
-<p>There are a multitude of magnetic field models. As all the magnetic field models are children of <a class="reference internal" href="../../environment/_GeneralModuleFiles/magneticFieldBase.html#magneticfieldbase"><span class="std std-ref">Module: magneticFieldBase</span></a> base class, magnetometer can be created based on any of the magnetic field model.</p>
+<p>There are a multitude of magnetic field models. As all the magnetic field models are children of <a class="reference internal" href="../../environment/_GeneralModuleFiles/magneticFieldBase.html#magneticfieldbase"><span class="std std-ref">C++ Module: magneticFieldBase</span></a> base class, magnetometer can be created based on any of the magnetic field model.</p>
 <section id="planet-centric-spacecraft-position-vector">
 <h3>Planet Centric Spacecraft Position Vector<a class="headerlink" href="#planet-centric-spacecraft-position-vector" title="Link to this heading"></a></h3>
 <p>For the following developments, the spacecraft location relative to the planet frame is required. Let <span class="math notranslate nohighlight">\(\boldsymbol r_{B/P}\)</span> be the spacecraft position vector relative to the planet center.

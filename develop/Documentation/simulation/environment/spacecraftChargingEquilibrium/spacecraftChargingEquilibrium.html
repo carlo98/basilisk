@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: spacecraftChargingEquilibrium &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: spacecraftChargingEquilibrium &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">spacecraftChargingEquilibrium</a></li>
-      <li class="breadcrumb-item active">Module: spacecraftChargingEquilibrium</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: spacecraftChargingEquilibrium</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/spacecraftChargingEquilibrium/spacecraftChargingEquilibrium.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,8 +153,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-spacecraftchargingequilibrium">
-<span id="spacecraftchargingequilibrium"></span><h1>Module: spacecraftChargingEquilibrium<a class="headerlink" href="#module-spacecraftchargingequilibrium" title="Link to this heading"></a></h1>
+  <section id="c-module-spacecraftchargingequilibrium">
+<span id="spacecraftchargingequilibrium"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: spacecraftChargingEquilibrium<a class="headerlink" href="#c-module-spacecraftchargingequilibrium" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">spacecraftChargingEquilibrium</span></code> module computes spacecraft equilibrium (floating) electric potentials in a plasma environment using two sequential <strong>1-D root solves</strong> (by enforcing a zero net current condition on each spacecraft surface). The model includes ambient plasma electron/ion collection, photoelectron emission, and secondary electron emission (SEE), electron backscattering, and electron beam coupling (from one spacecraft to another).</p>
@@ -180,6 +181,9 @@
 <p>The following table lists all module input and output messages. The module msg variable name is set by the user
 from Python. The msg type contains a link to the message structure definition, while the description explains how
 the message is used.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-ae40a24881e9c03ad31c748746090b530e043cb9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">spacecraftChargingEquilibrium module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id16">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id16" title="Link to this table"></a></caption>
 <colgroup>
@@ -195,27 +199,27 @@ the message is used.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>plasmaFluxInMsg</p></td>
-<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/PlasmaFluxMsgPayload.html#_CPPv420PlasmaFluxMsgPayload" title="PlasmaFluxMsgPayload"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">PlasmaFluxMsgPayload</span></code></a></p></td>
-<td><p>plasma environment input message containing the energy grid and particle flux distributions used to compute ambient electron/ion collection currents and yield-weighted emission currents</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/PlasmaFluxMsgPayload.html#plasmafluxmsgpayload"><span class="std std-ref">PlasmaFluxMsgPayload</span></a></p></td>
+<td><p>plasma environment input message containing the energy grid and particle flux distributions used to compute ambient electron/ion collection currents and yield-weighted emission currents.</p></td>
 </tr>
 <tr class="row-odd"><td><p>scStateInMsgs</p></td>
-<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#_CPPv418SCStatesMsgPayload" title="SCStatesMsgPayload"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">SCStatesMsgPayload</span></code></a></p></td>
-<td><p>vector of spacecraft state input messages; entries are appended via <code class="docutils literal notranslate"><span class="pre">addSpacecraft()</span></code></p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
+<td><p>vector of spacecraft state input messages; entries are appended via <code class="docutils literal notranslate"><span class="pre">addSpacecraft()</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p>eBeamInMsgs</p></td>
-<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ElectronBeamMsgPayload.html#_CPPv422ElectronBeamMsgPayload" title="ElectronBeamMsgPayload"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">ElectronBeamMsgPayload</span></code></a></p></td>
-<td><p>vector of electron beam parameter input messages (optional). If a spacecraft’s beam message is linked, its gun parameters are read from the message and used in beam-coupled charging terms</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ElectronBeamMsgPayload.html#electronbeammsgpayload"><span class="std std-ref">ElectronBeamMsgPayload</span></a></p></td>
+<td><p>vector of electron beam parameter input messages (optional). If a spacecraft’s beam message is linked, its gun parameters are read from the message and used in beam-coupled charging terms.</p></td>
 </tr>
 <tr class="row-odd"><td><p>voltOutMsgs</p></td>
-<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/VoltMsgPayload.html#_CPPv414VoltMsgPayload" title="VoltMsgPayload"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">VoltMsgPayload</span></code></a></p></td>
-<td><p>output vector of equilibrium spacecraft potentials (voltage), one per spacecraft</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/VoltMsgPayload.html#voltmsgpayload"><span class="std std-ref">VoltMsgPayload</span></a></p></td>
+<td><p>output vector of equilibrium spacecraft potentials (voltage), one per spacecraft.</p></td>
 </tr>
 <tr class="row-even"><td><p>currentsOutMsgs</p></td>
-<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ScChargingCurrentsMsgPayload.html#_CPPv428ScChargingCurrentsMsgPayload" title="ScChargingCurrentsMsgPayload"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">ScChargingCurrentsMsgPayload</span></code></a></p></td>
-<td><p>output vector of per-spacecraft current-component breakdowns used in the equilibrium evaluation (ambient, beam, and total terms)</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ScChargingCurrentsMsgPayload.html#scchargingcurrentsmsgpayload"><span class="std std-ref">ScChargingCurrentsMsgPayload</span></a></p></td>
+<td><p>output vector of per-spacecraft current-component breakdowns used in the equilibrium evaluation (ambient, beam, and total terms).</p></td>
 </tr>
 <tr class="row-odd"><td><p>scSunlitAreaInMsgs</p></td>
-<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ScSunlitFacetAreaMsgPayload.html#_CPPv427ScSunlitFacetAreaMsgPayload" title="ScSunlitFacetAreaMsgPayload"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">ScSunlitFacetAreaMsgPayload</span></code></a></p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ScSunlitFacetAreaMsgPayload.html#scsunlitfacetareamsgpayload"><span class="std std-ref">ScSunlitFacetAreaMsgPayload</span></a></p></td>
 <td><p>vector of optional sunlit facet area input messages, one per spacecraft. If linked and written, this overrides the configured per-spacecraft default or fallback sunlit area used in charging calculations.</p></td>
 </tr>
 </tbody>

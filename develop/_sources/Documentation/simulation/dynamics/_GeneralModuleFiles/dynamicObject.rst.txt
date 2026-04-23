@@ -1,7 +1,7 @@
 .. _dynamicObject:
 
-Module: dynamicObject
-=====================
+:module-type:`C++` Module: dynamicObject
+========================================
 
 
 Object that is to be used by an integrator. This holds the equations of motion, integrate state, energy and

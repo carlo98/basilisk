@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: lowPassFilterTorqueCommand &mdash; Basilisk 2.11.0beta
+  <title>C Module: lowPassFilterTorqueCommand &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -133,7 +134,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attControl</a></li>
           <li class="breadcrumb-item"><a href="index.html">lowPassFilterTorqueCommand</a></li>
-      <li class="breadcrumb-item active">Module: lowPassFilterTorqueCommand</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: lowPassFilterTorqueCommand</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attControl/lowPassFilterTorqueCommand/lowPassFilterTorqueCommand.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -143,8 +144,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-lowpassfiltertorquecommand">
-<span id="lowpassfiltertorquecommand"></span><h1>Module: lowPassFilterTorqueCommand<a class="headerlink" href="#module-lowpassfiltertorquecommand" title="Link to this heading"></a></h1>
+  <section id="c-module-lowpassfiltertorquecommand">
+<span id="lowpassfiltertorquecommand"></span><h1><span class="module-type-label module-type-c">C</span> Module: lowPassFilterTorqueCommand<a class="headerlink" href="#c-module-lowpassfiltertorquecommand" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Module applies a low pass filter to the attitude control torque command.</p>
@@ -155,9 +156,12 @@ how to run it, as well as testing.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-65e2bd7d5c9db026e69da295381f7f23b26c4b86.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">lowPassFilterTorqueCommand module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -174,11 +178,11 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>cmdTorqueOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdTorqueBodyMsgPayload.html#cmdtorquebodymsgpayload"><span class="std std-ref">CmdTorqueBodyMsgPayload</span></a></p></td>
-<td><p>filtered commanded torque output message</p></td>
+<td><p>Filtered commanded torque output message</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmdTorqueInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdTorqueBodyMsgPayload.html#cmdtorquebodymsgpayload"><span class="std std-ref">CmdTorqueBodyMsgPayload</span></a></p></td>
-<td><p>un-filtered commanded torque input message</p></td>
+<td><p>Unfiltered commanded torque input message</p></td>
 </tr>
 </tbody>
 </table>

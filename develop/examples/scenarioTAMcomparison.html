@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -154,12 +155,12 @@ The orbit setup is similar to that used in <a class="reference internal" href="s
 <h2>Simulation Scenario Setup Details<a class="headerlink" href="#simulation-scenario-setup-details" title="Link to this heading"></a></h2>
 <p>The simulation layout is shown in the following illustration. A single simulation process is created which contains
 the spacecraft object. The spacecraft state and the magnetic field models (World Magnetic Model (WMM) and Centered
-Dipole Magnetic Field) messages are each connected to a <a class="reference internal" href="../Documentation/simulation/sensors/magnetometer/magnetometer.html#magnetometer"><span class="std std-ref">Module: magnetometer</span></a> module which outputs the local magnetic field
+Dipole Magnetic Field) messages are each connected to a <a class="reference internal" href="../Documentation/simulation/sensors/magnetometer/magnetometer.html#magnetometer"><span class="std std-ref">C++ Module: magnetometer</span></a> module which outputs the local magnetic field
 measurements in sensor frame components.</p>
 <p>When the simulation completes three plots are shown for each case. One plot shows the radius in km, the second shows
 the <a class="reference internal" href="scenarioMagneticFieldCenteredDipole.html#scenariomagneticfieldcentereddipole"><span class="std std-ref">scenarioMagneticFieldCenteredDipole</span></a> measurements, and the third shows the <a class="reference internal" href="scenarioMagneticFieldWMM.html#scenariomagneticfieldwmm"><span class="std std-ref">scenarioMagneticFieldWMM</span></a>
 measurements. The magnetic models measurements are shown as vector components with respect to the sensor frame.</p>
-<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module. The magnetometers are defined as Three Axis
+<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module. The magnetometers are defined as Three Axis
 Magnetometers based on <a class="reference internal" href="scenarioTAM.html#scenariotam"><span class="std std-ref">scenarioTAM</span></a>. The bounds for each magnetometer can be individually activated, and a bias
 in the sensor z-direction can be individually activated. The Centered Dipole Model can be utilized for Jupiter
 or Earth, but only the parameters for Earth are defined in this simulation. The World Magnetic Model (WMM) is specific

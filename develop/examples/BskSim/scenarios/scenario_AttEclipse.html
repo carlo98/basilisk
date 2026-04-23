@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -177,7 +178,7 @@ attitude error, RW motor torque, and RW speed.</p>
 <h2><span class="section-number">6.2. </span>Custom Dynamics Configurations Instructions<a class="headerlink" href="#custom-dynamics-configurations-instructions" title="Link to this heading"></a></h2>
 <p>The fundamental simulation setup is a combination of the setups used in
 <a class="reference internal" href="../../scenarioAttitudeFeedback.html#scenarioattitudefeedback"><span class="std std-ref">scenarioAttitudeFeedback</span></a> and <a class="reference internal" href="../../scenarioCSS.html#scenariocss"><span class="std std-ref">scenarioCSS</span></a>.
-The dynamics simulation is setup using a <a class="reference internal" href="../../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module to which an Earth gravity
+The dynamics simulation is setup using a <a class="reference internal" href="../../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module to which an Earth gravity
 effector is attached. In addition a CSS constellation and RW pyramid are attached.</p>
 <p>The new element is adding the eclipse module <code class="docutils literal notranslate"><span class="pre">self.eclipseObject</span></code> to the simulation environment.</p>
 <p>The module requires spice data regarding the location of the sun, the planets, and the spacecraft
@@ -187,17 +188,17 @@ CSS constellation which simulates a shadow. The eclipse object output is sent to
 <section id="custom-fsw-configurations-instructions">
 <h2><span class="section-number">6.3. </span>Custom FSW Configurations Instructions<a class="headerlink" href="#custom-fsw-configurations-instructions" title="Link to this heading"></a></h2>
 <p>The general flight algorithm setup is different than the earlier simulation scripts. Here we
-use the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/sunSafePoint/sunSafePoint.html#sunsafepoint"><span class="std std-ref">Module: sunSafePoint</span></a> guidance module, the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">Module: cssWlsEst</span></a> module to evaluate the
-sun pointing vector, and the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">Module: mrpFeedback</span></a> module to provide the desired <span class="math notranslate nohighlight">\({\mathbf L}_r\)</span>
+use the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/sunSafePoint/sunSafePoint.html#sunsafepoint"><span class="std std-ref">C Module: sunSafePoint</span></a> guidance module, the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">C Module: cssWlsEst</span></a> module to evaluate the
+sun pointing vector, and the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">C Module: mrpFeedback</span></a> module to provide the desired <span class="math notranslate nohighlight">\({\mathbf L}_r\)</span>
 control torque vector.</p>
-<p>The <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/sunSafePoint/sunSafePoint.html#sunsafepoint"><span class="std std-ref">Module: sunSafePoint</span></a> guidance module is used to steer the spacecraft to point towards the sun direction vector.
+<p>The <a class="reference internal" href="../../../Documentation/fswAlgorithms/attGuidance/sunSafePoint/sunSafePoint.html#sunsafepoint"><span class="std std-ref">C Module: sunSafePoint</span></a> guidance module is used to steer the spacecraft to point towards the sun direction vector.
 This is used for functionality like safe mode, or a power generation mode. The inputs of the module are the
-sun direction vector (as provided by the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">Module: cssWlsEst</span></a> module), as well as the body rate
+sun direction vector (as provided by the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">C Module: cssWlsEst</span></a> module), as well as the body rate
 information (as provided by the simpleNav module).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">sHatBdyCmd</span></code> defines the desired body pointing vector that will align with the sun direction vector.
-The sun direction vector itself is calculated through the use of a CSS constellation and the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">Module: cssWlsEst</span></a>
+The sun direction vector itself is calculated through the use of a CSS constellation and the <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">C Module: cssWlsEst</span></a>
 module. The
-setup for the CSS constellation can be found in the <a class="reference internal" href="../../scenarioCSS.html#scenariocss"><span class="std std-ref">scenarioCSS</span></a> scenario. The <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">Module: cssWlsEst</span></a> module
+setup for the CSS constellation can be found in the <a class="reference internal" href="../../scenarioCSS.html#scenariocss"><span class="std std-ref">scenarioCSS</span></a> scenario. The <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">C Module: cssWlsEst</span></a> module
 is a weighted least-squares minimum-norm algorithm used to estimate the body-relative sun heading using a cluster of
 coarse sun sensors. The algorithm requires a minimum of three CSS to operate correctly.</p>
 </section>
@@ -209,7 +210,7 @@ coarse sun sensors. The algorithm requires a minimum of three CSS to operate cor
 <p>This plot illustrates the illumination fraction calculated by the CSS as the spacecraft orbits Earth and passes through
 the Earth’s shadow. 0.0 corresponds with total eclipse and 1.0 corresponds with direct sunlight.</p>
 <img alt="../../../_images/scenario_AttEclipse_illuminationFraction.svg" class="align-center" src="../../../_images/scenario_AttEclipse_illuminationFraction.svg" />
-<p>The <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">Module: cssWlsEst</span></a> module calculates the position of the sun based on input from the CSS.
+<p>The <a class="reference internal" href="../../../Documentation/fswAlgorithms/attDetermination/CSSEst/cssWlsEst.html#csswlsest"><span class="std std-ref">C Module: cssWlsEst</span></a> module calculates the position of the sun based on input from the CSS.
 The corresponding vector’s three
 components are plotted. When the spacecraft passes through the eclipse, it sets the sun direction vector to
 [0.0,0.0,0.0].</p>

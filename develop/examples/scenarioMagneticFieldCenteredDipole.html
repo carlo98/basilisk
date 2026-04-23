@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -186,7 +187,7 @@ If a different planet state message is required this can be specified
 through the optional input message <code class="docutils literal notranslate"><span class="pre">planetPosInMsgName</span></code>.</p>
 <p>The magnetic field module can produce the magnetic field for a vector of
 spacecraft locations, not just for a
-single spacecraft.  Let <code class="docutils literal notranslate"><span class="pre">scObject</span></code> be an instance of <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a>,
+single spacecraft.  Let <code class="docutils literal notranslate"><span class="pre">scObject</span></code> be an instance of <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a>,
 then the spacecraft state output message
 is added to the magnetic field module through:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">magModule</span><span class="o">.</span><span class="n">addSpacecraftToModel</span><span class="p">(</span><span class="n">scObject</span><span class="o">.</span><span class="n">scStateOutMsg</span><span class="p">)</span>

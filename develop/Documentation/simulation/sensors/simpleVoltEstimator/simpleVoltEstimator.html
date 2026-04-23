@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: simpleVoltEstimator &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: simpleVoltEstimator &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -128,7 +129,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">sensors</a></li>
           <li class="breadcrumb-item"><a href="index.html">simpleVoltEstimator</a></li>
-      <li class="breadcrumb-item active">Module: simpleVoltEstimator</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: simpleVoltEstimator</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/sensors/simpleVoltEstimator/simpleVoltEstimator.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -138,12 +139,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-simplevoltestimator">
-<span id="simplevoltestimator"></span><h1>Module: simpleVoltEstimator<a class="headerlink" href="#module-simplevoltestimator" title="Link to this heading"></a></h1>
+  <section id="c-module-simplevoltestimator">
+<span id="simplevoltestimator"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: simpleVoltEstimator<a class="headerlink" href="#c-module-simplevoltestimator" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The Simple Voltage Estimator module is used to provide error-ed truth (or truth) spacecraft electric potentials,
-similar to the <a class="reference internal" href="../../navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a> module that provides error-ed truth (or truth) spacecraft states.  This class is used
+similar to the <a class="reference internal" href="../../navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a> module that provides error-ed truth (or truth) spacecraft states.  This class is used
 to perturb the truth state away using a gauss-markov
 error model.  It is designed to look like a random walk process put on top of
 the nominal spacecraft voltage.  This is meant to
@@ -154,6 +155,9 @@ be used in place of the nominal voltage output.</p>
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-2dace65d7f8ee83e2ae4b102e7e0955736e5f3f8.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">simpleVoltEstimator module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -181,7 +185,7 @@ provides information on what this message is used for.</p>
 </section>
 <section id="user-guide">
 <h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h2>
-<p>This module is set up similarly to the <a class="reference internal" href="../../navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a> module. It is constructed using <code class="docutils literal notranslate"><span class="pre">sVoltObject</span> <span class="pre">=</span>
+<p>This module is set up similarly to the <a class="reference internal" href="../../navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a> module. It is constructed using <code class="docutils literal notranslate"><span class="pre">sVoltObject</span> <span class="pre">=</span>
 <span class="pre">simpleVoltEstimator.SimpleVoltEstimator()</span></code>. The random walk bound is specified using <code class="docutils literal notranslate"><span class="pre">sVoltObject.walkBounds</span></code> and
 the standard deviation is specified using <code class="docutils literal notranslate"><span class="pre">sVoltObject.PMatrix</span></code>. Note that the input for the walk bound and
 standard deviation must be a list to work for the <a class="reference internal" href="../../../architecture/utilities/gauss_markov.html#gauss-markov"><span class="std std-ref">gauss_markov</span></a> module.</p>

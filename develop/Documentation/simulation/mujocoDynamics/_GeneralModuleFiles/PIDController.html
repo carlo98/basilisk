@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: PIDController &mdash; Basilisk 2.11.0beta
+  <title>PIDController &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -24,8 +25,8 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Module: StatefulSysModel" href="StatefulSysModel.html" />
-    <link rel="prev" title="Module: MJUtils" href="MJUtils.html" /> 
+    <link rel="next" title="StatefulSysModel" href="StatefulSysModel.html" />
+    <link rel="prev" title="MJUtils" href="MJUtils.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -130,7 +131,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">mujocoDynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">_GeneralModuleFiles</a></li>
-      <li class="breadcrumb-item active">Module: PIDController</li>
+      <li class="breadcrumb-item active">PIDController</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/mujocoDynamics/_GeneralModuleFiles/PIDController.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,8 +141,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-pidcontroller">
-<span id="pidcontroller"></span><h1>Module: PIDController<a class="headerlink" href="#module-pidcontroller" title="Link to this heading"></a></h1>
+  <section id="pidcontroller">
+<span id="id1"></span><h1>PIDController<a class="headerlink" href="#pidcontroller" title="Link to this heading"></a></h1>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4I00000E13PIDController">
 <span id="_CPPv3I00000E13PIDController"></span><span id="_CPPv2I00000E13PIDController"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasuredPositionMsgPayload</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeasuredVelocityMsgPayload</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OutputMsgPayload</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DesiredPositionMsgPayload</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00000E13PIDController" title="PIDController::MeasuredPositionMsgPayload"><span class="n"><span class="pre">MeasuredPositionMsgPayload</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DesiredVelocityMsgPayload</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00000E13PIDController" title="PIDController::MeasuredVelocityMsgPayload"><span class="n"><span class="pre">MeasuredVelocityMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="class_p_i_d_controller"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PIDController</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="StatefulSysModel.html#_CPPv416StatefulSysModel" title="StatefulSysModel"><span class="n"><span class="pre">StatefulSysModel</span></span></a><a class="headerlink" href="#_CPPv4I00000E13PIDController" title="Link to this definition"></a><br /></dt>
@@ -398,8 +399,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="MJUtils.html" class="btn btn-neutral float-left" title="Module: MJUtils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="StatefulSysModel.html" class="btn btn-neutral float-right" title="Module: StatefulSysModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="MJUtils.html" class="btn btn-neutral float-left" title="MJUtils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="StatefulSysModel.html" class="btn btn-neutral float-right" title="StatefulSysModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

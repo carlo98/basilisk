@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: prescribedLinearTranslation &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: prescribedLinearTranslation &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">deviceInterface</a></li>
           <li class="breadcrumb-item"><a href="index.html">prescribedLinearTranslation</a></li>
-      <li class="breadcrumb-item active">Module: prescribedLinearTranslation</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: prescribedLinearTranslation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/deviceInterface/prescribedLinearTranslation/prescribedLinearTranslation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -144,8 +145,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-prescribedlineartranslation">
-<span id="prescribedlineartranslation"></span><h1>Module: prescribedLinearTranslation<a class="headerlink" href="#module-prescribedlineartranslation" title="Link to this heading"></a></h1>
+  <section id="c-module-prescribedlineartranslation">
+<span id="prescribedlineartranslation"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: prescribedLinearTranslation<a class="headerlink" href="#c-module-prescribedlineartranslation" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module profiles linear translational motion for a rigid body connected to a rigid spacecraft hub. The body frame of
@@ -176,7 +177,7 @@ are not set by the user, the module defaults to the non-smoothed bang-bang profi
 set to nonzero values, the smoothed bang-coast-bang profiler is selected.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>To use this module for prescribed motion, it must be connected to the <a class="reference internal" href="../../dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">Module: prescribedMotionStateEffector</span></a>
+<p>To use this module for prescribed motion, it must be connected to the <a class="reference internal" href="../../dynamics/prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">C++ Module: prescribedMotionStateEffector</span></a>
 dynamics module. This ensures the translational body’s states are correctly incorporated into the spacecraft
 dynamics.</p>
 </div>
@@ -187,6 +188,9 @@ dynamics.</p>
 The module msg connection is set by the user from python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-542c90629ae7a7450ea07438d9360935b683ba9c.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">prescribedLinearTranslation module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -203,15 +207,15 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>linearTranslationRigidBodyInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/LinearTranslationRigidBodyMsgPayload.html#lineartranslationrigidbodymsgpayload"><span class="std std-ref">LinearTranslationRigidBodyMsgPayload</span></a></p></td>
-<td><p>input msg with the prescribed body reference translational states</p></td>
+<td><p>Input message with the prescribed body reference translational states.</p></td>
 </tr>
 <tr class="row-odd"><td><p>prescribedTranslationOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/PrescribedTranslationMsgPayload.html#prescribedtranslationmsgpayload"><span class="std std-ref">PrescribedTranslationMsgPayload</span></a></p></td>
-<td><p>output message with the prescribed body translational states</p></td>
+<td><p>Output message with the prescribed body translational states.</p></td>
 </tr>
 <tr class="row-even"><td><p>prescribedTranslationOutMsgC</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/PrescribedTranslationMsgPayload.html#prescribedtranslationmsgpayload"><span class="std std-ref">PrescribedTranslationMsgPayload</span></a></p></td>
-<td><p>C-wrapped output message with the prescribed body translational states</p></td>
+<td><p>C-wrapped output message with the prescribed body translational states.</p></td>
 </tr>
 </tbody>
 </table>

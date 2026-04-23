@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -147,10 +148,10 @@
 <section id="overview">
 <span id="module-scenarioDragDeorbit"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This scenario demonstrates how to set up a spacecraft orbiting Earth subject to atmospheric drag, causing it to
-deorbit. This is achieved using the <a class="reference internal" href="../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">Module: exponentialAtmosphere</span></a> or <a class="reference internal" href="../Documentation/simulation/environment/MsisAtmosphere/msisAtmosphere.html#msisatmosphere"><span class="std std-ref">Module: msisAtmosphere</span></a> environment module and the
-<a class="reference internal" href="../Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#dragdynamiceffector"><span class="std std-ref">Module: dragDynamicEffector</span></a> dynamics module. The simulation is executed until the altitude falls below some threshold,
+deorbit. This is achieved using the <a class="reference internal" href="../Documentation/simulation/environment/ExponentialAtmosphere/exponentialAtmosphere.html#exponentialatmosphere"><span class="std std-ref">C++ Module: exponentialAtmosphere</span></a> or <a class="reference internal" href="../Documentation/simulation/environment/MsisAtmosphere/msisAtmosphere.html#msisatmosphere"><span class="std std-ref">C++ Module: msisAtmosphere</span></a> environment module and the
+<a class="reference internal" href="../Documentation/simulation/dynamics/dragEffector/dragDynamicEffector.html#dragdynamiceffector"><span class="std std-ref">C++ Module: dragDynamicEffector</span></a> dynamics module. The simulation is executed until the altitude falls below some threshold,
 using a terminal event handler.</p>
-<p>An optional wind model (<a class="reference internal" href="../Documentation/simulation/environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">Module: zeroWindModel</span></a>) can be enabled via the <code class="docutils literal notranslate"><span class="pre">useWind</span></code> argument (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>).
+<p>An optional wind model (<a class="reference internal" href="../Documentation/simulation/environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">C++ Module: zeroWindModel</span></a>) can be enabled via the <code class="docutils literal notranslate"><span class="pre">useWind</span></code> argument (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>).
 When active, SPICE is loaded with the default <code class="docutils literal notranslate"><span class="pre">IAU_EARTH</span></code> frame and drag is computed against the
 atmosphere-relative velocity rather than the inertial spacecraft velocity.  This is a more accurate treatment
 for scenarios where Earth’s rotation is relevant, but adds a SPICE dependency.  When <code class="docutils literal notranslate"><span class="pre">useWind=False</span></code>, the
@@ -198,9 +199,9 @@ the drag model:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dragEffector</span><span class="o">.</span><span class="n">atmoDensInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">atmo</span><span class="o">.</span><span class="n">envOutMsgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Optionally (<code class="docutils literal notranslate"><span class="pre">useWind=True</span></code>), a <a class="reference internal" href="../Documentation/simulation/environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">Module: zeroWindModel</span></a> can be linked so drag is computed against the
+<p>Optionally (<code class="docutils literal notranslate"><span class="pre">useWind=True</span></code>), a <a class="reference internal" href="../Documentation/simulation/environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">C++ Module: zeroWindModel</span></a> can be linked so drag is computed against the
 atmosphere-relative velocity.  SPICE is loaded with the default <code class="docutils literal notranslate"><span class="pre">IAU_EARTH</span></code> frame so that
-<code class="docutils literal notranslate"><span class="pre">J20002Pfix_dot</span></code> is populated; <a class="reference internal" href="../Documentation/simulation/environment/_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">Module: windBase</span></a> reads those derivatives to derive the Earth rotation
+<code class="docutils literal notranslate"><span class="pre">J20002Pfix_dot</span></code> is populated; <a class="reference internal" href="../Documentation/simulation/environment/_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">C++ Module: windBase</span></a> reads those derivatives to derive the Earth rotation
 rate, giving a physically consistent co-rotation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spiceObject</span> <span class="o">=</span> <span class="n">gravFactory</span><span class="o">.</span><span class="n">createSpiceInterface</span><span class="p">(</span>
     <span class="n">time</span><span class="o">=</span><span class="s2">&quot;2020 MAY 21 18:28:03 (UTC)&quot;</span><span class="p">,</span>
@@ -249,7 +250,7 @@ up and the simulation to terminate.</p>
 <li><p><strong>initialAlt</strong> (<em>float</em>) – Starting altitude in km</p></li>
 <li><p><strong>deorbitAlt</strong> (<em>float</em>) – Terminal altitude in km</p></li>
 <li><p><strong>model</strong> (<em>str</em>) – [“exponential”, “msis”]</p></li>
-<li><p><strong>useWind</strong> (<em>bool</em>) – If True, link a <a class="reference internal" href="../Documentation/simulation/environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">Module: zeroWindModel</span></a> so drag is computed against the atmosphere-relative
+<li><p><strong>useWind</strong> (<em>bool</em>) – If True, link a <a class="reference internal" href="../Documentation/simulation/environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">C++ Module: zeroWindModel</span></a> so drag is computed against the atmosphere-relative
 velocity.  If False (default), the inertial spacecraft velocity is used directly.</p></li>
 </ul>
 </dd>

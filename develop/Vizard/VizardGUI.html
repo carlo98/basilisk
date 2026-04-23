@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -427,7 +428,7 @@ apply the custom space object shape.  Note that instead of an <code class="docut
 <h2>Built-In CAD Models of Celestial Bodies<a class="headerlink" href="#built-in-cad-models-of-celestial-bodies" title="Link to this heading"></a></h2>
 <p>While custom CAD shapes can be imported to display celestial bodies and spacecraft shapes,
 Vizard has several built-in models that are automatically applied if the body has the
-corresponding name.  For the gravitational bodies, <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> uses by default
+corresponding name.  For the gravitational bodies, <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> uses by default
 the string <code class="docutils literal notranslate"><span class="pre">planetName</span></code> in the <code class="docutils literal notranslate"><span class="pre">GravBodyData()</span></code> structure as the gravity body label.  If
 the optional string <code class="docutils literal notranslate"><span class="pre">displayName</span></code> is set, this this gravity body label over-rides the <code class="docutils literal notranslate"><span class="pre">planetName</span></code>
 string.  This is handy in that sometimes the gravity body might have an unintuitive Spice ID or name,
@@ -499,11 +500,11 @@ The following table is the list of built-in Vizard celestial bodies.</p>
 <h2>Advanced Options<a class="headerlink" href="#advanced-options" title="Link to this heading"></a></h2>
 <section id="file-compress-messages-option">
 <h3><code class="docutils literal notranslate"><span class="pre">File/Compress</span> <span class="pre">Messages</span></code> Option<a class="headerlink" href="#file-compress-messages-option" title="Link to this heading"></a></h3>
-<p>This option will compress the number of stored vizMessages from the current run. This feature is especially useful during multi-day live streaming simulation runs when the number of saved <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> can grow too large for the app to continue running.</p>
-<p>Selecting this option brings up a settings panel that allows the user to specify how many messages should be retained. For example, if the user opts to retain 1/2  stored messages, Vizard will delete every other message in the <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> dictionary, reducing the Vizard memory footprint.</p>
+<p>This option will compress the number of stored vizMessages from the current run. This feature is especially useful during multi-day live streaming simulation runs when the number of saved <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> can grow too large for the app to continue running.</p>
+<p>Selecting this option brings up a settings panel that allows the user to specify how many messages should be retained. For example, if the user opts to retain 1/2  stored messages, Vizard will delete every other message in the <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> dictionary, reducing the Vizard memory footprint.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Compression can be applied when running the Vizard from a <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> archive file <em>or</em> when live streaming. Please note that the compression cannot be reversed, but that the archive file, if in use, will not be changed.</p>
+<p>Compression can be applied when running the Vizard from a <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> archive file <em>or</em> when live streaming. Please note that the compression cannot be reversed, but that the archive file, if in use, will not be changed.</p>
 </div>
 </section>
 <section id="sprite-representation-of-space-objects">

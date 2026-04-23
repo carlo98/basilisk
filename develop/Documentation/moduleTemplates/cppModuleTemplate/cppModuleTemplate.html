@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: cppModuleTemplate &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: cppModuleTemplate &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -113,7 +114,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">Documentation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">moduleTemplates</a></li>
           <li class="breadcrumb-item"><a href="index.html">cppModuleTemplate</a></li>
-      <li class="breadcrumb-item active">Module: cppModuleTemplate</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: cppModuleTemplate</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/Documentation/moduleTemplates/cppModuleTemplate/cppModuleTemplate.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -123,19 +124,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-cppmoduletemplate">
-<span id="cppmoduletemplate"></span><h1>Module: cppModuleTemplate<a class="headerlink" href="#module-cppmoduletemplate" title="Link to this heading"></a></h1>
+  <section id="c-module-cppmoduletemplate">
+<span id="cppmoduletemplate"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: cppModuleTemplate<a class="headerlink" href="#c-module-cppmoduletemplate" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This is a very basic dummy C++ Basilisk module that can be used as a template to create other C++ modules.
-It mimics the functionality of <a class="reference internal" href="../cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">Module: cModuleTemplate</span></a>.  See that module for a more complete discussion
+It mimics the functionality of <a class="reference internal" href="../cModuleTemplate/cModuleTemplate.html#cmoduletemplate"><span class="std std-ref">C Module: cModuleTemplate</span></a>.  See that module for a more complete discussion
 of how to write the RST module documentation file.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../_images/graphviz-768a0959e66b9af87af7e0134d2bb7f1345db0d0.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">cppModuleTemplate module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -152,8 +156,7 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>dataInMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/CModuleTemplateMsgPayload.html#cmoduletemplatemsgpayload"><span class="std std-ref">CModuleTemplateMsgPayload</span></a></p></td>
-<td><p>(optional) Input message description.  Note here if this message is optional, and what the default behavior
-is if this message is not provided.</p></td>
+<td><p>(optional) Input message description.  Note here if this message is optional, and what the default behavior is if this message is not provided.</p></td>
 </tr>
 <tr class="row-odd"><td><p>dataOutMsg</p></td>
 <td><p><a class="reference internal" href="../../architecture/msgPayloadDefC/CModuleTemplateMsgPayload.html#cmoduletemplatemsgpayload"><span class="std std-ref">CModuleTemplateMsgPayload</span></a></p></td>

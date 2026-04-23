@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -177,7 +178,7 @@ Note that the option names for groupings of Basilisk modules are the same as wit
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">vizInterface</span></code></p></td>
 <td><p>Boolean</p></td>
 <td><p>True</p></td>
-<td><p>Include <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> in the configuration and build</p></td>
+<td><p>Include <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> in the configuration and build</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">opNav</span></code></p></td>
 <td><p>Boolean</p></td>
@@ -218,7 +219,7 @@ package for the user (u) or system (s).</p></td>
 </tbody>
 </table>
 <p>Thus, using the same build example as in the one-step section, to create a build with <code class="docutils literal notranslate"><span class="pre">opNav</span></code> modes enabled,
-but no <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a>, and using a clean distribution folder, and that is built right away, you could use:</p>
+but no <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a>, and using a clean distribution folder, and that is built right away, you could use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conan</span> <span class="n">install</span> <span class="o">.</span> <span class="o">--</span><span class="n">build</span><span class="o">=</span><span class="n">missing</span> <span class="o">-</span><span class="n">o</span> <span class="n">clean</span><span class="o">=</span><span class="kc">True</span> <span class="o">-</span><span class="n">o</span> <span class="n">buildProject</span><span class="o">=</span><span class="kc">True</span> <span class="o">-</span><span class="n">o</span> <span class="n">opNav</span><span class="o">=</span><span class="kc">True</span> <span class="o">-</span><span class="n">o</span> <span class="n">vizInterface</span><span class="o">=</span><span class="kc">False</span>
 </pre></div>
 </div>
@@ -267,7 +268,7 @@ they are not used, then the shown default behaviors are used.</p>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BUILD_VIZINTERFACE</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ON</span></code></p></td>
-<td><p>will create <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a></p></td>
+<td><p>will create <a class="reference internal" href="../Documentation/simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BUILD_OPNAV</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code></p></td>

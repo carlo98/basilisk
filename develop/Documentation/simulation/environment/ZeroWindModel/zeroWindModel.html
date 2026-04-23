@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: zeroWindModel &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: zeroWindModel &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">ZeroWindModel</a></li>
-      <li class="breadcrumb-item active">Module: zeroWindModel</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: zeroWindModel</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/ZeroWindModel/zeroWindModel.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,12 +153,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-zerowindmodel">
-<span id="zerowindmodel"></span><h1>Module: zeroWindModel<a class="headerlink" href="#module-zerowindmodel" title="Link to this heading"></a></h1>
+  <section id="c-module-zerowindmodel">
+<span id="zerowindmodel"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: zeroWindModel<a class="headerlink" href="#c-module-zerowindmodel" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Zero wind model representing atmospheric conditions with no wind perturbations beyond co-rotation.
-The module is a sub-class of the <a class="reference internal" href="../_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">Module: windBase</span></a> base class.  See that class for the nominal messages
+The module is a sub-class of the <a class="reference internal" href="../_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">C++ Module: windBase</span></a> base class.  See that class for the nominal messages
 used and general instructions.</p>
 </section>
 <section id="module-description">
@@ -207,7 +208,7 @@ when <code class="docutils literal notranslate"><span class="pre">J20002Pfix_dot
 <span class="n">windModel</span><span class="o">.</span><span class="n">setUseSpiceOmegaFlag</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Use only manual value</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="../_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">Module: windBase</span></a> for details on the SPICE vs. manual omega selection logic.</p>
+<p>See <a class="reference internal" href="../_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">C++ Module: windBase</span></a> for details on the SPICE vs. manual omega selection logic.</p>
 </section>
 </section>
 <section id="message-connection-descriptions">
@@ -215,6 +216,9 @@ when <code class="docutils literal notranslate"><span class="pre">J20002Pfix_dot
 <p>The following table lists all the module specific input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-934f5a0eb5d1d501aba55e53e06f2918bb75b941.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">zeroWindModel module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -231,14 +235,14 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>planetPosInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>Planet SPICE state input message used to compute spacecraft position relative to planet and derive planet angular velocity</p></td>
+<td><p>Planet SPICE state input message used to compute spacecraft position relative to planet and derive planet angular velocity.</p></td>
 </tr>
 <tr class="row-odd"><td><p>scStateInMsgs</p></td>
-<td><p>Array of <a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
 <td><p>Spacecraft state input messages (vector). Use <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code> to add spacecraft.</p></td>
 </tr>
 <tr class="row-even"><td><p>envOutMsgs</p></td>
-<td><p>Array of <a class="reference internal" href="../../../architecture/msgPayloadDefC/WindMsgPayload.html#windmsgpayload"><span class="std std-ref">WindMsgPayload</span></a></p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/WindMsgPayload.html#windmsgpayload"><span class="std std-ref">WindMsgPayload</span></a></p></td>
 <td><p>Wind velocity output messages (vector). Automatically created when spacecraft are added.</p></td>
 </tr>
 </tbody>

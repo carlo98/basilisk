@@ -20,12 +20,14 @@ effectorInterfaces
    hingedJointArrayMotor/index
    hingedRigidBodyPIDMotor/index
    jointMotionCompensator/index
+   jointThrAllocation/index
    prescribedRot2DOF/index
    rwMotorTorque/index
    rwMotorVoltage/index
    rwNullSpace/index
    solarArrayReference/index
    thrFiringRemainder/index
+   thrFiringRound/index
    thrFiringSchmitt/index
    thrForceMapping/index
    thrJointCompensation/index

@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -148,7 +149,7 @@
 <p>This example script demonstrates how to use thrusters to stabilize the tumble of a spacecraft orbiting the
 Earth, using two separate threads.
 This script sets up a 6-DOF spacecraft which is orbiting the Earth.  The goal is to
-illustrate how a set of thrusters can be added to the rigid <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> hub, and what
+illustrate how a set of thrusters can be added to the rigid <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> hub, and what
 FSW modules are needed to control these thrusters. The simulation setup is performed with two
 processes, similarly to <a class="reference internal" href="scenarioAttitudeFeedback2T.html#scenarioattitudefeedback2t"><span class="std std-ref">scenarioAttitudeFeedback2T</span></a>,
 in which the dynamics and the FSW algorithms are run at different time steps.  The control setup is the same
@@ -169,14 +170,14 @@ tracking errors, the requested torque, the requested forces for each thruster an
 <h2>Setup Changes to Simulate Thrusters Dynamic Effectors<a class="headerlink" href="#setup-changes-to-simulate-thrusters-dynamic-effectors" title="Link to this heading"></a></h2>
 <p>At the beginning of the script all the plot functions are declared. Then the fundamental simulation setup is the same
 as the one used in <a class="reference internal" href="scenarioAttitudeFeedback2T.html#scenarioattitudefeedback2t"><span class="std std-ref">scenarioAttitudeFeedback2T</span></a>.
-The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module to which an Earth gravity
+The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module to which an Earth gravity
 effector is attached.  The simple navigation module is still used to output the inertial attitude,
 angular rate, as well as position and velocity messages.</p>
 <p>The Thruster Dynamic Effector is added to the the rigid spacecraft hub, similarly to
 <a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a>.  The support macro <code class="docutils literal notranslate"><span class="pre">simIncludeThruster.py</span></code>
 provides several convenient tools to facilitate the setup process.  This script allows the user to
 readily create thrusters from a database of public specifications, customize them if needed, and add
-them to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module.</p>
+them to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module.</p>
 <p>The first thing to do is to create the (empty) set of thrusters that will later contain all the devices. Then
 a fresh instance of the thruster factory class <code class="docutils literal notranslate"><span class="pre">thrusterFactory()</span></code> is created.  This factory is able
 to create a list of thruster devices, and return copies that can easily be manipulated and customized if needed.
@@ -241,28 +242,28 @@ use a minimum impulse time</p></td>
 </tr>
 </tbody>
 </table>
-<p>The command <code class="docutils literal notranslate"><span class="pre">addToSpacecraft()</span></code> adds all the created thrusters to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module.  The final step
-is to add the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a> to the list of simulation tasks.</p>
+<p>The command <code class="docutils literal notranslate"><span class="pre">addToSpacecraft()</span></code> adds all the created thrusters to the <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module.  The final step
+is to add the <a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a> to the list of simulation tasks.</p>
 </section>
 <section id="flight-algorithm-changes-to-control-thrusters">
 <h2>Flight Algorithm Changes to Control Thrusters<a class="headerlink" href="#flight-algorithm-changes-to-control-thrusters" title="Link to this heading"></a></h2>
 <p>The general flight algorithm setup is the same as in the earlier simulation scripts. Here we
-use again the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> guidance module, the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">Module: attTrackingError</span></a> module to evaluate the
-tracking error states, and the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">Module: mrpFeedback</span></a> module to provide the desired <span class="math notranslate nohighlight">\({\mathbf L}_r\)</span>
-control torque vector.  In addition, this time, we have to add two more modules: <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrForceMapping/thrForceMapping.html#thrforcemapping"><span class="std std-ref">Module: thrForceMapping</span></a>
-and <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrFiringSchmitt/thrFiringSchmitt.html#thrfiringschmitt"><span class="std std-ref">Module: thrFiringSchmitt</span></a>.</p>
-<p>The <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrForceMapping/thrForceMapping.html#thrforcemapping"><span class="std std-ref">Module: thrForceMapping</span></a> module takes a commanded attitude control torque vector and determines a set of desired
+use again the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> guidance module, the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">C Module: attTrackingError</span></a> module to evaluate the
+tracking error states, and the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">C Module: mrpFeedback</span></a> module to provide the desired <span class="math notranslate nohighlight">\({\mathbf L}_r\)</span>
+control torque vector.  In addition, this time, we have to add two more modules: <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrForceMapping/thrForceMapping.html#thrforcemapping"><span class="std std-ref">C Module: thrForceMapping</span></a>
+and <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrFiringSchmitt/thrFiringSchmitt.html#thrfiringschmitt"><span class="std std-ref">C Module: thrFiringSchmitt</span></a>.</p>
+<p>The <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrForceMapping/thrForceMapping.html#thrforcemapping"><span class="std std-ref">C Module: thrForceMapping</span></a> module takes a commanded attitude control torque vector and determines a set of desired
 thruster force values to implement this torque. It is assumed that the nominal thruster configuration is such that
 pure torque solutions are possible. The module supports both on- and off-pulsing solutions, including
 cases where the thruster solutions are saturated due to a large commanded attitude control torque.
 The module set up is done in an analogous way as the previous ones. It can be noted that one of the inputs
-corresponds to the output of the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">Module: mrpFeedback</span></a>, being the commanded control torque. The other ones are the
+corresponds to the output of the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">C Module: mrpFeedback</span></a>, being the commanded control torque. The other ones are the
 information on the thrusters configuration and spacecraft inertia, whose messages will be created later in the script.
 In addition, the control axes are specified using the full identity matrix for ACS thrusters, and its first
 two rows for the DV ones, since in the latter case we are not able to control one axis (z in our case),
 due to the geometrical configuration. The last value to specify is the <code class="docutils literal notranslate"><span class="pre">thrForceSign</span></code>, which will have the
 value of -1 if off-pulsing DV thrusters are employed, and +1 with the on-pulsing ACS configuration.</p>
-<p>The last needed FSW module is <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrFiringSchmitt/thrFiringSchmitt.html#thrfiringschmitt"><span class="std std-ref">Module: thrFiringSchmitt</span></a>. A Schmitt trigger logic is implemented to map a desired
+<p>The last needed FSW module is <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrFiringSchmitt/thrFiringSchmitt.html#thrfiringschmitt"><span class="std std-ref">C Module: thrFiringSchmitt</span></a>. A Schmitt trigger logic is implemented to map a desired
 thruster force value into a thruster on command time. The module reads in the attitude control thruster
 force values for both on- and off-pulsing scenarios, and then maps this into a time which specifies how
 long a thruster should be on. Four values are specified: <code class="docutils literal notranslate"><span class="pre">thrMinFireTime</span></code> (minimum thruster on-time in seconds),
@@ -271,7 +272,7 @@ long a thruster should be on. Four values are specified: <code class="docutils l
 and set to 1 for DV thrusters). As expected, the thrusters force
 input is directly the output of <code class="docutils literal notranslate"><span class="pre">thrForceMapping</span></code>, and also in this case we will need the thrusters configuration
 message. It can be noted how the output of this module ends up to be the input commands for the
-<a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>.</p>
+<a class="reference internal" href="../Documentation/simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>.</p>
 <p>The flight algorithm needs to know how many thruster devices are on the spacecraft and what their
 location and direction are.  This is set through a flight software message that is read
 in by flight algorithm modules that need this info.  To write the required flight thrusters configuration message

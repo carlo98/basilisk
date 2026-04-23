@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: mrpSteering &mdash; Basilisk 2.11.0beta
+  <title>C Module: mrpSteering &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -135,7 +136,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">attControl</a></li>
           <li class="breadcrumb-item"><a href="index.html">mrpSteering</a></li>
-      <li class="breadcrumb-item active">Module: mrpSteering</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: mrpSteering</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/attControl/mrpSteering/mrpSteering.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -145,31 +146,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-mrpsteering">
-<span id="mrpsteering"></span><h1>Module: mrpSteering<a class="headerlink" href="#module-mrpsteering" title="Link to this heading"></a></h1>
+  <section id="c-module-mrpsteering">
+<span id="mrpsteering"></span><h1><span class="module-type-label module-type-c">C</span> Module: mrpSteering<a class="headerlink" href="#c-module-mrpsteering" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The intend of this module is to implement an MRP attitude steering law where the control output is a vector of
 commanded body rates.  To use this module it is required to use a separate rate tracking servo control
-module, such as <a class="reference internal" href="../rateServoFullNonlinear/rateServoFullNonlinear.html#rateservofullnonlinear"><span class="std std-ref">Module: rateServoFullNonlinear</span></a>, as well.</p>
+module, such as <a class="reference internal" href="../rateServoFullNonlinear/rateServoFullNonlinear.html#rateservofullnonlinear"><span class="std std-ref">C Module: rateServoFullNonlinear</span></a>, as well.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
-<figure class="align-center" id="id1">
-<span id="moduleio-mrp-steering"></span><img alt="../../../../_images/moduleIOMrpSteering.svg" src="../../../../_images/moduleIOMrpSteering.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">mrpSteering()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<p id="moduleio-mrp-steering">The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-9ef9db36166d7d862f95f12136ec255b3f7ade81.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">mrpSteering module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
-<col style="width: 20.6%" />
-<col style="width: 20.6%" />
-<col style="width: 58.8%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Msg Variable Name</p></th>
@@ -262,7 +260,7 @@ For this purpose, let us select</p>
 <span class="eqno">(12)<a class="headerlink" href="#equation-eq-ms-12" title="Link to this equation"></a></span>\[    \dot V = -  \pmb\sigma_{\mathcal{B}/\mathcal{R}}^{T} {\bf f}(\pmb\sigma_{\mathcal{B}/\mathcal{R}}) &lt; 0\]</div>
 </section>
 <section id="saturated-mrp-steering-law">
-<h4>Saturated  MRP Steering Law<a class="headerlink" href="#saturated-mrp-steering-law" title="Link to this heading"></a></h4>
+<h4>Saturated MRP Steering Law<a class="headerlink" href="#saturated-mrp-steering-law" title="Link to this heading"></a></h4>
 <p>A very simple example would be to set</p>
 <div class="math notranslate nohighlight" id="equation-eq-ms-13">
 <span class="eqno">(13)<a class="headerlink" href="#equation-eq-ms-13" title="Link to this equation"></a></span>\[    {\bf f} (\pmb\sigma_{\mathcal{B}/\mathcal{R}}) =  K_{1} \pmb\sigma_{\mathcal{B}/\mathcal{R}}\]</div>
@@ -303,28 +301,29 @@ approach the <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)<
 is that the control rate is saturated individually about each axis.  If the smoothing component is removed
 to reduce this to a bang-band rate control, then this would yield a Lyapunov optimal control which
 minimizes <span class="math notranslate nohighlight">\(\dot V\)</span> subject to the allowable rate constraint <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span>.</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id2">
 <span id="moduleio-mrp-steering-fsigmaoptionsa"></span><a class="reference internal image-reference" href="../../../../_images/fSigmaOptionsA.jpg"><img alt="../../../../_images/fSigmaOptionsA.jpg" src="../../../../_images/fSigmaOptionsA.jpg" style="width: 222.0px; height: 133.0px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Figure 2: <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span> dependency with <span class="math notranslate nohighlight">\(K_{1} = 0.1\)</span>, <span class="math notranslate nohighlight">\(K_{3} = 1\)</span></span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">Figure 1: <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span> dependency with <span class="math notranslate nohighlight">\(K_{1} = 0.1\)</span>, <span class="math notranslate nohighlight">\(K_{3} = 1\)</span></span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id3">
 <span id="moduleio-mrp-steering-fsigmaoptionsb"></span><a class="reference internal image-reference" href="../../../../_images/fSigmaOptionsB.jpg"><img alt="../../../../_images/fSigmaOptionsB.jpg" src="../../../../_images/fSigmaOptionsB.jpg" style="width: 222.0px; height: 135.0px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Figure 3: <span class="math notranslate nohighlight">\(K_{1}\)</span> dependency with <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span> = 1 deg/s, <span class="math notranslate nohighlight">\(K_{3} = 1\)</span></span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+<p><span class="caption-text">Figure 2: <span class="math notranslate nohighlight">\(K_{1}\)</span> dependency with <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span> = 1 deg/s, <span class="math notranslate nohighlight">\(K_{3} = 1\)</span></span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id4">
 <span id="moduleio-mrp-steering-fsigmaoptionsc"></span><a class="reference internal image-reference" href="../../../../_images/fSigmaOptionsC.jpg"><img alt="../../../../_images/fSigmaOptionsC.jpg" src="../../../../_images/fSigmaOptionsC.jpg" style="width: 222.0px; height: 136.0px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Figure 4: <span class="math notranslate nohighlight">\(K_{3}\)</span> dependency with <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span> = 1 deg/s, <span class="math notranslate nohighlight">\(K_{1} = 0.1\)</span></span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text">Figure 3: <span class="math notranslate nohighlight">\(K_{3}\)</span> dependency with <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span> = 1 deg/s, <span class="math notranslate nohighlight">\(K_{1} = 0.1\)</span></span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>Figures 2-4 illustrate how the parameters <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span>, <span class="math notranslate nohighlight">\(K_{1}\)</span> and <span class="math notranslate nohighlight">\(K_{3}\)</span>
+<p>Figures 1-3 illustrate how the parameters
+<span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span>, <span class="math notranslate nohighlight">\(K_{1}\)</span> and <span class="math notranslate nohighlight">\(K_{3}\)</span>
 impact the steering law behavior.  The maximum steering law rate commands are easily set through the
 <span class="math notranslate nohighlight">\(\omega_{\text{max}}\)</span> parameters.  The gain <span class="math notranslate nohighlight">\(K_{1}\)</span> controls the linear stiffness when
 the attitude errors have become small, while <span class="math notranslate nohighlight">\(K_{3}\)</span> controls how rapidly the steering law

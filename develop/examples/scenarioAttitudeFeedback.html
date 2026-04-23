@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -157,25 +158,25 @@ shown in the following illustration.  A single simulation process is created
 which contains both the spacecraft simulation modules, as well as the Flight Software (FSW) algorithm
 modules.</p>
 <img alt="../_images/test_scenarioAttitudeFeedback.svg" class="align-center" src="../_images/test_scenarioAttitudeFeedback.svg" />
-<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module to which a gravity
+<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module to which a gravity
 effector is attached.  Note that both the rotational and translational degrees of
 freedom of the spacecraft hub are turned on here to get a 6-DOF simulation.  For more
 information on how to setup orbit, see <a class="reference internal" href="scenarioBasicOrbit.html#scenariobasicorbit"><span class="std std-ref">scenarioBasicOrbit</span></a>.</p>
-<p>The control torque is simulated using the <a class="reference internal" href="../Documentation/simulation/dynamics/extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">Module: extForceTorque</span></a> module.  This module can
+<p>The control torque is simulated using the <a class="reference internal" href="../Documentation/simulation/dynamics/extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">C++ Module: extForceTorque</span></a> module.  This module can
 accept a torque in body frame components either through an input message, or through
 a module internal torque vector which can be set in python.  In this simulation, the
 flight software is providing the attitude control torque message which is connected to
 the torque input message of this module.  If an external torque is being simulated,
 then the module internal torque vector is set to a constant value.</p>
 <p>The flight software algorithm module require a navigation message with the
-spacecraft orientation and attitude rates.  This is setup using the <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a>
+spacecraft orientation and attitude rates.  This is setup using the <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a>
 module. By just invoking a sensor module it is setup to run without any simulated
 corruptions.  Thus in this simulation it will return truth measurements.</p>
 <p>Next the flight software algorithms need to be setup.  The inertial pointing reference
-frame definition is provided through the simple <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">Module: inertial3D</span></a> module.  The only input
+frame definition is provided through the simple <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/inertial3D/inertial3D.html#inertial3d"><span class="std std-ref">C Module: inertial3D</span></a> module.  The only input
 it requires is the desired inertial heading.</p>
-<p>The reference frame states and the navigation message (output of <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">Module: simpleNav</span></a> are fed
-into the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">Module: attTrackingError</span></a> module.  It is setup to compute the attitude tracking error
+<p>The reference frame states and the navigation message (output of <a class="reference internal" href="../Documentation/simulation/navigation/simpleNav/simpleNav.html#simplenav"><span class="std std-ref">C++ Module: simpleNav</span></a> are fed
+into the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/attTrackingError/attTrackingError.html#atttrackingerror"><span class="std std-ref">C Module: attTrackingError</span></a> module.  It is setup to compute the attitude tracking error
 between the body frame <span class="math notranslate nohighlight">\(\cal B\)</span> and the reference frame <span class="math notranslate nohighlight">\(\cal R\)</span>.
 If a body fixed frame other than <span class="math notranslate nohighlight">\(\cal B\)</span>
 needs to be driven towards <em>R</em>, this could be configured as well in this module.</p>
@@ -183,7 +184,7 @@ needs to be driven towards <em>R</em>, this could be configured as well in this 
 algorithm of this is discussed in the text book
 <a class="reference external" href="http://dx.doi.org/10.2514/4.105210">Analytical Mechanics of Space Systems</a>.
 The control torque output vector message of this
-module is connected back to the input message of the <a class="reference internal" href="../Documentation/simulation/dynamics/extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">Module: extForceTorque</span></a> module to close
+module is connected back to the input message of the <a class="reference internal" href="../Documentation/simulation/dynamics/extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">C++ Module: extForceTorque</span></a> module to close
 the control loop.</p>
 <p>While the nominal simulation has set <code class="docutils literal notranslate"><span class="pre">useCMsg</span></code> flag to False, with it set to <code class="docutils literal notranslate"><span class="pre">True</span></code> it illustrates two things.
 First it shows how to create a C-wrapped C-message in Python and write to it.  This is done with the

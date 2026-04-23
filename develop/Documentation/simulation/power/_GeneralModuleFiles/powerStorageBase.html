@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: powerStorageBase &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: powerStorageBase &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -25,7 +26,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="antennaPower" href="../antennaPower/index.html" />
-    <link rel="prev" title="Module: powerNodeBase" href="powerNodeBase.html" /> 
+    <link rel="prev" title="C++ Module: powerNodeBase" href="powerNodeBase.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -127,7 +128,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">power</a></li>
           <li class="breadcrumb-item"><a href="index.html">_GeneralModuleFiles</a></li>
-      <li class="breadcrumb-item active">Module: powerStorageBase</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: powerStorageBase</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,14 +138,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-powerstoragebase">
-<span id="powerstoragebase"></span><h1>Module: powerStorageBase<a class="headerlink" href="#module-powerstoragebase" title="Link to this heading"></a></h1>
+  <section id="c-module-powerstoragebase">
+<span id="powerstoragebase"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: powerStorageBase<a class="headerlink" href="#c-module-powerstoragebase" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The PowerStorageBase is a base class that is used generate a standard interface and list of features for modules that store electrical power.  This class is used by other modules as a parent class and cannot be instantiated by itself.  All Basilisk power storage modules based on this PowerStorageBase inherit the following common properties:</p>
 <ol class="arabic simple">
 <li><p>Writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefC/PowerStorageStatusMsgPayload.html#powerstoragestatusmsgpayload"><span class="std std-ref">PowerStorageStatusMsgPayload</span></a> containing the current stored power (in Watt-Seconds or Joules), the current net power (in Watts), and the battery storage capacity (in Watt-Seconds or Joules).</p></li>
-<li><p>Allows for multiple <a class="reference internal" href="../../../architecture/msgPayloadDefC/PowerNodeUsageMsgPayload.html#powernodeusagemsgpayload"><span class="std std-ref">PowerNodeUsageMsgPayload</span></a> corresponding to individual <a class="reference internal" href="powerNodeBase.html#powernodebase"><span class="std std-ref">Module: powerNodeBase</span></a> instances to be subscribed to using the addPowerNodeToModel method.</p></li>
+<li><p>Allows for multiple <a class="reference internal" href="../../../architecture/msgPayloadDefC/PowerNodeUsageMsgPayload.html#powernodeusagemsgpayload"><span class="std std-ref">PowerNodeUsageMsgPayload</span></a> corresponding to individual <a class="reference internal" href="powerNodeBase.html#powernodebase"><span class="std std-ref">C++ Module: powerNodeBase</span></a> instances to be subscribed to using the addPowerNodeToModel method.</p></li>
 <li><p>Iterates through attached <a class="reference internal" href="../../../architecture/msgPayloadDefC/PowerNodeUsageMsgPayload.html#powernodeusagemsgpayload"><span class="std std-ref">PowerNodeUsageMsgPayload</span></a> instances and computes the net power over all messages using <code class="docutils literal notranslate"><span class="pre">sumAllInputs()</span></code></p></li>
 <li><p>Computes the conversion between net power in and storage using the <code class="docutils literal notranslate"><span class="pre">evaluateBatteryModel</span></code> method, which must be overridden in child classes and is therefore module-specific.</p></li>
 </ol>
@@ -161,6 +162,9 @@
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-352f596159ce3eda915f1d66442ef17a266b98b4.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">powerStorageBase module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -385,7 +389,7 @@ provides information on what this message is used for.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="powerNodeBase.html" class="btn btn-neutral float-left" title="Module: powerNodeBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="powerNodeBase.html" class="btn btn-neutral float-left" title="C++ Module: powerNodeBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../antennaPower/index.html" class="btn btn-neutral float-right" title="antennaPower" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

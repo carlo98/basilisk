@@ -1,7 +1,7 @@
 .. _svIntegratorRK4:
 
-Module: svIntegratorRK4
-=======================
+:module-type:`C++` Module: svIntegratorRK4
+==========================================
 
 
 RK4 integrator. It only implements the method integrate() to advance one time step.

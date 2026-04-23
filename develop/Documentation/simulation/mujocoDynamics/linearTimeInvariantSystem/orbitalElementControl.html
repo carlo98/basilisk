@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: orbitalElementControl &mdash; Basilisk 2.11.0beta
+  <title>orbitalElementControl &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -26,8 +27,8 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Module: singleActuatorLTI" href="singleActuatorLTI.html" />
-    <link rel="prev" title="Module: linearTimeInvariantSystem" href="linearTimeInvariantSystem.html" /> 
+    <link rel="next" title="singleActuatorLTI" href="singleActuatorLTI.html" />
+    <link rel="prev" title="C++ Module: linearTimeInvariantSystem" href="linearTimeInvariantSystem.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -132,7 +133,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">mujocoDynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">linearTimeInvariantSystem</a></li>
-      <li class="breadcrumb-item active">Module: orbitalElementControl</li>
+      <li class="breadcrumb-item active">orbitalElementControl</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/mujocoDynamics/linearTimeInvariantSystem/orbitalElementControl.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -142,8 +143,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-orbitalelementcontrol">
-<span id="orbitalelementcontrol"></span><h1>Module: orbitalElementControl<a class="headerlink" href="#module-orbitalelementcontrol" title="Link to this heading"></a></h1>
+  <section id="orbitalelementcontrol">
+<span id="id1"></span><h1>orbitalElementControl<a class="headerlink" href="#orbitalelementcontrol" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">OrbitalElementControl</span></code> module specializes <a class="reference internal" href="linearTimeInvariantSystem.html#lineartimeinvariantsystem"><span class="std std-ref">LinearTimeInvariantSystem</span></a> to
@@ -196,8 +197,11 @@ through the internal LTI state</p></li>
 </section>
 <section id="message-interfaces">
 <h2>Message Interfaces<a class="headerlink" href="#message-interfaces" title="Link to this heading"></a></h2>
-<table class="docutils align-default" id="id1">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-daa810c0905c4fadd4f1d5ad796f006238660f38.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">orbitalElementControl module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -216,8 +220,7 @@ through the internal LTI state</p></li>
 </tr>
 <tr class="row-odd"><td><p>currentOEInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ClassicElementsMsgPayload.html#classicelementsmsgpayload"><span class="std std-ref">ClassicElementsMsgPayload</span></a></p></td>
-<td><p>Input current classical orbital elements used to form feedback errors and to build the Gauss mapping and
-frame transforms.</p></td>
+<td><p>Input current classical orbital elements used to form feedback errors and to build the Gauss mapping and frame transforms.</p></td>
 </tr>
 <tr class="row-even"><td><p>forceOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/CmdForceInertialMsgPayload.html#cmdforceinertialmsgpayload"><span class="std std-ref">CmdForceInertialMsgPayload</span></a></p></td>
@@ -444,8 +447,8 @@ match the reference <code class="docutils literal notranslate"><span class="pre"
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="linearTimeInvariantSystem.html" class="btn btn-neutral float-left" title="Module: linearTimeInvariantSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="singleActuatorLTI.html" class="btn btn-neutral float-right" title="Module: singleActuatorLTI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="linearTimeInvariantSystem.html" class="btn btn-neutral float-left" title="C++ Module: linearTimeInvariantSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="singleActuatorLTI.html" class="btn btn-neutral float-right" title="singleActuatorLTI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

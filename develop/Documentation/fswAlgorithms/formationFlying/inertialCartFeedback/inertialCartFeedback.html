@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: inertialCartFeedback &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: inertialCartFeedback &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -134,7 +135,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">formationFlying</a></li>
           <li class="breadcrumb-item"><a href="index.html">inertialCartFeedback</a></li>
-      <li class="breadcrumb-item active">Module: inertialCartFeedback</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: inertialCartFeedback</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/formationFlying/inertialCartFeedback/inertialCartFeedback.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -144,8 +145,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-inertialcartfeedback">
-<span id="inertialcartfeedback"></span><h1>Module: inertialCartFeedback<a class="headerlink" href="#module-inertialcartfeedback" title="Link to this heading"></a></h1>
+  <section id="c-module-inertialcartfeedback">
+<span id="inertialcartfeedback"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: inertialCartFeedback<a class="headerlink" href="#c-module-inertialcartfeedback" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">inertialCartFeedback</span></code> module computes an inertial-frame deputy force command for translational tracking of a desired deputy inertial state.
@@ -165,10 +166,12 @@ This module uses Lyapunov control theory described in chapter 14 of <a class="re
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.
-The module msg connection is set by the user from Python.
-The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-f7c9d5ac6bdb8206a3d58c664f1fdbf5ac199b8a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">inertialCartFeedback module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>

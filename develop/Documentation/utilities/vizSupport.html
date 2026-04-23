@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -453,7 +454,7 @@ configuration setting messages.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scSim</strong> – variable with the simulationBaseClass copy</p></li>
 <li><p><strong>simTaskName</strong> – task to which to add the vizInterface module</p></li>
-<li><p><strong>scList</strong> – <a class="reference internal" href="../simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> objects.  Can be a single object or list of objects</p></li>
+<li><p><strong>scList</strong> – <a class="reference internal" href="../simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> objects.  Can be a single object or list of objects</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
@@ -463,14 +464,14 @@ in a local sub-folder called <code class="docutils literal notranslate"><span cl
 If a data file name is provided directly (i.e. it ends with <code class="docutils literal notranslate"><span class="pre">.bin</span></code>), then the
 associated file path and name are used explicitly.
 Default: empty string resulting in the data not being saved to a file</p></li>
-<li><p><strong>rwEffectorList</strong> (single or list of <code class="docutils literal notranslate"><span class="pre">ReactionWheelStateEffector</span></code>) – The list must have the same length <code class="docutils literal notranslate"><span class="pre">scList</span></code>.  Each entry is the <a class="reference internal" href="../simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">Module: reactionWheelStateEffector</span></a> instance
+<li><p><strong>rwEffectorList</strong> (single or list of <code class="docutils literal notranslate"><span class="pre">ReactionWheelStateEffector</span></code>) – The list must have the same length <code class="docutils literal notranslate"><span class="pre">scList</span></code>.  Each entry is the <a class="reference internal" href="../simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">C++ Module: reactionWheelStateEffector</span></a> instance
 for the spacecraft, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if the spacecraft has no RW devices.</p></li>
-<li><p><strong>thrEffectorList</strong> (single or double-list of <a class="reference internal" href="../simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>) – The list must have the same length <code class="docutils literal notranslate"><span class="pre">scList</span></code>.  Each entry is a list of <a class="reference internal" href="../simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">Module: reactionWheelStateEffector</span></a>
+<li><p><strong>thrEffectorList</strong> (single or double-list of <a class="reference internal" href="../simulation/dynamics/Thrusters/thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>) – The list must have the same length <code class="docutils literal notranslate"><span class="pre">scList</span></code>.  Each entry is a list of <a class="reference internal" href="../simulation/dynamics/reactionWheels/reactionWheelStateEffector.html#reactionwheelstateeffector"><span class="std std-ref">C++ Module: reactionWheelStateEffector</span></a>
 instances
 for the spacecraft denoting a thruster cluster, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if the spacecraft has no thruster devices.</p></li>
 <li><p><strong>thrColors</strong> (<em>single</em><em> or </em><em>vector</em><em> of </em><em>int</em><em>(</em><em>4</em><em>)</em>) – array of RGBA color values for each thruster set.  The list must have the same length as <code class="docutils literal notranslate"><span class="pre">scList</span></code>.
 Each list entry is a list of RGBA array values for each cluster set.</p></li>
-<li><p><strong>cssList</strong> – list of lists of <a class="reference internal" href="../simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">Module: coarseSunSensor</span></a> objects.  The outer list length must match <code class="docutils literal notranslate"><span class="pre">scList</span></code>.</p></li>
+<li><p><strong>cssList</strong> – list of lists of <a class="reference internal" href="../simulation/sensors/coarseSunSensor/coarseSunSensor.html#coarsesunsensor"><span class="std std-ref">C++ Module: coarseSunSensor</span></a> objects.  The outer list length must match <code class="docutils literal notranslate"><span class="pre">scList</span></code>.</p></li>
 <li><p><strong>genericSensorList</strong> – list of lists of <code class="docutils literal notranslate"><span class="pre">GenericSensor</span></code> structures.  The outer list length must match <code class="docutils literal notranslate"><span class="pre">scList</span></code>.</p></li>
 <li><p><strong>ellipsoidList</strong> – list of lists of <code class="docutils literal notranslate"><span class="pre">Ellipsoid</span></code> structures.  The outer list length must match <code class="docutils literal notranslate"><span class="pre">scList</span></code>.</p></li>
 <li><p><strong>lightList</strong> – list of lists of <code class="docutils literal notranslate"><span class="pre">Light</span></code> structures.   The outer list length must match <code class="docutils literal notranslate"><span class="pre">scList</span></code>.</p></li>
@@ -499,7 +500,7 @@ If None the ground track will default to spacecraft’s dominant grav body</p></
 <dd class="field-odd"><p>copy of the vizInterface instance</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">Module: vizInterface</span></a> object</p>
+<dd class="field-even"><p><a class="reference internal" href="../simulation/vizard/vizInterface/vizInterface.html#vizinterface"><span class="std std-ref">C++ Module: vizInterface</span></a> object</p>
 </dd>
 </dl>
 </dd></dl>

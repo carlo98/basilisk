@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: forceAtSiteLTI &mdash; Basilisk 2.11.0beta
+  <title>forceAtSiteLTI &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -26,7 +27,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Module: linearTimeInvariantSystem" href="linearTimeInvariantSystem.html" />
+    <link rel="next" title="C++ Module: linearTimeInvariantSystem" href="linearTimeInvariantSystem.html" />
     <link rel="prev" title="linearTimeInvariantSystem" href="index.html" /> 
 </head>
 
@@ -132,7 +133,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">mujocoDynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">linearTimeInvariantSystem</a></li>
-      <li class="breadcrumb-item active">Module: forceAtSiteLTI</li>
+      <li class="breadcrumb-item active">forceAtSiteLTI</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/mujocoDynamics/linearTimeInvariantSystem/forceAtSiteLTI.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -142,8 +143,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-forceatsitelti">
-<span id="forceatsitelti"></span><h1>Module: forceAtSiteLTI<a class="headerlink" href="#module-forceatsitelti" title="Link to this heading"></a></h1>
+  <section id="forceatsitelti">
+<span id="id1"></span><h1>forceAtSiteLTI<a class="headerlink" href="#forceatsitelti" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">ForceAtSiteLTI</span></code> module implements a three-input, three-output linear time-invariant force model by specializing <a class="reference internal" href="linearTimeInvariantSystem.html#lineartimeinvariantsystem"><span class="std std-ref">LinearTimeInvariantSystem</span></a>. It maps site-frame force vectors from <code class="docutils literal notranslate"><span class="pre">ForceAtSiteMsgPayload</span></code> into the LTI input and publishes filtered or shaped site-frame forces through the same payload type.</p>
@@ -175,8 +176,11 @@ F_z
 </section>
 <section id="message-interfaces">
 <h2>Message Interfaces<a class="headerlink" href="#message-interfaces" title="Link to this heading"></a></h2>
-<table class="docutils align-default" id="id1">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-f6770cd9c0a9388be7c7b660537b8a93d778f5b6.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">forceAtSiteLTI module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -309,7 +313,7 @@ F_z
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="linearTimeInvariantSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="linearTimeInvariantSystem.html" class="btn btn-neutral float-right" title="Module: linearTimeInvariantSystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="linearTimeInvariantSystem.html" class="btn btn-neutral float-right" title="C++ Module: linearTimeInvariantSystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

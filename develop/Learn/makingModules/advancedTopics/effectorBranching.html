@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -132,8 +133,8 @@
 <p>Back-substitution is the default method that manages the dynamics under the hood of Basilisk. The
 backsubstitution formulation assumes that all dynamical modules, a.k.a. “effectors”, influencing the
 dynamics of the spacecraft are attached directly to its central hub in parallel. These effectors are
-sub-classed as either <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">Module: dynamicEffector</span></a> (provide external forces and torques acting on the
-body, but doesn’t have state differential equations to integrate) or <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">Module: stateEffector</span></a> (has
+sub-classed as either <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">C++ Module: dynamicEffector</span></a> (provide external forces and torques acting on the
+body, but doesn’t have state differential equations to integrate) or <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">C++ Module: stateEffector</span></a> (has
 internal state differential equations to integrate that couple with the spacecraft rigid hub).</p>
 <p>This parallel coupling assumption can be relaxed to allow select configurations of effectors to be
 attached in series to each other as opposed to being attached directly to the hub. See
@@ -142,7 +143,7 @@ attached in series to each other as opposed to being attached directly to the hu
 <h2>State Effector Augmentation<a class="headerlink" href="#state-effector-augmentation" title="Link to this heading"></a></h2>
 <p>For a state effector, three changes must be made.</p>
 <ol class="arabic">
-<li><p>Connect the state effector’s properties to the <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynParamManager.html#dynparammanager"><span class="std std-ref">Module: dynParamManager</span></a></p>
+<li><p>Connect the state effector’s properties to the <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynParamManager.html#dynparammanager"><span class="std std-ref">C++ Module: dynParamManager</span></a></p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Ensure the effector’s inertial properties are of an appropriate data type to be accepted by
@@ -211,7 +212,7 @@ constructor.</p></li>
 <p class="admonition-title">Important</p>
 <p>The force and torque ouput by dependent effectors as variables forceExternal_B and
 <code class="docutils literal notranslate"><span class="pre">torqueExternalPntB_B</span></code> is computed relative to its parent frame, not the body frame as they
-are labeled. For example if attached to a <a class="reference internal" href="../../../Documentation/simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">Module: spinningBodyOneDOFStateEffector</span></a>,
+are labeled. For example if attached to a <a class="reference internal" href="../../../Documentation/simulation/dynamics/spinningBodies/spinningBodiesOneDOF/spinningBodyOneDOFStateEffector.html#spinningbodyonedofstateeffector"><span class="std std-ref">C++ Module: spinningBodyOneDOFStateEffector</span></a>,
 <code class="docutils literal notranslate"><span class="pre">torqueExternalPntB_B</span></code> is actually the torque about point S expressed in the S frame
 (<code class="docutils literal notranslate"><span class="pre">torqueExternalPntS_S</span></code>) as its parent frame is the spinning body’s frame.</p>
 <p>This also requires that the state effector output inertial properties to this frame origin
@@ -222,8 +223,8 @@ position, this torque computed by the attached dynamic effector would need to be
 the state effector does not get knowledge of where dynamic effectors are attached to make such a
 correction.</p>
 </div>
-<p>A more complete description of back-substitution, <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">Module: stateEffector</span></a>, and <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">Module: dynamicEffector</span></a>
-can be found in <a class="reference internal" href="../../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> and its linked PDF description, particularly the Equations of
+<p>A more complete description of back-substitution, <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/stateEffector.html#stateeffector"><span class="std std-ref">C++ Module: stateEffector</span></a>, and <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/dynamicEffector.html#dynamiceffector"><span class="std std-ref">C++ Module: dynamicEffector</span></a>
+can be found in <a class="reference internal" href="../../../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> and its linked PDF description, particularly the Equations of
 Motion section. Specifics on setting up the corresponding integrated tests for any newly enabled
 branching effectors can be found in <a class="reference internal" href="../../../Documentation/simulation/dynamics/_GeneralModuleFiles/_UnitTestDynamics/test_effectorBranching_integrated.html#test-effectorbranching-integrated"><span class="std std-ref">test_effectorBranching_integrated</span></a>. A more detailed
 description of this augmentation of the back-substitution method can be found in the following

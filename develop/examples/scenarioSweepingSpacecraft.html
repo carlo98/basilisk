@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -153,7 +154,7 @@
 <p>A single simulation process is created which contains both the spacecraft simulation modules, as well as the Flight Software (FSW) algorithm
 modules.</p>
 <p>The simulation setup is similar to the one used in the Hill pointing guidance example
-<a class="reference internal" href="scenarioAttitudeGuidance.html#scenarioattitudeguidance"><span class="std std-ref">scenarioAttitudeGuidance</span></a>. The main difference is based on the use of the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/eulerRotation/eulerRotation.html#eulerrotation"><span class="std std-ref">Module: eulerRotation</span></a> to allow 3-2-1 Euler rotations of the Hill reference frame.
+<a class="reference internal" href="scenarioAttitudeGuidance.html#scenarioattitudeguidance"><span class="std std-ref">scenarioAttitudeGuidance</span></a>. The main difference is based on the use of the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/eulerRotation/eulerRotation.html#eulerrotation"><span class="std std-ref">C Module: eulerRotation</span></a> to allow 3-2-1 Euler rotations of the Hill reference frame.
 This rotating Hill frame becomes the new reference frame for the attitude tracking error evaluation module.
 Two inputs are added : (1) A sequence of 3-2-1 Euler angle rate commands (in rad/s) of type numpy array, (2) A sequence of time commands (in min) of type numpy array, which specifies the duration of each angle rate command.</p>
 <p>When the simulation completes, 4 plots are shown : (1) The attitude error norm history, (2) The rate

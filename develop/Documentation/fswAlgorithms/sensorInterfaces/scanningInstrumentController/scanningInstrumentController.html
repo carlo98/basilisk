@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: scanningInstrumentController &mdash; Basilisk 2.11.0beta
+  <title>C Module: scanningInstrumentController &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -130,7 +131,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">sensorInterfaces</a></li>
           <li class="breadcrumb-item"><a href="index.html">scanningInstrumentController</a></li>
-      <li class="breadcrumb-item active">Module: scanningInstrumentController</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: scanningInstrumentController</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/sensorInterfaces/scanningInstrumentController/scanningInstrumentController.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,8 +141,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-scanninginstrumentcontroller">
-<span id="scanninginstrumentcontroller"></span><h1>Module: scanningInstrumentController<a class="headerlink" href="#module-scanninginstrumentcontroller" title="Link to this heading"></a></h1>
+  <section id="c-module-scanninginstrumentcontroller">
+<span id="scanninginstrumentcontroller"></span><h1><span class="module-type-label module-type-c">C</span> Module: scanningInstrumentController<a class="headerlink" href="#c-module-scanninginstrumentcontroller" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Module to perform continuous instrument control if attitude error and attitude rate are within specified
@@ -151,10 +152,12 @@ attitude requirements.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.
-The module msg connection is set by the user from python.
-The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-f898c67e76302a32a682a70687800a6813fdbd13.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">scanningInstrumentController module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -190,12 +193,12 @@ provides information on what this message is used for.</p>
 </section>
 <section id="detailed-module-description">
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
-<p>This module writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceCmdMsgPayload.html#devicecmdmsgpayload"><span class="std std-ref">DeviceCmdMsgPayload</span></a> to turn on an instrument, i.e. <a class="reference internal" href="../../../simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">Module: simpleInstrument</span></a>, continuously
+<p>This module writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceCmdMsgPayload.html#devicecmdmsgpayload"><span class="std std-ref">DeviceCmdMsgPayload</span></a> to turn on an instrument, i.e. <a class="reference internal" href="../../../simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">C++ Module: simpleInstrument</span></a>, continuously
 while the requirement conditions are met.</p>
 <p>The module first checks if the instrument controller is active using the <code class="docutils literal notranslate"><span class="pre">controllerStatus</span></code> variable. This variable
 defaults to 0 (inactive) due to swig initialization of the module, but the user may set the variable to 1 (active)
 with the <code class="docutils literal notranslate"><span class="pre">deviceStatusInMsg</span></code> or <code class="docutils literal notranslate"><span class="pre">controllerStatus</span></code> variable. If the instrument controller is active, the module
-then checks if the norm of the attitude error is less than the user specified tolerance and if the <a class="reference internal" href="../../../simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a>
+then checks if the norm of the attitude error is less than the user specified tolerance and if the <a class="reference internal" href="../../../simulation/environment/groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a>
 is accessible. If both are true, the module sets the <code class="docutils literal notranslate"><span class="pre">deviceCmd</span></code> to 1. Otherwise, the <code class="docutils literal notranslate"><span class="pre">deviceCmd</span></code> is set to 0.</p>
 </section>
 <section id="user-guide">

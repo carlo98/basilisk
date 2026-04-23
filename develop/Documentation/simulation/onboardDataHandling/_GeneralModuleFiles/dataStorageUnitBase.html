@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: dataStorageUnitBase &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: dataStorageUnitBase &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -25,7 +26,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="instrument" href="../instrument/index.html" />
-    <link rel="prev" title="Module: dataNodeBase" href="dataNodeBase.html" /> 
+    <link rel="prev" title="C++ Module: dataNodeBase" href="dataNodeBase.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -125,7 +126,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">onboardDataHandling</a></li>
           <li class="breadcrumb-item"><a href="index.html">_GeneralModuleFiles</a></li>
-      <li class="breadcrumb-item active">Module: dataStorageUnitBase</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: dataStorageUnitBase</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -135,19 +136,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-datastorageunitbase">
-<span id="datastorageunitbase"></span><h1>Module: dataStorageUnitBase<a class="headerlink" href="#module-datastorageunitbase" title="Link to this heading"></a></h1>
+  <section id="c-module-datastorageunitbase">
+<span id="datastorageunitbase"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: dataStorageUnitBase<a class="headerlink" href="#c-module-datastorageunitbase" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>DataStorageUnitBase is a base class that is used generate a standard interface and list of features for modules that store simulated onboard data.  This class is used by other modules as a parent class and cannot be instantiated by itself.  All Basilisk data storage modules based on this DataStorageUnitBase inherit the following common properties:</p>
 <ol class="arabic simple">
 <li><p>Writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefCpp/DataStorageStatusMsgPayload.html#datastoragestatusmsgpayload"><span class="std std-ref">DataStorageStatusMsgPayload</span></a> containing the sum of the current stored data (in bits), the storage capacity (bits), the current net data rate (in baud), an array of char array containing the names of the stored data (ex. Instrument 1, Instrument 2), and an array of integers containing the stored data associated with each type (bits).</p></li>
-<li><p>Allows for multiple <a class="reference internal" href="../../../architecture/msgPayloadDefC/DataNodeUsageMsgPayload.html#datanodeusagemsgpayload"><span class="std std-ref">DataNodeUsageMsgPayload</span></a> corresponding to individual <a class="reference internal" href="dataNodeBase.html#datanodebase"><span class="std std-ref">Module: dataNodeBase</span></a> instances to be subscribed to using the <code class="docutils literal notranslate"><span class="pre">addDataNodeToModel(msg)</span></code> method.</p></li>
+<li><p>Allows for multiple <a class="reference internal" href="../../../architecture/msgPayloadDefC/DataNodeUsageMsgPayload.html#datanodeusagemsgpayload"><span class="std std-ref">DataNodeUsageMsgPayload</span></a> corresponding to individual <a class="reference internal" href="dataNodeBase.html#datanodebase"><span class="std std-ref">C++ Module: dataNodeBase</span></a> instances to be subscribed to using the <code class="docutils literal notranslate"><span class="pre">addDataNodeToModel(msg)</span></code> method.</p></li>
 <li><p>Iterates through attached <a class="reference internal" href="../../../architecture/msgPayloadDefC/DataNodeUsageMsgPayload.html#datanodeusagemsgpayload"><span class="std std-ref">DataNodeUsageMsgPayload</span></a> instances, integrates the data for each data node, and adds it to its respective entry using <code class="docutils literal notranslate"><span class="pre">integrateDataStatus()</span></code> method, which may be overwritten in child classes.</p></li>
 <li><p>Loops through the vector of storedData to sum the total amount of data contained within the storage unit.</p></li>
 <li><p>Add or remove data from specified partitions using <code class="docutils literal notranslate"><span class="pre">setDataBuffer()</span></code> method.</p></li>
 </ol>
-<p>Core functionality is wrapped in the <code class="docutils literal notranslate"><span class="pre">integrateDataStatus</span></code> protected virtual void method, which computes the amount of data stored in a storage unit on a module basis. This base class automatically implements a partitioned storage unit (different data buffers for each device). See <a class="reference internal" href="../storageUnit/simpleStorageUnit.html#simplestorageunit"><span class="std std-ref">Module: simpleStorageUnit</span></a> for an example of how this functionality can be overwritten.</p>
+<p>Core functionality is wrapped in the <code class="docutils literal notranslate"><span class="pre">integrateDataStatus</span></code> protected virtual void method, which computes the amount of data stored in a storage unit on a module basis. This base class automatically implements a partitioned storage unit (different data buffers for each device). See <a class="reference internal" href="../storageUnit/simpleStorageUnit.html#simplestorageunit"><span class="std std-ref">C++ Module: simpleStorageUnit</span></a> for an example of how this functionality can be overwritten.</p>
 <p>Protected methods prepended with <code class="docutils literal notranslate"><span class="pre">custom</span></code> are intended for module developers to override with additional, module-specific functionality.</p>
 <p>For more information on how to set up and use classes derived from this module, see the simple data system example: <a class="reference internal" href="../../../../examples/scenarioDataDemo.html#scenariodatademo"><span class="std std-ref">scenarioDataDemo</span></a></p>
 </section>
@@ -160,6 +161,9 @@
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-d9ffb383ed0a983b70e4d9a866372ab41395a940.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">dataStorageUnitBase module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -446,7 +450,7 @@ provides information on what this message is used for.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dataNodeBase.html" class="btn btn-neutral float-left" title="Module: dataNodeBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataNodeBase.html" class="btn btn-neutral float-left" title="C++ Module: dataNodeBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../instrument/index.html" class="btn btn-neutral float-right" title="instrument" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

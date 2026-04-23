@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -140,11 +141,26 @@
 </section>
 <section id="tool-requirements">
 <h2>Tool Requirements<a class="headerlink" href="#tool-requirements" title="Link to this heading"></a></h2>
-<p>You need to have a command line version of Doxygen installed on your system. The Doxygen <a class="reference external" href="https://www.doxygen.nl/download.html">download
-page</a> contains a range of pre-compiled binaries for many different platforms.</p>
+<p>You need to have command line versions of Doxygen and Graphviz installed on
+your system. The Doxygen <a class="reference external" href="https://www.doxygen.nl/download.html">download page</a>
+contains a range of pre-compiled binaries for many different platforms.
+Graphviz provides the <code class="docutils literal notranslate"><span class="pre">dot</span></code> executable used by Sphinx to render module I/O
+diagrams.</p>
 <p>On macOS the <a class="reference external" href="https://brew.sh">Homebrew</a> tool is also a very
-convenient method to install Doxygen by typing in the terminal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">doxygen</span>
+convenient method to install these tools by typing in the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">doxygen</span> <span class="n">graphviz</span>
+</pre></div>
+</div>
+<p>On Ubuntu or Debian Linux systems these tools can be installed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">doxygen</span> <span class="n">graphviz</span>
+</pre></div>
+</div>
+<p>If you are using a conda environment, Graphviz can also be installed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">graphviz</span>
+</pre></div>
+</div>
+<p>You can verify that Graphviz is available with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dot</span> <span class="o">-</span><span class="n">V</span>
 </pre></div>
 </div>
 <p>To install the required python packages run the command:</p>
@@ -164,7 +180,7 @@ convenient method to install Doxygen by typing in the terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">docs</span>
 </pre></div>
 </div>
-<p>Finally, type the following command to build the HTML documenation:</p>
+<p>Finally, type the following command to build the HTML documentation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
 </pre></div>
 </div>

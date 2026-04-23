@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: relativeODuKF &mdash; Basilisk 2.11.0beta
+  <title>C Module: relativeODuKF &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -126,7 +127,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">fswAlgorithms</a></li>
           <li class="breadcrumb-item"><a href="../index.html">opticalNavigation</a></li>
           <li class="breadcrumb-item"><a href="index.html">relativeODuKF</a></li>
-      <li class="breadcrumb-item active">Module: relativeODuKF</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-c">C</span> Module: relativeODuKF</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/fswAlgorithms/opticalNavigation/relativeODuKF/relativeODuKF.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,8 +137,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-relativeodukf">
-<span id="relativeodukf"></span><h1>Module: relativeODuKF<a class="headerlink" href="#module-relativeodukf" title="Link to this heading"></a></h1>
+  <section id="c-module-relativeodukf">
+<span id="relativeodukf"></span><h1><span class="module-type-label module-type-c">C</span> Module: relativeODuKF<a class="headerlink" href="#c-module-relativeodukf" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module filters position measurements that have been processed from planet images in order to estimate spacecraft relative position to an observed body in the inertial frame. The filter used is an unscented Kalman filter, and the images are first processed by houghCricles and pixelLineConverter in order to produce this filter’s measurements.</p>
@@ -148,9 +149,12 @@ how to run it, as well as testing.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<p>The following table lists all the module input and output messages.  The module msg connection is set by the
-user from python.  The msg type contains a link to the message structure definition, while the description
-provides information on what this message is used for.</p>
+<p>The following diagram and table list all the module input and output messages.  The module message connection is
+set by the user from Python.  The message type contains a link to the message structure definition, while the
+description provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-cec347c1d85557b32f6a64cdf8d4ed0b8acd3487.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">relativeODuKF module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -171,7 +175,7 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>filtDataOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/OpNavFilterMsgPayload.html#opnavfiltermsgpayload"><span class="std std-ref">OpNavFilterMsgPayload</span></a></p></td>
-<td><p>output filter data message</p></td>
+<td><p>Output filter data message</p></td>
 </tr>
 <tr class="row-even"><td><p>opNavInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/OpNavMsgPayload.html#opnavmsgpayload"><span class="std std-ref">OpNavMsgPayload</span></a></p></td>

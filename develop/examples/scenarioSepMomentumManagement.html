@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -152,23 +153,23 @@ The goals for the SEP are to continuously point the thruster along the requested
 maneuvering the gimbal in order to manage the momentum build-up on RWs due to external unmodeled perturbations. As a
 consequence, the optimal reference attitude for the spacecraft changes as the dual-gimbaled platform is articulated.
 In this script, the unmodeled perturbation consists in the solar radiation pressure (SRP) torque acting on the
-system, and modeled using <a class="reference internal" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.html#facetsrpdynamiceffector"><span class="std std-ref">Module: facetSRPDynamicEffector</span></a>. The main flight software modules used in this script are
+system, and modeled using <a class="reference internal" href="../Documentation/simulation/dynamics/facetSRPDynamicEffector/facetSRPDynamicEffector.html#facetsrpdynamiceffector"><span class="std std-ref">C++ Module: facetSRPDynamicEffector</span></a>. The main flight software modules used in this script are
 the following:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/oneAxisSolarArrayPoint/oneAxisSolarArrayPoint.html#oneaxissolararraypoint"><span class="std std-ref">Module: oneAxisSolarArrayPoint</span></a>: computes the reference attitude for a spacecraft with multiple pointing requirements.
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/oneAxisSolarArrayPoint/oneAxisSolarArrayPoint.html#oneaxissolararraypoint"><span class="std std-ref">C Module: oneAxisSolarArrayPoint</span></a>: computes the reference attitude for a spacecraft with multiple pointing requirements.
 For this application, the first requirement is to align the thruster with the requested inertial direction; the
 second requirement is to have the solar array drive axis as close to orthogonal as possible to the sunline.</p></li>
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">Module: thrusterPlatformReference</span></a>: computes the reference tip and tilt angles for the dual-gimbaled platform on which
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">C Module: thrusterPlatformReference</span></a>: computes the reference tip and tilt angles for the dual-gimbaled platform on which
 the SEP thruster is mounted on. Based on nominal expected thruster behavior, this module computes the gimbal angles
 that ensure that the resulting thruster torque feeds back on RW momentum build-up, therefore ensuring that the total
 net momentum is continuously dumped.</p></li>
-<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/stateEstimation/thrustCMEstimation/thrustCMEstimation.html#thrustcmestimation"><span class="std std-ref">Module: thrustCMEstimation</span></a>: estimates the location of the system’s center of mass (CM). In the presence of an
+<li><p><a class="reference internal" href="../Documentation/fswAlgorithms/stateEstimation/thrustCMEstimation/thrustCMEstimation.html#thrustcmestimation"><span class="std std-ref">C++ Module: thrustCMEstimation</span></a>: estimates the location of the system’s center of mass (CM). In the presence of an
 unmodeled disturbance such as SRP the estimate is biased, and the estimated point is the location of a point
 <span class="math notranslate nohighlight">\(C^*\)</span> such that, when the thruster is fired through this point, the resulting torque counterbalances external
 unmodeled perturbations.</p></li>
 </ul>
-<p>To ensure that attitude convergence is reached, in order for <a class="reference internal" href="../Documentation/fswAlgorithms/stateEstimation/thrustCMEstimation/thrustCMEstimation.html#thrustcmestimation"><span class="std std-ref">Module: thrustCMEstimation</span></a> to process meaningful torque
-measurements, <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">Module: thrusterPlatformReference</span></a> is run at the frequency of one update per hour, as opposed to the
+<p>To ensure that attitude convergence is reached, in order for <a class="reference internal" href="../Documentation/fswAlgorithms/stateEstimation/thrustCMEstimation/thrustCMEstimation.html#thrustcmestimation"><span class="std std-ref">C++ Module: thrustCMEstimation</span></a> to process meaningful torque
+measurements, <a class="reference internal" href="../Documentation/fswAlgorithms/effectorInterfaces/thrusterPlatformReference/thrusterPlatformReference.html#thrusterplatformreference"><span class="std std-ref">C Module: thrusterPlatformReference</span></a> is run at the frequency of one update per hour, as opposed to the
 frequency of one update every other second (0.5 Hz) for every other flight software module. Dynamics frequency is 2 Hz.</p>
 <p>The script is found in the folder <code class="docutils literal notranslate"><span class="pre">basilisk/examples</span></code> and executed by using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenarioSepMomentumManagement</span><span class="o">.</span><span class="n">py</span>

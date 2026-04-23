@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -156,8 +157,8 @@ simplePower modules are intended to provide three major features:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenarioPowerDemo</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>The simplePower subsystem consists of two kinds of Basilisk simModules: <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">Module: powerStorageBase</span></a> (which is used to represent
-power storage units, and serves as the heart of the subsystem) and <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerNodeBase.html#powernodebase"><span class="std std-ref">Module: powerNodeBase</span></a> (which is used to represent system
+<p>The simplePower subsystem consists of two kinds of Basilisk simModules: <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">C++ Module: powerStorageBase</span></a> (which is used to represent
+power storage units, and serves as the heart of the subsystem) and <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerNodeBase.html#powernodebase"><span class="std std-ref">C++ Module: powerNodeBase</span></a> (which is used to represent system
 components that consume or generate power). A conceptual diagram of these classes and their interfaces to eachother
 and the rest of Basilisk is shown in the figure below.</p>
 <a class="reference internal image-reference" href="../_images/simplePowerConcept.svg"><img alt="../_images/simplePowerConcept.svg" class="align-center" src="../_images/simplePowerConcept.svg" style="width: 450px;" />
@@ -166,16 +167,16 @@ and the rest of Basilisk is shown in the figure below.</p>
 <ol class="arabic simple">
 <li><p>Create and configure a set of powerNodeBase modules to represent power system sources and sinks,
 including their <code class="docutils literal notranslate"><span class="pre">nodePowerOutMsg</span></code> attributes;</p></li>
-<li><p>Create and configure a <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">Module: powerStorageBase</span></a> instance;</p></li>
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">addPowerNodeToModel()</span></code> method from the <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">Module: powerStorageBase</span></a> on the <code class="docutils literal notranslate"><span class="pre">nodePowerOutMsg</span></code>
-you configured in step 1 to link the power nodes to the <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">Module: powerStorageBase</span></a> instance</p></li>
+<li><p>Create and configure a <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">C++ Module: powerStorageBase</span></a> instance;</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">addPowerNodeToModel()</span></code> method from the <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">C++ Module: powerStorageBase</span></a> on the <code class="docutils literal notranslate"><span class="pre">nodePowerOutMsg</span></code>
+you configured in step 1 to link the power nodes to the <a class="reference internal" href="../Documentation/simulation/power/_GeneralModuleFiles/powerStorageBase.html#powerstoragebase"><span class="std std-ref">C++ Module: powerStorageBase</span></a> instance</p></li>
 <li><p>Run the simulation.</p></li>
 </ol>
 <p>One version of this process is demonstrated here. A spacecraft representing a tumbling 6U cubesat
 is placed in a LEO orbit,
 using methods that are described in other scenarios. Three simplePower modules are created:
-a <a class="reference internal" href="../Documentation/simulation/power/simpleBattery/simpleBattery.html#simplebattery"><span class="std std-ref">Module: simpleBattery</span></a>, a <a class="reference internal" href="../Documentation/simulation/power/simpleSolarPanel/simpleSolarPanel.html#simplesolarpanel"><span class="std std-ref">Module: simpleSolarPanel</span></a>,
-and a <a class="reference internal" href="../Documentation/simulation/power/simplePowerSink/simplePowerSink.html#simplepowersink"><span class="std std-ref">Module: simplePowerSink</span></a> (which represents the load demanded by on-board electronics.)
+a <a class="reference internal" href="../Documentation/simulation/power/simpleBattery/simpleBattery.html#simplebattery"><span class="std std-ref">C++ Module: simpleBattery</span></a>, a <a class="reference internal" href="../Documentation/simulation/power/simpleSolarPanel/simpleSolarPanel.html#simplesolarpanel"><span class="std std-ref">C++ Module: simpleSolarPanel</span></a>,
+and a <a class="reference internal" href="../Documentation/simulation/power/simplePowerSink/simplePowerSink.html#simplepowersink"><span class="std std-ref">C++ Module: simplePowerSink</span></a> (which represents the load demanded by on-board electronics.)
 The solar panel is assumed to be body-fixed,
 and given the parameters appropriate for a 6U cubesat.</p>
 <p>When the simulation completes, the following single plot is shown to

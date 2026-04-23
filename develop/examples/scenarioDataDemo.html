@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -156,8 +157,8 @@ by instruments, stored by computers, and downlinked by transmittters.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenarioDataDemo</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/index.html#folder-onboarddatahandling"><span class="std std-ref">onboardDataHandling</span></a> subsystem consists of two kinds of Basilisk simModules: <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">Module: dataStorageUnitBase</span></a> (which is used to represent
-data storage units, and serves as the heart of the subsystem) and <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">Module: dataNodeBase</span></a> (which is used to represent system
+<p>The <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/index.html#folder-onboarddatahandling"><span class="std std-ref">onboardDataHandling</span></a> subsystem consists of two kinds of Basilisk simModules: <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">C++ Module: dataStorageUnitBase</span></a> (which is used to represent
+data storage units, and serves as the heart of the subsystem) and <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataNodeBase.html#datanodebase"><span class="std std-ref">C++ Module: dataNodeBase</span></a> (which is used to represent system
 components that consume or generate data). A conceptual diagram of these classes and their interfaces to each other
 and the rest of Basilisk is shown in the figure below.</p>
 <a class="reference internal image-reference" href="../_images/simpleDataConcept.svg"><img alt="../_images/simpleDataConcept.svg" class="align-center" src="../_images/simpleDataConcept.svg" style="width: 450px;" />
@@ -165,14 +166,14 @@ and the rest of Basilisk is shown in the figure below.</p>
 <p>In general, this system can be configured using the following process:</p>
 <ol class="arabic simple">
 <li><p>Create and configure a set of dataNodeBase modules to represent data system sources and sinks, including their <code class="docutils literal notranslate"><span class="pre">nodeDataOutMsg</span></code> attributes;</p></li>
-<li><p>Create and configure a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">Module: dataStorageUnitBase</span></a> instance;</p></li>
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">addDataNodeToModel()</span></code> method from the <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">Module: dataStorageUnitBase</span></a> on the <code class="docutils literal notranslate"><span class="pre">nodeDataOutMsg</span></code> you configured in step 1 to link the power nodes to the <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">Module: dataStorageUnitBase</span></a> instance</p></li>
+<li><p>Create and configure a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">C++ Module: dataStorageUnitBase</span></a> instance;</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">addDataNodeToModel()</span></code> method from the <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">C++ Module: dataStorageUnitBase</span></a> on the <code class="docutils literal notranslate"><span class="pre">nodeDataOutMsg</span></code> you configured in step 1 to link the power nodes to the <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/_GeneralModuleFiles/dataStorageUnitBase.html#datastorageunitbase"><span class="std std-ref">C++ Module: dataStorageUnitBase</span></a> instance</p></li>
 <li><p>Run the simulation.</p></li>
 </ol>
 <p>One version of this process is demonstrated here using methods that are described in other scenarios.
 Three <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/index.html#folder-onboarddatahandling"><span class="std std-ref">onboardDataHandling</span></a> modules are created:
-a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/storageUnit/partitionedStorageUnit.html#partitionedstorageunit"><span class="std std-ref">Module: partitionedStorageUnit</span></a>, a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">Module: simpleInstrument</span></a>,
-and a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/transmitter/simpleTransmitter.html#simpletransmitter"><span class="std std-ref">Module: simpleTransmitter</span></a>.</p>
+a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/storageUnit/partitionedStorageUnit.html#partitionedstorageunit"><span class="std std-ref">C++ Module: partitionedStorageUnit</span></a>, a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/instrument/simpleInstrument/simpleInstrument.html#simpleinstrument"><span class="std std-ref">C++ Module: simpleInstrument</span></a>,
+and a <a class="reference internal" href="../Documentation/simulation/onboardDataHandling/transmitter/simpleTransmitter.html#simpletransmitter"><span class="std std-ref">C++ Module: simpleTransmitter</span></a>.</p>
 <p>When the simulation completes, the following plots are shown to
 demonstrate the data stored, generated, and downlinked.</p>
 <img alt="../_images/scenario_dataDemoBits.svg" class="align-center" src="../_images/scenario_dataDemoBits.svg" />

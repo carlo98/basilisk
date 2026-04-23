@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -151,10 +152,10 @@ setup attitude filters that use measurements from the Coarse Sun Sensors (CSS).<
 </pre></div>
 </div>
 <p>When the simulation completes several plots are written summarizing the filter performances.</p>
-<p>The simulation reads the Sun’s position from <a class="reference internal" href="../Documentation/simulation/environment/spiceInterface/spiceInterface.html#spiceinterface"><span class="std std-ref">Module: spiceInterface</span></a>. By creating this
+<p>The simulation reads the Sun’s position from <a class="reference internal" href="../Documentation/simulation/environment/spiceInterface/spiceInterface.html#spiceinterface"><span class="std std-ref">C++ Module: spiceInterface</span></a>. By creating this
 spice object and adding it to the task, the spice object automatically writes out
 the ephemeris messages.</p>
-<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">Module: spacecraft</span></a> module where a specific
+<p>The dynamics simulation is setup using a <a class="reference internal" href="../Documentation/simulation/dynamics/spacecraft/spacecraft.html#spacecraft"><span class="std std-ref">C++ Module: spacecraft</span></a> module where a specific
 spacecraft location is specified.  Note that both the rotational and translational
 degrees of freedom of the spacecraft hub are turned on here to get a 6-DOF simulation.
 The position vector is required when computing the relative heading between the sun
@@ -218,7 +219,7 @@ over which we are comparing performance:</p>
 </section>
 <section id="setup-1-ukf">
 <h2>Setup 1 - ukF<a class="headerlink" href="#setup-1-ukf" title="Link to this heading"></a></h2>
-<p>In the first run, we use an square root unscented Kalman Filter (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineUKF/sunlineUKF.html#sunlineukf"><span class="std std-ref">Module: sunlineUKF</span></a>).
+<p>In the first run, we use an square root unscented Kalman Filter (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineUKF/sunlineUKF.html#sunlineukf"><span class="std std-ref">C Module: sunlineUKF</span></a>).
 This filter has the following states:</p>
 <table class="docutils align-default">
 <thead>
@@ -278,7 +279,7 @@ As a unscented filter, it also has the the following parameters:</p>
 </tbody>
 </table>
 <p>The resulting plots of the states, their covariance envelopes, as compared
-to the true state are plotted. Further documentation can be found in <a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineUKF/sunlineUKF.html#sunlineukf"><span class="std std-ref">Module: sunlineUKF</span></a>.</p>
+to the true state are plotted. Further documentation can be found in <a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineUKF/sunlineUKF.html#sunlineukf"><span class="std std-ref">C Module: sunlineUKF</span></a>.</p>
 <img alt="../_images/scenario_Filters_StatesPlotuKF.svg" class="align-center" src="../_images/scenario_Filters_StatesPlotuKF.svg" />
 <img alt="../_images/scenario_Filters_StatesExpecteduKF.svg" class="align-center" src="../_images/scenario_Filters_StatesExpecteduKF.svg" />
 <p>These plots show good state estimation throughout the simulation.
@@ -288,7 +289,7 @@ The mean stays close to the truth, the states do appear slightly noisy at times.
 </section>
 <section id="setup-2-ekf">
 <h2>Setup 2 - EKF<a class="headerlink" href="#setup-2-ekf" title="Link to this heading"></a></h2>
-<p>The following filter tested is an Extended Kalman filter (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineEKF/sunlineEKF.html#sunlineekf"><span class="std std-ref">Module: sunlineEKF</span></a>).
+<p>The following filter tested is an Extended Kalman filter (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineEKF/sunlineEKF.html#sunlineekf"><span class="std std-ref">C Module: sunlineEKF</span></a>).
 This filter uses all the same values for initialization as the uKF (aside
 from the uKF specific alpha, beta, kappa variables). A couple variables are added:</p>
 <table class="docutils align-default">
@@ -312,7 +313,7 @@ for dynamical uncertainties, and avoid filter saturation.</p>
 linear Kalman filter when the filter is first run. This allows for the covariance
 to shrink before employing the EKF, increasing the robustness.</p>
 <p>The states vs expected states are plotted, as well as the state error plots along with the covariance
-envelopes. Further documentation can be found in <a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineEKF/sunlineEKF.html#sunlineekf"><span class="std std-ref">Module: sunlineEKF</span></a></p>
+envelopes. Further documentation can be found in <a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineEKF/sunlineEKF.html#sunlineekf"><span class="std std-ref">C Module: sunlineEKF</span></a></p>
 <img alt="../_images/scenario_Filters_StatesPlotEKF.svg" class="align-center" src="../_images/scenario_Filters_StatesPlotEKF.svg" />
 <img alt="../_images/scenario_Filters_StatesExpectedEKF.svg" class="align-center" src="../_images/scenario_Filters_StatesExpectedEKF.svg" />
 <p>These plots show good state estimation throughout the simulation and despite the patches of time with
@@ -322,13 +323,13 @@ fewer measurements. The covariance stays close to the mean, without exesive nois
 </section>
 <section id="setup-3-oekf">
 <h2>Setup 3 - OEKF<a class="headerlink" href="#setup-3-oekf" title="Link to this heading"></a></h2>
-<p>The 3rd scenario uses a second type of Extended Kalman Filter (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/okeefeEKF/okeefeEKF.html#okeefeekf"><span class="std std-ref">Module: okeefeEKF</span></a>).
+<p>The 3rd scenario uses a second type of Extended Kalman Filter (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/okeefeEKF/okeefeEKF.html#okeefeekf"><span class="std std-ref">C Module: okeefeEKF</span></a>).
 This filter takes in fewer states as it only estimates the sun heading. In order to
 propagate it, it estimates the omega vector from the two last measurements.</p>
 <p>The set up is nearly identical to the EKF, with the exception of the size of the
 vectors and matrices (only 3 states are estimated now). Furthermore, the
 rotation rate of the spacecraft, omega, is initialized. More in-depth documentation on the filter
-specifics are found in <a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/okeefeEKF/okeefeEKF.html#okeefeekf"><span class="std std-ref">Module: okeefeEKF</span></a>.</p>
+specifics are found in <a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/okeefeEKF/okeefeEKF.html#okeefeekf"><span class="std std-ref">C Module: okeefeEKF</span></a>.</p>
 <img alt="../_images/scenario_Filters_StatesPlotOEKF.svg" class="align-center" src="../_images/scenario_Filters_StatesPlotOEKF.svg" />
 <img alt="../_images/scenario_Filters_StatesExpectedOEKF.svg" class="align-center" src="../_images/scenario_Filters_StatesExpectedOEKF.svg" />
 <p>These plots show poorer state estimation throughout the simulation. As measurements stop,
@@ -342,7 +343,7 @@ when measurements become sparse:</p>
 <section id="setup-4-switch-ekf">
 <h2>Setup 4 -Switch-EKF<a class="headerlink" href="#setup-4-switch-ekf" title="Link to this heading"></a></h2>
 <p>The 4th scenario uses a Switch formulation to extract the observable rates as
-well as estimate the sun heading (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineSEKF/sunlineSEKF.html#sunlinesekf"><span class="std std-ref">Module: sunlineSEKF</span></a>).</p>
+well as estimate the sun heading (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineSEKF/sunlineSEKF.html#sunlinesekf"><span class="std std-ref">C Module: sunlineSEKF</span></a>).</p>
 <img alt="../_images/scenario_Filters_StatesPlotSEKF.svg" class="align-center" src="../_images/scenario_Filters_StatesPlotSEKF.svg" />
 <img alt="../_images/scenario_Filters_StatesExpectedSEKF.svg" class="align-center" src="../_images/scenario_Filters_StatesExpectedSEKF.svg" />
 <p>These plots show poorer state estimation throughout the simulation.</p>
@@ -352,7 +353,7 @@ when measurements become sparse.</p>
 </section>
 <section id="setup-5-switch-ukf">
 <h2>Setup 5 -Switch-uKF<a class="headerlink" href="#setup-5-switch-ukf" title="Link to this heading"></a></h2>
-<p>The 5th scenario uses the same Switch formulation but in a square-root uKF (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineSuKF/sunlineSuKF.html#sunlinesukf"><span class="std std-ref">Module: sunlineSuKF</span></a>).
+<p>The 5th scenario uses the same Switch formulation but in a square-root uKF (<a class="reference internal" href="../Documentation/fswAlgorithms/attDetermination/sunlineSuKF/sunlineSuKF.html#sunlinesukf"><span class="std std-ref">C Module: sunlineSuKF</span></a>).
 This one has an additional state: the sun intensity (equal to 1 at 1AU). This state
 has low process noise and low initial covariance given it’s well determined nature generally.</p>
 <img alt="../_images/scenario_Filters_StatesPlotSuKF.svg" class="align-center" src="../_images/scenario_Filters_StatesPlotSuKF.svg" />

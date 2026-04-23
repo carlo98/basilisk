@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -150,7 +151,7 @@ adds a spiral scanning motion on top of it.</p>
 </pre></div>
 </div>
 <p>The initial orientation is set to zero for all MRPs and rates, and the desired attitude is layered on top using
-<a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/eulerRotation/eulerRotation.html#eulerrotation"><span class="std std-ref">Module: eulerRotation</span></a>, which allows 3-2-1 Euler rotations to be specified. In this script, the first rotation
+<a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/eulerRotation/eulerRotation.html#eulerrotation"><span class="std std-ref">C Module: eulerRotation</span></a>, which allows 3-2-1 Euler rotations to be specified. In this script, the first rotation
 is 0.02 radians per second about the 1-axis and the second is 0.0001 radians per second about the 2-axis. This
 creates an outward sweeping spiral motion. The inertial pointing module feeds its output message into the first
 rotation, which feeds into the second, which in turn gives the attitude error that is used by the control law.</p>

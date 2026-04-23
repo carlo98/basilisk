@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: thrusterStateEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: thrusterStateEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -155,7 +156,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="../index.html">Thrusters</a></li>
           <li class="breadcrumb-item"><a href="index.html">thrusterStateEffector</a></li>
-      <li class="breadcrumb-item active">Module: thrusterStateEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: thrusterStateEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../../_sources/Documentation/simulation/dynamics/Thrusters/thrusterStateEffector/thrusterStateEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -165,18 +166,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-thrusterstateeffector">
-<span id="thrusterstateeffector"></span><h1>Module: thrusterStateEffector<a class="headerlink" href="#module-thrusterstateeffector" title="Link to this heading"></a></h1>
+  <section id="c-module-thrusterstateeffector">
+<span id="thrusterstateeffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: thrusterStateEffector<a class="headerlink" href="#c-module-thrusterstateeffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module provides an implementation of the behavior of thrusters. Thrusters are modeled dynamically using a first-order ordinary differential equation, which is compatible with variable time step integrators.
-With this module, there are now two different thruster implementations. See <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a> for the previous version, which implemented thrusters using on and off-ramps, although not compatible with variable time step integrators.</p>
+With this module, there are now two different thruster implementations. See <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a> for the previous version, which implemented thrusters using on and off-ramps, although not compatible with variable time step integrators.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../../_images/graphviz-2dfb66e7c9a8d85673421926c0d7d07f9e4977b9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">thrusterStateEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -197,7 +201,7 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>thrusterOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../../architecture/msgPayloadDefCpp/THROutputMsgPayload.html#throutputmsgpayload"><span class="std std-ref">THROutputMsgPayload</span></a></p></td>
-<td><p>output message vector for thruster data</p></td>
+<td><p>output message vector for thruster data.</p></td>
 </tr>
 </tbody>
 </table>
@@ -206,9 +210,9 @@ provides information on what this message is used for.</p>
 <h2>Detailed Module Description<a class="headerlink" href="#detailed-module-description" title="Link to this heading"></a></h2>
 <section id="thruster-modeling">
 <h3>Thruster Modeling<a class="headerlink" href="#thruster-modeling" title="Link to this heading"></a></h3>
-<p>The functionalities of this thruster implementation are identical to the ones seen in <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>. For a general description of the thruster implementation in Basilisk, namely how the forces and torques are computed, see that module’s documentation.</p>
+<p>The functionalities of this thruster implementation are identical to the ones seen in <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>. For a general description of the thruster implementation in Basilisk, namely how the forces and torques are computed, see that module’s documentation.</p>
 <p>The main difference between the two thruster implementations comes from how the <code class="docutils literal notranslate"><span class="pre">thrustFactor</span></code> is computed and updated at each timestep. The <code class="docutils literal notranslate"><span class="pre">thrustFactor</span></code> is a parameter specific to each thruster and ranges from 0 to 1. It defines what the current magnitude of the thrust is: at 0 the thruster is off, and at 1 the thruster is at <code class="docutils literal notranslate"><span class="pre">maxThrust</span></code>. While the previous thruster module computed the <code class="docutils literal notranslate"><span class="pre">thrustFactor</span></code> using on and off-ramps at the beginning and end of the thrusting maneuver, respectively, with a constant steady-state value of 1 in-between, this module updates that value through a first-order ordinary differential equation.</p>
-<p>The state variable used in this state effector is <span class="math notranslate nohighlight">\(\kappa\)</span>, which is a vector of <code class="docutils literal notranslate"><span class="pre">thrustFactors</span></code> for each thruster. As with <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>, the <code class="docutils literal notranslate"><span class="pre">addThruster()</span></code> method augments the vector of thruster inside the module. However, for this module the state vector <span class="math notranslate nohighlight">\(\kappa\)</span> is also augmented in this method.</p>
+<p>The state variable used in this state effector is <span class="math notranslate nohighlight">\(\kappa\)</span>, which is a vector of <code class="docutils literal notranslate"><span class="pre">thrustFactors</span></code> for each thruster. As with <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>, the <code class="docutils literal notranslate"><span class="pre">addThruster()</span></code> method augments the vector of thruster inside the module. However, for this module the state vector <span class="math notranslate nohighlight">\(\kappa\)</span> is also augmented in this method.</p>
 <p>Let <span class="math notranslate nohighlight">\(\kappa_i\)</span> correspond to the <code class="docutils literal notranslate"><span class="pre">thrustFactor</span></code> of the i-th thruster. It has two governing differential equations, depending on whether a thrust command is present or not. The differential equation when thrusting is given by</p>
 <div class="math notranslate nohighlight">
 \[\dot{\kappa_i} = \omega(1-\kappa_i)\]</div>
@@ -231,7 +235,7 @@ panel, for example.  Currently there is one-way coupling here where the sub-comp
 impact the location and orientation of the thruster, but firing the thruster does not impact
 the effector.</p>
 <p>Let <span class="math notranslate nohighlight">\(F\)</span> be the body-fixed frame of the rigid body sub-component, such as
-<a class="reference internal" href="../../prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">Module: prescribedMotionStateEffector</span></a>.  With this effector case it is ok that the thruster
+<a class="reference internal" href="../../prescribedMotion/prescribedMotionStateEffector.html#prescribedmotionstateeffector"><span class="std std-ref">C++ Module: prescribedMotionStateEffector</span></a>.  With this effector case it is ok that the thruster
 does not impact the effector as the effector motion is prescribed.
 If the thruster is added to an auxiliary body <span class="math notranslate nohighlight">\(F\)</span>
 which is connected to the main spacecraft body <span class="math notranslate nohighlight">\(B\)</span>, then this is accomplished using:</p>
@@ -260,11 +264,11 @@ damping.</p>
 <section id="limitations">
 <h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h3>
 <p>One of the limitations of this model relates to the dynamic nature of this thruster implementation. The thrust is simulated through the thrust factor, which is updated by integrating a differencial equation. This means that it is not possible to reproduce on-off behavior, where the thruster goes from not thrusting to being at maximum thrust or vice-versa. Using this dynamic model, we would have to use infinite derivatives to
-reproduce this behavior, which is not numerically feasible. To replicate this behavior, the user should use the older version of the thruster effector (<a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>) with both on or off-ramps disabled.</p>
+reproduce this behavior, which is not numerically feasible. To replicate this behavior, the user should use the older version of the thruster effector (<a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>) with both on or off-ramps disabled.</p>
 <p>Another limitation is that the <span class="math notranslate nohighlight">\(I_{sp}\)</span> used is constant throughout the simulation. This means that the mass flow rate of the thruster is constant - the thruster will lose mass as soon as the valve is open, independent of how much thrust force is being produced. If the user needs to change the <span class="math notranslate nohighlight">\(I_{sp}\)</span> value of any of the thrusters, the simulation needs to be stop and restarted.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The dynamic behaviour of this module is governed by the <code class="docutils literal notranslate"><span class="pre">cutoffFrequency</span></code> variable inside <a class="reference internal" href="../../_GeneralModuleFiles/THRSimConfig.html#thrsimconfig"><span class="std std-ref">Module: THRSimConfig</span></a>. Its default value is equal to 10 rad/s. All variables related to on and off-ramps have no impact on this module and are instead supposed to be used to determine the dynamic behaviour within <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">Module: thrusterDynamicEffector</span></a>.</p>
+<p>The dynamic behaviour of this module is governed by the <code class="docutils literal notranslate"><span class="pre">cutoffFrequency</span></code> variable inside <a class="reference internal" href="../../_GeneralModuleFiles/THRSimConfig.html#thrsimconfig"><span class="std std-ref">THRSimConfig</span></a>. Its default value is equal to 10 rad/s. All variables related to on and off-ramps have no impact on this module and are instead supposed to be used to determine the dynamic behaviour within <a class="reference internal" href="../thrusterDynamicEffector/thrusterDynamicEffector.html#thrusterdynamiceffector"><span class="std std-ref">C++ Module: thrusterDynamicEffector</span></a>.</p>
 </div>
 </section>
 </section>

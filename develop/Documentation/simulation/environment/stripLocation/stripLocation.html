@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: stripLocation &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: stripLocation &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">stripLocation</a></li>
-      <li class="breadcrumb-item active">Module: stripLocation</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: stripLocation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/stripLocation/stripLocation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,11 +153,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-striplocation">
-<span id="striplocation"></span><h1>Module: stripLocation<a class="headerlink" href="#module-striplocation" title="Link to this heading"></a></h1>
+  <section id="c-module-striplocation">
+<span id="striplocation"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: stripLocation<a class="headerlink" href="#c-module-striplocation" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
-<p>This module extends the <a class="reference internal" href="../groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">Module: groundLocation</span></a> concept to model a <strong>strip imaging target</strong> on a
+<p>This module extends the <a class="reference internal" href="../groundLocation/groundLocation.html#groundlocation"><span class="std std-ref">C++ Module: groundLocation</span></a> concept to model a <strong>strip imaging target</strong> on a
 celestial body’s surface.  Instead of a single fixed point, the user defines a ground strip by
 specifying a <strong>start</strong> and an <strong>end</strong> location (both body-fixed).  The module uses spherical
 linear interpolation (SLERP) to sweep a moving target point <span class="math notranslate nohighlight">\(L\)</span> along the great-circle arc
@@ -189,6 +190,9 @@ at the current target location.</p></li>
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-7ed2dfdb600f7048fb995d5271891eed603cbca5.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">stripLocation module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -209,15 +213,15 @@ provides information on what this message is used for.</p>
 </tr>
 <tr class="row-odd"><td><p>scStateInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>vector of sc state input messages.  These are set through <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code></p></td>
+<td><p>vector of sc state input messages.  These are set through <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p>currentStripStateOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/StripStateMsgPayload.html#stripstatemsgpayload"><span class="std std-ref">StripStateMsgPayload</span></a></p></td>
-<td><p>strip location output message providing the current target point inertial position and velocity</p></td>
+<td><p>strip location output message providing the current target point inertial position and velocity.</p></td>
 </tr>
 <tr class="row-odd"><td><p>accessOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AccessMsgPayload.html#accessmsgpayload"><span class="std std-ref">AccessMsgPayload</span></a></p></td>
-<td><p>vector of access output messages (one per spacecraft)</p></td>
+<td><p>vector of access output messages (one per spacecraft).</p></td>
 </tr>
 </tbody>
 </table>

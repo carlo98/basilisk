@@ -1,7 +1,7 @@
 .. _svIntegratorEuler:
 
-Module: svIntegratorEuler
-=========================
+svIntegratorEuler
+=================
 
 
 RK1 or Euler integrator. It only implements the method integrate() to advance one time step.

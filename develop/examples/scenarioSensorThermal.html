@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -142,7 +143,7 @@
 </div>
 <section id="overview">
 <span id="module-scenarioSensorThermal"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This scenario demonstrates the use of the <a class="reference internal" href="../Documentation/simulation/thermal/sensorThermal/sensorThermal.html#sensorthermal"><span class="std std-ref">Module: sensorThermal</span></a> module, which models a sensor as a flat plate of solid
+<p>This scenario demonstrates the use of the <a class="reference internal" href="../Documentation/simulation/thermal/sensorThermal/sensorThermal.html#sensorthermal"><span class="std std-ref">C++ Module: sensorThermal</span></a> module, which models a sensor as a flat plate of solid
 material with an insulated backing. An optional power input can be used if the sensor consumes power, which is transferred
 to heat. The sensor radiates heat to the outside environment, and takes in heat from the sun based on its incidence
 angle.</p>
@@ -150,7 +151,7 @@ angle.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenarioSensorThermal</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>In this scenario, the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">Module: locationPointing</span></a>, <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">Module: mrpFeedback</span></a>, and <a class="reference internal" href="../Documentation/simulation/dynamics/extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">Module: extForceTorque</span></a> modules are used to
+<p>In this scenario, the <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/locationPointing/locationPointing.html#locationpointing"><span class="std std-ref">C Module: locationPointing</span></a>, <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpFeedback/mrpFeedback.html#mrpfeedback"><span class="std std-ref">C Module: mrpFeedback</span></a>, and <a class="reference internal" href="../Documentation/simulation/dynamics/extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">C++ Module: extForceTorque</span></a> modules are used to
 point the sensor. In the first orbital period, the sensor is pointed directly at the sun, heating it up. In the second
 orbital period, the sensor is pointed opposite of the sun, cooling it.</p>
 </section>

@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: windBase &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: windBase &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -27,7 +28,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="albedo" href="../albedo/index.html" />
-    <link rel="prev" title="Module: magneticFieldBase" href="magneticFieldBase.html" /> 
+    <link rel="prev" title="C++ Module: magneticFieldBase" href="magneticFieldBase.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -142,7 +143,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">environment</a></li>
           <li class="breadcrumb-item"><a href="index.html">_GeneralModuleFiles</a></li>
-      <li class="breadcrumb-item active">Module: windBase</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: windBase</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/environment/_GeneralModuleFiles/windBase.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -152,8 +153,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-windbase">
-<span id="windbase"></span><h1>Module: windBase<a class="headerlink" href="#module-windbase" title="Link to this heading"></a></h1>
+  <section id="c-module-windbase">
+<span id="windbase"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: windBase<a class="headerlink" href="#c-module-windbase" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Abstract base class for atmospheric wind models. <code class="docutils literal notranslate"><span class="pre">WindBase</span></code> reads spacecraft
@@ -201,6 +202,9 @@ opportunity to set the epoch from a module-level variable.</p></li>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
 <p>The following table lists all the module input and output messages.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-e72e496e44dcc52364b427b25f42426bb0495c59.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">windBase module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -217,26 +221,19 @@ opportunity to set the epoch from a module-level variable.</p></li>
 <tbody>
 <tr class="row-even"><td><p>scStateInMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>Spacecraft state input messages (vector). Use <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code>
-to add spacecraft and automatically create corresponding output messages.</p></td>
+<td><p>Spacecraft state input messages (vector). Use <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code> to add spacecraft and automatically create corresponding output messages.</p></td>
 </tr>
 <tr class="row-odd"><td><p>envOutMsgs</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/WindMsgPayload.html#windmsgpayload"><span class="std std-ref">WindMsgPayload</span></a></p></td>
-<td><p>Atmospheric wind velocity output messages (vector). Automatically created when
-spacecraft are added via <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code>. Each message contains:
-<code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> (full air velocity in inertial frame) and <code class="docutils literal notranslate"><span class="pre">v_wind_N</span></code>
-(wind perturbation velocity), both expressed in inertial frame N</p></td>
+<td><p>Atmospheric wind velocity output messages (vector). Automatically created when spacecraft are added via <code class="docutils literal notranslate"><span class="pre">addSpacecraftToModel()</span></code>. Each message contains: <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> (full air velocity in inertial frame) and <code class="docutils literal notranslate"><span class="pre">v_wind_N</span></code> (wind perturbation velocity), both expressed in inertial frame N.</p></td>
 </tr>
 <tr class="row-even"><td><p>planetPosInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>Planet SPICE state input message. Provides <code class="docutils literal notranslate"><span class="pre">PositionVector</span></code> used to compute <code class="docutils literal notranslate"><span class="pre">r_BP_N</span></code>.
-Must be connected before <code class="docutils literal notranslate"><span class="pre">InitializeSimulation()</span></code>.</p></td>
+<td><p>Planet SPICE state input message. Provides <code class="docutils literal notranslate"><span class="pre">PositionVector</span></code> used to compute <code class="docutils literal notranslate"><span class="pre">r_BP_N</span></code>. Must be connected before <code class="docutils literal notranslate"><span class="pre">InitializeSimulation()</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p>epochInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/EpochMsgPayload.html#epochmsgpayload"><span class="std std-ref">EpochMsgPayload</span></a></p></td>
-<td><p>(Optional) Epoch date/time message. When connected, overrides the default
-Basilisk epoch stored in <code class="docutils literal notranslate"><span class="pre">epochDateTime</span></code>. Required by empirical wind
-models that depend on calendar date.</p></td>
+<td><p>(Optional) Epoch date/time message. When connected, overrides the default Basilisk epoch stored in <code class="docutils literal notranslate"><span class="pre">epochDateTime</span></code>. Required by empirical wind models that depend on calendar date.</p></td>
 </tr>
 </tbody>
 </table>
@@ -562,7 +559,7 @@ models that depend on calendar date.</p></td>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="magneticFieldBase.html" class="btn btn-neutral float-left" title="Module: magneticFieldBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="magneticFieldBase.html" class="btn btn-neutral float-left" title="C++ Module: magneticFieldBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../albedo/index.html" class="btn btn-neutral float-right" title="albedo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

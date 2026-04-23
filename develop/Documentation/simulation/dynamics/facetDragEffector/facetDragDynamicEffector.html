@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: facetDragDynamicEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: facetDragDynamicEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -154,7 +155,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">facetDragEffector</a></li>
-      <li class="breadcrumb-item active">Module: facetDragDynamicEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: facetDragDynamicEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/facetDragEffector/facetDragDynamicEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -164,8 +165,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-facetdragdynamiceffector">
-<span id="facetdragdynamiceffector"></span><h1>Module: facetDragDynamicEffector<a class="headerlink" href="#module-facetdragdynamiceffector" title="Link to this heading"></a></h1>
+  <section id="c-module-facetdragdynamiceffector">
+<span id="facetdragdynamiceffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: facetDragDynamicEffector<a class="headerlink" href="#c-module-facetdragdynamiceffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Drag dynamics class used to compute drag effects on spacecraft bodies</p>
@@ -177,7 +178,7 @@ For more information see the
 </section>
 <section id="wind-velocity-input">
 <h2>Wind Velocity Input<a class="headerlink" href="#wind-velocity-input" title="Link to this heading"></a></h2>
-<p>When <code class="docutils literal notranslate"><span class="pre">windVelInMsg</span></code> is linked to a <a class="reference internal" href="../../environment/_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">Module: windBase</span></a>-derived module (e.g. <a class="reference internal" href="../../environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">Module: zeroWindModel</span></a>),
+<p>When <code class="docutils literal notranslate"><span class="pre">windVelInMsg</span></code> is linked to a <a class="reference internal" href="../../environment/_GeneralModuleFiles/windBase.html#windbase"><span class="std std-ref">C++ Module: windBase</span></a>-derived module (e.g. <a class="reference internal" href="../../environment/ZeroWindModel/zeroWindModel.html#zerowindmodel"><span class="std std-ref">C++ Module: zeroWindModel</span></a>),
 the drag model subtracts the air velocity <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> from the spacecraft inertial velocity before
 computing drag, yielding the atmosphere-relative velocity:</p>
 <div class="math notranslate nohighlight">
@@ -208,6 +209,9 @@ Both inputs are therefore treated as <strong>piecewise-constant</strong> over ea
 <p>The following table lists all the module input and output messages.  The module msg variable name is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-9f188090361756443ae232e959661eb839acc243.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">facetDragDynamicEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -224,12 +228,11 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>atmoDensInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AtmoPropsMsgPayload.html#atmopropsmsgpayload"><span class="std std-ref">AtmoPropsMsgPayload</span></a></p></td>
-<td><p>input message for atmospheric density information</p></td>
+<td><p>input message for atmospheric density information.</p></td>
 </tr>
 <tr class="row-odd"><td><p>windVelInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/WindMsgPayload.html#windmsgpayload"><span class="std std-ref">WindMsgPayload</span></a></p></td>
-<td><p>(optional) wind velocity input message; when linked, <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> is subtracted from the
-spacecraft inertial velocity to obtain the atmosphere-relative velocity</p></td>
+<td><p>(optional) wind velocity input message; when linked, <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> is subtracted from the spacecraft inertial velocity to obtain the atmosphere-relative velocity.</p></td>
 </tr>
 </tbody>
 </table>

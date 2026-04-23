@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -215,7 +216,7 @@ correctly from the state effector to dynamic effector.</p>
 <p>Finally, we simultaneously check that a) the applied force and torque are being handed correctly
 from the dynamic effector to state effector, and b) that these forces and torques are
 implemented correctly in the state effector’s equations of motion. We do this by isolating each
-case where a state effector has the <a class="reference internal" href="../../extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">Module: extForceTorque</span></a> effector attached to it. Using the
+case where a state effector has the <a class="reference internal" href="../../extForceTorque/extForceTorque.html#extforcetorque"><span class="std std-ref">C++ Module: extForceTorque</span></a> effector attached to it. Using the
 explicitly defined <code class="docutils literal notranslate"><span class="pre">forceExternal_B</span></code> and <code class="docutils literal notranslate"><span class="pre">torqueExternalPntB_B</span></code> and the logged inertial
 position and attitude properties of the state effector, we manually compute the total external
 force on the vehicle about the combined center of mass and the accumulated delta V of the

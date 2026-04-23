@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: gravityEffector &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: gravityEffector &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -24,8 +25,8 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Module: gravityModel" href="gravityModel.html" />
-    <link rel="prev" title="Module: fuelSlosh" href="fuelSlosh.html" /> 
+    <link rel="next" title="gravityModel" href="gravityModel.html" />
+    <link rel="prev" title="fuelSlosh" href="fuelSlosh.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -152,7 +153,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">dynamics</a></li>
           <li class="breadcrumb-item"><a href="index.html">_GeneralModuleFiles</a></li>
-      <li class="breadcrumb-item active">Module: gravityEffector</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: gravityEffector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/dynamics/_GeneralModuleFiles/gravityEffector.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -162,8 +163,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-gravityeffector">
-<span id="gravityeffector"></span><h1>Module: gravityEffector<a class="headerlink" href="#module-gravityeffector" title="Link to this heading"></a></h1>
+  <section id="c-module-gravityeffector">
+<span id="gravityeffector"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: gravityEffector<a class="headerlink" href="#c-module-gravityeffector" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>Abstract class that is used to implement an effector impacting a GRAVITY body
@@ -179,8 +180,11 @@ how to run it, as well as testing.</p>
 <p>The following table lists all the module input and output messages.  The module msg connection is set by the
 user from python.  The msg type contains a link to the message structure definition, while the description
 provides information on what this message is used for.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-95d76519d0d52d01f39401563305486f18fd8e10.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">gravityEffector module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<caption><span class="caption-text">GravityEffector Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -195,15 +199,18 @@ provides information on what this message is used for.</p>
 <tbody>
 <tr class="row-even"><td><p>centralBodyOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>central planet body state output message</p></td>
+<td><p>Central planet body state output message.</p></td>
 </tr>
 </tbody>
 </table>
 <p>The gravity effector contains a list of <code class="docutils literal notranslate"><span class="pre">GravBodyData</span></code> objects which contain the planet mass and size properties etc.
 The following table lists the Spice planet ephemeris input message that can be connected to a <code class="docutils literal notranslate"><span class="pre">GravBodyData</span></code> object.
 If no message is connected, then the planet has zero position and orientation information by default.</p>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-a40ad9f733bf606a919e0af8e21569faa15fd7d2.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">GravBodyData module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<caption><span class="caption-text">GravBodyData Message Interfaces</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -218,7 +225,7 @@ If no message is connected, then the planet has zero position and orientation in
 <tbody>
 <tr class="row-even"><td><p>planetBodyInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SpicePlanetStateMsgPayload.html#spiceplanetstatemsgpayload"><span class="std std-ref">SpicePlanetStateMsgPayload</span></a></p></td>
-<td><p>planet spice ephemerisis input message</p></td>
+<td><p>Planet spice ephemeris input message.</p></td>
 </tr>
 </tbody>
 </table>
@@ -605,8 +612,8 @@ setting up gravity bodies.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="fuelSlosh.html" class="btn btn-neutral float-left" title="Module: fuelSlosh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gravityModel.html" class="btn btn-neutral float-right" title="Module: gravityModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="fuelSlosh.html" class="btn btn-neutral float-left" title="fuelSlosh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gravityModel.html" class="btn btn-neutral float-right" title="gravityModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

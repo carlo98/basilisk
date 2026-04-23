@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: antennaPower &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: antennaPower &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -129,7 +130,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">power</a></li>
           <li class="breadcrumb-item"><a href="index.html">antennaPower</a></li>
-      <li class="breadcrumb-item active">Module: antennaPower</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: antennaPower</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/power/antennaPower/antennaPower.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -139,12 +140,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-antennapower">
-<span id="antennapower"></span><h1>Module: antennaPower<a class="headerlink" href="#module-antennapower" title="Link to this heading"></a></h1>
+  <section id="c-module-antennapower">
+<span id="antennapower"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: antennaPower<a class="headerlink" href="#c-module-antennapower" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module evaluates the power draw of an antenna device. It reads the <code class="docutils literal notranslate"><span class="pre">antennaSetStateInMsg</span></code> containing the current antenna state and calculates the power draw accordingly.</p>
-<p>This module is a sub-class of <a class="reference internal" href="../_GeneralModuleFiles/powerNodeBase.html#powernodebase"><span class="std std-ref">Module: powerNodeBase</span></a>. As such it:</p>
+<p>This module is a sub-class of <a class="reference internal" href="../_GeneralModuleFiles/powerNodeBase.html#powernodebase"><span class="std std-ref">C++ Module: powerNodeBase</span></a>. As such it:</p>
 <ol class="arabic simple">
 <li><p>Writes out a <a class="reference internal" href="../../../architecture/msgPayloadDefC/PowerNodeUsageMsgPayload.html#powernodeusagemsgpayload"><span class="std std-ref">PowerNodeUsageMsgPayload</span></a> describing its power consumption at each sim update</p></li>
 <li><p>Can be switched on or off using an optional message of type <a class="reference internal" href="../../../architecture/msgPayloadDefC/DeviceStatusMsgPayload.html#devicestatusmsgpayload"><span class="std std-ref">DeviceStatusMsgPayload</span></a></p></li>
@@ -152,18 +153,15 @@
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
-<figure class="align-center" id="id1">
-<span id="moduleio-antenna-power"></span><img alt="../../../../_images/PowerAnt.svg" src="../../../../_images/PowerAnt.svg" />
-<figcaption>
-<p><span class="caption-text">Figure 1: <code class="docutils literal notranslate"><span class="pre">antennaPower()</span></code> Module I/O Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-ea1fa8641342129a4046ddf011fd396cf8c2aaa7.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">antennaPower module input and output messages</p></object></div>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
-<col style="width: 16.7%" />
-<col style="width: 16.7%" />
-<col style="width: 66.7%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Msg Variable Name</p></th>
@@ -174,8 +172,7 @@
 <tbody>
 <tr class="row-even"><td><p>antennaSetStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AntennaLogMsgPayload.html#antennalogmsgpayload"><span class="std std-ref">AntennaLogMsgPayload</span></a></p></td>
-<td><p>Antenna state input message providing current
-antenna state and power values.</p></td>
+<td><p>Antenna state input message providing current antenna state and power values.</p></td>
 </tr>
 </tbody>
 </table>

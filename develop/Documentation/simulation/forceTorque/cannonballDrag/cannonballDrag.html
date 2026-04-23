@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module: cannonballDrag &mdash; Basilisk 2.11.0beta
+  <title>C++ Module: cannonballDrag &mdash; Basilisk 2.11.0beta
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
@@ -123,7 +124,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">simulation</a></li>
           <li class="breadcrumb-item"><a href="../index.html">forceTorque</a></li>
           <li class="breadcrumb-item"><a href="index.html">cannonballDrag</a></li>
-      <li class="breadcrumb-item active">Module: cannonballDrag</li>
+      <li class="breadcrumb-item active"><span class="module-type-label module-type-cpp">C++</span> Module: cannonballDrag</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/Documentation/simulation/forceTorque/cannonballDrag/cannonballDrag.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -133,8 +134,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-cannonballdrag">
-<span id="cannonballdrag"></span><h1>Module: cannonballDrag<a class="headerlink" href="#module-cannonballdrag" title="Link to this heading"></a></h1>
+  <section id="c-module-cannonballdrag">
+<span id="cannonballdrag"></span><h1><span class="module-type-label module-type-cpp">C++</span> Module: cannonballDrag<a class="headerlink" href="#c-module-cannonballdrag" title="Link to this heading"></a></h1>
 <section id="executive-summary">
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">CannonballDrag</span></code> module computes quasi-steady aerodynamic drag force and the associated torque acting at a site fixed on a body. It outputs force and torque expressed in a site-fixed reference frame. The model follows the classical cannonball drag formulation and is intended for low-fidelity aerodynamic disturbance modeling.</p>
@@ -152,6 +153,9 @@
 </section>
 <section id="message-interfaces">
 <h2>Message Interfaces<a class="headerlink" href="#message-interfaces" title="Link to this heading"></a></h2>
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-d5651582136a82c2c5ce25fe0bff3402eca58bbb.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">cannonballDrag module input and output messages</p></object></div>
+</div>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">Module I/O Messages</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
@@ -168,24 +172,19 @@
 <tbody>
 <tr class="row-even"><td><p>dragGeometryInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/DragGeometryMsgPayload.html#draggeometrymsgpayload"><span class="std std-ref">DragGeometryMsgPayload</span></a></p></td>
-<td><p>Input message providing the aerodynamic geometry parameters: <code class="docutils literal notranslate"><span class="pre">dragCoeff</span></code> (<span class="math notranslate nohighlight">\(C_D\)</span>),
-<code class="docutils literal notranslate"><span class="pre">projectedArea</span></code> (<span class="math notranslate nohighlight">\(A\)</span>), and <code class="docutils literal notranslate"><span class="pre">r_CP_S</span></code> (center-of-pressure vector relative to the site frame origin,
-expressed in the site frame).</p></td>
+<td><p>Input message providing the aerodynamic geometry parameters: <code class="docutils literal notranslate"><span class="pre">dragCoeff</span></code> (<span class="math notranslate nohighlight">\(C_D\)</span>), <code class="docutils literal notranslate"><span class="pre">projectedArea</span></code> (<span class="math notranslate nohighlight">\(A\)</span>), and <code class="docutils literal notranslate"><span class="pre">r_CP_S</span></code> (center-of-pressure vector relative to the site frame origin, expressed in the site frame).</p></td>
 </tr>
 <tr class="row-odd"><td><p>atmoDensInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/AtmoPropsMsgPayload.html#atmopropsmsgpayload"><span class="std std-ref">AtmoPropsMsgPayload</span></a></p></td>
-<td><p>Input message providing local atmospheric properties at the site location, including <code class="docutils literal notranslate"><span class="pre">neutralDensity</span></code>
-(<span class="math notranslate nohighlight">\(\rho\)</span>).</p></td>
+<td><p>Input message providing local atmospheric properties at the site location, including <code class="docutils literal notranslate"><span class="pre">neutralDensity</span></code> (<span class="math notranslate nohighlight">\(\rho\)</span>).</p></td>
 </tr>
 <tr class="row-even"><td><p>referenceFrameStateInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/SCStatesMsgPayload.html#scstatesmsgpayload"><span class="std std-ref">SCStatesMsgPayload</span></a></p></td>
-<td><p>Input message providing the inertial state of the site reference frame, including <code class="docutils literal notranslate"><span class="pre">sigma_BN</span></code> (MRPs for
-site frame attitude relative to inertial) and <code class="docutils literal notranslate"><span class="pre">v_BN_N</span></code> (inertial velocity of the site frame origin).</p></td>
+<td><p>Input message providing the inertial state of the site reference frame, including <code class="docutils literal notranslate"><span class="pre">sigma_BN</span></code> (MRPs for site frame attitude relative to inertial) and <code class="docutils literal notranslate"><span class="pre">v_BN_N</span></code> (inertial velocity of the site frame origin).</p></td>
 </tr>
 <tr class="row-odd"><td><p>windVelInMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/WindMsgPayload.html#windmsgpayload"><span class="std std-ref">WindMsgPayload</span></a></p></td>
-<td><p>(optional) wind velocity input message; when linked, <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> is subtracted from the site frame
-inertial velocity before computing the drag force, yielding the atmosphere-relative velocity.</p></td>
+<td><p>(optional) wind velocity input message; when linked, <code class="docutils literal notranslate"><span class="pre">v_air_N</span></code> is subtracted from the site frame inertial velocity before computing the drag force, yielding the atmosphere-relative velocity.</p></td>
 </tr>
 <tr class="row-even"><td><p>forceOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ForceAtSiteMsgPayload.html#forceatsitemsgpayload"><span class="std std-ref">ForceAtSiteMsgPayload</span></a></p></td>
@@ -197,13 +196,11 @@ inertial velocity before computing the drag force, yielding the atmosphere-relat
 </tr>
 <tr class="row-even"><td><p>torqueOutMsg</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/TorqueAtSiteMsgPayload.html#torqueatsitemsgpayload"><span class="std std-ref">TorqueAtSiteMsgPayload</span></a></p></td>
-<td><p>Output message containing aerodynamic torque about the site frame origin, expressed in the site reference
-frame.</p></td>
+<td><p>Output message containing aerodynamic torque about the site frame origin, expressed in the site reference frame.</p></td>
 </tr>
 <tr class="row-odd"><td><p>torqueOutMsgC</p></td>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/TorqueAtSiteMsgPayload.html#torqueatsitemsgpayload"><span class="std std-ref">TorqueAtSiteMsgPayload</span></a></p></td>
-<td><p>Output message containing aerodynamic torque about the site frame origin, expressed in the site reference
-frame (C-wrapped output).</p></td>
+<td><p>Output message containing aerodynamic torque about the site frame origin, expressed in the site reference frame (C-wrapped output).</p></td>
 </tr>
 </tbody>
 </table>

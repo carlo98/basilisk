@@ -10,8 +10,9 @@
  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=57a44e8a" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2ebb1c42" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -145,10 +146,10 @@
 </div>
 <section id="overview">
 <span id="module-scenarioAttitudeSteering"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>Demonstrates how to use the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpSteering/mrpSteering.html#mrpsteering"><span class="std std-ref">Module: mrpSteering</span></a> module to stabilize the attiude relative to the Hill Frame.
+<p>Demonstrates how to use the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpSteering/mrpSteering.html#mrpsteering"><span class="std std-ref">C Module: mrpSteering</span></a> module to stabilize the attiude relative to the Hill Frame.
 Details on the math of this module can be found in this <a class="reference external" href="http://doi.org/10.1016/j.actaastro.2018.03.022">paper</a>.
 This script sets up a spacecraft with 3 RWs which is orbiting the Earth.  The goal is to
-illustrate how to use the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpSteering/mrpSteering.html#mrpsteering"><span class="std std-ref">Module: mrpSteering</span></a> module with a rate sub-servo system to control
+illustrate how to use the <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/mrpSteering/mrpSteering.html#mrpsteering"><span class="std std-ref">C Module: mrpSteering</span></a> module with a rate sub-servo system to control
 the attitude.</p>
 <p>The script is found in the folder <code class="docutils literal notranslate"><span class="pre">basilisk/examples</span></code> and executed by using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">scenarioAttitudeSteering</span><span class="o">.</span><span class="n">py</span>
@@ -159,9 +160,9 @@ which contains both the spacecraft simulation modules, as well as the Flight Sof
 modules.</p>
 <img alt="../_images/test_scenarioAttitudeSteering.svg" class="align-center" src="../_images/test_scenarioAttitudeSteering.svg" />
 <p>The spacecraft is equipped with three RW, just as in the
-<a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a> tutorial.  The <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/hillPoint/hillPoint.html#hillpoint"><span class="std std-ref">Module: hillPoint</span></a> guidance module is
+<a class="reference internal" href="scenarioAttitudeFeedbackRW.html#scenarioattitudefeedbackrw"><span class="std std-ref">scenarioAttitudeFeedbackRW</span></a> tutorial.  The <a class="reference internal" href="../Documentation/fswAlgorithms/attGuidance/hillPoint/hillPoint.html#hillpoint"><span class="std std-ref">C Module: hillPoint</span></a> guidance module is
 used to align the body frame <span class="math notranslate nohighlight">\(\cal B\)</span> to the Hill frame <span class="math notranslate nohighlight">\(\cal H\)</span>.
-The <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/rateServoFullNonlinear/rateServoFullNonlinear.html#rateservofullnonlinear"><span class="std std-ref">Module: rateServoFullNonlinear</span></a> module is
+The <a class="reference internal" href="../Documentation/fswAlgorithms/attControl/rateServoFullNonlinear/rateServoFullNonlinear.html#rateservofullnonlinear"><span class="std std-ref">C Module: rateServoFullNonlinear</span></a> module is
 used to create the rate tracking sub-servo system.  How to setup the Hill frame
 guidance module is discussed in
 <a class="reference internal" href="scenarioAttitudeGuidance.html#scenarioattitudeguidance"><span class="std std-ref">scenarioAttitudeGuidance</span></a>.</p>
