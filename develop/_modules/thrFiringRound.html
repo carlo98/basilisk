@@ -131,7 +131,8 @@
 
 <span class="sd">    Each thruster on-time is computed from the configured control period, force</span>
 <span class="sd">    command, and maximum thruster force.  The result is rounded to the nearest</span>
-<span class="sd">    multiple of ``onTimeResolutionSec``.</span>
+<span class="sd">    multiple of ``onTimeResolutionSec``. The minimum fire time can be set to</span>
+<span class="sd">    prevent short pulses that may not be physically realizable.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -145,6 +146,7 @@
         <span class="c1"># Configuration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">controlPeriodSec</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># [s]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">onTimeResolutionSec</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># [s]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thrMinFireTimeSec</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># [s]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">numThrusters</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">thrForceMax</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># [N]</span>
 
@@ -156,6 +158,9 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">setNumThrusters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numThrustersIn</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">numThrusters</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">numThrustersIn</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">setThrMinFireTime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thrMinFireTimeSecIn</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thrMinFireTimeSec</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">thrMinFireTimeSecIn</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ThrFiringRound.setThrForceMax">
 <a class="viewcode-back" href="../Documentation/fswAlgorithms/effectorInterfaces/thrFiringRound/thrFiringRound.html#thrFiringRound.ThrFiringRound.setThrForceMax">[docs]</a>
@@ -219,6 +224,7 @@
         <span class="n">onTimeRequest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controlPeriodSec</span> <span class="o">*</span> <span class="n">forceCmd</span> <span class="o">/</span> <span class="n">thrForceMax</span>
         <span class="n">onTimeRequest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">onTimeRequest</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">controlPeriodSec</span><span class="p">)</span>  <span class="c1"># [s]</span>
         <span class="n">onTimeRequest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">onTimeRequest</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">onTimeResolutionSec</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">onTimeResolutionSec</span>
+        <span class="n">onTimeRequest</span><span class="p">[</span><span class="n">onTimeRequest</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">thrMinFireTimeSec</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># [s]</span>
         <span class="n">onTimeRequest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">onTimeRequest</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">controlPeriodSec</span><span class="p">)</span>  <span class="c1"># [s]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">thrOnTimePayload</span><span class="o">.</span><span class="n">OnTimeRequest</span> <span class="o">=</span> <span class="n">onTimeRequest</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>

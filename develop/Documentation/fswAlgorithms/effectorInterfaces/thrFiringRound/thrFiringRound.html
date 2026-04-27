@@ -166,8 +166,9 @@
 <h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading"></a></h2>
 <p>This module converts thruster force commands into thruster on-time commands.
 Each positive force command is normalized by the configured maximum thrust,
-scaled by the control period, clipped to the control period, and rounded to the
-nearest configured on-time resolution.</p>
+scaled by the control period, clipped to the control period, rounded to the
+nearest configured on-time resolution, and checked to make sure it is longer
+than the minimum fire time.</p>
 </section>
 <section id="message-connection-descriptions">
 <h2>Message Connection Descriptions<a class="headerlink" href="#message-connection-descriptions" title="Link to this heading"></a></h2>
@@ -217,10 +218,12 @@ the maximum thrust is scalar.</p>
 <span class="n">rounder</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;thrFiringRound&quot;</span>
 </pre></div>
 </div>
-<p>The control period, on-time resolution, number of thrusters, and maximum
-thruster force are configured with setter methods:</p>
+<p>The control period, on-time resolution, minimum thruster on-time,
+number of thrusters, and maximum thruster force are configured
+with setter methods:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rounder</span><span class="o">.</span><span class="n">setControlPeriodSec</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
 <span class="n">rounder</span><span class="o">.</span><span class="n">setOnTimeResolutionSec</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">rounder</span><span class="o">.</span><span class="n">setThrMinFireTime</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">rounder</span><span class="o">.</span><span class="n">setNumThrusters</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">rounder</span><span class="o">.</span><span class="n">setThrForceMax</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
 </pre></div>
@@ -235,7 +238,8 @@ thruster force are configured with setter methods:</p>
 <p>Convert thruster force commands into thruster on-time commands.</p>
 <p>Each thruster on-time is computed from the configured control period, force
 command, and maximum thruster force.  The result is rounded to the nearest
-multiple of <code class="docutils literal notranslate"><span class="pre">onTimeResolutionSec</span></code>.</p>
+multiple of <code class="docutils literal notranslate"><span class="pre">onTimeResolutionSec</span></code>. The minimum fire time can be set to
+prevent short pulses that may not be physically realizable.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="thrFiringRound.ThrFiringRound.setThrForceMax">
 <span class="sig-name descname"><span class="pre">setThrForceMax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thrForceMaxIn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/thrFiringRound.html#ThrFiringRound.setThrForceMax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#thrFiringRound.ThrFiringRound.setThrForceMax" title="Link to this definition"></a></dt>

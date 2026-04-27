@@ -182,6 +182,39 @@
     <span class="k">assert</span> <span class="n">module</span><span class="o">.</span><span class="n">resolveNumThrusters</span><span class="p">(</span><span class="n">forceCmd</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
     <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">resolveThrForceMax</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>  <span class="c1"># [N]</span></div>
 
+
+
+<div class="viewcode-block" id="test_thr_firing_round_minimum_fire_time">
+<a class="viewcode-back" href="../Documentation/fswAlgorithms/effectorInterfaces/thrFiringRound/_UnitTest/test_thrFiringRound.html#test_thrFiringRound.test_thr_firing_round_minimum_fire_time">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_thr_firing_round_minimum_fire_time</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Validation Test Description**</span>
+
+<span class="sd">    This unit test verifies that :class:`thrFiringRound.ThrFiringRound` can</span>
+<span class="sd">    apply an optional minimum fire-time threshold to rounded on-time commands.</span>
+
+<span class="sd">    **Description of Variables Being Tested**</span>
+
+<span class="sd">    This unit test checks that ``OnTimeRequest`` is set to zero when the</span>
+<span class="sd">    rounded on-time is less than ``thrMinFireTimeSec``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">thrFiringRound</span><span class="o">.</span><span class="n">ThrFiringRound</span><span class="p">()</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">setControlPeriodSec</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># [s]</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">setOnTimeResolutionSec</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># [s]</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">setThrMinFireTime</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>  <span class="c1"># [s]</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">setThrForceMax</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># [N]</span>
+
+    <span class="n">forcePayload</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">THRArrayCmdForceMsgPayload</span><span class="p">()</span>
+    <span class="n">forcePayload</span><span class="o">.</span><span class="n">thrForce</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.14</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">]</span>  <span class="c1"># [N]</span>
+    <span class="n">forceMsg</span> <span class="o">=</span> <span class="n">messaging</span><span class="o">.</span><span class="n">THRArrayCmdForceMsg</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">forcePayload</span><span class="p">)</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">thrForceInMsg</span><span class="o">.</span><span class="n">subscribeTo</span><span class="p">(</span><span class="n">forceMsg</span><span class="p">)</span>
+
+    <span class="n">module</span><span class="o">.</span><span class="n">Reset</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">UpdateState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">onTimeOut</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">thrOnTimeOutMsg</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">onTimeOut</span><span class="o">.</span><span class="n">OnTimeRequest</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>  <span class="c1"># [s]</span></div>
+
 </pre></div>
 
            </div>
