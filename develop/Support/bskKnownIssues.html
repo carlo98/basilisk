@@ -155,6 +155,12 @@
 logging issues are fixed in the current version.</p></li>
 <li><p>Additional build-helper command execution, temporary file cleanup, remote example download, and image buffer
 validation hardening is included in the current version.</p></li>
+<li><p>A Vizard <code class="docutils literal notranslate"><span class="pre">noDisplay</span></code> image request regression that caused OpNav scenarios to stop with a
+<code class="docutils literal notranslate"><span class="pre">Vizard</span> <span class="pre">image</span> <span class="pre">request</span> <span class="pre">acknowledgement</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">received</span></code> error is fixed in the current version.</p></li>
+<li><p>The camera module now passes PNG encoding options as OpenCV key-value pairs, fixing OpNav image
+processing failures with OpenCV 4.13.</p></li>
+<li><p>The MuJoCo dynamics wrapper now uses MuJoCo 3.7 element-name APIs, fixing builds after the MuJoCo
+3.7 upgrade.</p></li>
 <li><p>SWIG 4.4.0 caused Basilisk build failures in some Python 3.13+ source-build configurations.
 The development dependency range now excludes SWIG 4.4.0, and SWIG 4.4.1 has been verified to build
 successfully. If source builds fail with SWIG 4.4.0 or emit <code class="docutils literal notranslate"><span class="pre">builtin</span> <span class="pre">type</span> <span class="pre">swigvarlink</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">__module__</span> <span class="pre">attribute</span></code>
