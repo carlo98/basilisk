@@ -39,6 +39,7 @@ msgPayloadDefC
    CmdTorqueBodyMsgPayload
    ColorMsgPayload
    ConstDynEffectorMsgPayload
+   CurrentMsgPayload
    DataNodeUsageMsgPayload
    DesiredVelocityMsgPayload
    DeviceCmdMsgPayload

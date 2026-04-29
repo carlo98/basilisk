@@ -189,7 +189,7 @@ is not permitted.</p>
 The module msg connections are set by the user from Python.
 The msg type contains a link to the message structure definition, while the description
 provides information on what each message is used for.</p>
-<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-68f4087d505cd26ac69e5455f513523aa4c5da06.svg" type="image/svg+xml" class="graphviz">
+<div align="center" class="align-center"><div class="graphviz"><object data="../../../../_images/graphviz-49097bdc557348bd773365c61403075da90741a8.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">facetedSpacecraftProjectedArea module input and output messages</p></object></div>
 </div>
 <table class="docutils align-default" id="id1">
@@ -230,6 +230,10 @@ provides information on what each message is used for.</p>
 <td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ProjectedAreaMsgPayload.html#projectedareamsgpayload"><span class="std std-ref">ProjectedAreaMsgPayload</span></a></p></td>
 <td><p>Output message containing the total projected area summed over all facets.</p></td>
 </tr>
+<tr class="row-even"><td><p>surfaceAreaOutMsg</p></td>
+<td><p><a class="reference internal" href="../../../architecture/msgPayloadDefC/ProjectedAreaMsgPayload.html#projectedareamsgpayload"><span class="std std-ref">ProjectedAreaMsgPayload</span></a></p></td>
+<td><p>Output message containing the total spacecraft surface area summed over all facets.</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -243,6 +247,7 @@ provides information on what each message is used for.</p>
 <li><p>Computes the individual projected area for each facet. Negative projected areas are set to zero</p></li>
 <li><p>Computes the total projected area for all facets by summing all individual facet projected areas</p></li>
 <li><p>Writes a single and a vector of <a class="reference internal" href="../../../architecture/msgPayloadDefC/ProjectedAreaMsgPayload.html#projectedareamsgpayload"><span class="std std-ref">ProjectedAreaMsgPayload</span></a> output messages for the total projected area and per-facet projected areas, respectively</p></li>
+<li><p>Writes a single <a class="reference internal" href="../../../architecture/msgPayloadDefC/ProjectedAreaMsgPayload.html#projectedareamsgpayload"><span class="std std-ref">ProjectedAreaMsgPayload</span></a> output message for the total spacecraft surface area</p></li>
 </ul>
 </div></blockquote>
 </section>
@@ -488,6 +493,12 @@ The test checks that the computed truth values match the values output from the 
 </dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30FacetedSpacecraftProjectedArea17surfaceAreaOutMsgE">
+<span id="_CPPv3N30FacetedSpacecraftProjectedArea17surfaceAreaOutMsgE"></span><span id="_CPPv2N30FacetedSpacecraftProjectedArea17surfaceAreaOutMsgE"></span><span id="FacetedSpacecraftProjectedArea::surfaceAreaOutMsg__Message:ProjectedAreaMsgPayload:"></span><span class="target" id="class_faceted_spacecraft_projected_area_1aafb35b36b9cc1634946331b9d6e3f1cd"></span><a class="reference internal" href="../../../architecture/messaging/messaging.html#_CPPv4I0E7Message" title="Message"><span class="n"><span class="pre">Message</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../../../architecture/msgPayloadDefC/ProjectedAreaMsgPayload.html#_CPPv423ProjectedAreaMsgPayload" title="ProjectedAreaMsgPayload"><span class="n"><span class="pre">ProjectedAreaMsgPayload</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">surfaceAreaOutMsg</span></span></span><a class="headerlink" href="#_CPPv4N30FacetedSpacecraftProjectedArea17surfaceAreaOutMsgE" title="Link to this definition"></a><br /></dt>
+<dd><p>Spacecraft surface area output message. </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N30FacetedSpacecraftProjectedArea9bskLoggerE">
 <span id="_CPPv3N30FacetedSpacecraftProjectedArea9bskLoggerE"></span><span id="_CPPv2N30FacetedSpacecraftProjectedArea9bskLoggerE"></span><span id="FacetedSpacecraftProjectedArea::bskLogger__BSKLoggerP"></span><span class="target" id="class_faceted_spacecraft_projected_area_1a995fceec69863a0cb7a84c17803a79c4"></span><span class="n"><span class="pre">BSKLogger</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bskLogger</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><a class="headerlink" href="#_CPPv4N30FacetedSpacecraftProjectedArea9bskLoggerE" title="Link to this definition"></a><br /></dt>
 <dd><p>BSK logging. </p>
@@ -530,6 +541,12 @@ The test checks that the computed truth values match the values output from the 
 <dt class="sig sig-object cpp" id="_CPPv4N30FacetedSpacecraftProjectedArea18totalProjectedAreaE">
 <span id="_CPPv3N30FacetedSpacecraftProjectedArea18totalProjectedAreaE"></span><span id="_CPPv2N30FacetedSpacecraftProjectedArea18totalProjectedAreaE"></span><span id="FacetedSpacecraftProjectedArea::totalProjectedArea__double"></span><span class="target" id="class_faceted_spacecraft_projected_area_1a9e72ef433ef6d6283e947625812e4d3c"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">totalProjectedArea</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N30FacetedSpacecraftProjectedArea18totalProjectedAreaE" title="Link to this definition"></a><br /></dt>
 <dd><p>[m^2] Total projected area for all facets </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30FacetedSpacecraftProjectedArea11surfaceAreaE">
+<span id="_CPPv3N30FacetedSpacecraftProjectedArea11surfaceAreaE"></span><span id="_CPPv2N30FacetedSpacecraftProjectedArea11surfaceAreaE"></span><span id="FacetedSpacecraftProjectedArea::surfaceArea__double"></span><span class="target" id="class_faceted_spacecraft_projected_area_1af0a1f58daa5fb1e8a6784a7b390d8cab"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">surfaceArea</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N30FacetedSpacecraftProjectedArea11surfaceAreaE" title="Link to this definition"></a><br /></dt>
+<dd><p>[m^2] Total surface area of all facets </p>
 </dd></dl>
 
 </div>

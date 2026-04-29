@@ -52,6 +52,7 @@
               <p class="caption" role="heading"><span class="caption-text">Basilisk:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nightly-builds">Nightly Builds</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basilisk-support-data">Basilisk Support Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basilisk-examples">Basilisk Examples</a></li>
 </ul>
@@ -159,6 +160,42 @@ download the source archive (<code class="docutils literal notranslate"><span cl
 This requires a C++ compiler toolchain and standard build tools
 to be installed on your system.</p>
 </div>
+<section id="nightly-builds">
+<h2>Nightly Builds<a class="headerlink" href="#nightly-builds" title="Link to this heading"></a></h2>
+<p>Nightly pre-release wheels are built automatically from the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch and
+published to the Basilisk nightly index for all supported platforms. These
+builds are replaced each night and reflect the latest state of active development.
+They are intended for testing and early access to new features, but may be
+unstable and are not recommended for production use.</p>
+<p>To install the latest nightly build, use the Basilisk nightly index as the primary
+source, allow pip to fall back to PyPI for dependencies, and pass <code class="docutils literal notranslate"><span class="pre">--pre</span></code> since
+nightly wheels are pre-release versions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--index-url<span class="w"> </span>https://avslab.github.io/basilisk/nightly/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--pre<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>bsk
+</pre></div>
+</div>
+<p>Because nightly wheels are built from the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch and carry the same
+version string until <code class="docutils literal notranslate"><span class="pre">bskVersion.txt</span></code> changes, pip may report
+<code class="docutils literal notranslate"><span class="pre">Requirement</span> <span class="pre">already</span> <span class="pre">satisfied</span></code> even when a newer build is available. To
+force an overwrite of whatever is currently installed, add
+<code class="docutils literal notranslate"><span class="pre">--upgrade</span> <span class="pre">--force-reinstall</span> <span class="pre">--no-cache-dir</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--index-url<span class="w"> </span>https://avslab.github.io/basilisk/nightly/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--pre<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--upgrade<span class="w"> </span>--force-reinstall<span class="w"> </span>--no-cache-dir<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>bsk
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Nightly builds are development snapshots and are not suitable for production use.
+For stable releases, install from <a class="reference external" href="https://pypi.org/project/bsk/">PyPI</a> as described above.</p>
+</div>
+</section>
 <section id="basilisk-support-data">
 <h2>Basilisk Support Data<a class="headerlink" href="#basilisk-support-data" title="Link to this heading"></a></h2>
 <p>To keep the wheel size smaller, the large BSK data files are not installed by
