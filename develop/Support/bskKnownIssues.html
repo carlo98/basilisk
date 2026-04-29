@@ -159,6 +159,8 @@ validation hardening is included in the current version.</p></li>
 <code class="docutils literal notranslate"><span class="pre">Vizard</span> <span class="pre">image</span> <span class="pre">request</span> <span class="pre">acknowledgement</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">received</span></code> error is fixed in the current version.</p></li>
 <li><p>The camera module now passes PNG encoding options as OpenCV key-value pairs, fixing OpNav image
 processing failures with OpenCV 4.13.</p></li>
+<li><p>The camera module filename input was only used to test filters and never published to imageOut. This is fixed
+so images loaded from filename now follow the same processing and publishing pipeline as images from imageInMsg.</p></li>
 <li><p>The MuJoCo dynamics wrapper now uses MuJoCo 3.7 element-name APIs, fixing builds after the MuJoCo
 3.7 upgrade.</p></li>
 <li><p>SWIG 4.4.0 caused Basilisk build failures in some Python 3.13+ source-build configurations.

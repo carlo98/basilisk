@@ -129,6 +129,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">Basilisk.architecture.bskLogging</span><span class="w"> </span><span class="kn">import</span> <span class="n">BasiliskError</span>
+
 <span class="n">filename</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getframeinfo</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">())</span><span class="o">.</span><span class="n">filename</span>
 <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 <span class="n">bskName</span> <span class="o">=</span> <span class="s1">&#39;Basilisk&#39;</span>
@@ -159,6 +161,237 @@
 <span class="c1"># Uncomment this line if this test has an expected failure, adjust message as needed.</span>
 <span class="c1"># @pytest.mark.xfail(conditionstring)</span>
 <span class="c1"># Provide a unique test method name, starting with &#39;test_&#39;.</span>
+
+<div class="viewcode-block" id="test_no_image_zero_msg">
+<a class="viewcode-back" href="../Documentation/simulation/sensors/camera/_UnitTest/test_camera.html#test_camera.test_no_image_zero_msg">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">importErr</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="n">reasonErr</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_no_image_zero_msg</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Validation Test Description**</span>
+
+<span class="sd">    This module tests that when no image is present (no filename and no input message),</span>
+<span class="sd">    the camera module properly outputs a zeroed-out message.</span>
+
+<span class="sd">    **Description of Variables Being Tested**</span>
+
+<span class="sd">    The camera output message should have all fields set to zero/empty when no image is available.</span>
+<span class="sd">    This ensures that downstream modules receive valid (though empty) data.</span>
+
+<span class="sd">    - ``imageOutMsg.valid`` should be 0</span>
+<span class="sd">    - ``imageOutMsg.imageBufferLength`` should be 0</span>
+<span class="sd">    - ``imageOutMsg.imagePointer`` should be nullptr</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">testFailCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">testMessages</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">unitTaskName</span> <span class="o">=</span> <span class="s2">&quot;unitTask&quot;</span>
+    <span class="n">unitProcessName</span> <span class="o">=</span> <span class="s2">&quot;TestProcess&quot;</span>
+
+    <span class="c1"># Create a sim module as an empty container</span>
+    <span class="n">unitTestSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
+
+    <span class="c1"># Create test thread</span>
+    <span class="n">testProcessRate</span> <span class="o">=</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">testProc</span> <span class="o">=</span> <span class="n">unitTestSim</span><span class="o">.</span><span class="n">CreateNewProcess</span><span class="p">(</span><span class="n">unitProcessName</span><span class="p">)</span>
+    <span class="n">testProc</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">unitTestSim</span><span class="o">.</span><span class="n">CreateNewTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">testProcessRate</span><span class="p">))</span>
+
+    <span class="c1"># Construct algorithm and associated C++ container</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">Camera</span><span class="p">()</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;cameras&quot;</span>
+
+    <span class="c1"># Add test module to runtime call list</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+
+    <span class="c1"># Don&#39;t provide filename or input message - this should trigger zeroed output</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">cameraIsOn</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Setup logging on the test module output message</span>
+    <span class="n">dataLog</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">imageOutMsg</span><span class="o">.</span><span class="n">recorder</span><span class="p">()</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">dataLog</span><span class="p">)</span>
+
+    <span class="c1"># Need to call the self-init and cross-init methods</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+
+    <span class="c1"># Set the simulation time</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+
+    <span class="c1"># Begin the simulation time run</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span>
+
+    <span class="c1"># Check that the output message fields are zeroed</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataLog</span><span class="o">.</span><span class="n">valid</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;No image output message was written&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Check the last written message</span>
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">valid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.valid should be 0, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">valid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">imageBufferLength</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.imageBufferLength should be 0, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">imageBufferLength</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">timeTag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.timeTag should be 0, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">timeTag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">cameraID</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.cameraID should be 0, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">cameraID</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">imageType</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.imageType should be 0, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">imageType</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">testFailCount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">testMessages</span></div>
+
+
+
+<div class="viewcode-block" id="test_filename_metadata">
+<a class="viewcode-back" href="../Documentation/simulation/sensors/camera/_UnitTest/test_camera.html#test_camera.test_filename_metadata">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">importErr</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="n">reasonErr</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_filename_metadata</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Validation Test Description**</span>
+
+<span class="sd">    This module tests that when using the filename parameter (without an input message),</span>
+<span class="sd">    the camera module outputs an image with correct metadata populated from deterministic sources.</span>
+
+<span class="sd">    **Description of Variables Being Tested**</span>
+
+<span class="sd">    When loading an image from a filename, the camera should set:</span>
+<span class="sd">    - ``imageOutMsg.timeTag`` to the current simulation time</span>
+<span class="sd">    - ``imageOutMsg.cameraID`` to the configured camera ID</span>
+<span class="sd">    - ``imageOutMsg.imageType`` to 3 (RGB channels)</span>
+<span class="sd">    - ``imageOutMsg.valid`` to 1 (image is valid)</span>
+
+<span class="sd">    This ensures that downstream consumers receive correct metadata for provenance and synchronization.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">testFailCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">testMessages</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">unitTaskName</span> <span class="o">=</span> <span class="s2">&quot;unitTask&quot;</span>
+    <span class="n">unitProcessName</span> <span class="o">=</span> <span class="s2">&quot;TestProcess&quot;</span>
+
+    <span class="c1"># Create a sim module as an empty container</span>
+    <span class="n">unitTestSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
+
+    <span class="c1"># Create test thread</span>
+    <span class="n">testProcessRate</span> <span class="o">=</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">testProc</span> <span class="o">=</span> <span class="n">unitTestSim</span><span class="o">.</span><span class="n">CreateNewProcess</span><span class="p">(</span><span class="n">unitProcessName</span><span class="p">)</span>
+    <span class="n">testProc</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">unitTestSim</span><span class="o">.</span><span class="n">CreateNewTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">testProcessRate</span><span class="p">))</span>
+
+    <span class="c1"># Construct algorithm and associated C++ container</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">Camera</span><span class="p">()</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;cameras&quot;</span>
+
+    <span class="c1"># Add test module to runtime call list</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+
+    <span class="c1"># Use filename to load image, with a specific camera ID</span>
+    <span class="n">imagePath</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/mars.jpg&#39;</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">imagePath</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">cameraID</span> <span class="o">=</span> <span class="mi">42</span>  <span class="c1"># Use a non-default camera ID to verify it&#39;s used</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">cameraIsOn</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Setup logging on the test module output message</span>
+    <span class="n">dataLog</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">imageOutMsg</span><span class="o">.</span><span class="n">recorder</span><span class="p">()</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">dataLog</span><span class="p">)</span>
+
+    <span class="c1"># Need to call the self-init and cross-init methods</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+
+    <span class="c1"># Set the simulation time</span>
+    <span class="n">simEndTime</span> <span class="o">=</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">simEndTime</span><span class="p">)</span>
+
+    <span class="c1"># Begin the simulation time run</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span>
+
+    <span class="c1"># Check that the output message has correct metadata</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataLog</span><span class="o">.</span><span class="n">valid</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;No image output message was written&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Check the last written message (filename path should produce output)</span>
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">valid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.valid should be 1, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">valid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">cameraID</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">42</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.cameraID should be 42, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">cameraID</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># mars.jpg is a color image, so it should have 3 channels</span>
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">imageType</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.imageType should be 3 (RGB) for mars.jpg, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">imageType</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># timeTag should be close to the simulation end time (within the process rate)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dataLog</span><span class="o">.</span><span class="n">timeTag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">simEndTime</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">0.1</span><span class="p">):</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.timeTag should be ~</span><span class="si">{</span><span class="n">simEndTime</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">timeTag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dataLog</span><span class="o">.</span><span class="n">imageBufferLength</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">testFailCount</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">testMessages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imageOutMsg.imageBufferLength should be &gt; 0, but got </span><span class="si">{</span><span class="n">dataLog</span><span class="o">.</span><span class="n">imageBufferLength</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">testFailCount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">testMessages</span></div>
+
+
+
+<div class="viewcode-block" id="test_invalid_filename_error">
+<a class="viewcode-back" href="../Documentation/simulation/sensors/camera/_UnitTest/test_camera.html#test_camera.test_invalid_filename_error">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">importErr</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="n">reasonErr</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_filename_error</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Validation Test Description**</span>
+
+<span class="sd">    This module tests that when an invalid filename is provided, the camera module</span>
+<span class="sd">    detects the failed image load and emits a BSK_ERROR.</span>
+
+<span class="sd">    **Description of Variables Being Tested**</span>
+
+<span class="sd">    When a bad filename, unsupported file, or malformed input is provided:</span>
+<span class="sd">    - OpenCV&#39;s imread() or imdecode() returns an empty cv::Mat</span>
+<span class="sd">    - The camera module should check imageCV.empty() and emit BSK_ERROR</span>
+<span class="sd">    - BSK_ERROR throws an exception that stops execution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unitTaskName</span> <span class="o">=</span> <span class="s2">&quot;unitTask&quot;</span>
+    <span class="n">unitProcessName</span> <span class="o">=</span> <span class="s2">&quot;TestProcess&quot;</span>
+
+    <span class="c1"># Create a sim module as an empty container</span>
+    <span class="n">unitTestSim</span> <span class="o">=</span> <span class="n">SimulationBaseClass</span><span class="o">.</span><span class="n">SimBaseClass</span><span class="p">()</span>
+
+    <span class="c1"># Create test thread</span>
+    <span class="n">testProcessRate</span> <span class="o">=</span> <span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">testProc</span> <span class="o">=</span> <span class="n">unitTestSim</span><span class="o">.</span><span class="n">CreateNewProcess</span><span class="p">(</span><span class="n">unitProcessName</span><span class="p">)</span>
+    <span class="n">testProc</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">unitTestSim</span><span class="o">.</span><span class="n">CreateNewTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">testProcessRate</span><span class="p">))</span>
+
+    <span class="c1"># Construct algorithm and associated C++ container</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">Camera</span><span class="p">()</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">ModelTag</span> <span class="o">=</span> <span class="s2">&quot;cameras&quot;</span>
+
+    <span class="c1"># Add test module to runtime call list</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">AddModelToTask</span><span class="p">(</span><span class="n">unitTaskName</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+
+    <span class="c1"># Use an invalid filename that cannot be loaded</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;/nonexistent/path/to/image.png&quot;</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">cameraIsOn</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Add the module to the sim and initialize</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">InitializeSimulation</span><span class="p">()</span>
+
+    <span class="c1"># Set the simulation time</span>
+    <span class="n">unitTestSim</span><span class="o">.</span><span class="n">ConfigureStopTime</span><span class="p">(</span><span class="n">macros</span><span class="o">.</span><span class="n">sec2nano</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+
+    <span class="c1"># Begin the simulation time run - should raise BSK_ERROR</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">BasiliskError</span><span class="p">):</span>
+        <span class="n">unitTestSim</span><span class="o">.</span><span class="n">ExecuteSimulation</span><span class="p">()</span></div>
+
+
 
 <div class="viewcode-block" id="test_module">
 <a class="viewcode-back" href="../Documentation/simulation/sensors/camera/_UnitTest/test_camera.html#test_camera.test_module">[docs]</a>

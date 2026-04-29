@@ -145,6 +145,34 @@
 <div class="toctree-wrapper compound">
 </div>
 <dl class="py function" id="module-test_camera">
+<dt class="sig sig-object py" id="test_camera.test_filename_metadata">
+<span class="sig-prename descclassname"><span class="pre">test_camera.</span></span><span class="sig-name descname"><span class="pre">test_filename_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_camera.html#test_filename_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_camera.test_filename_metadata" title="Link to this definition"></a></dt>
+<dd><p><strong>Validation Test Description</strong></p>
+<p>This module tests that when using the filename parameter (without an input message),
+the camera module outputs an image with correct metadata populated from deterministic sources.</p>
+<p><strong>Description of Variables Being Tested</strong></p>
+<p>When loading an image from a filename, the camera should set:
+- <code class="docutils literal notranslate"><span class="pre">imageOutMsg.timeTag</span></code> to the current simulation time
+- <code class="docutils literal notranslate"><span class="pre">imageOutMsg.cameraID</span></code> to the configured camera ID
+- <code class="docutils literal notranslate"><span class="pre">imageOutMsg.imageType</span></code> to 3 (RGB channels)
+- <code class="docutils literal notranslate"><span class="pre">imageOutMsg.valid</span></code> to 1 (image is valid)</p>
+<p>This ensures that downstream consumers receive correct metadata for provenance and synchronization.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_camera.test_invalid_filename_error">
+<span class="sig-prename descclassname"><span class="pre">test_camera.</span></span><span class="sig-name descname"><span class="pre">test_invalid_filename_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_camera.html#test_invalid_filename_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_camera.test_invalid_filename_error" title="Link to this definition"></a></dt>
+<dd><p><strong>Validation Test Description</strong></p>
+<p>This module tests that when an invalid filename is provided, the camera module
+detects the failed image load and emits a BSK_ERROR.</p>
+<p><strong>Description of Variables Being Tested</strong></p>
+<p>When a bad filename, unsupported file, or malformed input is provided:
+- OpenCV’s imread() or imdecode() returns an empty cv::Mat
+- The camera module should check imageCV.empty() and emit BSK_ERROR
+- BSK_ERROR throws an exception that stops execution</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="test_camera.test_module">
 <span class="sig-prename descclassname"><span class="pre">test_camera.</span></span><span class="sig-name descname"><span class="pre">test_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_plots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gauss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">darkCurrent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saltPepper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosmic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blurSize</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_camera.html#test_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_camera.test_module" title="Link to this definition"></a></dt>
 <dd><p><strong>Validation Test Description</strong></p>
@@ -167,6 +195,22 @@ as the relative difference of the images is taken (whereas pixel values can get 
 <p><strong>General Documentation Comments</strong></p>
 <p>The script could benefit from more profound image processing testing. Currently the bulk of the image processing
 is only tested by the result image.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test_camera.test_no_image_zero_msg">
+<span class="sig-prename descclassname"><span class="pre">test_camera.</span></span><span class="sig-name descname"><span class="pre">test_no_image_zero_msg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/test_camera.html#test_no_image_zero_msg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_camera.test_no_image_zero_msg" title="Link to this definition"></a></dt>
+<dd><p><strong>Validation Test Description</strong></p>
+<p>This module tests that when no image is present (no filename and no input message),
+the camera module properly outputs a zeroed-out message.</p>
+<p><strong>Description of Variables Being Tested</strong></p>
+<p>The camera output message should have all fields set to zero/empty when no image is available.
+This ensures that downstream modules receive valid (though empty) data.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">imageOutMsg.valid</span></code> should be 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">imageOutMsg.imageBufferLength</span></code> should be 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">imageOutMsg.imagePointer</span></code> should be nullptr</p></li>
+</ul>
 </dd></dl>
 
 </section>
