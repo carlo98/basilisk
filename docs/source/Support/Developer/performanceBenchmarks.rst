@@ -25,6 +25,19 @@ Source script: :download:`benchmark_state_effectors.py <../../../../benchmarks/d
 
 .. automodule:: benchmark_state_effectors
 
+Facet Self-Occlusion Benchmark
+------------------------------
+
+The facet self-occlusion benchmark measures the run time of the polygon-clipping self-occlusion
+algorithm of the faceted drag and SRP effectors for increasing facet counts, with and without the
+visibility cache.
+
+Source script: :download:`benchmark_facet_self_occlusion.py <../../../../benchmarks/dynamics/benchmark_facet_self_occlusion.py>`
+
+.. _benchmark_facet_self_occlusion:
+
+.. automodule:: benchmark_facet_self_occlusion
+
 Eigen and ``linearAlgebra`` Benchmark
 -------------------------------------
 

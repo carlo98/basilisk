@@ -200,6 +200,34 @@ def test_dynamics_benchmark_smoke():
     assert "spacecraft" in completed.stdout
 
 
+def test_facet_self_occlusion_benchmark_smoke():
+    """Run the facet self-occlusion timing study for both flux models with minimal settings."""
+
+    benchmark_script = REPO_ROOT / "benchmarks" / "dynamics" / "benchmark_facet_self_occlusion.py"
+    completed = _run(
+        [
+            sys.executable,
+            str(benchmark_script),
+            "--model",
+            "all",
+            "--facet-counts",
+            "2",
+            "--steps",
+            "1",
+            "--trials",
+            "1",
+            "--warmup-steps",
+            "0",
+        ],
+        env=_python_environment(),
+    )
+
+    assert "Facet self-occlusion benchmark" in completed.stdout
+    assert "Timing study: drag" in completed.stdout
+    assert "Timing study: srp" in completed.stdout
+    assert "force err" in completed.stdout
+
+
 def test_eigen_linear_algebra_benchmark_smoke():
     """Build and run the C++ Eigen versus linearAlgebra benchmark smoke target."""
 
